@@ -1,0 +1,4 @@
+/* CSSフレームワークと関連するSprocketsの読み込み */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";

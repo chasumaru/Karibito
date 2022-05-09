@@ -1,0 +1,29 @@
+Arguments: 
+  /usr/bin/node /usr/share/yarn/bin/yarn.js add tailwindcss@latest postcss@latest autoprefixer@latest
+
+PATH: 
+  /usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+Yarn version: 
+  1.22.18
+
+Node version: 
+  12.22.5
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: EPROTO: protocol error, symlink '../../../acorn/bin/acorn' -> '/myapp/node_modules/acorn-node/node_modules/.bin/acorn'
+
+npm manifest: 
+  {
+    "name": "app",
+    "private": "true"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
