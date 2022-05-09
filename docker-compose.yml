@@ -26,7 +26,7 @@ services:
       - public-data:/myapp/public
       - tmp-data:/myapp/tmp
     ports:
-      - 3010:80
+      - 3005:80
     depends_on:
       - app
 volumes:
