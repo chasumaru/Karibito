@@ -1,4 +1,4 @@
-<h2>ユーザー編集</h2>
+<h1>ユーザー編集</h1>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
@@ -39,4 +39,4 @@
 
  <%= button_to "削除", registration_path(resource_name), data: { confirm: "本当によろしいですか?" }, method: :delete %>
 
-<%= link_to "Back", :back %>
+<%= link_to "戻る", :back %>
