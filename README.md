@@ -1,24 +1,36 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+環境:
+- Docker
+- Ruby:         3.1.2
+- Rails:        7.0.2
+- Nginx:        1.21.1
+- MySQL:        8.0
+- Tailwindcss
+- Vue.js
 
-* Ruby version
 
-* System dependencies
+実装gems
 
-* Configuration
+*Hotwire
+- turbo-rails
+- stimulus-rails
 
-* Database creation
+*AssetsPipleline
+- sprockets-rails
+- importmap-rails
+- cssbundling-rails
 
-* Database initialization
+*Test
+- Rspec-rails
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+開発の大まかな流れ
+- [ ] 環境構築
+- [ ] 基本機能の実装
+- [ ] 本番環境(AWS)へのデプロイ
+- [ ] CI/CDの実装
+- [ ] Teraformによるインフラのコード化
 
-* Deployment instructions
 
-* ...
