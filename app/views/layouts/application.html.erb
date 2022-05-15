@@ -14,7 +14,7 @@
         <header>
             <nav class="text-red-500 text-2xl">
                 <% if user_signed_in? %>
-                <strong><%= link_to current_user.username, pages_show_path %></strong>
+                <strong><%= link_to current_user.name, pages_show_path %></strong>
                 <%= link_to 'プロフィール変更', edit_user_registration_path %>
 
                 <%= button_to("ログアウト", destroy_user_session_path, method: :delete) %>
