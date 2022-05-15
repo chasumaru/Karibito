@@ -13,6 +13,8 @@ services:
       - log-data:/myapp/log
     depends_on:
       - db
+    environment:
+      - EDITOR=vim
   db:
     image: mysql:8.0
     env_file:

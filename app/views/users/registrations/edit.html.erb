@@ -39,8 +39,6 @@
   </div>
 <% end %>
 
-<h3>退会</h3>
-
- <p>退会処理を行うと元に戻せません。<%= button_to "退会する", registration_path(resource_name), data: { confirm: "本当によろしいですか?" }, method: :delete %></p>
+ <%= button_to "退会する", registration_path(resource_name), data: { confirm: "本当によろしいですか?" }, method: :delete %>
 
 <%= link_to "戻る", :back %>

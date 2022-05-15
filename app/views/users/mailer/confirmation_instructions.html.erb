@@ -6,9 +6,9 @@
     <div><%= link_to 'ユーザ認証を実行する', confirmation_url(@user,confirmation_token: @token) %></div>
   <% else %>
     <% if @user.confirmed_at != nil %>
-      <div>会員登録が完了済みです。</div>
+      <div>会員登録が完了しました。</div>
       <div>下記リンクからログインをお願いいたします。</div>
-      <p>http://localhost:3005/</p>
+      <p>http://localhost:3005/login</p>
     <% else %>
       <div>以下のリンクからユーザの認証を行ってユーザ登録を完了してください。</div>
       <div><%= link_to 'ユーザ認証を実行する', confirmation_url(@user,confirmation_token: @token) %></div>
