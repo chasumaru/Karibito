@@ -1,26 +1,43 @@
-<h2>ログイン</h2>
+<div class="box">
+  <div class="box-inner">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <h1>ログイン</h1>
+      <div class="box-email">
+        <%= f.label :email, "メールアドレス" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+      <div class="box-password">
+        <div class="a-row">
+          <div class="column-left">
+            <%= f.label :password, "パスワード" %>
+          </div>
+          <div class="column-right">
+            <%= link_to "パスワードを忘れた場合", new_user_password_path %>
+          </div>
+        </div>
+        <%= f.password_field :password, autocomplete: "current-password" %>
+      </div>
+      <div class="box-login">
+        <%= f.submit "ログイン" %>
+        <div class="legal-text">
+          続行することで、Karibitoの
+          <%= link_to "利用規約", "#" %>
+          および
+          <%= link_to "プライバシー規約", "#" %>
+          に同意するものとみなされます。
+        </div>
+        <% if devise_mapping.rememberable? %>
+          <div class="remember">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember, "ログインしたままにする" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <% f.label :email %><i>Eメール</i><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <% f.label :password %><i>パスワード</i><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <% f.label :remember_me %><i>ログインの保持</i>
+    <div class="box-newusr">
+      <p><span>------------</span> Karibitoは初めてですか？ <span>------------</span></p>
+      <%= link_to "アカウントを作成", new_user_registration_path %>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "ログイン" %>
   </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>
