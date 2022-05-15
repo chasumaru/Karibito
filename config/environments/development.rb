@@ -43,8 +43,12 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     :address => 'smtp.gmail.com',
     :port => 587,
-    user_name: Rails.application.credentials.gmail[:user_name],
-    password: Rails.application.credentials.gmail[:password],
+
+    # 本番環境にデプロイ前に隠す
+    # user_name: Rails.application.credentials.gmail[:user_name],
+    # password: Rails.application.credentials.gmail[:password],
+    :user_name => 'yumami345@gmail.com',
+    :password => 'kstzsgskrqyxlhau',
     :authentication => :plain,
     :enable_starttls_auto => true
   }
