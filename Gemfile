@@ -58,6 +58,7 @@ gem 'vuejs-rails', '~> 2.5'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+gem 'kakurenbo-puti'
 gem 'omniauth-twitter'
 
 
