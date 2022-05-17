@@ -8,7 +8,7 @@
     <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
 
   <div class="field">
-    <% f.label :email %><i>メールアドレス</i><br />
+    <%= f.label :メールアドレス %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
@@ -17,7 +17,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :新しいパスワード %> <i>(空白の場合は変更されません)</i>
+    <%= f.label :新しいパスワード %> 
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %>~32桁の半角英数字)</em>
     <% end %><br />
@@ -25,7 +25,7 @@
   </div>
 
   <div class="field">
-    <% f.label :password_confirmation %> <i>パスワード(確認用)</i><br />
+    <%= f.label :パスワードの確認 %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
@@ -39,6 +39,8 @@
   </div>
 <% end %>
 
- <%= button_to "退会する", registration_path(resource_name), data: { confirm: "本当によろしいですか?" }, method: :delete %>
+ <%# <%= button_to "退会する", registration_path(resource_name), data: { confirm: "本当によろしいですか?" }, method: :delete %> 
+ <%= button_to "退会する", registration_path(resource_name), { method: :delete, form: { data: { turbo_confirm: "本当によろしいですか？" } } } %>
+ 
 
 <%= link_to "戻る", :back %>

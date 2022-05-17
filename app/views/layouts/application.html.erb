@@ -17,7 +17,7 @@
                 <strong><%= link_to current_user.name, pages_show_path %></strong>
                 <%= link_to 'プロフィール変更', edit_user_registration_path %>
 
-                <%= button_to("ログアウト", destroy_user_session_path, method: :delete) %>
+                <%= button_to "ログアウト", destroy_user_session_path, { method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } } %>
 
 
             <% else %>

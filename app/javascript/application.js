@@ -1,5 +1,6 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 
+// サンプル
 import Vue from 'vue'
 var vm = new Vue({
   el: '#example',
@@ -7,3 +8,5 @@ var vm = new Vue({
     domain: 'HAZM.JP'
   }
 })
+
+import "@hotwired/turbo-rails"
