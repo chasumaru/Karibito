@@ -1,9 +1,22 @@
 /* CSSフレームワークと関連するSprocketsの読み込み */
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply w-24 m-4 p-4 rounded-sm bg-red-500 text-center text-white
+  }
+}
 
 
+
+
+
+
+
+
+/* 
 * {
   margin: 0px;
   padding: 0px;
@@ -124,4 +137,4 @@ h1 {
 
 .box-newusr a:hover {
   background: #e7e9ec;
-}
+} */
