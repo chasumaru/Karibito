@@ -3,6 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  h1 {
+    @apply text-3xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+}
 @layer components {
   .btn {
     @apply w-24 m-4 p-4 rounded-sm bg-red-500 text-center text-white

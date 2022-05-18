@@ -1,43 +1,43 @@
-<div class="box">
-  <div class="box-inner">
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <h1>ログイン</h1>
-      <div class="box-email">
-        <%= f.label :email, "メールアドレス" %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-      </div>
-      <div class="box-password">
-        <div class="a-row">
-          <div class="column-left">
-            <%= f.label :password, "パスワード" %>
-          </div>
-          <div class="column-right">
-            <%= link_to "パスワードを忘れた場合", new_user_password_path %>
-          </div>
-        </div>
-        <%= f.password_field :password, autocomplete: "current-password" %>
-      </div>
-      <div class="box-login">
-        <%= f.submit "ログイン" %>
-        <div class="legal-text">
-          続行することで、Karibitoの
-          <%= link_to "利用規約", "#" %>
-          および
-          <%= link_to "プライバシー規約", "#" %>
-          に同意するものとみなされます。
-        </div>
-        <% if devise_mapping.rememberable? %>
-          <div class="remember">
-            <%= f.check_box :remember_me %>
-            <%= f.label :remember, "ログインしたままにする" %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
 
-    <div class="box-newusr">
-      <p><span>------------</span> Karibitoは初めてですか？ <span>------------</span></p>
-      <%= link_to "アカウントを作成", new_user_registration_path %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="flex flex-col m-7">
+    <h1>ログイン</h1>
+    
+    <div class="mb-6">
+      <%= f.label :email, "メールアドレス", class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300' %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" , class: 'border-2 border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'%>
     </div>
-  </div>
-</div>
+    <div class="mb-6">
+      <div class="a-row">
+        <div class="column-left">
+          <%= f.label :password, "パスワード" ,class: 'block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300'%>
+        </div>
+        <div class="column-right">
+          <%= link_to "パスワードを忘れた場合", new_user_password_path %>
+        </div>
+      </div>
+      <%= f.password_field :password, autocomplete: "current-password", class: 'border-2 border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5' %>
+    </div>
+    <div class="mb-6">
+      <%= f.submit "ログイン" %>
+      <%# <div class="legal-text"> %>
+        <%# 続行することで、Karibitoの %>
+        <%# <%= link_to "利用規約", "#" %> 
+        <%# および %>
+        <%# <%= link_to "プライバシー規約", "#" %> 
+        <%# に同意するものとみなされます。 %>
+      </div>
+      <% if devise_mapping.rememberable? %>
+        <div class="remember">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember, "ログインしたままにする" %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%# <div class="mb-6">
+    <p><span>------------</span> Karibitoは初めてですか？ <span>------------</span></p>
+    <%= link_to "アカウントを作成", new_user_registration_path %>
+  <%# </div> %>
+
