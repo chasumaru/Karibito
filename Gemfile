@@ -57,8 +57,7 @@ gem 'vuejs-rails', '~> 2.5'
 
 gem 'devise'
 gem 'devise-i18n'
-gem 'devise-i18n-views'
-gem 'omniauth-twitter'
+# gem 'omniauth-twitter'
 
 
 group :development, :test do

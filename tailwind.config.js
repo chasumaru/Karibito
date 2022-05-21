@@ -10,17 +10,32 @@ module.exports = {
   ],
   darkMode:'media ',
   theme: {
+    screens: {
+      'sm': '520px',
+      // => @media (min-width: 520px) { ... }
+
+      'md': '768px',
+      // => @media (min-width: 768px) { ... }
+
+      'lg': '960px',
+      // => @media (min-width: 960px) { ... }
+
+      'xl': '1280px',
+      // => @media (min-width: 1280px) { ... }
+    },
     extend: {
-    darkMode: 'media',
       colors: {
-        'teal': colors.teal,
-        hobby: {
-          100: '#001871',
-          200: '#ff585d',
-          300: '#ffb549',
-          400: '#41b6e6',
-        }
+        'base-white': '#f9fafb',
+        'base-gray' : '#f4f4f5',
       },
+      // backgroundImage: {
+      //   'main-img-1': "url('/images/#.jpg')",
+      //   'main-img-2': "url('/images/main_background_2.jpg')",
+      // },
+      // spacing: {
+      //   'sidebar': '500px'
+      // },
+      
     },
   },
   plugins: [

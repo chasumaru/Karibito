@@ -1,0 +1,35 @@
+
+
+<%# registration/new %>
+パスワード変更画面に追加したい
+
+  <div class="field">
+    <%= f.label :パスワード %><br />
+    <%= f.password_field :current_password, autocomplete: "current-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :新しいパスワード %> 
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %>~32桁の半角英数字)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :パスワードの確認 %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <%# 利用規約　ログインページ %>
+
+      <div class="mb-6">
+      <%= f.submit "ログイン" %>
+      <div class="legal-text"> %>
+        続行することで、Karibitoの
+        <%= link_to "利用規約", "#" 
+        および
+        <%= link_to "プライバシー規約", "#" %> 
+        に同意するものとみなされます。
+      </div>
+    </div>

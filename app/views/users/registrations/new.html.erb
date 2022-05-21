@@ -8,17 +8,17 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %> 
       <%= render "users/shared/error_messages", resource: resource %>
       <div class="field">
-        <%= f.label :ユーザ名 %><br />
+        <%= f.label :name, "ユーザー名" %><br />
         <%= f.text_field :name %>
       </div>
 
       <div class="field">
-        <%= f.label :メールアドレス %><br />
+        <%= f.label :email, "メールアドレス" %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
 
       </div>
       <div class="field">
-        <%= f.label :パスワード %>
+        <%= f.label :password, "パスワード" %>
         <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %>~32桁の半角英数字)</em>
         <% end %><br />
@@ -26,7 +26,7 @@
       </div>
 
       <div class="field">
-        <%= f.label :パスワードの確認 %><br />
+        <%= f.label :password_confirmation, "パスワード(確認用)" %><br />
         <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
       </div>
 
