@@ -8,5 +8,5 @@ var vm = new Vue({
     domain: 'HAZM.JP'
   }
 })
-
-import "@hotwired/turbo-rails"
+// Hotwireを適切に設定しないと、エラーメッセージが表示されなくなる
+// import "@hotwired/turbo-rails"

@@ -15,8 +15,12 @@
   }
 }
 @layer components {
+  /* sample */
   .btn {
     @apply w-24 m-4 p-4 rounded-sm bg-red-500 text-center text-white
+  }
+  .form-button { 
+    @apply w-full px-4 py-2 tracking-wide transition-colors duration-200 transform bg-green-200 rounded-md hover:bg-green-100 focus:outline-none focus:bg-green-100 focus:ring focus:ring-green-100 focus:ring-opacity-50
   }
 }
 
