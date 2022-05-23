@@ -31,7 +31,7 @@
 
 <%# 退会リンクはサイドバーにのみ表示する %>
 <div class="actions">
-   <%= button_to "退会する", registration_path(resource_name), { method: :delete, form: { data: { turbo_confirm: "本当によろしいですか？" } } } %>
+   <%= button_to "退会する", registration_path(resource_name), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } } %>
 </div>
  
 
