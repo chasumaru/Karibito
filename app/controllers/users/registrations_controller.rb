@@ -18,7 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       redirect_to new_user_session_path
     else
       flash[:alert] = "ユーザー登録に失敗しました。"
-      render action: :new and return
+      render :new, status: :unprocessable_entity
     end
   end
 
