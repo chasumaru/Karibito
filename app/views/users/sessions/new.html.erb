@@ -2,7 +2,7 @@
     <h1 class=" font-bold text-center text-gray-700">ログイン</h1>
 </div>
 
-<div class="flex w-full lg:w-1/2 justify-center items-center space-y-8 bg-white dark:bg-gray-800">
+<div class="flex w-full items-center space-y-8 bg-white dark:bg-gray-800">
     <div class="flex-1 px-8 md:px-32 lg:px-24">
         <div class="mt-8 bg-white rounded-md shadow-md p-5">
             <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -20,7 +20,7 @@
                     <%= f.password_field :password ,autocomplete: "current-password" ,placeholder: "Your Password" ,class: "block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" %>
                 </div><br>
                 <% if devise_mapping.rememberable? %>
-                  <div class="remember">
+                  <div class="remember text-center">
                     <%= f.check_box :remember_me %>
                     <%= f.label :remember, "ログインしたままにする" ,class: "text-sm text-gray-600 focus:text-blue-500 hover:text-blue-500 hover:underline" %>
                   </div>

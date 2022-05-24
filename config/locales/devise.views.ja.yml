@@ -48,8 +48,8 @@ ja:
       unlock_instructions:
         action: "アカウントのロック解除"
         greeting: "こんにちは、%{recipient}さん!"
-        instruction: "アカウントのロックを解除するには下のリンクをクリックしてください。"
-        message: "ログイン失敗が繰り返されたため、アカウントはロックされています。"
+        instruction: "アカウントのロックを解除するには次のリンクをクリックしてください。"
+        message: "ログインが連続で失敗したため、アカウントはロックされています。"
     passwords:
       edit:
         change_my_password: "パスワードを変更する"

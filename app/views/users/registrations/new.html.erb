@@ -20,7 +20,7 @@
                     <div class="flex justify-between">
                         <%= f.label :password, "パスワード" ,class: "text-lg font-bold text-gray-600 dark:text-gray-200" %>
                         <% if @minimum_password_length %>
-                        <div class="text-sm text-gray-400 mt-2 ml-16">(<%= @minimum_password_length %>~32桁までの半角英数字)</div>
+                        <div class="text-sm text-gray-400 mt-2 ml-8">(<%= @minimum_password_length %>~32桁の半角英数字)</div>
                         <% end %><br />
                     </div>
                     <%= f.password_field :password ,autocomplete: "new-password" ,placeholder: "New Password" ,class: "block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" %>
