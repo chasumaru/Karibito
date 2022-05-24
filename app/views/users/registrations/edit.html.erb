@@ -30,11 +30,10 @@
 <%= render "users/shared/links" %>
 
 <%# 退会リンクはサイドバーにのみ表示する %>
-<div class="actions">
-   <%# <%= button_to "退会する", registration_path(resource_name), method: :delete, form: { data: { turbo_confirm: "Are you sure?" } } %>
+<%# <div class="actions"> %>
+   <%# <%= button_to "退会する", registration_path(resource_name), method: :delete, form: { data: { turbo_confirm: "ログアウトしますか?" } } %> 
+<%# </div> %>
 
-   <%= button_to "退会する", registration_path(resource_name), { method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } } %>
-</div>
-
+<%= link_to "退会", unsubscribe_path(current_user) %>
 
 <%= link_to "戻る", :back %>
