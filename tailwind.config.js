@@ -10,6 +10,17 @@ module.exports = {
   ],
   darkMode:'media ',
   theme: {
+    fontFamily: {
+      body: [
+        '游ゴシック',
+        'YuGothic', 
+        "ヒラギノ角ゴ Pro",
+        "Hiragino Kaku Gothic Pro",
+        'メイリオ',
+        'Meiryo',
+        'sans-serif'
+      ]
+    },
     extend: {
       colors: {
         'base-white': '#f9fafb',

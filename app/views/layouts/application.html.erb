@@ -9,9 +9,9 @@
     <%= javascript_importmap_tags %>
     </head>
     
-    <body>
+    <body class="font-body text-stone-700 bg-neutral-100 ">
         <header>
-            <nav class="text-red-500 text-2xl">
+            <nav class="text-2xl">
                 <% if user_signed_in? %>
                 <strong><%= link_to current_user.name, pages_show_path %></strong>
                 <%= link_to 'プロフィール変更', edit_user_registration_path %>
@@ -19,7 +19,7 @@
                 <%= button_to "ログアウト", destroy_user_session_path, { method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } } %>
 
             <% else %>
-                <%= link_to '新規登録', new_user_registration_path %>
+                <%= link_to '会員登録', new_user_registration_path %>
                 <%= link_to 'ログイン', new_user_session_path %>
                 <% end %>
             </nav>

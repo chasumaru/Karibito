@@ -7,11 +7,13 @@ Rails.application.routes.draw do
       module: "users",
       path: '',
       path_names: {
-      sign_in: 'login', sign_out: 'logout',
+      sign_up: 'signup', sign_in: 'login', sign_out: 'logout',
       password: 'secret', confirmation: 'verification',
       registration: 'register', edit: 'edit/profile'
     }
+
     resources :users, only: [:show, :edit, :update]
+
     # 退会確認画面
     get '/softdeletes/:id/unsubscribe' => 'softdeletes#unsubscribe', as: 'unsubscribe'
     # 論理削除用のルーティング
