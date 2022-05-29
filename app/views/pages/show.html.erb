@@ -17,3 +17,11 @@
   <li>自分の投稿を表示</li>
   <li>feed?</li>
 </ul>
+
+<% content_for :head do %>
+  <%= javascript_import_module_tag "app" %>
+<% end %>
+
+  <div id="container">
+    The Planet Wercury was formed {{ age }} age.
+  </div>

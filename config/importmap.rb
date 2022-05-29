@@ -3,6 +3,7 @@
 pin "application", preload: true
 pin "vue", to: "https://unpkg.com/vue@2.6.11/dist/vue.esm.browser.min.js"
 pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
+pin "app"
 # pin "postcss", to: "https://ga.jspm.io/npm:postcss@8.4.13/lib/postcss.mjs"
 # pin "buffer", to: "https://ga.jspm.io/npm:@jspm/core@2.0.0-beta.24/nodelibs/browser/buffer.js"
 # pin "fs", to: "https://ga.jspm.io/npm:@jspm/core@2.0.0-beta.24/nodelibs/browser/fs.js"
