@@ -7,9 +7,10 @@ class Users::UnlocksController < Devise::UnlocksController
   # end
 
   # POST /resource/unlock
-  # def create
-  #   super
-  # end
+  def create
+    super
+    @user = current_user
+  end
 
   # GET /resource/unlock?unlock_token=abcdef
   # def show

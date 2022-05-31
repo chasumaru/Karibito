@@ -13,6 +13,8 @@ services:
       - log-data:/myapp/log
     depends_on:
       - db
+    environment:
+      - EDITOR=vim
   db:
     image: mysql:8.0
     env_file:
@@ -26,7 +28,7 @@ services:
       - public-data:/myapp/public
       - tmp-data:/myapp/tmp
     ports:
-      - 3005:80
+      - 3000:80
     depends_on:
       - app
 volumes:

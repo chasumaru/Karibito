@@ -1,9 +1,26 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :confirmable, :lockable, :timeoutable
-        #  #omniauthableは後で設定
-        #  :omniauthable, omniauth_providers: [:twitter]
+  
+  validates :name, presence: true
+  validates :profile, length: {maximum: 200}
+      
+  # Include default devise modules. 
+  devise :database_authenticatable, 
+         :registerable,
+         :recoverable, 
+         :rememberable, 
+         :confirmable,
+         :lockable,
+         :validatable,
+         :timeoutable
+         #  :omniauthable, omniauth_providers: [:twitter]
+
+  def send_devise_notification(notification, *args)
+    # deliver_laterを使って非同期送信するように修正
+    devise_mailer.send(notification, self, *args).deliver_later
+  end
+
+  # 退会したユーザの再登録・ログインを防ぐ
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
 end

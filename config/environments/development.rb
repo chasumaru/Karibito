@@ -37,12 +37,16 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # mailer setting
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3005 }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :address => 'smtp.gmail.com',
     :port => 587,
+
+    # 本番環境にデプロイ前に隠す
+    # user_name: Rails.application.credentials.gmail[:user_name],
+    # password: Rails.application.credentials.gmail[:password],
     :user_name => 'yumami345@gmail.com',
     :password => 'kstzsgskrqyxlhau',
     :authentication => :plain,
