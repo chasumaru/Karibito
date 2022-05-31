@@ -1,25 +1,32 @@
-<h2>Change your password</h2>
+<h1 class="font-bold text-center">パスワードの変更</h1>
+<div class="flex w-full items-center space-y-8">
+    <div class="flex-1 px-8 md:px-32 lg:px-24">
+        <div class="mt-8 bg-white rounded-md shadow-md p-5">
+            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+            <%= render "users/shared/error_messages", resource: resource %>
+            <%= f.hidden_field :reset_password_token %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+                <div class="field">
+                    <div class="flex justify-between">
+                        <%= f.label :password, "新しいパスワード" ,class: "block text-lg font-bold text-gray-600 dark:text-gray-200" %>
+                        <% if @minimum_password_length %>
+                        <div class="text-sm text-gray-400 mt-2 ml-8">(<%= @minimum_password_length %>~32桁の半角英数字)</div>
+                        <% end %><br />
+                    </div>
+                    <%= f.password_field :password ,autocomplete: "new-password" ,placeholder: "New Password" ,class: "block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 dark:focus:border-blue-400" %>
+                </div><br>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
-  </div>
+                <div class="field">
+                    <div class="flex justify-between">
+                        <%= f.label :password_confirmation, "パスワード(確認用)", class: "block text-lg font-bold text-gray-600 dark:text-gray-200" %>
+                    </div>
+                    <%= f.password_field :password_confirmation, autocomplete: "new-password" ,class: "block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 dark:focus:border-blue-400" %>
+                </div><br>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
+                    <%= f.submit "変更する" ,class: "w-full px-4 py-2 tracking-wide transition-colors duration-200 transform bg-green-200 rounded-md hover:bg-green-100 focus:outline-none focus:bg-green-100 focus:ring focus:ring-green-100 focus:ring-opacity-50 mb-4" %>
+            <% end %>
+        </div>
+    </div>
+</div>
 <%= render "users/shared/links" %>
+

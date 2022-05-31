@@ -1,16 +1,17 @@
-<h2>Forgot your password?</h2>
+<h1 class="font-bold text-center">パスワードの再設定</h1>
+<div class="flex w-full items-center space-y-8">
+    <div class="flex-1 px-8 md:px-32 lg:px-24">
+        <div class="mt-8 bg-white rounded-md shadow-md p-5">
+            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+            <%= render "users/shared/error_messages", resource: resource %>
+                <div class="field mb-12">
+                  <%= f.label :email, "メールアドレス", class: " block text-lg font-bold text-gray-600 dark:text-gray-200" %>
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email" ,placeholder: "example@gmail.com", class: "block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 dark:focus:border-blue-400" %>
+                </div>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
+                <%= f.submit "再設定用メールを送信" ,class: "w-full px-4 py-2 tracking-wide transition-colors duration-200 transform bg-green-200 rounded-md hover:bg-green-100 focus:outline-none focus:bg-green-100 focus:ring focus:ring-green-100 focus:ring-opacity-50 mb-4" %>
+            <% end %>
+        </div>
+    </div>
+</div>
 <%= render "users/shared/links" %>

@@ -1,35 +1,38 @@
-<h2>新規登録</h2>
+<h1 class="font-bold text-center">会員登録</h1>
+<div class="flex w-full items-center space-y-8">
+    <div class="flex-1 px-8 md:px-32 lg:px-24">
+        <div class="mt-8 bg-white rounded-md shadow-md p-5">
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %> 
+            <%= render "users/shared/error_messages", resource: resource %>
+                <div class="field">
+                  <%= f.label :name, "ユーザー名", class: "block text-lg font-bold text-gray-600 dark:text-gray-200" %>
+                  <%= f.text_field :name, autofocus: true, autocomplete: "name" ,placeholder: "山本太郎", class: "block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 dark:focus:border-blue-400" %>
+                </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+                <div class="field mt-6">
+                    <%= f.label :email, "メールアドレス", class: "block text-lg font-bold text-gray-600 dark:text-gray-200" %>
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email" ,placeholder: "example@gmail.com",class: "block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 dark:focus:border-blue-400" %>
+                </div><br>
 
-    <!-- ユーザー名を追加 -->
-  <div class="field">
-    <% f.label :username %><i>ユーザー名</i><br />
-    <%= f.text_field :username %>
-  </div>
+                <div class="field">
+                    <div class="flex justify-between">
+                        <%= f.label :password, "パスワード" ,class: "block text-lg font-bold text-gray-600 dark:text-gray-200" %>
+                        <% if @minimum_password_length %>
+                        <div class="text-sm text-gray-400 mt-2 ml-8">(<%= @minimum_password_length %>~32桁の半角英数字)</div>
+                        <% end %><br />
+                    </div>
+                    <%= f.password_field :password ,autocomplete: "new-password" ,placeholder: "New Password" ,class: "block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 dark:focus:border-blue-400" %>
+                </div><br>
 
-  <div class="field">
-    <% f.label :email %><i>Eメール</i><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <% f.label :password %><i>パスワード</i>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %>~20桁の半角英数字)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <% f.label :password_confirmation %><i>パスワード(確認用)</i><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "新規登録" %>
-  </div>
-<% end %>
-
+                <div class="field">
+                    <div class="flex justify-between">
+                        <%= f.label :password_confirmation, "パスワード(確認用)", class: "block text-lg font-bold text-gray-600 dark:text-gray-200" %>
+                    </div>
+                    <%= f.password_field :password_confirmation, autocomplete: "new-password" ,class: "block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 dark:focus:border-blue-400" %>
+                </div><br>
+                    <%= f.submit "無料登録する" ,class: "w-full px-4 py-2 tracking-wide transition-colors duration-200 transform bg-green-200 rounded-md hover:bg-green-100 focus:outline-none focus:bg-green-100 focus:ring focus:ring-green-100 focus:ring-opacity-50 mb-4" %>
+            <% end %>
+        </div>
+    </div>
+</div>
 <%= render "users/shared/links" %>
