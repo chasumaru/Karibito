@@ -12,7 +12,9 @@
                 <div class="field mt-6">
                     <div class="flex justify-between mb-2">
                         <%= f.label :password, "パスワード" ,class: "text-lg font-bold text-gray-600 dark:text-gray-200"%>
-                        <%= link_to "パスワードをお忘れですか?" ,new_user_password_path ,class: "text-sm text-gray-400 focus:text-blue-500 hover:text-blue-500 hover:underline" %>
+                        <div class="-mb-2">
+                          <%= link_to "パスワードをお忘れですか?" ,new_user_password_path ,class: "text-sm text-gray-400 focus:text-blue-500 hover:text-blue-500 hover:underline" %>
+                        </div>
                     </div>
                     <%= f.password_field :password ,autocomplete: "current-password" ,placeholder: "Your Password" ,class: "block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 dark:focus:border-blue-400" %>
                 </div><br>
