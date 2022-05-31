@@ -1,6 +1,41 @@
 /* CSSフレームワークと関連するSprocketsの読み込み */
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* tailwindを編集 */
+@layer base {
+  h1 {
+    @apply text-3xl;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+  h3 {
+    @apply text-xl;
+  }
+}
+/* @layer components { */
+  /* form周辺, Vue.jsのcomponent化と対応させる */
+  /* .form-title { 
+    @apply font-bold text-center
+  }
+  .form-outer { 
+    @apply flex w-full items-center space-y-8
+  }
+  .form-inner-1 { 
+    @apply flex-1 px-8 md:px-32 lg:px-24
+  }
+  .form-inner-2 { 
+    @apply mt-8 bg-white rounded-md shadow-md p-5
+  }
+  .form-label { 
+    @apply block text-lg font-bold text-gray-600
+  }
+  .form-field { 
+    @apply block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40
+  }
+  .form-button { 
+    @apply w-full px-4 py-2 tracking-wide transition-colors duration-200 transform bg-green-200 rounded-md hover:bg-green-100 focus:outline-none focus:bg-green-100 focus:ring focus:ring-green-100 focus:ring-opacity-50 mb-4
+  } */
+/* } */
+

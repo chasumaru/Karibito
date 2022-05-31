@@ -14,7 +14,7 @@ en:
       last_attempt: "あと一回間違えるとアカウントが凍結されます。"
       not_found_in_database: "有効でない%{authentication_keys}またはパスワードです。"
       timeout: "セッションの有効期限が切れています。ログインか新規登録をしてください。"
-      unauthenticated: "続けるにはログインか新規登録をしてください。"
+      unauthenticated: "続けるにはログインまたは新規登録をしてください。"
       unconfirmed: "先にアカウントのメール認証をお済ませください。"
     mailer:
       confirmation_instructions:

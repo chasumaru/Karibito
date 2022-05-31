@@ -9,13 +9,11 @@ default: &default
 development:
   <<: *default
   database: karibito_development
-
 test:
   <<: *default
   database: karibito_test
 
 production:
   <<: *default
-  database: myapp_production
-  username: myapp
+  database: karibito_production
   password: <%= ENV["KARIBITO_DATABASE_PASSWORD"] %>
