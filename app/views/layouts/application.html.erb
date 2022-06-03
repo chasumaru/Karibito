@@ -9,22 +9,71 @@
     <%= javascript_importmap_tags %>
     <%= yield(:head) %>
     </head>
-    
+<%# ブレイクポイント対応はしていない %>
     <body class="font-body text-stone-700 bg-neutral-100 ">
-        <header>
-            <nav class="text-2xl">
-                <% if user_signed_in? %>
-                <strong><%= link_to current_user.name, pages_show_path %></strong>
-                <%= link_to 'プロフィール変更', edit_user_registration_path %>
+        <div id="app">
+            <div class="flex justify-between items-center fixed w-full left-0 h-16 bg-white px-3">
+                <header class="container mx-auto pb-3">
+                    <div class="flex justify-between items-center">
+                        <h1 class="text-xl font-semibold">Karibito</h1>
+<%# クリック時の画像を切り換え %>
+                        <div>
+                            <button @click="isOpen = !isOpen" class="focus:outline-none">
+                                <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                                    <path v-show="!isOpen" d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z"/>
+                                    <path v-show="isOpen" d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/>
+                                </svg>                       
+                            </button>
+                        </div>
+                    </div>
+<%# isOpenの状態ではblockクラスからなるバーを表示 %>
+                        <%# サイドバーにする %>
+                    <div :class="isOpen ? 'block' : 'hidden'" class="fixed w-full left-0 bg-white">
+                        <ul>
+                            <% if user_signed_in? %>
+                            <li class="border-b block px-8 py-2 rounded hover:bg-pink-100"><%= link_to current_user.name, pages_show_path %>
+                            <li class="border-b block px-8 py-2 rounded hover:bg-pink-100"><%= link_to 'プロフィール変更', edit_user_registration_path %> 
+                            <li class="border-b block px-8 py-2 rounded hover:bg-pink-100"><%= button_to "ログアウト", destroy_user_session_path, { method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } } %> 
+                            <% else %>
+                            <li class="border-b block px-8 py-2 rounded hover:bg-pink-100"><%= link_to '会員登録', new_user_registration_path %> 
+                            <li class="border-b block px-8 py-2 rounded hover:bg-pink-100"><%= link_to 'ログイン', new_user_session_path %> 
+                            <% end %>
+                            <%# 色とか線とかで境界を作りたい %>
+                            <%# <li class="border-b block px-8 py-2 rounded hover:bg-pink-100"><%= link_to 'Karibitoとは?', about_path %> 
+                            <%# <li class="border-b block px-8 py-2 rounded hover:bg-pink-100"><%= link_to '利用規約', # %> 
+                            <%# <li class="border-b block px-8 py-2 rounded hover:bg-pink-100"><%= link_to 'お問い合わせ', # %>
+                        </ul>
+                    </div>
+                </header>
+            </div>
+        </div>
+            <div class="container mx-auto">
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            <p>コンテンツ領域</p>
+            </div>
 
-                <%= button_to "ログアウト", destroy_user_session_path, { method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } } %>
-
-            <% else %>
-                <%= link_to '会員登録', new_user_registration_path %>
-                <%= link_to 'ログイン', new_user_session_path %>
-                <% end %>
-            </nav>
-        </header>
             <% if flash[:notice] %>
                 <p class="px-6 py-4 bg-blue-50 rounded-lg text-blue-500"><%= notice %></p>
             <% end %>

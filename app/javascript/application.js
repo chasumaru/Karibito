@@ -5,3 +5,12 @@ import "@hotwired/turbo-rails"
 // Hotwireを利用したくない場面では適宜無効化する
 // Turbo.session.drive = false
 
+
+import Vue from 'vue'
+
+const app = new Vue({
+  el: "#app",
+  data: {
+    isOpen: false,
+  }
+});
