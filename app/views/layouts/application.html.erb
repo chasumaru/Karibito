@@ -10,52 +10,45 @@
     <%= yield(:head) %>
   </head>
 <%# ブレイクポイント対応はしていない %>
-  <body class="font-body text-stone-700 bg-neutral-100 ">
-        <div id="app">
-            <div class="flex z-40 justify-between items-center fixed w-full left-0 h-16 bg-white px-3">
-                <header class="container mx-auto pb-3">
-                    <div class="flex justify-between items-center">
-                        <h1 class="text-xl font-semibold">Karibito</h1>
-<%# クリック時の画像を切り換え %>
-                        <div>
-                            <button @click="isOpen = !isOpen" class="focus:outline-none">
-                                <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
-                                    <path v-show="!isOpen" d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z"/>
-                                    <path v-show="isOpen" d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/>
-                                </svg>                       
-                            </button>
-                        </div>
-                    </div>
-<%# isOpenがtrueならblockクラスのバーを表示し、falseならバーを隠す%>
-                        <%# サイドバーにする %>
-                    <div v-bind:class="isOpen ? 'block' : 'hidden'" class="fixed right-0 bg-white">
-                        <aside class=" block mt-6 border" aria-label="Sidebar">
-                            <div class="overflow-y-auto py-4 px-3 rounded dark:border-gray-700">
+  <body class="font-body text-stone-700 bg-neutral-100 overflow-x-hidden">
+
+
+        <header class="w-full bg-green-300 top-0 sticky h-14 z-40">
+            <div id="hamburger" class="hamburger">
+                <span class="inner_line top-0" id="line1"></span>
+                <span class="inner_line top-2.5" id="line2"></span>
+                <span class="inner_line bottom-0" id="line3"></span>
+            </div>
+            <nav id="nav" class="z-30 absolute h-screen w-40 -right-40 top-0 bg-white transition duration-600">
+                        <div class="nav_contents pt-20">
+                            <p class="block px-4 py-2 bg-fuchsia-400 text-white">アカウント設定</p>
                                 <ul class="space-y-2 border-gray-200">
                                     <% if user_signed_in? %>
-                                    <li class=" block px-8 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'マイページ', pages_show_path %>
-                                    <li class=" block px-8 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'プロフィール編集', edit_user_registration_path %> 
-                                    <li class=" block px-8 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'アカウント設定', edit_user_registration_path %> 
-                                    <li class="border-b block px-8 py-2 rounded hover:bg-pink-100 dark:hover:bg-gray-700"><%= button_to "ログアウト", destroy_user_session_path, { method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } } %> 
+                                    <li class=" block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'マイページ', pages_show_path %>
+                                    <li class=" block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'プロフィール編集', edit_user_registration_path %> 
+                                    <li class=" block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'アカウント設定', edit_user_registration_path %> 
+                                    <li class="border-b block px-4 py-2 rounded hover:bg-pink-100 dark:hover:bg-gray-700"><%= button_to "ログアウト", destroy_user_session_path, { method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } } %> 
                                     <% else %> 
-                                    <li class=" block px-8 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to '会員登録', new_user_registration_path %> 
-                                    <li class=" block px-8 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'ログイン', new_user_session_path %> 
+                                    <li class=" block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to '会員登録', new_user_registration_path %> 
+                                    <li class=" block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'ログイン', new_user_session_path %> 
                                     <% end %>
-
+                                    <%# 色とか線とかで境界を作りたい %>
                                 </ul>
+                                <p class="block px-4 py-2 -mb-4 bg-fuchsia-400 text-white">サービスについて</p>
                                 <ul class="mt-4 space-y-2 border-gray-200">
-                                    <li class=" block px-8 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'Karibitoとは?',pages_show_path %> 
-                                    <li class=" block px-8 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to '利用規約',pages_show_path %> 
-                                    <li class=" block px-8 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'お問い合わせ',pages_show_path %>
-                                    <li class=" block px-8 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'よくある質問',pages_show_path %>
+                                    <li class=" block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'Karibitoとは?',pages_show_path %> 
+                                    <li class=" block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to '利用規約',pages_show_path %> 
+                                    <li class=" block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'お問い合わせ',pages_show_path %>
+                                    <li class=" block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'よくある質問',pages_show_path %>
                                 </ul>
-                            </div>
-                        </aside>
-                    </div>
-                </header>
-            </div>
-        </div>
-        <div class="container mx-auto">            
+                        </div>
+            </nav>
+            <h2 class="block absolute top-3 left-3 font-semibold">Karibito</h2>
+        </header>
+
+
+
+        <div class="container mx-auto relative z-0 mt-4">            
             <% if flash[:notice] %>
                 <p class="px-6 py-4 bg-blue-50 rounded-lg text-blue-500"><%= notice %></p>
             <% end %>

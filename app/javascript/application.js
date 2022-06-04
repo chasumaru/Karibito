@@ -6,11 +6,21 @@ import "@hotwired/turbo-rails"
 // Turbo.session.drive = false
 
 
-import Vue from 'vue'
+// import Vue from 'vue'
 
-const app = new Vue({
-  el: "#app",
-  data: {
-    isOpen: false,
-  }
-});
+// const app = new Vue({
+//   el: "#app",
+//   data: {
+//     isOpen: false,
+//   }
+// });
+
+function hamburger() {
+  document.getElementById('line1').classList.toggle('line_1');
+  document.getElementById('line2').classList.toggle('line_2');
+  document.getElementById('line3').classList.toggle('line_3');
+  document.getElementById('nav').classList.toggle('in');
+}
+document.getElementById('hamburger').addEventListener('click' , function () {
+  hamburger();
+} );

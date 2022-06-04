@@ -28,8 +28,17 @@ module.exports = {
         // 緑を調製する
         'base-brown' : '#ecd94b',
       },
+      spacing: {
+        '3.75': '0.9375rem',
+        '5.5': '1.375rem',
+        '6.25': '1.5625rem',
+
+      },
       boxShadow: {
         'md': '1px 1px 1px 1px rgba(0, 0, 0, 0.1),-1px -1px 1px 1px rgba(0, 0, 0, 0.1)'
+      },
+      transitionDuration: {
+        '600': '600ms',
       }
       // backgroundImage: {
       //   'main-img-1': "url('/images/#.jpg')",
