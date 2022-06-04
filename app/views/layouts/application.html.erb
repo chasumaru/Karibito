@@ -8,11 +8,11 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= yield(:head) %>
-    </head>
+  </head>
 <%# ブレイクポイント対応はしていない %>
-    <body class="font-body text-stone-700 bg-neutral-100 ">
+  <body class="font-body text-stone-700 bg-neutral-100 ">
         <div id="app">
-            <div class="flex justify-between items-center fixed w-full left-0 h-16 bg-white px-3">
+            <div class="flex z-40 justify-between items-center fixed w-full left-0 h-16 bg-white px-3">
                 <header class="container mx-auto pb-3">
                     <div class="flex justify-between items-center">
                         <h1 class="text-xl font-semibold">Karibito</h1>
@@ -26,60 +26,48 @@
                             </button>
                         </div>
                     </div>
-<%# isOpenの状態ではblockクラスからなるバーを表示 %>
+<%# isOpenがtrueならblockクラスのバーを表示し、falseならバーを隠す%>
                         <%# サイドバーにする %>
-                    <div :class="isOpen ? 'block' : 'hidden'" class="fixed w-full left-0 bg-white">
-                        <ul>
-                            <% if user_signed_in? %>
-                            <li class="border-b block px-8 py-2 rounded hover:bg-pink-100"><%= link_to current_user.name, pages_show_path %>
-                            <li class="border-b block px-8 py-2 rounded hover:bg-pink-100"><%= link_to 'プロフィール変更', edit_user_registration_path %> 
-                            <li class="border-b block px-8 py-2 rounded hover:bg-pink-100"><%= button_to "ログアウト", destroy_user_session_path, { method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } } %> 
-                            <% else %>
-                            <li class="border-b block px-8 py-2 rounded hover:bg-pink-100"><%= link_to '会員登録', new_user_registration_path %> 
-                            <li class="border-b block px-8 py-2 rounded hover:bg-pink-100"><%= link_to 'ログイン', new_user_session_path %> 
-                            <% end %>
-                            <%# 色とか線とかで境界を作りたい %>
-                            <%# <li class="border-b block px-8 py-2 rounded hover:bg-pink-100"><%= link_to 'Karibitoとは?', about_path %> 
-                            <%# <li class="border-b block px-8 py-2 rounded hover:bg-pink-100"><%= link_to '利用規約', # %> 
-                            <%# <li class="border-b block px-8 py-2 rounded hover:bg-pink-100"><%= link_to 'お問い合わせ', # %>
-                        </ul>
+                    <div v-bind:class="isOpen ? 'block' : 'hidden'" class="fixed right-0 bg-white">
+                        <aside class=" block mt-6 border" aria-label="Sidebar">
+                            <div class="overflow-y-auto py-4 px-3 rounded dark:border-gray-700">
+                                <ul class="space-y-2 border-gray-200">
+                                    <% if user_signed_in? %>
+                                    <li class=" block px-8 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'マイページ', pages_show_path %>
+                                    <li class=" block px-8 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'プロフィール編集', edit_user_registration_path %> 
+                                    <li class=" block px-8 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'アカウント設定', edit_user_registration_path %> 
+                                    <li class="border-b block px-8 py-2 rounded hover:bg-pink-100 dark:hover:bg-gray-700"><%= button_to "ログアウト", destroy_user_session_path, { method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } } %> 
+                                    <% else %> 
+                                    <li class=" block px-8 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to '会員登録', new_user_registration_path %> 
+                                    <li class=" block px-8 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'ログイン', new_user_session_path %> 
+                                    <% end %>
+
+                                </ul>
+                                <ul class="mt-4 space-y-2 border-gray-200">
+                                    <li class=" block px-8 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'Karibitoとは?',pages_show_path %> 
+                                    <li class=" block px-8 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to '利用規約',pages_show_path %> 
+                                    <li class=" block px-8 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'お問い合わせ',pages_show_path %>
+                                    <li class=" block px-8 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'よくある質問',pages_show_path %>
+                                </ul>
+                            </div>
+                        </aside>
                     </div>
                 </header>
             </div>
         </div>
-            <div class="container mx-auto">
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            <p>コンテンツ領域</p>
-            </div>
-
+        <div class="container mx-auto">            
             <% if flash[:notice] %>
                 <p class="px-6 py-4 bg-blue-50 rounded-lg text-blue-500"><%= notice %></p>
             <% end %>
             <% if flash[:alert] %>
                 <p class="px-6 py-4 bg-blue-50 rounded-lg text-blue-500"><%= alert %></p>
             <% end %>
-        <%= yield %>
+            <%= yield %>
+        </div>
+        <footer>
+            <div>
+                <p>fottter要素</p>
+            </div>
+        </footer>
     </body>
 </html>
