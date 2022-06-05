@@ -10,10 +10,10 @@
     <%= yield(:head) %>
   </head>
 <%# ブレイクポイント対応はしていない %>
-  <body class="font-body text-stone-700 bg-neutral-100 overflow-x-hidden">
+  <body class="font-body text-stone-700 bg-neutral-100 relative z-0 overflow-x-hidden">
 
 
-        <header class="w-full bg-green-300 top-0 sticky h-14 z-40">
+        <header class="w-full bg-green-300 top-0 fixed h-14 z-40">
             <div id="hamburger" class="hamburger">
                 <span class="inner_line top-0" id="line1"></span>
                 <span class="inner_line top-2.5" id="line2"></span>
@@ -48,7 +48,7 @@
 
 
 
-        <div class="container mx-auto relative z-0 mt-4">            
+        <div class="container mx-auto relative z-0 mt-20">            
             <% if flash[:notice] %>
                 <p class="px-6 py-4 bg-blue-50 rounded-lg text-blue-500"><%= notice %></p>
             <% end %>

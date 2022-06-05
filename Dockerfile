@@ -1,5 +1,6 @@
 FROM ruby:3.1
-
+ENV APP_NAME=myapp
+ENV BUNDLER_VERSION=2.3.10
 
 # yarnパッケージ管理ツールインストール
 RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
@@ -8,18 +9,19 @@ RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
     apt-get update && apt-get install -y yarn
 RUN apt-get install -y vim
 
-# ルート直下にmyappという名前で作業ディレクトリを作成（コンテナ内のアプリケーションディレクトリ）
-RUN mkdir /myapp
-WORKDIR /myapp
+# ルート直下に${APP_NAME}という名前で作業ディレクトリを作成（コンテナ内のアプリケーションディレクトリ）
+RUN mkdir /${APP_NAME}
+WORKDIR /${APP_NAME}
 # ホストのGemfileとGemfile.lockをコンテナにコピー
-ADD Gemfile /myapp/Gemfile
-ADD Gemfile.lock /myapp/Gemfile.lock
+ADD Gemfile /${APP_NAME}/Gemfile
+ADD Gemfile.lock /${APP_NAME}/Gemfile.lock
 
-# bundle installの実行
-RUN bundle install
+# bundler(v=2.3.7)ではエラーが発生したため変更
+RUN gem install bundler -v ${BUNDLER_VERSION} && \
+    bundle install
 
 # ホストのアプリケーションディレクトリ内をすべてコンテナにコピー
-ADD . /myapp
+ADD . /${APP_NAME}
 
 # puma.sockを配置するディレクトリを作成
 RUN mkdir -p tmp/sockets
