@@ -13,7 +13,7 @@
   <body class="font-body text-stone-700 bg-neutral-100 relative z-0 overflow-x-hidden">
 
 
-        <header class="w-full bg-green-600 top-0 fixed h-14 z-40" data-turbo="false">
+        <header class="w-full bg-lime-300 top-0 fixed h-14 z-40" data-turbo="false">
             <div id="hamburger" class="hamburger">
                 <span class="inner_line top-0" id="line1"></span>
                 <span class="inner_line top-2.5" id="line2"></span>
@@ -21,10 +21,10 @@
             </div>
             <nav id="nav" class="z-30 absolute h-screen w-40 -right-40 top-0 bg-white transition duration-600">
                 <div class="nav_contents pt-20">
-                    <p class="block px-4 py-2 bg-fuchsia-400 text-white">アカウント設定</p>
-                    <ul class="space-y-2 border-gray-200">
+                    <p class="block px-4 py-2 bg-neutral-400 text-white">アカウント設定</p>
+                    <ul class="space-y-2 border-gray-200 outline-none">
                         <% if user_signed_in? %>
-                        <li class=" block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'マイページ', pages_show_path %>
+                        <li class=" block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'マイページ', pages_show_path%>
                         <li class=" block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'プロフィール編集', edit_user_registration_path %> 
                         <li class=" block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'アカウント設定', edit_user_registration_path %> 
                         <li class="border-b block px-4 py-2 rounded hover:bg-pink-100 dark:hover:bg-gray-700"><%= button_to "ログアウト", destroy_user_session_path, { method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } } %> 
@@ -33,7 +33,7 @@
                         <li class=" block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'ログイン', new_user_session_path %> 
                         <% end %>
                     </ul>
-                    <p class="block px-4 py-2 -mb-4 bg-fuchsia-400 text-white">サービスについて</p>
+                    <p class="block px-4 py-2 -mb-4 bg-neutral-400 text-white font-semibold">サービスについて</p>
                     <ul class="mt-4 space-y-2 border-gray-200">
                         <li class=" block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to 'Karibitoとは?',pages_show_path %> 
                         <li class=" block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"><%= link_to '利用規約',pages_show_path %> 
