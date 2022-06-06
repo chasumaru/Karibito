@@ -45,5 +45,21 @@
   bottom: 0;
 }
 
+/* スクロール時にヘッダーの表示切り替え */
 
+.header {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
 
+.header--unpinned {
+  -webkit-transform: translateY(-150%);
+  transform: translateY(-150%);
+}
+
+.header {
+  -webkit-transition: -webkit-transform .4s ease;
+  transition: -webkit-transform .4s ease;
+  transition: transform .4s ease;
+  transition: transform .4s ease, -webkit-transform .4s ease;
+}
