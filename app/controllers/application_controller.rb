@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
 
   def after_sign_in_path_for(resource)
-    pages_show_path
+    mypage_path
   end
 
   private

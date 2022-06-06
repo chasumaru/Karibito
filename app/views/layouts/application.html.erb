@@ -11,7 +11,7 @@
     <%= yield(:head) %>
   </head>
 <%# ブレイクポイント対応はしていない %>
-  <body class="font-body text-stone-700 bg-neutral-100 relative z-0 overflow-x-hidden">
+  <body class="font-body text-stone-700 bg-lime-300 relative z-0 overflow-x-hidden">
 
         <header class="w-full bg-lime-300 top-0 fixed h-14 z-40" data-turbo="false">
             <div id="hamburger" class="hamburger">
@@ -24,7 +24,7 @@
                     <p class="block px-4 py-2 bg-neutral-400 text-white">アカウント設定</p>
                     <ul class="space-y-2 border-gray-200 outline-none">
                         <% if user_signed_in? %>
-                        <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'マイページ', pages_show_path, class: "block"%>
+                        <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'マイページ', mypage_path, class: "block"%>
                         <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'プロフィール編集', edit_user_registration_path, class: "block" %> 
                         <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'アカウント設定', edit_user_registration_path, class: "block" %> 
                         <li class="border-b  px-4 py-2 rounded hover:bg-pink-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= button_to "ログアウト", destroy_user_session_path, { method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } } %> 
@@ -35,17 +35,17 @@
                     </ul>
                     <p class="block px-4 py-2 -mb-4 bg-neutral-400 text-white font-semibold">サービスについて</p>
                     <ul class="mt-4 space-y-2 border-gray-200">
-                        <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'Karibitoとは?',pages_show_path, class: "block" %> 
-                        <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to '利用規約',pages_show_path, class: "block" %> 
-                        <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'お問い合わせ',pages_show_path, class: "block" %>
-                        <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'よくある質問',pages_show_path, class: "block" %>
+                        <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'Karibitoとは?',about_path, class: "block" %> 
+                        <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to '利用規約',term_path, class: "block" %> 
+                        <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'お問い合わせ',contact_path, class: "block" %>
+                        <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'よくある質問',faq_path, class: "block" %>
                     </ul>
                 </div>
             </nav>
             <h2><%= link_to "Karibito", root_path, class:"block absolute top-3 left-18 font-semibold no-tap-highlighting"%></h2>
-            <%= link_to image_tag('Karibito_logo.png', class:'md:w-18 w-12 absolute top-1 left-3 no-tap-highlighting'), root_path %>
+            <%= link_to image_tag('Karibito_logo.png', class:'w-12 absolute top-1 left-3 no-tap-highlighting'), root_path %>
         </header>
-        <div class="container mx-auto relative z-0 mt-20">            
+        <div class="main bg-neutral-100 mx-auto relative z-0 pt-24">            
             <% if flash[:notice] %>
                 <p class="px-6 py-4 bg-blue-50 rounded-lg text-blue-500"><%= notice %></p>
             <% end %>
@@ -56,7 +56,15 @@
         </div>
         <footer>
             <div>
-                <p>fottter要素</p>
+            <p>footer要素
+                <ul>
+                    <li><%= link_to '利用規約',term_path, class: "block" %> 
+                    <li><%= link_to 'プライバシーポリシー',privacy_path, class: "block" %> 
+                    <% if user_signed_in? %>
+                    <li><%= link_to "退会ページ", unsubscribe_path(current_user) %>
+                    <% end %>
+                    <li>©コピーライト
+                </ul>
             </div>
         </footer>
     </body>

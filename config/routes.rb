@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
   root 'pages#index'
-  get "pages/show"
+  get "/mypage" => 'pages#show', as: 'mypage'
+  get "/about" => 'pages#about', as: 'about'
+  get "/contact" => 'pages#contact', as: 'contact'
+  get "/privacy" => 'pages#privacy', as: 'privacy'
+  get "/faq" => 'pages#faq', as: 'faq'
+  get "/term" => 'pages#term', as: 'term'
   
   devise_for :users,
       module: "users",
@@ -12,15 +17,10 @@ Rails.application.routes.draw do
       registration: 'register', edit: 'edit/profile'
     }
 
-    resources :users, only: [:show, :edit, :update]
 
     # 退会確認画面
-    get '/softdeletes/:id/unsubscribe' => 'softdeletes#unsubscribe', as: 'unsubscribe'
+    get '/:id/unsubscribe' => 'softdeletes#unsubscribe', as: 'unsubscribe'
     # 論理削除用のルーティング
-    patch '/softdeletes/:id/withdrawal' => 'softdeletes#withdrawal', as: 'withdrawal'
+    patch '/:id/withdrawal' => 'softdeletes#withdrawal', as: 'withdrawal'
   
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end
