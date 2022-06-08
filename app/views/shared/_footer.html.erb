@@ -1,0 +1,9 @@
+<p>footer要素
+<ul>
+    <li><%= link_to '利用規約',term_path, class: "block" %> 
+    <li><%= link_to 'プライバシーポリシー',privacy_path, class: "block" %> 
+    <% if user_signed_in? %>
+    <li><%= link_to "退会ページ", unsubscribe_path(current_user) %>
+    <% end %>
+    <li>©コピーライト
+</ul>
