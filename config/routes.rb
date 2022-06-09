@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :posts
 
   root 'pages#index'
   get "/mypage" => 'pages#show', as: 'mypage'

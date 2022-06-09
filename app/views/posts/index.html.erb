@@ -1,0 +1,9 @@
+<% if user_signed_in? %>
+  <%= button_to "投稿", new_post_path, {method: :get} %>
+<% end %>
+
+<% @posts.each do |post| %>
+  <span>投稿者：</span><%= post.user.name %>
+  <%= post.title %>
+  <%= post.content %>
+<% end %>
