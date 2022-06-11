@@ -3,7 +3,10 @@
 <% end %>
 
 <% @posts.each do |post| %>
-  <span>投稿者：</span><%= post.user.name %>
-  <%= post.title %>
-  <%= post.content %>
+<%# 投稿者のプロフィールページへのリンクを作成する %>
+  <span>投稿者：</span><%= post.user.name %><br>
+  <span>タイトル：</span><%= link_to post.title, "posts/#{post.id}" %><br>
+   <span>内容：</span><%= post.content %><br>
 <% end %>
+
+ <%== pagy_nav(@pagy) %>
