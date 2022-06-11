@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       registration: 'register', edit: 'edit/profile'
     }
   devise_scope :user do
-    get "mypage", to: "users/accounts#show"
+    get "/:id/mypage", to: "users/accounts#show", as: 'mypage'
     get '/:id/unsubscribe' => 'users/accounts#unsubscribe', as: 'unsubscribe'
     patch '/:id/withdrawal' => 'users/accounts#withdrawal', as: 'withdrawal'
   end

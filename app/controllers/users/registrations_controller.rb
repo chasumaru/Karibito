@@ -28,9 +28,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    super
+    if account_update_params[:avatar].present?
+      resource.avatar.attach(account_update_params[:avatar])
+    end
+  end
 
     # DELETE /resource
     # def destroy
@@ -62,17 +65,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_sign_up_path_for(resource)
   #   super(resource)
   # end
-
+  def after_update_path_for(resource)
+    # 自分で設定した「マイページ」へのパス
+    mypage_path(current_user)
+  end
   # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_inactive_sign_up_path_for(resource)
+    mypage_url(resource)
+  end
   def update_resource(resource, params)
     resource.update_without_password(params)
   end
 
   private
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar)
     end
 end

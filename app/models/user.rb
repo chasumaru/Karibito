@@ -22,6 +22,7 @@ class User < ApplicationRecord
   # Assortiation
   has_many :posts
 
+  has_one_attached :avatar
 
 
   def send_devise_notification(notification, *args)

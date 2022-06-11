@@ -3,3 +3,6 @@
 
 <h3>本文</h3>
 <%= @post.content %>
+
+<%# 画像の削除機能の追加(correct_userのみ)
+User.image.purge %>

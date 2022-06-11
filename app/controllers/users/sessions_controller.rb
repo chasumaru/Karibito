@@ -14,7 +14,8 @@ class Users::SessionsController < Devise::SessionsController
     @user = User.new(user_params)
     if user_signed_in?
       flash[:notice] = "ログインしました。"
-      redirect_to mypage_path
+      redirect_to root_path
+      # redirect_to mypage_path(@user)
     else
       flash[:alert] = "メールアドレスまたはパスワードが正しくありません。"
       render :new, status: :unprocessable_entity
