@@ -1,4 +1,4 @@
-class PagesController < ApplicationController
+class StaticPagesController < ApplicationController
   before_action :sign_in_required, only: [:show]
 
 
@@ -11,4 +11,11 @@ class PagesController < ApplicationController
     # @user = User.find_by...?
       # ユーザのプロフィール画面を表示
   end
+
+  def about
+  end
+
+  def faq
+  end
+  
 end

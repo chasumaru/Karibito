@@ -2,13 +2,13 @@ Rails.application.routes.draw do
 
   resources :posts
 
-  root 'pages#index'
-  # get "/profile" => 'pages#show', as: 'profile'
-  get "/about" => 'pages#about', as: 'about'
-  get "/contact" => 'pages#contact', as: 'contact'
-  get "/privacy" => 'pages#privacy', as: 'privacy'
-  get "/faq" => 'pages#faq', as: 'faq'
-  get "/term" => 'pages#term', as: 'term'
+  root 'static_pages#index'
+  # get "/profile" => 'static_pages#show', as: 'profile'
+  get "/about" => 'static_pages#about', as: 'about'
+  get "/contact" => 'static_pages#contact', as: 'contact'
+  get "/privacy" => 'static_pages#privacy', as: 'privacy'
+  get "/faq" => 'static_pages#faq', as: 'faq'
+  get "/term" => 'static_pages#term', as: 'term'
   
   devise_for :users,
       module: "users",
