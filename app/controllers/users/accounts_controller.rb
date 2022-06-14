@@ -15,7 +15,7 @@ class Users::AccountsController < ApplicationController
 
   # is_deletedカラムをtrueに変更する
   def withdrawal
-    @user = current_userことにより削除フラグを立てる
+    @user = current_user
     @user.update(is_deleted: true)
     reset_session
     flash[:notice] = '退会処理を実行いたしました'
