@@ -14,10 +14,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:notice] = "ユーザー認証メールを送信いたしました。認証が完了しましたらログインしてください。"
+      flash[:notice] = 'ユーザー認証メールを送信いたしました。認証が完了しましたらログインしてください。'
       redirect_to new_user_session_path
     else
-      flash[:alert] = "ユーザー登録に失敗しました。"
+      flash[:alert] = 'ユーザー登録に失敗しました。'
       render :new, status: :unprocessable_entity
     end
   end
@@ -30,15 +30,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     super
-    if account_update_params[:avatar].present?
-      resource.avatar.attach(account_update_params[:avatar])
-    end
+    resource.avatar.attach(account_update_params[:avatar]) if account_update_params[:avatar].present?
   end
 
-    # DELETE /resource
-    # def destroy
-    #     super
-    # end
+  # DELETE /resource
+  # def destroy
+  #     super
+  # end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
@@ -65,20 +63,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_sign_up_path_for(resource)
   #   super(resource)
   # end
-  def after_update_path_for(resource)
+  def after_update_path_for(_resource)
     # 自分で設定した「マイページ」へのパス
     mypage_path(current_user)
   end
+
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)
     mypage_url(resource)
   end
+
   def update_resource(resource, params)
     resource.update_without_password(params)
   end
 
   private
-    def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar)
-    end
+
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar)
+  end
 end

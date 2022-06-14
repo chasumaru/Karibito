@@ -29,9 +29,10 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   # end
 
   private
-  def after_confirmation_path_for(resource_name, resource)
+
+  def after_confirmation_path_for(_resource_name, resource)
     sign_in(resource)
-    flash[:notice] = "アカウント認証が完了しました"
+    flash[:notice] = 'アカウント認証が完了しました'
     root_path
   end
 end
