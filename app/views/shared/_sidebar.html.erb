@@ -1,6 +1,6 @@
-<div class="bg-neutral-100 mx-auto relative">
-  <aside id="sidebar" class="z-40 absolute h-screen w-40 -right-40 top-0 pt-20 bg-white transition duration-600">
-      <p class="block px-4 py-2 bg-neutral-400 text-white">アカウント設定</p>
+<div class="bg-neutral-100 mx-auto fixed top-0  -right-40 z-40 ">
+  <aside id="sidebar" class="  h-screen w-40 pt-20 bg-white transition duration-600">
+      <p class="block px-4 py-2 bg-neutral-400 text-white font-semibold">アカウント設定</p>
       <ul class="space-y-2 border-gray-200 outline-none">
           <% if user_signed_in? %>
           <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'マイページ', mypage_path(current_user), class: "block"%>

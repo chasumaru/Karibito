@@ -7,7 +7,7 @@ ruby '3.1.2'
 gem 'rails', '~> 7.0.2', '>= 7.0.2.4'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem 'sprockets-rails'
+gem 'propshaft'
 
 # Use mysql as the database for Active Record
 gem 'mysql2', '~> 0.5'
@@ -28,10 +28,10 @@ gem 'stimulus-rails'
 # gem "tailwindcss-rails"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem 'jbuilder'
+# gem 'jbuilder'
 
 # Use Redis adapter to run Action Cable in production(Hotwire)
-gem 'redis', '~> 4.0'
+# gem 'redis', '~> 4.0'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -52,8 +52,6 @@ gem 'bootsnap', require: false
 # gem "image_processing", "~> 1.2"
 
 gem 'cssbundling-rails'
-
-gem 'vuejs-rails', '~> 2.5'
 
 gem 'devise'
 gem 'devise-i18n'
