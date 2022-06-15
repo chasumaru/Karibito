@@ -7,6 +7,9 @@
   <span>投稿者：</span><%= post.user.name %><br>
   <span>タイトル：</span><%= link_to post.title, "posts/#{post.id}" %><br>
    <span>内容：</span><%= post.content %><br>
+   <span>画像の枚数：</span><%= post.images.attached? ? post.images.count : 0 %><br>
+   <%= link_to '編集', edit_post_path(post)%>
+   <%= link_to "削除", post, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
 <% end %>
 
  <%== pagy_nav(@pagy) %>
