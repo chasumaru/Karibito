@@ -13,9 +13,7 @@ function hamburger() {
   document.getElementById('line3').classList.toggle('line_3');
   document.getElementById('sidebar').classList.toggle('in');
 }
-document.getElementById('hamburger').addEventListener('click' , function () {
-  hamburger();
-} );
+document.getElementById('hamburger').addEventListener('click', hamburger);
 
 
 // /* スクロール時にヘッダーの表示切り替え */
