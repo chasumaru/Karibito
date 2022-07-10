@@ -25,7 +25,7 @@
 
   /* ハンバーガーメニューのモーション */
 
-.in{
+.sidebar{
   transform: translateX(-100%);
 }
 

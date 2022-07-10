@@ -4,16 +4,6 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
-// ハンバーガーメニューのクリックイベント
-function hamburger() {
-  document.getElementById('line1').classList.toggle('line_1');
-  document.getElementById('line2').classList.toggle('line_2');
-  document.getElementById('line3').classList.toggle('line_3');
-  document.getElementById('sidebar').classList.toggle('in');
-}
-document.getElementById('hamburger').addEventListener('click', hamburger);
-
-
 // /* スクロール時にヘッダーの表示切り替え */
 
 // // ヘッダーを取得

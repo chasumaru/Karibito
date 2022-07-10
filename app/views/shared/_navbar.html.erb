@@ -1,9 +1,11 @@
-<div class="header w-full bg-lime-300 top-0 fixed h-14 z-50">
-    <nav id="hamburger" class="hamburger">
-        <span class="inner_line top-0" id="line1"></span>
-        <span class="inner_line top-2.5" id="line2"></span>
-        <span class="inner_line bottom-0" id="line3"></span>
-    </nav>
+<div class="w-full bg-lime-300 top-0 fixed h-14 z-50">
+    <div data-controller="sidebar" data-sidebar-target="hamburger" data-action="click->sidebar#toggle"  data-expanded="0" class="w-full bg-lime-300 top-0 fixed h-14 z-50">
+        <nav class="hamburger">
+            <span data-sidebar-target="line1" class="inner_line top-0"></span>
+            <span data-sidebar-target="line2"  class="inner_line top-2.5"></span>
+            <span data-sidebar-target="line3"  class="inner_line bottom-0"></span>
+        </nav>
+    </div>
     <h2><%= link_to "Karibito", root_path, class:"block absolute top-3 left-18 font-semibold no-tap-highlighting"%></h2>
     <%= link_to image_tag('Karibito_logo.png', class:'w-12 absolute top-1 left-3 no-tap-highlighting'), root_path %>
 </div>
