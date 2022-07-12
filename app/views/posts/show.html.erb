@@ -9,7 +9,7 @@
   <p><strong>Image:</strong></p>
   <% @post.images.each do |image| %>
     <%= link_to image_tag(image, size: '200×150'), url_for(image) %>
-    <%= image_tag image.variant(resize: "300×300") %>
+    <%# <%= image_tag image.variant(resize: "300×300") %>
   <% end %>
 </div>
 <% end %>
