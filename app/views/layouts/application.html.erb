@@ -11,14 +11,15 @@
         <%= yield(:head) %>
     </head>
 <%# ブレイクポイント対応はしていない %>
-    <body class="font-body text-stone-700 bg-lime-300 relative z-0">
-        <header data-controller="sidebar" id="header">
+    <body class="font-body text-stone-700 bg-lime-300 relative z-0" data-controller="sidebar">
+        <header id="header">
             <%= render "shared/navbar" %>
         </header>
         <main>
-            <div class="bg-neutral-100 mx-auto relative z-0 pt-24">
+            <div class="bg-neutral-100 mx-auto relative z-0 pt-24 ">
                 <%= render "shared/flash" %>
                 <%= yield %>
+            <div data-sidebar-target="covering"></div>
             </div>
         </main>
         <footer>

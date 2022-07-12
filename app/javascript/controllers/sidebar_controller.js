@@ -4,17 +4,19 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static get targets() {
     // ターゲットの更新
-    return ["displaySidebar", "hamburger", "line1", "line2", "line3"]
+    return ["displaySidebar", "hamburger", "line1", "line2", "line3", "covering"]
   }
-
+  
   toggle() {
     //  sidebar-containerターゲットを持つ要素のdata-expanded属性が0であるか判定
       if (this.hamburgerTarget.dataset.expanded === "0") {
         this.hamburgerOn()
         this.expand()
+        this.cover()
       } else {
         this.hamburgerOff()
         this.collapse()
+        this.uncover()
       }
     }
 
@@ -40,4 +42,12 @@ export default class extends Controller {
     this.hamburgerTarget.dataset.expanded = "0"
   }
   
+  cover() {
+    this.coveringTarget.classList.add('sidebar__cover')
+  }
+
+  uncover() {
+    this.coveringTarget.classList.remove('sidebar__cover')
+  }
+
 }
