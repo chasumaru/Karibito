@@ -1,12 +1,12 @@
-<div class="w-full bg-lime-300 top-0 fixed h-14 z-30">
-    <div data-sidebar-target="hamburger" data-action="click->sidebar#toggle"  data-expanded="0">
+<div class="w-full bg-white top-0 fixed h-14 z-30">
         <h2><%= link_to "Karibito", root_path, class:"block absolute top-3 left-18 font-semibold no-tap-highlighting"%></h2>
         <%= link_to image_tag('Karibito_logo.png', class:'w-12 absolute top-1 left-3 no-tap-highlighting'), root_path %>
-        <nav class="hamburger fixed z-50">
-            <span data-sidebar-target="line1" class="inner_line top-0"></span>
-            <span data-sidebar-target="line2"  class="inner_line top-2.5"></span>
-            <span data-sidebar-target="line3"  class="inner_line bottom-0"></span>
-        </nav>
+        <div data-sidebar-target="hamburger" data-action="click->sidebar#toggle"  data-expanded="0">
+            <nav class="hamburger fixed z-50">
+                <span data-sidebar-target="line1" class="inner_line top-0"></span>
+                <span data-sidebar-target="line2"  class="inner_line top-2.5"></span>
+                <span data-sidebar-target="line3"  class="inner_line bottom-0"></span>
+            </nav>
+        </div>
         <%= render "shared/sidebar" %>
-    </div>
 </div>

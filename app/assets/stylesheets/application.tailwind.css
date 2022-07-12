@@ -19,7 +19,7 @@
     @apply z-40 block absolute top-4 right-3.75 w-6.25 h-5.5 cursor-pointer transition duration-600;
   }
   .inner_line {
-    @apply block absolute right-0 w-6.25 h-0.5 bg-white duration-600 rounded;
+    @apply block absolute right-0 w-6.25 h-0.5 bg-black duration-600 rounded;
   }
 }
 
@@ -29,9 +29,6 @@
   transform: translateX(-100%);
 }
 
-.line_1,.line_2,.line_3{
-  background: #000000;
-}
 
 .line_1 {
   transform: translateY(10px) rotate(-45deg);
@@ -55,6 +52,7 @@
 	background: rgba(3,3,3,.5);
 	display: block;
 }
+
 
 
 
