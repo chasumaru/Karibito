@@ -8,7 +8,6 @@
 - Nginx:        1.21.1
 - MySQL:        8.0
 - Tailwindcss
-- Vue.js
 
 
 実装gems
@@ -24,11 +23,12 @@
 
 *Test
 - Rspec-rails
+- factorybot-rails
 
 
 開発の大まかな流れ
 - [ ] 環境構築
-- [ ] 基本機能の実装
+- [ ] 機能の実装
 - [ ] 本番環境(AWS)へのデプロイ
 - [ ] CI/CDの実装
 - [ ] Teraformによるインフラのコード化
