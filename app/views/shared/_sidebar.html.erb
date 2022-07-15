@@ -4,8 +4,7 @@
                 <ul class="space-y-2 border-gray-200 outline-none">
                     <% if user_signed_in? %>
                     <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'マイページ', mypage_path(current_user), class: "block"%>
-                    <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'プロフィール編集', edit_user_registration_path, class: "block" %> 
-                    <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'アカウント設定', edit_user_registration_path, class: "block" %> 
+                    <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'プロフィール確認', edit_user_registration_path, class: "block" %> 
                     <li class="border-b  px-4 py-2 rounded hover:bg-pink-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= button_to "ログアウト", destroy_user_session_path, { method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } } %> 
                     <% else %> 
                     <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to '会員登録', new_user_registration_path, class: "block" %> 

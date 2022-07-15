@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get "/privacy" => 'static_pages#privacy', as: 'privacy'
   get "/faq" => 'static_pages#faq', as: 'faq'
   get "/term" => 'static_pages#term', as: 'term'
+  get "/manual" => 'static_pages#manual', as: 'manual'
   
   devise_for :users,
       module: "users",
