@@ -1,0 +1,23 @@
+        <div class="bg-neutral-100 mx-auto fixed top-0 -right-48 z-40">
+            <aside data-sidebar-target="displaySidebar" class=" h-screen w-48 pt-20 bg-white transition duration-600 border-l-2 border-lime-300">
+                <p class="block px-4 py-2 bg-neutral-400 text-white font-semibold">アカウント設定</p>
+                <ul class="space-y-2 border-gray-200 outline-none">
+                    <% if user_signed_in? %>
+                    <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'マイページ', mypage_path(current_user), class: "block"%>
+                    <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'プロフィール編集', edit_user_registration_path, class: "block" %> 
+                    <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'アカウント設定', edit_user_registration_path, class: "block" %> 
+                    <li class="border-b  px-4 py-2 rounded hover:bg-pink-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= button_to "ログアウト", destroy_user_session_path, { method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } } %> 
+                    <% else %> 
+                    <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to '会員登録', new_user_registration_path, class: "block" %> 
+                    <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'ログイン', new_user_session_path, class: "block" %> 
+                    <% end %>
+                </ul>
+                <p class="block px-4 py-2 -mb-4 bg-neutral-400 text-white font-semibold">サービスについて</p>
+                <ul class="mt-4 space-y-2 border-gray-200">
+                    <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'Karibitoとは?',about_path, class: "block" %> 
+                    <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to '利用規約',term_path, class: "block" %> 
+                    <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'お問い合わせ',contact_path, class: "block" %>
+                    <li class="px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 no-tap-highlighting"><%= link_to 'よくある質問',faq_path, class: "block" %>
+                </ul>
+            </aside>
+        </div>

@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
 
-  root 'pages#index'
-  get "pages/show"
+  resources :posts
+
+  root 'static_pages#index'
+  # get "/profile" => 'static_pages#show', as: 'profile'
+  get "/about" => 'static_pages#about', as: 'about'
+  get "/contact" => 'static_pages#contact', as: 'contact'
+  get "/privacy" => 'static_pages#privacy', as: 'privacy'
+  get "/faq" => 'static_pages#faq', as: 'faq'
+  get "/term" => 'static_pages#term', as: 'term'
   
   devise_for :users,
       module: "users",
@@ -11,16 +18,15 @@ Rails.application.routes.draw do
       password: 'secret', confirmation: 'verification',
       registration: 'register', edit: 'edit/profile'
     }
+  devise_scope :user do
+    get "/:id/mypage", to: "users/accounts#show", as: 'mypage'
+    get '/:id/unsubscribe' => 'users/accounts#unsubscribe', as: 'unsubscribe'
+    patch '/:id/withdrawal' => 'users/accounts#withdrawal', as: 'withdrawal'
+  end
 
-    resources :users, only: [:show, :edit, :update]
-
-    # 退会確認画面
-    get '/softdeletes/:id/unsubscribe' => 'softdeletes#unsubscribe', as: 'unsubscribe'
-    # 論理削除用のルーティング
-    patch '/softdeletes/:id/withdrawal' => 'softdeletes#withdrawal', as: 'withdrawal'
+  # 退会確認画面
+  # get '/:id/unsubscribe' => 'softdeletes#unsubscribe', as: 'unsubscribe'
+  # # 論理削除用のルーティング
+  # patch '/:id/withdrawal' => 'softdeletes#withdrawal', as: 'withdrawal'
   
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end

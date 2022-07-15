@@ -19,19 +19,16 @@
     @apply z-40 block absolute top-4 right-3.75 w-6.25 h-5.5 cursor-pointer transition duration-600;
   }
   .inner_line {
-    @apply block absolute right-0 w-6.25 h-0.5 bg-white duration-600 rounded;
+    @apply block absolute right-0 w-6.25 h-0.5 bg-black duration-600 rounded;
   }
 }
 
-  /* ハンバーガーメニューのモーション */
+  /* サイドバーのモーション */
 
-.in{
+.sidebar{
   transform: translateX(-100%);
 }
 
-.line_1,.line_2,.line_3{
-  background: #000000;
-}
 
 .line_1 {
   transform: translateY(10px) rotate(-45deg);
@@ -45,5 +42,35 @@
   bottom: 0;
 }
 
+.sidebar__cover{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 9997;
+	background: rgba(3,3,3,.5);
+	display: block;
+}
 
 
+
+
+/* スクロール時にヘッダーの表示切り替え */
+
+.header {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.header--unpinned {
+  -webkit-transform: translateY(-150%);
+  transform: translateY(-150%);
+}
+
+.header {
+  -webkit-transition: -webkit-transform .4s ease;
+  transition: -webkit-transform .4s ease;
+  transition: transform .4s ease;
+  transition: transform .4s ease, -webkit-transform .4s ease;
+}

@@ -1,5 +1,6 @@
 
 const colors = require('tailwindcss/colors');
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
   content: [
@@ -32,6 +33,7 @@ module.exports = {
         '3.75': '0.9375rem',
         '5.5': '1.375rem',
         '6.25': '1.5625rem',
+        '18': '4.5rem',
 
       },
       boxShadow: {
@@ -51,6 +53,17 @@ module.exports = {
     },
   },
   plugins: [
-    require('@tailwindcss/forms'),
+    // 指定行数で文章を切り捨てて省略記法
+    // require('@tailwindcss/line-clamp'),
+    // // 画像の縦横比を指定
+    // require('@tailwindcss/aspect-ratio'),
+    // モバイル端末でのタップ時の影を非表示にする
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        '.no-tap-highlighting': {
+          '-webkit-tap-highlight-color': 'rgba(0,0,0,0)',
+        }
+      })
+    })
   ],
 }

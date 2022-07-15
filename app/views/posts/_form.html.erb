@@ -1,0 +1,50 @@
+<%= form_with(model: post) do |f| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= f.label :title, "タイトル" %><br>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :content, "本文" %><br>
+    <%= f.text_area :content %>
+  </div>
+
+  <div class="field">
+    <%= f.label :images, "画像を添付する" %><br>
+    <%= f.file_field :images, multiple: true %><br>
+  </div>
+
+  <h3>画像</h3>
+
+  <% if post.images.attached? %>
+    <p>選択済みの画像（削除する画像にチェックをつけてください）</p>
+    <div style="display: flex; flex-wrap: wrap; width: 750px;">
+      <% @post.images.each do |image| %>
+        <div style="display: flex; margin:5px 5px 5px 0;">
+        <%= f.check_box :image_ids, {multiple: true }, image.id, false %>
+          <label for="post_image_ids_<%= image.id %>" >
+            <%= image_tag image, width: 300, height: 200 %>
+          </label>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

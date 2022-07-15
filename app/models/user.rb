@@ -1,18 +1,23 @@
 class User < ApplicationRecord
-  
-  validates :name, presence: true
-  validates :profile, length: {maximum: 200}
-      
-  # Include default devise modules. 
-  devise :database_authenticatable, 
+  # Include default devise modules.
+  devise :database_authenticatable,
          :registerable,
-         :recoverable, 
-         :rememberable, 
+         :recoverable,
+         :rememberable,
          :confirmable,
          :lockable,
          :validatable,
          :timeoutable
-         #  :omniauthable, omniauth_providers: [:twitter]
+  #  :omniauthable, omniauth_providers: [:twitter]
+
+  # Valdation
+  validates :name, presence: true
+  validates :profile, length: { maximum: 200 }
+
+  # Assortiation
+  has_many :posts
+
+  has_one_attached :avatar
 
   def send_devise_notification(notification, *args)
     # deliver_laterを使って非同期送信するように修正
