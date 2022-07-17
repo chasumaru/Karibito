@@ -1,10 +1,24 @@
-<div class="footer w-full bg-lime-300 bottom-0 h-32">
-    <ul>
-        <li><%= link_to '利用規約',term_path, class: "block" %> 
-        <li><%= link_to 'プライバシーポリシー',privacy_path, class: "block" %> 
+<div class="flex w-full bottom-0 h-56 py-6 bg-stone-500 text-white">
+    <ul class="flex-auto w-60 ml-4 px-8">
+        <div class="block mb-4">
+            <li><%= link_to '狩猟日記',posts_path, class: "block" %> 
+            <li class="my-1"><%= link_to '日記を書く',posts_path, class: "block" %> 
+        </div>
+        <div class="block mb-6">
+            <li><%= link_to '質問掲示板',about_path, class: "block" %> 
+        </div>
+    </ul>
+    <ul class="flex-auto w-60">
+        <li class="mb-2"><%= link_to 'Karibitoとは?',about_path, class: "block" %> 
+        <li class="mb-2"><%= link_to '利用規約',term_path, class: "block" %> 
+        <li class="my-2"><%= link_to 'プライバシーポリシー',privacy_path, class: "block" %> 
+        <li class="my-2"><%= link_to 'よくある質問',about_path, class: "block" %> 
+        <li class="my-2"><%= link_to 'お問い合わせ',contact_path, class: "block" %> 
         <% if user_signed_in? %>
-        <li><%= link_to "退会ページ", unsubscribe_path(current_user) %>
+        <li class="my-2"><%= link_to "退会する", unsubscribe_path(current_user) %>
         <% end %>
-        <li>©コピーライト
     </ul>
 </div>
+<div class="flex w-full bottom-0 h-16 bg-stone-700 text-white">
+ <p class="flex-none text-sm mt-8 ml-2 pb-2 w-96 ">©Karibito All Right Reserved</p>
+ </div>
