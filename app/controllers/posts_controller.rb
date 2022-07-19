@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
-  before_action :sign_in_required, only: %i[new create]
+  before_action :sign_in_required, except: [:index, :show]
   before_action :set_post, only: %i[ show edit update destroy]
+  before_action :ensure_correct_user,{only: [:edit,:update,:destroy]}
 
   def index
     # @posts = Post.order(created_at: :desc)
@@ -23,11 +24,10 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
   end
 
   def update
-    #添付画像を個別に削除
+    #チェックした削除がある場合にのみ個別削除
     if params[:post][:image_ids]
       params[:post][:image_ids].each do |image_id|
         image = @post.images.find(image_id)
@@ -44,7 +44,7 @@ class PostsController < ApplicationController
   
   def destroy
     @post.destroy
-    redirect_to posts_url, notice: "ツイートを削除しました。"
+    redirect_to posts_path, notice: "ツイートを削除しました。", status: :see_other 
     # flash.now.notice = "ツイートを削除しました。"
 
   end
@@ -60,5 +60,12 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :content, images: [])
+  end
+
+  def ensure_correct_user
+    @post = Post.find_by(id: params[:id])
+    if @post.user_id != current_user.id
+    redirect_to posts_path, notice: "権限がありません"
+    end
   end
 end
