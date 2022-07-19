@@ -1,5 +1,6 @@
 <h3>タイトル</h3>
 <%= @post.title %><br>
+<%= @post.user.name %><br>
 
 <h3>本文</h3>
 <%= @post.content %>
@@ -13,9 +14,13 @@
   <% end %>
 </div>
 <% end %>
-
-<%= link_to '編集する', edit_post_path(@post) %> |
-<%= link_to 'ユーザーページ', posts_path %>
+<% if user_signed_in? %>
+  <% if current_user.id == @post.user_id %>
+    <%= link_to '編集する', edit_post_path(@post) %> |
+      <%= link_to "削除", @post, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
+  <% end %>
+<% end %>
+<%= link_to '一覧に戻る', posts_path %>
 
 <ul>
 <li>ユーザー自身のみ投稿,編集,削除が可能</li>
