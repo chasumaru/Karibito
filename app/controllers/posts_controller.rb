@@ -16,9 +16,9 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      redirect_to posts_path
+      redirect_to posts_path, notice: "新しい日記を作成しました."
     else
-      flash[:alert] = 'ツイートの作成に失敗しました。'
+      flash.now.alert = '日記の作成に失敗しました。'
       render :new, status: :unprocessable_entity
     end
   end
@@ -36,7 +36,7 @@ class PostsController < ApplicationController
     end
 
     if @post.update(post_params)
-      redirect_to @post, notice: "ツイート内容が更新されました."
+      redirect_to @post, notice: "日記の内容が更新されました."
     else
       render :edit, status: :unprocessable_entity 
     end
@@ -44,8 +44,8 @@ class PostsController < ApplicationController
   
   def destroy
     @post.destroy
-    redirect_to posts_path, notice: "ツイートを削除しました。", status: :see_other 
-    # flash.now.notice = "ツイートを削除しました。"
+    redirect_to posts_path, notice: "日記を削除しました。", status: :see_other 
+    # flash.now.notice = "日記を削除しました。"
 
   end
 
