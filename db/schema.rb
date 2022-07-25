@@ -72,7 +72,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_11_123427) do
     t.text "profile"
     t.string "provider"
     t.string "uid"
-    t.boolean "is_deleted", default: false, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name"

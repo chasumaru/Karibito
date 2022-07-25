@@ -4,6 +4,5 @@
    再度ご利用をいただく場合には、新規登録のお手続きが必要になります。<br>
    本当に退会してよろしいですか？
  </p>
-  <%= button_to "退会する", withdrawal_path, { method: :patch, form: { data: { turbo_confirm: "本当に退会しますか？" } } } %>
-  <%# <%= link_to '退会する', withdrawal_path, data: { turbo_method: :patch, turbo_confirm: "本当に削除しますか？" } %>
+  <%= button_to "退会する", user_registration_path, { method: :delete, form: { data: { turbo_confirm: "本当に退会しますか？" } } } %>
   <%= link_to "退会しない", root_path %>
