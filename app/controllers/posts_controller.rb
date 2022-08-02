@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   def index
     # @posts = Post.order(created_at: :desc)
-    @pagy, @posts = pagy(Post.order(created_at: :desc), items: 10)
+    @pagy, @posts = pagy(Post.order(created_at: :desc), items: 30)
   end
 
   def new

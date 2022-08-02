@@ -2,12 +2,15 @@
   <%= button_to "投稿", new_post_path, {method: :get} %>
 <% end %>
 
-<% @posts.each do |post| %>
-<%# 投稿者のプロフィールページへのリンクを作成する %>
-  <span>投稿者：</span><%= link_to post.user.name, "#{post.user.id}/mypage" %><br>
-  <span>タイトル：</span><%= link_to post.title, "posts/#{post.id}" %><br>
-   <span>内容：</span><%= post.content %><br>
-   <span>画像の枚数：</span><%= post.images.attached? ? post.images.count : 0 %><br>
-<% end %>
-
+<div class="grid md:grid-cols-3 gap-2">
+    <% @posts.each do |post| %>
+      <div class="rounded p-4 h-full border-2 border-gray-200 border-opacity-60 overflow-hidden">
+        <%# 投稿者のプロフィールページへのリンクを作成する %>
+          <span>投稿者：<%= link_to post.user.name, "#{post.user.id}/mypage" %></span><br>
+          <span>タイトル：<%= link_to post.title, "posts/#{post.id}" %></span><br>
+          <span>内容：<%= post.content %></span><br>
+          <span>画像の枚数：<%= post.images.attached? ? post.images.count : 0 %></span>
+      </div>
+    <% end %>
+</div>
  <%== pagy_nav(@pagy) %>
