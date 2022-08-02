@@ -7,7 +7,7 @@ export default class extends Controller {
     return ["displaySidebar", "hamburger", "line1", "line2", "line3", "covering"]
   }
   
-  toggle() {
+  sidebarToggle() {
     //  sidebar-containerターゲットを持つ要素のdata-expanded属性が0であるか判定
       if (this.hamburgerTarget.dataset.expanded === "0") {
         this.hamburgerOn()
