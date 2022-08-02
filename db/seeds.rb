@@ -15,7 +15,7 @@ if Rails.env == "development"
   end
   (1..10).each do |t|
     (1..10).each do |i|
-      Post.create!(title: "#{t}さんの#{i}", content: "This is an sample post. This is useful for developer to check and modify layout", created_at: DateTime.now, user_id: "#{t}")
+      Post.create!(title: "#{t}さんの#{i}番目の投稿", content: "This is an sample post. This is useful for developer to check and modify layout", created_at: DateTime.now, user_id: "#{t}")
     end
   end 
 end
