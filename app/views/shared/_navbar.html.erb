@@ -1,11 +1,11 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <nav class="w-full fixed z-50 top-0 bg-white">
-  <div class="max-w-7xl px-2 sm:px-6 lg:px-8">
+  <div class="px-2 sm:px-6 lg:px-8">
     <div class="relative flex items-center justify-between h-14">
-      <div class="absolute inset-y-0 left-0 flex items-center lg:hidden">
+      <div class="absolute inset-y-0 flex items-center lg:hidden">
         <!-- Mobile menu button-->
         <div data-sidebar-target="hamburger" data-action="click->sidebar#sidebarToggle" data-expanded="0" class="items-center">
-            <nav class="hamburger fixed z-50">
+            <nav class="hamburger fixed z-50 no-tap-highlighting">
                 <span data-sidebar-target="line1" class="inner_line top-0"></span>
                 <span data-sidebar-target="line2"  class="inner_line top-2.5"></span>
                 <span data-sidebar-target="line3"  class="inner_line bottom-0"></span>
@@ -18,26 +18,26 @@
         <%= link_to "Karibito", root_path, class:"text-xl md:text-2xl block absolute items-center left-14 md:left-16 font-semibold no-tap-highlighting" %>
         <%= link_to image_tag('Karibito_logo.png', class:'w-10 md:w-12 no-tap-highlighting'), root_path %>
         </div>
-        <div class="w-full hidden lg:block ml-">
-          <div class="flex flax-auto space-x-4 ml-56 lg:space-x-8 items-center mt-2">
-            <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-gray-200 hover:border-b-2 hover:border-cyan-400">
+        <div class="w-full hidden lg:block ml-56 mt-2">
+          <div class="flex flax-auto space-x-4 lg:space-x-8 items-center">
+            <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black">
               <%= button_to 'サービス概要', about_path, method: :get %> 
             </div>
-            <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-gray-200 hover:border-b-2 hover:border-cyan-400">
+            <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black">
               <%= button_to 'ヘルプ', faq_path, method: :get %> 
             </div>
-            <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-gray-200 hover:border-b-2 hover:border-cyan-400">
+            <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black">
               <%= button_to 'お問い合せ', contact_path, method: :get %> 
             </div>
             <% if user_signed_in? %>
-              <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-pink-100 hover:border-b-2 hover:border-cyan-400">
+              <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-pink-100 hover:text-black">
                 <%= button_to "ログアウト", destroy_user_session_path, { method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } } %> 
               </div>
             <% else %> 
-              <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-gray-200 hover:border-b-2 hover:border-cyan-400">
+              <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black">
                 <%= button_to '会員登録', new_user_registration_path, method: :get %> 
               </div>
-              <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-gray-200 hover:border-b-2 hover:border-cyan-400">
+              <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black">
                 <%= button_to 'ログイン', new_user_session_path, method: :get %> 
               </div>
             <% end %>
@@ -47,7 +47,7 @@
       <div class="relative mr-12">
         <label class="sr-only" for="search"> Search </label>
         <button
-          class="absolute p-2 text-gray-600 transition -translate-y-1/2 rounded-full hover:text-gray-200 bg-gray-50 top-1/2 right-1"
+          class="absolute p-2 text-gray-600 transition -translate-y-1/2 rounded-full hover:text-black bg-gray-50 top-1/2 right-1"
           type="button"
           aria-label="Submit Search"
         >
@@ -69,7 +69,7 @@
       </div>
       <div class="user-info hidden lg:block">
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-          <button type="button" class="bg-white p-1 rounded-full text-gray-400 hover:text-black hover:bg-gray-200">
+          <button type="button" class="bg-white p-1 rounded-full text-gray-400 hover:text-black hover:bg-gray-100">
             <span class="sr-only">View notifications</span>
             <!-- Heroicon name: outline/bell -->
             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
@@ -82,10 +82,12 @@
             <div>
               <button type="button" class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                 <span class="sr-only">Open user menu</span>
-                <% if @user.avatar.present? %>
-                  <%= image_tag @user.avatar, class: "avatar" %>
+                <%if user_signed_in? %>
+                  <% if current_user.avatar.present? %>
+                    <%= link_to image_tag(current_user.avatar), mypage_path(current_user), class: "avatar w-8 h-8" %>
+                  <% end %>
                 <% else %>
-                  <%= image_tag "noavatar.png", class: "avatar"%>
+                  <%= image_tag "noavatar.png", class: "avatar w-8 h-8"%>                 
                 <% end %>
               </button>
             </div>
