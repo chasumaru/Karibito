@@ -2,7 +2,7 @@ class StaticPagesController < ApplicationController
   before_action :sign_in_required, only: [:show]
 
   def index
-    # ユーザ一覧画面を表示
+    @user = current_user
   end
 
   def show
