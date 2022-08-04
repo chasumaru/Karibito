@@ -10,12 +10,14 @@
         <%= javascript_importmap_tags %>
         <%= yield(:head) %>
     </head>
-    <body class="font-body text-stone-700 bg-neutral-100 relative z-0" data-controller="sidebar">
+    <body class="font-body text-stone-700 bg-neutral-100 relative z-0">
 <%# スクロール時にheaderを隠したい場合。sticky使う。stimulusで置き換える %>
         <%# <header id="header"> %>
         <header>
-            <%= render "shared/navbar" %>
-            <%= render "shared/sidebar" %>
+            <div data-controller="sidebar">
+                <%= render "shared/navbar" %>
+                <%= render "shared/sidebar" %>
+            </div>
         </header>
         <main>
             <div class=" mx-auto relative z-0 pt-24 ">

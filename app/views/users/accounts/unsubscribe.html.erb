@@ -5,4 +5,4 @@
    本当に退会してよろしいですか？
  </p>
   <%= button_to "退会する", user_registration_path, { method: :delete, form: { data: { turbo_confirm: "本当に退会しますか？" } } } %>
-  <%= link_to "退会しない", root_path %>
+  <%= link_to "戻る", :back, class:"no-tap-highlighting" %>
