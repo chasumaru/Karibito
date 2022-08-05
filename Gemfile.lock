@@ -95,6 +95,10 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
+    faker (2.22.0)
+      i18n (>= 1.8.11, < 2)
+    gimei (1.1.0)
+      romaji
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.10.0)
@@ -189,6 +193,8 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.5)
+    romaji (0.2.4)
+      rake (>= 0.8.0)
     rspec-core (3.11.0)
       rspec-support (~> 3.11.0)
     rspec-expectations (3.11.0)
@@ -256,6 +262,8 @@ DEPENDENCIES
   devise
   devise-i18n
   factory_bot_rails
+  faker
+  gimei
   importmap-rails
   mini_magick
   mysql2 (~> 0.5)

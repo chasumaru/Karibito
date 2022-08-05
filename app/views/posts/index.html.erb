@@ -6,7 +6,14 @@
     <% @posts.each do |post| %>
       <div class="p-4">
         <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-          <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog">
+        <% if post.images.attached? %>
+          <% post.images.each do |image| %>
+            <%= image_tag image ,class: "w-full object-cover object-center" %>
+            <%# <%= image_tag image.variant(resize: "300×300") %>
+          <% end %>
+        <% else %>
+          <img class="w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog">
+        <% end %>
           <div class="p-6">
             <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1"><%= link_to post.user.name, "#{post.user.id}/mypage" %></h2>
             <h1 class="title-font text-lg font-medium text-gray-900 mb-3"><%= link_to post.title, "posts/#{post.id}" %></h1>
