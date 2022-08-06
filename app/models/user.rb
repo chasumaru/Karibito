@@ -13,6 +13,8 @@ class User < ApplicationRecord
   # Valdation
   validates :name, presence: true
   validates :profile, length: { maximum: 200 }
+  validates :avatar, presence: true, unless: :was_attached?
+
 
   # Assortiation
   has_many :posts, dependent: :destroy
@@ -22,5 +24,9 @@ class User < ApplicationRecord
   def send_devise_notification(notification, *args)
     # deliver_laterを使って非同期送信するように修正
     devise_mailer.send(notification, self, *args).deliver_later
+  end
+
+  def was_attached?
+    self.avatar.attached?
   end
 end
