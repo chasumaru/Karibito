@@ -26,6 +26,8 @@ module Myapp
 
     #ActiveStorage上書きしない
     config.active_storage.replace_on_assign_to_many = false
+    #ImageProcessingの利用(default: vips)
+    # config.active_storage.variant_processor = :mini_magick
     
     #rspec設定
     config.generators do |g|

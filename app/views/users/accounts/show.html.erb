@@ -1,9 +1,9 @@
 <h1>ユーザーページ</h1>
 
 <% if @user.avatar.present? %>
-  <%= image_tag @user.avatar, size: "200×200", class: "avatar" %>
-<% else %>
-  <%= image_tag "noavatar.png", size: "200×200" ,class: "avatar"%>
+  <%= image_tag @user.avatar.variant(resize_to_limit: [300, 300]), class: "avatar" %>
+<%# <% else %>
+  <%# <%= image_tag "noavatar.png".variant(resize_to_limit: [720, 400]), size: "200×200" ,class: "avatar"%>
 <% end %>
 
 <h3>名前</h3>
@@ -14,7 +14,9 @@
 <%= @user.profile%>
 <%= link_to "投稿する", new_post_path %>
 <br>
+<%= link_to 'プロフィール確認', edit_user_registration_path, class: "block" %> 
 <br>
+
 
 
 <p>実装予定</p>
