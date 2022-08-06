@@ -36,6 +36,7 @@ module.exports = {
         '7': '1.75rem',
         '9': '2.25rem',
         '18': '4.5rem',
+        '30': '7.5rem',
 
       },
       boxShadow: {
