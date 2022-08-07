@@ -43,7 +43,7 @@
       <div class="p-4">
         <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
         <% if post.images.attached? %>
-        <%= image_tag(post.images.first ,class: "w-full object-cover object-center") %>
+        <%= image_tag(post.images.first.variant(resize_to_fill: [350, 200], sampling_factor: "4:2:0", colorspace: "sRGB", quality: 85) ,class: "object-cover object-center") %>
         <% else %>
           <img class="w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog">
         <% end %>
