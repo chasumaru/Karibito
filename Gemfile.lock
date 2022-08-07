@@ -274,6 +274,7 @@ DEPENDENCIES
   gimei
   image_processing
   importmap-rails
+  mini_magick
   mysql2 (~> 0.5)
   pagy (~> 5.10)
   propshaft

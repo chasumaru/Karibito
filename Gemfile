@@ -58,7 +58,8 @@ gem 'rails-i18n'
 gem 'devise'
 gem 'devise-i18n'
 
-gem "image_processing"
+gem 'image_processing'
+gem 'mini_magick'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

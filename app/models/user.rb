@@ -13,8 +13,8 @@ class User < ApplicationRecord
   # Valdation
   validates :name, presence: true
   validates :profile, length: { maximum: 200 }
-  validates :avatar, presence: true, unless: :was_attached?
-  validate :image_size
+  validates :avatar, presence: true, unless: :not_attached?
+  validate :image_size, unless: :not_attached?
 
 
   # Assortiation
@@ -29,8 +29,8 @@ class User < ApplicationRecord
 
   private
 
-  def was_attached?
-    self.avatar.attached?
+  def not_attached?
+   !( self.avatar.attached?)
   end
 
   # 1000kB以上のファイルを許可しない
