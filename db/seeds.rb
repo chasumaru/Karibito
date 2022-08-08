@@ -22,10 +22,10 @@ if Rails.env == "development"
   (1..10).each do |t|
     (1..10).each do |i|
       Post.create!(
-y        title: "投稿サンプル(#{t}の#{i})",
-y        content: "This is an sample post. This is useful for developer to check and modify layout (#ユーザー#{t}の#{i}番目の投稿)",
-y        created_at: DateTime.now,
-y        user_id: "#{t}")
+        title: "投稿サンプル(#{t}の#{i})",
+        content: "This is an sample post. This is useful for developer to check and modify layout (#ユーザー#{t}の#{i}番目の投稿)",
+        created_at: DateTime.now,
+        user_id: "#{t}")
     end
   end 
 end

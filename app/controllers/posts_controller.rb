@@ -3,8 +3,10 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy]
   before_action :ensure_correct_user,{only: [:edit,:update,:destroy]}
 
-  # require "image_processing/mini_magick"
+
   require "mini_magick"
+  require "image_processing/mini_magick"
+
 
   def index
     # @posts = Post.order(created_at: :desc)
@@ -19,37 +21,38 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
     if @post.save
-      redirect_to posts_path, notice: "新しい日記を作成しました."
+      redirect_to post_path(@post), notice: "新しい日記を作成しました."
     else
       flash.now.alert = '日記の作成に失敗しました。'
       render :new, status: :unprocessable_entity
     end
   end
 
+
   # def create
   #   @post = Post.new(post_params)
   #   @post.user = current_user
-  #   if @post.save
-  #     @last_post = Post.where(user_id: current_user.id).last
-  #     if @last_post.images.attached?
-  #       img_records = @last_post.images
-  #       img_records.each do |image|
-  #         img_data = image.download
-  #         image = MiniMagick::Image
-  #         .read(img_data)
-  #         image.sampling_factor "4:2:0"
-  #         image.strip
-  #         image.resize "300x200"
-  #         image.quality "85"
-  #         # {image.write [パス]}で上書きしたいが、ActiveStorageからblobのURLを取得する方法が不明。
-  #       end
+  #   @post.images.attach(params[:post][:images])
+  #   if @post.images.attached?
+  #     @post.images.each do |image|
+  #       image = MiniMagick::Image
+  #       .read(image.blob)
+  #       image.sampling_factor "4:2:0"
+  #       image.strip
+  #       image.resize "300x200"
+  #       image.quality "85"
+  #       image.format 'png'
+  #       image.write 'posts_item.png'
   #     end
+  #   end
+  #   if @post.save
   #     redirect_to posts_path, notice: "新しい日記を作成しました."
   #   else
   #     flash.now.alert = '日記の作成に失敗しました。'
   #     render :new, status: :unprocessable_entity
   #   end
   # end
+
 
   def show
   end

@@ -3,9 +3,7 @@
       <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
         <% if @post.images.attached? %>
           <% @post.images.each do |image| %>
-            <%# <%= link_to image_tag(image), url_for(image) ,class: "w-full object-cover object-center" %>
-            <%# <%= image_tag image.variant(resize: "300×300") %>
-              <%= image_tag image, class: "w-full object-cover object-center" %>
+            <%= image_tag image, class: "w-full object-cover object-center" %>
           <% end %>
         <% else %>
           <img class="w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog">
@@ -33,9 +31,9 @@
     </div>
     <% if user_signed_in? %>
       <% if current_user.id == @post.user_id %>
-        <%= link_to '編集する', edit_post_path(@post) %> |
+        <%= link_to '編集する', edit_post_path(@post) %> 
         <%= link_to "削除", @post, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
       <% end %>
     <% end %>
-    <%= link_to "戻る", :back, class:"no-tap-highlighting" %>
+    <%= link_to '一覧ページに戻る', posts_path, class:"no-tap-highlighting" %>
 </div>

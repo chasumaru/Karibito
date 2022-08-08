@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
   <%# <%= button_to "日記を書く", new_post_path, {method: :get, class: "text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800"} %> 
     <div class="flex justify-end my-4 mr-6">
-      <button type="submit" onclick="location.href='http://192.168.3.5:3000/posts/new'" class="relative inline-flex items-center justify-center overflow-hidden h-9 w-30 text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+      <button type="submit" onclick="location.href='http://192.168.3.10:3000/posts/new'" class="relative inline-flex items-center justify-center overflow-hidden h-9 w-30 text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
         <span class="relative flex items-center px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-lg group-hover:bg-opacity-0">
           日記を書く
         <%= image_tag("lead-pencil.png", size:"25x25", class: "ml-1") %>
@@ -38,15 +38,17 @@
 </form>
 
 
-<div class="grid md:grid-cols-3 lg:grid-cols-4 gap-0.5">
+<div class="grid md:grid-cols-3 lg:grid-cols-4 gap-x-px gap-y-1">
     <% @posts.each do |post| %>
-      <div class="p-4">
-        <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-        <% if post.images.attached? %>
-        <%= image_tag(post.images.first.variant(resize_to_fill: [300, 200], sampling_factor: "4:2:0", colorspace: "sRGB", quality: 85).processed ,class: "object-cover object-center") %>
-        <% else %>
-          <img class="w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog">
-        <% end %>
+      <%# <div class="p-4"> %>
+        <div class="h-full w-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+          <div class="relative h-2/5">
+            <% if post.images.attached? %>
+              <%= image_tag(post.images.first.variant(resize_to_fill: [700, 580], sampling_factor: "4:2:0", colorspace: "sRGB", quality: 85).processed, class: "w-full h-full object-cover object-center") %>
+            <% else %>
+              <img class="w-full h-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog">
+            <% end %>
+          </div>
           <div class="p-6">
             <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1"><%= link_to post.user.name, "#{post.user.id}/mypage" %></h2>
             <h1 class="title-font text-lg font-medium text-gray-900 mb-3"><%= link_to post.title, "posts/#{post.id}" %></h1>
@@ -67,7 +69,7 @@
             </div>
           </div>
         </div>
-      </div>
+      <%# </div> %>
     <% end %>
 </div>
  <%== pagy_nav(@pagy) %>
