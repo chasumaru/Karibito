@@ -38,23 +38,21 @@
 </form>
 
 
-<div class="grid md:grid-cols-3 lg:grid-cols-4 gap-x-px gap-y-1">
+<div class="grid md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-4 mx-4">
     <% @posts.each do |post| %>
-      <%# <div class="p-4"> %>
-        <div class="h-full w-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-          <div class="relative h-2/5">
+        <div class="h-full w-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden -mb-24 md:-mb-16">
+          <div class="relative h-1/2 md:h-2/5">
             <% if post.images.attached? %>
-              <%= image_tag(post.images.first.variant(resize_to_fill: [700, 580], sampling_factor: "4:2:0", colorspace: "sRGB", quality: 85).processed, class: "w-full h-full object-cover object-center") %>
+              <%= image_tag(post.images.first.variant(resize_to_fill: [800, 650], sampling_factor: "4:2:0", colorspace: "sRGB", quality: 85).processed, class: "w-full h-full object-cover object-center") %>
             <% else %>
               <img class="w-full h-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog">
             <% end %>
           </div>
-          <div class="p-6">
+          <div class="pt-6">
             <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1"><%= link_to post.user.name, "#{post.user.id}/mypage" %></h2>
             <h1 class="title-font text-lg font-medium text-gray-900 mb-3"><%= link_to post.title, "posts/#{post.id}" %></h1>
             <p class="leading-relaxed mb-3"><%= post.content %></p>
-            <div class="flex items-center flex-wrap ">
-
+            <div class="flex items-center flex-wrap">
               <span class="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
                 <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                   <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
@@ -69,7 +67,6 @@
             </div>
           </div>
         </div>
-      <%# </div> %>
     <% end %>
 </div>
  <%== pagy_nav(@pagy) %>

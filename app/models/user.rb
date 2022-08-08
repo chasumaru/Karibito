@@ -33,9 +33,9 @@ class User < ApplicationRecord
    !( self.avatar.attached?)
   end
 
-  # 1000kB以上のファイルを許可しない
+  # 10MB以上のファイルを許可しない
   def image_size
-    if avatar.blob.byte_size > 1000000
+    if avatar.blob.byte_size > 10485760
       errors.add :avatar, 'ファイルサイズが大きすぎます。'
     end
   end

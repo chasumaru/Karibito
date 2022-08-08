@@ -7,10 +7,10 @@ class Post < ApplicationRecord
   validate :image_size, :image_count
   
   private
-  # 1000kB以上のファイルを許可しない
+  # 10MB以上の画像ファイルを許可しない
   def image_size
     images.blobs.each do |image|
-      if image.byte_size > 1000000
+      if image.byte_size > 10485760
         errors.add :images, 'ファイルサイズが大きすぎます。'
       end
     end
