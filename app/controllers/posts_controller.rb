@@ -9,8 +9,13 @@ class PostsController < ApplicationController
 
 
   def index
-    # @posts = Post.order(created_at: :desc)
-    @pagy, @posts = pagy(Post.order(created_at: :desc), items: 30)
+    # @pagy, @posts = pagy(Post.order(created_at: :desc), items: 20)
+    # paramsを基にデータを検索
+    @search = Post.ransack(params[:q])
+    # デフォルトのソートを降順に設定
+    @search.sorts =  'id desc' if @search.sorts.empty?
+    # 検索結果の取得
+    @posts = @search.result
   end
 
   def new
@@ -27,31 +32,6 @@ class PostsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-
-
-  # def create
-  #   @post = Post.new(post_params)
-  #   @post.user = current_user
-  #   @post.images.attach(params[:post][:images])
-  #   if @post.images.attached?
-  #     @post.images.each do |image|
-  #       image = MiniMagick::Image
-  #       .read(image.blob)
-  #       image.sampling_factor "4:2:0"
-  #       image.strip
-  #       image.resize "300x200"
-  #       image.quality "85"
-  #       image.format 'png'
-  #       image.write 'posts_item.png'
-  #     end
-  #   end
-  #   if @post.save
-  #     redirect_to posts_path, notice: "新しい日記を作成しました."
-  #   else
-  #     flash.now.alert = '日記の作成に失敗しました。'
-  #     render :new, status: :unprocessable_entity
-  #   end
-  # end
 
 
   def show
@@ -99,4 +79,8 @@ class PostsController < ApplicationController
     redirect_to posts_path, notice: "権限がありません"
     end
   end
+
+  # def search_params
+  #   params.require(:q).permit!
+  # end
 end

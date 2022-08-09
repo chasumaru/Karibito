@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
   <%# <%= button_to "日記を書く", new_post_path, {method: :get, class: "text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800"} %> 
-    <div class="flex justify-end my-4 mr-6">
-      <button type="submit" onclick="location.href='http://192.168.3.10:3000/posts/new'" class="relative inline-flex items-center justify-center overflow-hidden h-9 w-30 text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+    <div class="flex my-4 mr-6 justify-end">
+      <button type="submit" onclick="location.href='http://192.168.3.11:3000/posts/new'" class="relative inline-flex items-center justify-center overflow-hidden h-9 w-30 text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
         <span class="relative flex items-center px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-lg group-hover:bg-opacity-0">
           日記を書く
         <%= image_tag("lead-pencil.png", size:"25x25", class: "ml-1") %>
@@ -11,10 +11,22 @@
 <% end %>
 
 
-<form>
+ <%= search_form_for @search do |f| %>
+    <div class="mx-4 mb-4">
+      <div class="relative w-full -ml-0.5">
+        <%= f.label :titl_or_content_cont, "キーワード検索" %>
+        <%= f.search_field :title_or_content_cont , placeholder: "キーワードを入力してください。", class: "relative block p-2.5 w-full z-20 text-sm text-slate-600 bg-gray-50 rounded-none appearance-none rounded-r-lg border-l-2 border border-slate-300 focus:ring  dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" %>
+      </div>
+  <%= f.submit %>
+  <%= link_to "クリア", posts_path %>
+ <% end %>
+<%= sort_link(@search, :created_at) %>
+    </div>
+
+<%# <form>
     <div class="flex mx-4 mb-4">
         <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Your Email</label>
-        <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">カテゴリー未選択 <svg aria-hidden="true" class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></button>
+        <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">カテゴリー未選択 <svg aria-hidden="true" class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmln1s="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></button>
         <div id="dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(897px, 5637px, 0px);">
             <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
             <li>
@@ -35,21 +47,21 @@
             <input type="search" id="search-dropdown" class="relative block p-2.5 w-full z-20 text-sm text-slate-600 bg-gray-50 rounded-none appearance-none rounded-r-lg border-l-2 border border-slate-300 focus:ring  dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search..." required>
         </div>
     </div>
-</form>
+</form> %>
 
 
 <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-4 mx-4">
     <% @posts.each do |post| %>
         <div class="h-full w-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden -mb-24 md:-mb-16">
-          <div class="relative h-1/2 md:h-2/5">
+          <div class="relative h- h-3/5 md:h-1/2">
             <% if post.images.attached? %>
-              <%= image_tag(post.images.first.variant(resize_to_fill: [800, 650], sampling_factor: "4:2:0", colorspace: "sRGB", quality: 85).processed, class: "w-full h-full object-cover object-center") %>
+              <%= image_tag(post.images.first.variant(resize_to_fill: [800, 650], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed, class: "w-full h-full object-cover object-center") %>
             <% else %>
               <img class="w-full h-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog">
             <% end %>
           </div>
           <div class="pt-6">
-            <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1"><%= link_to post.user.name, "#{post.user.id}/mypage" %></h2>
+            <h2 class="tracking-widest text-xs font-medium text-gray-400 mb-1"><%= link_to post.user.name, "#{post.user.id}/mypage" %></h2>
             <h1 class="title-font text-lg font-medium text-gray-900 mb-3"><%= link_to post.title, "posts/#{post.id}" %></h1>
             <p class="leading-relaxed mb-3"><%= post.content %></p>
             <div class="flex items-center flex-wrap">
@@ -69,4 +81,32 @@
         </div>
     <% end %>
 </div>
- <%== pagy_nav(@pagy) %>
+
+<div class="max-w-2xl mx-auto">
+
+	<nav aria-label="Page navigation example">
+  <ul class="inline-flex items-center -space-x-px">
+    <li>
+      <a href="#" class="block py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+        <span class="sr-only">Previous</span>
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+      </a>
+    </li>
+    <li>
+      <a href="#" class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+    </li>
+
+    <li>
+      <a href="#" class="block py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+        <span class="sr-only">Next</span>
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+      </a>
+    </li>
+  </ul>
+</nav>
+	<p class="mt-5">This pagination component is part of a larger, open-source library of Tailwind CSS components. Learn more
+		by going to the official <a class="text-blue-600 hover:underline"
+			href="https://flowbite.com/docs/getting-started/introduction/" target="_blank">Flowbite Documentation</a>.
+	</p>
+</div>
+ <%# <%== pagy_nav(@pagy) %>
