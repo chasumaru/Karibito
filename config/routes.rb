@@ -23,4 +23,6 @@ Rails.application.routes.draw do
     get "/:id/mypage", to: "users/accounts#show", as: 'mypage'
     get '/:id/unsubscribe' => 'users/accounts#unsubscribe', as: 'unsubscribe'
   end
+
+  get "posts/:id/mypage", to: "users/accounts#show", as: 'user_page'
 end
