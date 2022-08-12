@@ -9,14 +9,8 @@ class PostsController < ApplicationController
 
 
   def index
-    # @pagy, @posts = pagy(Post.order(created_at: :desc), items: 20)
-    # paramsを基にデータを検索
     @search = Post.ransack(params[:q])
-
-    # 検索結果の取得
-    # @pagy, @posts = pagy @search.result(distinct: true).order('created_at DESC')
-    @search.sorts =  'id desc' if @search.sorts.empty?
-    # # 検索結果の取得
+    @search.sorts = 'id desc' if @search.sorts.empty?
     @pagy, @posts = pagy @search.result
   end
 

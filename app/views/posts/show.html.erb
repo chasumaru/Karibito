@@ -1,4 +1,5 @@
-<div class="grid gap-1">
+<%= turbo_frame_tag "posts-item" do %>
+  <div class="grid gap-1">
     <div class="p-4">
       <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
         <% if @post.images.attached? %>
@@ -9,7 +10,7 @@
           <img class="w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog">
         <% end %>
         <div class="p-6">
-          <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1"><%= link_to @post.user.name, "/#{@post.user_id}/mypage" %></h2>
+          <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1"><%= link_to @post.user.name, user_page_path(@post.user) %></h2>
           <h1 class="title-font text-lg font-medium text-gray-900 mb-3"><%= @post.title %></h1>
           <p class="leading-relaxed mb-3"><%= @post.content %></p>
           <div class="flex items-center flex-wrap ">
@@ -36,4 +37,5 @@
       <% end %>
     <% end %>
     <%= link_to '一覧ページに戻る', posts_path, class:"no-tap-highlighting" %>
-</div>
+  </div>
+<% end %>
