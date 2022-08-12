@@ -3,7 +3,6 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 // Turbo.session.drive = false
-// application.debug = true
 
 // /* スクロール時にヘッダーの表示切り替え */
 

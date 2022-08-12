@@ -1,5 +1,5 @@
-<%= turbo_frame_tag "posts-item" do %>
-  <div class="grid gap-1">
+<%# <%= turbo_frame_tag "posts-item" do %>
+<div class="grid gap-1">
     <div class="p-4">
       <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
         <% if @post.images.attached? %>
@@ -37,5 +37,5 @@
       <% end %>
     <% end %>
     <%= link_to '一覧ページに戻る', posts_path, class:"no-tap-highlighting" %>
-  </div>
-<% end %>
+</div>
+<%# <% end %>

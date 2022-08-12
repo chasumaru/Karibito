@@ -1,5 +1,5 @@
-    <%= turbo_frame_tag "posts-item" do %>
-      <div class="h-full w-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden -mb-24 md:-mb-16">
+
+      <div class="h-full w-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden -mb-24 md:-mb-16" data-turbo="false">
         <div class="relative h- h-3/5 md:h-1/2">
           <% if post.images.attached? %>
             <%= image_tag(post.images.first.variant(resize_to_fill: [800, 650], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed, class: "w-full h-full object-cover object-center") %>
@@ -9,7 +9,7 @@
         </div>
         <div class="pt-6">
           <h2 class="tracking-widest text-xs font-medium text-gray-400 mb-1"><%= link_to post.user.name, mypage_path(post.user) %></h2>
-          <h1 class="title-font text-lg font-medium text-gray-900 mb-3"><%= link_to post.title, "posts/#{post.id}" %></h1>
+          <h1 class="title-font text-lg font-medium text-gray-900 mb-3"><%= link_to post.title, post_path(post) %></h1>
           <p class="leading-relaxed mb-3"><%= post.content %></p>
           <div class="flex items-center flex-wrap">
             <span class="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
@@ -26,4 +26,4 @@
           </div>
         </div>
       </div>
-    <% end %>
+  
