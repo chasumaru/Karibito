@@ -85,7 +85,7 @@
                 <%if user_signed_in? && current_user.avatar.attached? %>
                     <%= link_to image_tag(current_user.avatar), mypage_path(current_user), class: "avatar w-8 h-8" %>
                 <% else %>
-                  <%= image_tag "no_avatar.png", size: 10, class: "avatar w-8 h-8"%>                 
+                  <%= link_to image_tag("no_avatar.png"), new_user_session_path, size:10, class: "avatar w-8 h-8" %>
                 <% end %>
               </button>
             </div>
