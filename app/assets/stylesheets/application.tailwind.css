@@ -16,7 +16,7 @@
 },
 @layer components {
   .hamburger {
-    @apply z-40 block absolute top-4 right-3.75 w-6.25 h-5.5 cursor-pointer transition duration-200;
+    @apply z-40 block absolute top-4 right-5 w-6 h-5.5 cursor-pointer transition duration-200;
   }
   .inner_line {
     @apply block absolute right-0 w-6.25 h-0.5 bg-black duration-200 rounded;

@@ -30,9 +30,7 @@ module.exports = {
         'base-brown' : '#ecd94b',
       },
       spacing: {
-        '3.75': '0.9375rem',
         '5.5': '1.375rem',
-        '6.25': '1.5625rem',
         '7': '1.75rem',
         '9': '2.25rem',
         '18': '4.5rem',
