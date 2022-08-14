@@ -31,14 +31,25 @@
 <% end %>
 
 <%= turbo_frame_tag "posts-list", target: "_top" do %>
-  <% if @posts.present? %>
-    <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-4 mx-4">
-      <%= render @posts %>
-    </div>
-    <div class="flex justify-center my-6">
-      <%= pagy_nav(@pagy).html_safe %>
-    </div>
-  <% else %>
-    <p>検索結果が見つかりませんでした。
-  <% end %>
+  <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-4 mx-4">
+    <% if @posts.present? %>
+      <% @posts.each do |post| %>
+        <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden" data-turbo="false">
+          <div class="relative h-3/5 md:h-1/2">
+            <% if post.images.attached? %>
+              <%= image_tag(post.images.first.variant(resize_to_fill: [800, 650], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed, class: "w-full h-full object-cover object-center") %>
+            <% else %>
+              <img class="w-full h-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog">
+            <% end %>
+          </div>
+          <%= render post %>
+        </div>
+      <% end %>
+      <div class="flex justify-center my-6">
+        <%= pagy_nav(@pagy).html_safe %>
+      </div>
+    <% else %>
+      <p>検索結果が見つかりませんでした。
+    <% end %>
+  </div>
 <% end %>
