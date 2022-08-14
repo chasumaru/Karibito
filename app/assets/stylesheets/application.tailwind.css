@@ -94,7 +94,7 @@ turbo-frame::before {
 .pagy-nav-js .page.active,
 .pagy-nav-js .page.prev.disabled,
 .pagy-nav-js .page.next.disabled {
-  @apply block rounded-lg px-3 md:px-6 py-1 text-sm text-gray-500 font-semibold bg-gray-200 shadow-md;
+  @apply block rounded-lg px-4 md:px-6 py-2 text-sm text-gray-500 font-semibold bg-gray-200 shadow-md;
   &:hover{
     @apply bg-gray-300;
   }

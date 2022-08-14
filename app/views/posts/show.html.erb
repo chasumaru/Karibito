@@ -12,7 +12,7 @@
         <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1"><%= link_to @post.user.name, user_page_path(@post.user) %></h2>
         <h1 class="title-font text-lg font-medium text-gray-900 mb-3"><%= @post.title %></h1>
         <p class="leading-relaxed mb-3"><%= @post.content %></p>
-          <p><%= time_ago_in_words(@post.created_at)%>前</p>
+          <p><%= how_long_ago(@post) %></p>
         <div class="flex items-center flex-wrap ">
           <span class="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
             <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -58,8 +58,7 @@
             <strong><%= c.user.name %></strong>
           <% end %>
           <%= c.context %>
-          <%# <p>投稿日時:<%= c.how_long_ago %>
-          <p><%= time_ago_in_words(c.created_at)%>前</p>
+          <p><%= how_long_ago(c) %></p>
           <% if user_signed_in? && current_user == c.user %>
             <%= link_to "編集", edit_post_comment_path(@post, c) %>
             <%= link_to "削除", post_comment_path(@post, c), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
@@ -85,8 +84,7 @@
                 <% end %>
                 <%= reply.user.name %>
                 <%= reply.context %>
-                <%# <p>返信日時:<%= reply.how_long_ago %>
-                <p><%= time_ago_in_words(reply.created_at)%>前</p>
+                <p><%= how_long_ago(reply) %></p>
                 <% if user_signed_in? && current_user == reply.user %>
                   <%= link_to "編集", edit_post_comment_path(@post, reply) %>
                   <%= link_to "削除", post_comment_path(@post, reply), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>

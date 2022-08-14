@@ -9,7 +9,6 @@
     </button>
   </div>
 <% end %>
-
 <%= search_form_for(
   @search,
     html: { 
@@ -36,7 +35,7 @@
     <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-4 mx-4">
       <%= render @posts %>
     </div>
-    <div class="my-6">
+    <div class="flex justify-center my-6">
       <%= pagy_nav(@pagy).html_safe %>
     </div>
   <% else %>

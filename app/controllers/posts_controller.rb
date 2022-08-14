@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  include ApplicationHelper
   before_action :sign_in_required, except: [:index, :show]
   before_action :set_post, only: %i[ show edit update destroy]
   before_action :ensure_correct_user,{only: [:edit,:update,:destroy]}
