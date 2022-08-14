@@ -31,6 +31,8 @@ class PostsController < ApplicationController
 
 
   def show
+    @comment = Comment.new
+    @comments = @post.comments.includes(:user)
   end
 
   def update
@@ -45,6 +47,7 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to @post, notice: "日記の内容が更新されました."
     else
+      flash.now.alert = '日記の作成に失敗しました。'
       render :edit, status: :unprocessable_entity 
     end
   end

@@ -36,6 +36,34 @@
         <%= link_to "削除", @post, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
       <% end %>
     <% end %>
-    <%= link_to '一覧ページに戻る', posts_path, class:"no-tap-highlighting" %>
+
+    <% if user_signed_in? %>
+      <%= form_with model: [@post, @comment] do |f| %>
+        <%= f.text_area :context, placeholder: "コメントする" %>
+        <%= f.submit "SEND" %>
+      <% end %>
+    <% end %>
+
+    <h3>コメント一覧</h3>
+    <% if @comments.present? %>
+      <% @comments.each do |c| %>
+        <%= c.context %>
+        <% if user_signed_in? %>
+          <% if current_user.id == c.user_id %>
+            <%= link_to "編集", edit_post_comment_path(@post, c) %>
+            <%= link_to "削除", post_comment_path(@post, c), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
+          <% elsif current_user.id == @post.user_id then %>
+            <%# <%= link_to "削除", post_comment_path(@post, c), method: :delete %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p>まだコメントがありません</p>
+    <% end %>
+
+
+
+
+    <%= link_to '一覧に戻る', posts_path, class:"no-tap-highlighting" %>
 </div>
 <%# <% end %>

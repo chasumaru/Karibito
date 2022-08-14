@@ -1,0 +1,14 @@
+<%= form_with model: [@post, @comment] do |f| %>
+
+
+  <div class="field">
+    <%= f.label :context, "コメント編集" %><br>
+    <%= f.text_field :context %>
+  </div>
+
+  <div class="submit">
+    <%= f.submit "送信" %>
+  </div>
+  
+  <%= link_to "戻る", :back, class:"no-tap-highlighting" %>
+<% end %>

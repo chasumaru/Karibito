@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
   root 'static_pages#index'
-  resources :posts
+
+  resources :posts do
+    resources :comments, only: [:create, :edit, :update, :destroy]
+  end
 
   # get "/profile" => 'static_pages#show', as: 'profile'
   get "/about" => 'static_pages#about', as: 'about'
