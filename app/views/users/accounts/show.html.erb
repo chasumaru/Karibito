@@ -1,9 +1,9 @@
 <h1>ユーザーページ</h1>
 
-<% if @user.avatar.present? %>
-  <%= image_tag @user.avatar.variant(resize_to_limit: [300, 300]), class: "avatar" %>
-<%# <% else %>
-  <%# <%= image_tag "noavatar.png".variant(resize_to_limit: [720, 400]), size: "200×200" ,class: "avatar"%>
+<%if @user.avatar.attached? %>
+  <%= image_tag @user, size: "200×200", class: "avatar" %>
+<% else %>
+  <%= image_tag "no_avatar.png", size: "200×200", class: "avatar" %>
 <% end %>
 
 <h3>名前</h3>

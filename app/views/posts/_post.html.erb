@@ -8,8 +8,8 @@
           <% end %>
         </div>
         <div class="pt-6">
-          <h2 class="tracking-widest text-xs font-medium text-gray-400 mb-1"><%= link_to post.user.name, mypage_path(post.user) %></h2>
-          <h1 class="title-font text-lg font-medium text-gray-900 mb-3"><%= link_to post.title, post_path(post) %></h1>
+          <p class="tracking-widest text-xs font-medium text-gray-400 mb-1"><%= link_to post.user.name, mypage_path(post.user) %></p>
+          <p class="title-font text-lg font-medium text-gray-900 mb-3"><%= link_to post.title, post_path(post) %></p>
           <p class="leading-relaxed mb-3"><%= post.content %></p>
           <div class="flex items-center flex-wrap">
             <span class="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">

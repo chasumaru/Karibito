@@ -5,9 +5,11 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = current_user.comments.build(comment_params)
     if @comment.save
+            # # この記述は通知機能の記述になるので気にしないでください
+            # @comment.create_notification_comment!(current_user, @comment.id)
       redirect_to request.referer, notice: "コメントを投稿しました"
     else
-      flash.now.alert = 'コメントの投稿に失敗しました'
+      flash.now.alert = 'コメントの作成に失敗しました'
       render template: "posts/show", status: :unprocessable_entity
     end
   end

@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <%# <%= button_to "日記を書く", new_post_path, {method: :get, class: "text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800"} %> 
+
   <div class="flex my-4 mr-6 justify-end">
     <button type="submit" onclick="location.href='http://localhost:3000/posts/new'" class="relative inline-flex items-center justify-center overflow-hidden h-9 w-30 text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
       <span class="relative flex items-center px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-lg group-hover:bg-opacity-0">
@@ -9,7 +9,6 @@
     </button>
   </div>
 <% end %>
-
 
 <%= search_form_for(
   @search,
@@ -28,16 +27,19 @@
         placeholder: "キーワードを入力してください。",
         class: "relative block p-2.5 w-full z-20 text-sm text-slate-600 bg-gray-50 appearance-none rounded-lg  border border-slate-300 focus:ring  dark:bg-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" %>
     </div>
-  <%# <%= f.submit %>
-  <%= link_to "クリア", posts_path %>
+    <%= link_to "クリア", posts_path %>
   </div>
 <% end %>
 
 <%= turbo_frame_tag "posts-list", target: "_top" do %>
-  <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-4 mx-4">
-    <%= render @posts %>
-  </div>
-  <div class="my-6">
-    <%= pagy_nav(@pagy).html_safe %>
-  </div>
+  <% if @posts.present? %>
+    <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-4 mx-4">
+      <%= render @posts %>
+    </div>
+    <div class="my-6">
+      <%= pagy_nav(@pagy).html_safe %>
+    </div>
+  <% else %>
+    <p>検索結果が見つかりませんでした。
+  <% end %>
 <% end %>
