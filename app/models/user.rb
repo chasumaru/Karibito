@@ -20,12 +20,17 @@ class User < ApplicationRecord
   # Assortiation
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
-
+  has_many :likes
+  has_many :liked_posts, through: :likes, source: :post
   has_one_attached :avatar
 
   def send_devise_notification(notification, *args)
     # deliver_laterを使って非同期送信するように修正
     devise_mailer.send(notification, self, *args).deliver_later
+  end
+
+  def already_liked?(post)
+    self.likes.exists?(post_id: post.id)
   end
 
   private

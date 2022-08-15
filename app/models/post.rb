@@ -2,6 +2,8 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many_attached :images
   has_many :comments, dependent: :destroy
+  has_many :likes
+  has_many :liked_users, through: :likes, source: :user
   validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: 75 }
   validates :content, presence: true, length: { maximum: 255 }
@@ -22,5 +24,9 @@ class Post < ApplicationRecord
       images.purge
       errors.add :images, '画像枚数の上限を超えています。'
     end
+  end
+
+  def favorited_by?(user)
+    Like.where(user_id: user.id).exists?
   end
 end

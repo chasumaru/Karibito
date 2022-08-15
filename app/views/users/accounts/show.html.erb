@@ -17,6 +17,11 @@
 <%= link_to 'プロフィール確認', edit_user_registration_path, class: "block" %> 
 <br>
 
+<h3>いいねしている投稿</h3>
+<% @user.liked_posts.each do |post| %>
+  <%= post.user.name %>
+  <%= post.content %>
+<% end %>
 
 
 <p>実装予定</p>

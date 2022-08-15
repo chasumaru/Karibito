@@ -43,6 +43,7 @@
             <% end %>
           </div>
           <%= render post %>
+          <p>いいね数:<%= post.liked_users.count %></p>
         </div>
       <% end %>
       <div class="flex justify-center my-6">
