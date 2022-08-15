@@ -87,3 +87,5 @@ group :development do
   # gem "spring"
 end
 
+
+gem "inline_svg", "~> 1.8"

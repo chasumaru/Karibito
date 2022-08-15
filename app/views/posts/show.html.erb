@@ -1,97 +1,97 @@
 <div class="grid gap-1">
-  <div class="p-4">
-    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-      <% if @post.images.attached? %>
-        <% @post.images.each do |image| %>
-          <%= image_tag image, class: "w-full object-cover object-center" %>
-        <% end %>
-      <% else %>
-        <img class="w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog">
-      <% end %>
-      <%= render @post %>
-      <h3>いいね件数: <%= @post.likes.count %></h3>
-      <% if signed_in? %>
-        <% if current_user.already_liked?(@post) %>
-          <%= button_to 'いいねを取り消す', post_like_path(@post), method: :delete %>
+  <article>
+    <div class="p-4">
+      <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+        <% if @post.images.attached? %>
+          <% @post.images.each do |image| %>
+            <%= image_tag image, class: "w-full object-cover object-center" %>
+          <% end %>
         <% else %>
-          <%= button_to 'いいね', post_likes_path(@post) %>
+          <img class="w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog">
         <% end %>
-      <% end %>
-
-      <h3>いいねしたユーザー</h>
-      <% @post.liked_users.each do |user| %>
-        <li><%= user.name %></li>
-      <% end %>
-
+        <%= render @post %>
+        <% if signed_in? %>
+          <% if current_user.already_liked?(@post) %>
+            <%= button_to 'いいねを取り消す', post_like_path(@post), method: :delete %>
+          <% else %>
+            <%= button_to 'いいね', post_likes_path(@post) %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
-  </div>
-  <% if user_signed_in? %>
-    <% if current_user == @post.user %>
-      <%= link_to '編集する', edit_post_path(@post) %> 
-      <%= link_to "削除", @post, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
-    <% end %>
-  <% end %>
-
-  <% if user_signed_in? %>
-    <%= form_with model: [@post, @comment] do |f| %>
-      <%= f.text_area :context, placeholder: "コメントを入力..." %>
-      <%= f.submit "SEND" %>
-    <% end %>
-  <% end %>
-  <h3>コメント一覧</h3>
-  <% if @comments.present? %>
-    <% @comments.each do |c| %>  
-      <% if c.reply_comment_id.present? %>
-        <% next %>
+    <% if user_signed_in? %>
+      <% if current_user == @post.user %>
+        <%= link_to '編集する', edit_post_path(@post) %> 
+        <%= link_to "削除", @post, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
       <% end %>
-        <span id="comment_<%= c.id %>">
-          <%= link_to mypage_path(c.user.id), class: "text-dark" do %> 
-            <%if c.user.avatar.attached? %>
-              <%= image_tag c.user.avatar, size: "200×200", class: "avatar" %>
-            <% else %>
-              <%= image_tag "no_avatar.png", size: "200×200", class: "avatar" %>
-            <% end %>
-            <strong><%= c.user.name %></strong>
-          <% end %>
-          <%= c.context %>
-          <p><%= how_long_ago(c) %></p>
-          <% if user_signed_in? && current_user == c.user %>
-            <%= link_to "編集", edit_post_comment_path(@post, c) %>
-            <%= link_to "削除", post_comment_path(@post, c), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
-          <% end %>
-
-          <div class="row mt-1">
-            <div class="col-sm-8">
-              <%= form_with model: [@post, @comment] do |f| %>
-                <%= f.text_field :context, class: "rounded-pill form-control", placeholder: "コメントへの返信を入力..." %>
-                <%= f.hidden_field :reply_comment_id, :value => c.id  %>
-                <%= f.submit "返信", class: "btn" %>
-              <% end %>
-            </div>
-          </div>
-
-          <% if c.replies.present? %>
-            <div class="ml-5">
-              <% c.replies.each do |reply| %>
-                <%if c.user.avatar.attached? %>
-                  <%= image_tag c.user.avatar, size: "50×50", class: "avatar" %>
-                <% else %>
-                  <%= image_tag "no_avatar.png", size: "200×200", class: "avatar" %>
-                <% end %>
-                <%= reply.user.name %>
-                <%= reply.context %>
-                <p><%= how_long_ago(reply) %></p>
-                <% if user_signed_in? && current_user == reply.user %>
-                  <%= link_to "編集", edit_post_comment_path(@post, reply) %>
-                  <%= link_to "削除", post_comment_path(@post, reply), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
-                <% end %>
-              <% end %>
-            </div>
-          <% end %>
-        </span><br/>
     <% end %>
-  <% else %>
-    <p>まだコメントがありません</p>
-  <% end %>
+  </article>
+
+  <section>
+    <% if user_signed_in? %>
+      <%= form_with model: [@post, @comment] do |f| %>
+        <%= f.text_area :context, placeholder: "コメントを入力..." %>
+        <%= f.submit "SEND" %>
+      <% end %>
+    <% end %>
+  </section>
+
+  <section>
+    <h3>コメント一覧</h3>
+    <% if @comments.present? %>
+      <% @comments.each do |c| %>  
+        <% if c.reply_comment_id.present? %>
+          <% next %>
+        <% end %>
+          <span id="comment_<%= c.id %>">
+            <%= link_to mypage_path(c.user.id), class: "text-dark" do %> 
+              <%if c.user.avatar.attached? %>
+                <%= image_tag c.user.avatar, size: "200×200", class: "avatar" %>
+              <% else %>
+                <%= image_tag "no_avatar.png", size: "200×200", class: "avatar" %>
+              <% end %>
+              <strong><%= c.user.name %></strong>
+            <% end %>
+            <%= c.context %>
+            <p><%= how_long_ago(c) %></p>
+            <% if user_signed_in? && current_user == c.user %>
+              <%= link_to "編集", edit_post_comment_path(@post, c) %>
+              <%= link_to "削除", post_comment_path(@post, c), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
+            <% end %>
+
+            <div class="row mt-1">
+              <div class="col-sm-8">
+                <%= form_with model: [@post, @comment] do |f| %>
+                  <%= f.text_field :context, class: "rounded-pill form-control", placeholder: "コメントへの返信を入力..." %>
+                  <%= f.hidden_field :reply_comment_id, :value => c.id  %>
+                  <%= f.submit "返信", class: "btn" %>
+                <% end %>
+              </div>
+            </div>
+
+            <% if c.replies.present? %>
+              <div class="ml-5">
+                <% c.replies.each do |reply| %>
+                  <%if c.user.avatar.attached? %>
+                    <%= image_tag c.user.avatar, size: "50×50", class: "avatar" %>
+                  <% else %>
+                    <%= image_tag "no_avatar.png", size: "200×200", class: "avatar" %>
+                  <% end %>
+                  <%= reply.user.name %>
+                  <%= reply.context %>
+                  <p><%= how_long_ago(reply) %></p>
+                  <% if user_signed_in? && current_user == reply.user %>
+                    <%= link_to "編集", edit_post_comment_path(@post, reply) %>
+                    <%= link_to "削除", post_comment_path(@post, reply), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          </span><br/>
+      <% end %>
+    <% else %>
+      <p>まだコメントがありません</p>
+    <% end %>
+  </section>
   <%= link_to '一覧に戻る', posts_path, class:"no-tap-highlighting" %>
 </div>
