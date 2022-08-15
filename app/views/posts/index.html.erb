@@ -43,14 +43,13 @@
             <% end %>
           </div>
           <%= render post %>
-          <p>いいね数:<%= post.liked_users.count %></p>
         </div>
       <% end %>
-      <div class="flex justify-center my-6">
-        <%= pagy_nav(@pagy).html_safe %>
-      </div>
-    <% else %>
-      <p>検索結果が見つかりませんでした。
-    <% end %>
-  </div>
+    </div>
+    <div class="flex justify-center my-6">
+      <%= pagy_nav(@pagy).html_safe %>
+    </div>
+  <% else %>
+    <p>検索結果が見つかりませんでした。
+  <% end %>
 <% end %>
