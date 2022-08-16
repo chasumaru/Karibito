@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :edit, :update, :destroy]
     resources :likes, only: [:create, :destroy]
   end
+  resources :relationships, only: [:create, :destroy]
 
   # get "/profile" => 'static_pages#show', as: 'profile'
   get "/about" => 'static_pages#about', as: 'about'
@@ -26,7 +27,9 @@ Rails.application.routes.draw do
   devise_scope :user do
     get "/:id/mypage", to: "users/accounts#show", as: 'mypage'
     get '/:id/unsubscribe' => 'users/accounts#unsubscribe', as: 'unsubscribe'
+    get '/:id/following' => 'users/accounts#following', as: 'following'
+    get '/:id/followers' => 'users/accounts#followers', as: 'followers'
   end
-
+  
   get "posts/:id/mypage", to: "users/accounts#show", as: 'user_page'
 end
