@@ -1,7 +1,7 @@
 <section>
   <% if user_signed_in? %>
     <div class="flex my-4 mr-6 justify-end">
-      <button type="submit" onclick="location.href='http://localhost:3000/posts/new'" class="relative inline-flex items-center justify-center overflow-hidden h-9 w-30 text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+      <button type="submit" onclick="location.href='http://192.168.3.18:3000/posts/new'" class="relative inline-flex items-center justify-center overflow-hidden h-9 w-30 text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
         <span class="relative flex items-center px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-lg group-hover:bg-opacity-0">
           日記を書く
         <%= image_tag("lead-pencil.png", size:"25x25", class: "ml-1") %>
@@ -38,7 +38,7 @@
     <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-4 mx-4">
       <% if @posts.present? %>
         <% @posts.each do |post| %>
-          <article class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden" data-turbo="false">
+          <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
             <div class="relative h-3/5 md:h-1/2">
               <% if post.images.attached? %>
                 <%= image_tag(post.images.first.variant(resize_to_fill: [800, 650], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed, alt: "サムネイル画像", class: "w-full h-full object-cover object-center") %>
@@ -46,8 +46,7 @@
                 <img class="w-full h-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog">
               <% end %>
             </div>
-            <%= render post %>
-          </article>
+          <%= render post %>
         <% end %>
       </div>
       <div class="flex justify-center my-6">

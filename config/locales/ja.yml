@@ -9,15 +9,14 @@ ja:
 
     models:
       user: ユーザー
-      post: 投稿
+      post: 日記
       # Board: 掲示板
+    attributes:
+        title: タイトル
+        content: 本文
       # comment: コメント
       # like: いいね
       # contact: お問い合わせ
-    attributes:
-      post:
-        title: タイトル
-        content: 本文
     
   date:
     abbr_day_names:
