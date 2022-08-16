@@ -36,19 +36,19 @@
 <section>
   <%= turbo_frame_tag "posts-list", target: "_top" do %>
     <% if @posts.present? %>
-      <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-4 mx-4">
+      <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-x-1 gap-y-2 mx-4">
         <% @posts.each do |post| %>
           <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden -mb-16">
             <div class="h-3/5">
               <% if post.images.attached? %>
-                <%= image_tag(post.images.first.variant(resize_to_fill: [800, 650], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed, alt: "サムネイル画像", class: "w-full h-full object-cover object-center") %>
+                <%= image_tag(post.thumbnail, alt: "サムネイル画像", class: "w-full h-auto object-cover object-center") %>
               <% else %>
-                <img class="w-full h-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog">
+                <%= image_tag'dummy.jpg', alt: "ダミー画像", class: "w-full h-full object-cover object-center" %>
               <% end %>
             </div>
             <div class="grid pt-2 mx-4">
-              <p class="text-xl font-bold text-black mb-1.5"><%= link_to post.title, post_path(post) %></p>
-              <p class="tracking-tight leading-tight mb-1 text-slate-600 ml-0.5 h-14 md:h-20 lg:h-18"><%= truncate(post.content, length:40) %></p>
+              <p class="text-xl font-semibold text-black mb-1.5"><%= link_to post.title, post_path(post) %></p>
+              <p class="tracking-tight leading-tight text-slate-600 md:text-sm ml-0.5 h-12 md:h-20 lg:h-18"><%= truncate(post.content, length:38) %></p>
               <div class="flex flex-wrap items-center">
               <%# ここにユーザーアイコンを設置する %>
                 <p class="inline-flex items-center text-xs font-semibold ml-1"><%= link_to post.user.name, mypage_path(post.user) %></p>
@@ -70,7 +70,7 @@
           </div>
         <% end %>
       </div>
-      <div class="grid w-full justify-center my-6">
+      <div class="flex justify-center my-6">
         <%= pagy_nav(@pagy).html_safe %>
       </div>
     <% else %>

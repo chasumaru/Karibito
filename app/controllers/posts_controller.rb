@@ -22,13 +22,17 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
     if @post.save
-      redirect_to post_path(@post), notice: "新しい日記を作成しました."
+      if @post.images.attached?
+        @post.processed_images
+        redirect_to post_path(@post), notice: "新しい日記を作成しました。" and return
+      else
+        redirect_to post_path(@post), notice: "新しい日記を作成しました。" and return
+      end
     else
       flash.now.alert = '日記の作成に失敗しました。'
       render :new, status: :unprocessable_entity
     end
   end
-
 
   def show
     @comment = Comment.new

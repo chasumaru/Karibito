@@ -83,7 +83,7 @@ turbo-frame::before {
 
 .pagy-nav,
 .pagy-nav-js {
-  @apply flex w-full justify-center items-center space-x-2 mx-2;
+   @apply flex w-full justify-center items-center space-x-3 md:space-x-4 mx-2;
 }
 
 .pagy-nav .page a,
@@ -94,7 +94,7 @@ turbo-frame::before {
 .pagy-nav-js .page.active,
 .pagy-nav-js .page.prev.disabled,
 .pagy-nav-js .page.next.disabled {
-  @apply block rounded-lg px-4 md:px-6 py-2 text-sm text-gray-500 font-semibold bg-gray-200 shadow-md;
+  @apply block rounded-lg px-3 md:px-6 py-2 text-sm md:text-base text-gray-500 font-semibold bg-gray-200 shadow-md;
   &:hover{
     @apply bg-gray-300;
   }

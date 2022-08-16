@@ -9,6 +9,16 @@ class Post < ApplicationRecord
   validates :content, presence: true, length: { maximum: 255 }
   validate :image_size, :image_count
   
+  def thumbnail
+    return self.images.first.variant(resize_to_fill: [800, 650], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed
+  end
+
+  def processed_images
+    self.images.each do |i|
+      i.variant(resize_to_fill: [800, 600], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed
+    end
+  end
+
   private
   # 10MB以上の画像ファイルを許可しない
   def image_size
