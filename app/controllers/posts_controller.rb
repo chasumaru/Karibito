@@ -12,6 +12,7 @@ class PostsController < ApplicationController
     @search = Post.ransack(params[:q])
     @search.sorts = 'id desc' if @search.sorts.empty?
     @pagy, @posts = pagy @search.result
+    @dummy_text = '　　　　　　　　　　　　　　　　　　　'
   end
 
   def new
