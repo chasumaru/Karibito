@@ -33,9 +33,8 @@ module.exports = {
         '5.5': '1.375rem',
         '7': '1.75rem',
         '9': '2.25rem',
-        '18': '4.5rem',
         '30': '7.5rem',
-
+        '88': '22rem',
       },
       boxShadow: {
         'md': '1px 1px 1px 1px rgba(0, 0, 0, 0.1),-1px -1px 1px 1px rgba(0, 0, 0, 0.1)'
