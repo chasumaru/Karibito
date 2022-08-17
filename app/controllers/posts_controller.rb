@@ -38,6 +38,9 @@ class PostsController < ApplicationController
     @comment = Comment.new
     @comments = @post.comments.includes(:user)
     @like = Like.new
+    if @post.images.attached?
+      @processed = @post.processed_images
+    end
   end
 
   def update
