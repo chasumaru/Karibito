@@ -44,7 +44,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
     yield resource if block_given?
     if resource_updated
-      resource.resized_avatar
+      # resource.resized_avatar
       set_flash_message_for_update(resource, prev_unconfirmed_email)
       bypass_sign_in resource, scope: resource_name if sign_in_after_change_password?
 

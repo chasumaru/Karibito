@@ -4,12 +4,12 @@
   <div class="grid grid-cols-1 gap-x-4">
     <% if @user.avatar.attached? %>
       <% if @user == current_user %>
-        <%= image_tag @user.resized_avatar, class: "w-28 h-28 rounded-full border-2 border-emerald-500" %>
+        <%= image_tag @user.avatar, class: "w-28 h-28 rounded-full border-4 border-emerald-500" %>
       <% else %>
-        <%= image_tag @user.resized_avatar, class: "w-28 h-28 rounded-full border-2 border-indigo-500" %>
+        <%= image_tag @user.avatar, class: "w-28 h-28 rounded-full border-4 border-indigo-500" %>
       <% end %>
     <% else %>
-      <%= image_tag "no_avatar.png", class: "w-28 h-28 rounded-full border-2 border-yellow-300" %>
+      <%= image_tag "no_avatar.png", class: "w-28 h-28 rounded-full border-4 border-yellow-300" %>
     <% end %>
 
     <h3>名前</h3>
