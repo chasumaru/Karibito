@@ -7,14 +7,6 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
   end
   resources :relationships, only: [:create, :destroy]
-
-  # get "/profile" => 'static_pages#show', as: 'profile'
-  get "/about" => 'static_pages#about', as: 'about'
-  get "/contact" => 'static_pages#contact', as: 'contact'
-  get "/privacy" => 'static_pages#privacy', as: 'privacy'
-  get "/faq" => 'static_pages#faq', as: 'faq'
-  get "/term" => 'static_pages#term', as: 'term'
-  get "/manual" => 'static_pages#manual', as: 'manual'
   
   devise_for :users,
       module: "users",
@@ -24,12 +16,17 @@ Rails.application.routes.draw do
       password: 'secret', confirmation: 'verification',
       registration: 'register', edit: 'edit/profile'
     }
-  devise_scope :user do
-    get "/:id/mypage", to: "users/accounts#show", as: 'mypage'
-    get '/:id/unsubscribe' => 'users/accounts#unsubscribe', as: 'unsubscribe'
-    get '/:id/following' => 'users/accounts#following', as: 'following'
-    get '/:id/followers' => 'users/accounts#followers', as: 'followers'
-  end
+
+  get "/about", to: 'static_pages#about', as: 'about'
+  get "/contact", to: 'static_pages#contact', as: 'contact'
+  get "/privacy", to: 'static_pages#privacy', as: 'privacy'
+  get "/faq", to: 'static_pages#faq', as: 'faq'
+  get "/term", to: 'static_pages#term', as: 'term'
+  get "/manual", to: 'static_pages#manual', as: 'manual'
   
-  get "posts/:id/mypage", to: "users/accounts#show", as: 'user_page'
+  
+    get "/:id/profile", to: "users/accounts#show", as: 'profile'
+    get '/:id/unsubscribe', to: 'users/accounts#unsubscribe', as: 'unsubscribe'
+    get '/:id/following', to: 'users/accounts#following', as: 'following'
+    get '/:id/followers', to: 'users/accounts#followers', as: 'followers'
 end

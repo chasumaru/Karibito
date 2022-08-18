@@ -40,9 +40,9 @@
         <% @posts.each do |post| %>
           <div class="border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden no-tap-highlighting">
             <% if post.images.attached? %>
-              <%= link_to image_tag(post.thumbnail, alt: "サムネイル画像"), post_path(post), class: "rounded-t-xl w-full h-54 object-cover object-center" %>
+              <%= link_to image_tag(post.thumbnail, alt: "サムネイル画像"), post_path(post), class: "rounded-t-xl w-full h-54 object-center" %>
             <% else %>
-              <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "rounded-t-xl w-full h-54 object-cover object-center" %>
+              <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "rounded-t-xl w-full h-54 object-center" %>
             <% end %>
             <div class="flex flex-col p-4 -mt-2">
               <p class="text-base font-semibold text-black"><%= link_to post.title, post_path(post) %></p>
@@ -51,14 +51,14 @@
                 <span class="flex flex-row items-center -ml-1 mr-1">
                   <%if post.user.avatar.attached? %>
                     <% if post.user == current_user %>
-                      <%= link_to image_tag(current_user.avatar, class: "w-8 h-8 rounded-full border-2 border-emerald-500"), mypage_path(current_user) %>
+                      <%= link_to image_tag(current_user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-emerald-500"), profile_path(current_user) %>
                     <% else %>
-                      <%= link_to image_tag(post.user.avatar, class: "w-8 h-8 rounded-full border-2 border-indigo-500"), user_page_path(post.user) %>
+                      <%= link_to image_tag(post.user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-indigo-500"), user_page_path(post.user) %>
                     <% end %>
                   <% else %>
-                    <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border-2 border-yellow-300" %>
+                    <%= image_tag "no_avatar.png", class: "w-8 h-8 md:w-12 md:h-12 object-cover rounded-full border-2 border-yellow-300" %>
                   <% end %>
-                  <p class="text-sm font-medium mr-2 ml-2 hover:underline hover:underline-offset-2"><%= link_to post.user.name, mypage_path(post.user) %></p>
+                  <p class="text-sm font-medium mr-2 ml-2 hover:underline hover:underline-offset-2"><%= link_to post.user.name, profile_path(post.user) %></p>
                 </span>
                 <span class="text-gray-400 inline-flex items-center ml-auto leading-none text-sm border-r-2 border-gray-200 pr-3">
                   <svg class="w-4 h-4 mr-1"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  
