@@ -15,9 +15,9 @@ class ApplicationController < ActionController::Base
   #   raise ActionController::RoutingError, params[:path]
   # end
 
-  def after_sign_in_path_for(resource)
-    mypage_path(resource)
-  end
+  # def after_sign_in_path_for(resource)
+  #   redirect_back(fallback_location: root_path)
+  # end
   
   private
   
