@@ -56,6 +56,12 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  
+  def resized_avatar
+    return self.avatar.variant(
+      resize_to_fill: [800, 800], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed
+  end
+
   private
 
   def not_attached?

@@ -1,54 +1,57 @@
-<h1>ユーザーページ</h1>
 
-<%if @user.avatar.attached? %>
-  <%= image_tag @user.avatar, class: "w-20 h-20 object-cover rounded-full border-2 border-indigo-500" %>
-<% else %>
-  <%= image_tag "no_avatar.png", size: "200×200", class: "w-20 h-20 object-cover rounded-full border-2 border-indigo-500" %>
-<% end %>
-      <img class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80">
-
-<h3>名前</h3>
-<%= @user.name %>
-<h3>メールアドレス</h3>
-<%= @user.email %>
-<h3>プロフィール</h3>
-<%= @user.profile %>
-<%= link_to "投稿する", new_post_path %>
-<br>
-<%= link_to 'プロフィール確認', edit_user_registration_path, class: "block" %> 
-<br>
-
-<h3>いいねしている投稿</h3>
-<% @user.liked_posts.each do |post| %>
-  <%= post.user.name %>
-  <%= post.title %>
-<% end %>
-
-
-<p>フォロー:<%= @user.following.count %></p>
-<p>フォロワー:<%= @user.followers.count %></p>
-
-<% if current_user != @user %>
-  <% if current_user.following?(@user) %>
-    <%= form_with(model: current_user.active_relationships.find_by(followed_id: @user.id), html: { method: :delete }) do |f| %>
-      <%= f.submit "Unfollow" %>
+<section>
+  <div class="grid grid-cols-1 gap-x-4">
+    <%if @user.avatar.attached? %>
+      <%= image_tag @user.avatar, class: "w-28 h-28 object-cover rounded-full border-2 border-indigo-500" %>
+    <% else %>
+      <%= image_tag "no_avatar.png", class: "w-28 h-28 object-cover rounded-full border-2 border-indigo-500" %>
     <% end %>
-  <% else %>
-    <%= form_with(model: current_user.active_relationships.build) do |f| %>
-      <div><%= hidden_field_tag :followed_id, @user.id %></div>
-      <%= f.submit "Follow" %>
-    <% end %>
-  <% end %>
-<% end %>
 
-<p>実装予定</p>
-<div class="tabs">
-  <div class="tab1">"日誌"</div>
-  <div class="tab2">"Q&A"</div>
-  <div class="tab3">"いいねした日誌"</div>
-  <div class="tab4">"いいねした質問"</div>
-</div>
-<div class="tab__contents">
- <p> ユーザーに紐づくそれぞれのタブの一覧を表示</p>
-</div>
-<%= link_to "戻る", :back, class:"no-tap-highlighting" %>
+    <h3>名前</h3>
+    <%= @user.name %>
+    <h3>メールアドレス</h3>
+    <%= @user.email %>
+    <h3>プロフィール</h3>
+    <%= @user.profile %>
+    <%= link_to "投稿する", new_post_path %>
+    <br>
+    <%= link_to 'プロフィール確認', edit_user_registration_path, class: "block" %> 
+    <br>
+
+    <h3>いいねしている投稿</h3>
+    <% @user.liked_posts.each do |post| %>
+      <%= post.user.name %>
+      <%= post.title %>
+    <% end %>
+
+
+    <p>フォロー:<%= @user.following.count %></p>
+    <p>フォロワー:<%= @user.followers.count %></p>
+
+    <% if current_user != @user %>
+      <% if current_user.following?(@user) %>
+        <%= form_with(model: current_user.active_relationships.find_by(followed_id: @user.id), html: { method: :delete }) do |f| %>
+          <%= f.submit "Unfollow" %>
+        <% end %>
+      <% else %>
+        <%= form_with(model: current_user.active_relationships.build) do |f| %>
+          <div><%= hidden_field_tag :followed_id, @user.id %></div>
+          <%= f.submit "Follow" %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <p>実装予定</p>
+    <div class="tabs">
+      <div class="tab1">"日誌"</div>
+      <div class="tab2">"Q&A"</div>
+      <div class="tab3">"いいねした日誌"</div>
+      <div class="tab4">"いいねした質問"</div>
+    </div>
+    <div class="tab__contents">
+    <p> ユーザーに紐づくそれぞれのタブの一覧を表示</p>
+    </div>
+    <%= link_to "戻る", :back, class:"no-tap-highlighting" %>
+    </div>
+  </div>
+</section>
