@@ -46,16 +46,19 @@
             <% end %>
             <div class="flex flex-col p-4 -mt-2">
               <p class="text-base font-semibold text-black"><%= link_to post.title, post_path(post) %></p>
-              <p class="tracking-tight leading-tight text-slate-600 md:text-sm"><%= truncate(post.content, length:30) %></p>
+              <p class="tracking-tight leading-tight text-slate-600 md:text-sm"><%= truncate(post.content, length:38) %></p>
               <div class="flex flex-row mt-5 justify-start">
                 <span class="flex flex-row items-center -ml-1 mr-1">
                   <%if post.user.avatar.attached? %>
-                    <%= image_tag post.user.avatar, size: "20×20", class: "w-8 h-8 object-cover rounded-full border-1 border-indigo-500" %>
+                    <% if post.user == current_user %>
+                      <%= link_to image_tag(current_user.resized_avatar, class: "w-8 h-8 rounded-full border-2 border-emerald-500"), mypage_path(current_user) %>
+                    <% else %>
+                      <%= link_to image_tag(post.user.avatar, class: "w-8 h-8 rounded-full border-2 border-indigo-500"), user_page_path(post.user) %>
+                    <% end %>
                   <% else %>
-                    <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border-1 border-indigo-500" %>
+                    <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border-2 border-yellow-300" %>
                   <% end %>
-                  <%# <%= image_tag "no_avatar.png", size: "20×20", class: "rounded-2xl mr-1" %>
-                  <p class="text-xs font-bold mr-2 ml-1 hover:underline hover:underline-offset-2"><%= link_to post.user.name, mypage_path(post.user) %></p>
+                  <p class="text-sm font-medium mr-2 ml-2 hover:underline hover:underline-offset-2"><%= link_to post.user.name, mypage_path(post.user) %></p>
                 </span>
                 <span class="text-gray-400 inline-flex items-center ml-auto leading-none text-sm border-r-2 border-gray-200 pr-3">
                   <svg class="w-4 h-4 mr-1"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  
@@ -70,7 +73,7 @@
                   <%= post.comments.count %>
                 </span>
               </div>
-              <p class="text-xs text-slate-500 ml-6"><%= how_long_ago(post) %></p>
+              <p class="text-xs text-slate-500 ml-8"><%= how_long_ago(post) %></p>
             </div>
           </div>
         <% end %>
@@ -85,3 +88,4 @@
     <% end %>
   <% end %>
 </section>
+

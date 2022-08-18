@@ -1,10 +1,15 @@
 
+
 <section>
   <div class="grid grid-cols-1 gap-x-4">
-    <%if @user.avatar.attached? %>
-      <%= image_tag @user.avatar, class: "w-28 h-28 object-cover rounded-full border-2 border-indigo-500" %>
+    <% if @user.avatar.attached? %>
+      <% if @user == current_user %>
+        <%= image_tag @user.resized_avatar, class: "w-28 h-28 rounded-full border-2 border-emerald-500" %>
+      <% else %>
+        <%= image_tag @user.resized_avatar, class: "w-28 h-28 rounded-full border-2 border-indigo-500" %>
+      <% end %>
     <% else %>
-      <%= image_tag "no_avatar.png", class: "w-28 h-28 object-cover rounded-full border-2 border-indigo-500" %>
+      <%= image_tag "no_avatar.png", class: "w-28 h-28 rounded-full border-2 border-yellow-300" %>
     <% end %>
 
     <h3>名前</h3>
@@ -13,7 +18,6 @@
     <%= @user.email %>
     <h3>プロフィール</h3>
     <%= @user.profile %>
-    <%= link_to "投稿する", new_post_path %>
     <br>
     <%= link_to 'プロフィール確認', edit_user_registration_path, class: "block" %> 
     <br>

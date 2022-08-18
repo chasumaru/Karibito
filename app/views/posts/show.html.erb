@@ -1,3 +1,4 @@
+
 <div class="grid gap-1">
   <article>
     <div class="p-4">
@@ -13,17 +14,19 @@
             <p class="text-base font-semibold text-black"><%= link_to @post.title, post_path(@post) %></p>
             <p class="tracking-tight leading-tight text-slate-600 md:text-sm"><%= @post.content %></p>
             <div class="flex flex-row mt-5 justify-start">
-            <%# スパンタグにリンクをユーザーページへのリンクを設置 %>
-            <%# %# ここにユーザーアイコンを設置する %>
               <span class="flex flex-row items-center -ml-2 mr-1">
                 <%if @post.user.avatar.attached? %>
-                  <%= image_tag @post.user.avatar, size: "20×20", class: "w-16 h-16 object-cover rounded-full border-2 border-indigo-500" %>
+                  <% if @post.user == current_user %>
+                      <%= link_to image_tag(current_user.resized_avatar, class: "w-8 h-8 rounded-full border-2 border-emeral-500"), mypage_path(current_user) %>
+                    <% else %>
+                      <%= link_to image_tag(@post.user.resized_avatar, class: "w-8 h-8 rounded-full border-2 border-indigo-500"), user_page_path(@post.user) %>
+                  <% end %>
                 <% else %>
-                  <%= image_tag "no_avatar.png", size: "200×200", class: "w-8 h-8 object-cover rounded-full border-2 border-indigo-500" %>
+                  <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border-2 border-pink-500" %>
                 <% end %>
-                <p class="text-xs font-semibold mr-2 hover:underline hover:underline-offset-2"><%= link_to @post.user.name, mypage_path(@post.user) %></p>
+                <p class="text-xs font-semibold hover:underline hover:underline-offset-2 mr-2 ml-2"><%= link_to @post.user.name, mypage_path(@post.user) %></p>
               </span>
-              <span class="text-gray-400 inline-flex items-center ml-auto leading-none text-sm border-r-2 border-gray-200 pr-1">
+              <span class="text-gray-400 inline-flex items-center ml-auto leading-none text-sm border-r-2 border-gray-200 pr-3">
                 <svg class="w-4 h-4 mr-1"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                 </svg>
@@ -36,7 +39,7 @@
                 <%= @post.comments.count %>
               </span>
             </div>
-            <p class="text-xs text-slate-500 ml-6"><%= how_long_ago(@post) %></p>
+            <p class="text-xs text-slate-500 ml-8"><%= how_long_ago(@post) %></p>
           </div>
         <% if signed_in? %>
           <% if current_user.already_liked?(@post) %>
