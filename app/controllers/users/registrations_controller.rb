@@ -87,12 +87,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
   def after_update_path_for(_resource)
-    mypage_path(current_user)
+    profile_path(current_user)
   end
 
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)
-    mypage_url(resource)
+    profile_url(resource)
   end
 
   def update_resource(resource, params)

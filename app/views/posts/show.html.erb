@@ -75,7 +75,7 @@
           <% next %>
         <% end %>
           <span id="comment_<%= c.id %>">
-            <%= link_to profile_path(c.user), class: "text-dark" do %> 
+            <%= link_to mypage_path(c.user), class: "text-dark" do %> 
                <%if  c.user.avatar.attached? %>
                   <% if c.user == current_user %>
                     <%= image_tag(current_user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-emerald-500") %>
