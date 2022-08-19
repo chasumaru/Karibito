@@ -1,6 +1,17 @@
 module ApplicationHelper
   include Pagy::Frontend
 
+  # タイトル用のメソッド
+  def full_title(page_title = '')
+    base_title = "Karibito"
+    if page_title.empty?
+      base_title
+    else
+      page_title + " | " + base_title
+    end
+  end
+
+  # 時間間隔を表示
   def how_long_ago(object)
     if (Time.now - object.created_at) <= 60 * 60
       # 60分以内

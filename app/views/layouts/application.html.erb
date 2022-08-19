@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Karibito</title>
+  <title><%= full_title(yield(:title)) %></title>
     <%= favicon_link_tag('favicon.ico') %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -10,13 +10,13 @@
     <%= javascript_importmap_tags %>
     <%= yield(:head) %>
   </head>
-  <body data-controller="sidebar" class="font-body text-stone-700 bg-neutral-100 relative z-0">
+  <body data-controller="sidebar" class="font-body text-stone-700 bg-neutral-100">
     <header>
       <%= render "shared/navbar" %>
       <%= render "shared/sidebar" %>
     </header>
     <main>
-      <div class="mx-auto relative z-0 pt-24">
+      <div class="pt-24">
         <%= render "shared/flash" %>
         <%= yield %>
         <div data-sidebar-target="covering"></div>

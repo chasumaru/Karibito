@@ -1,54 +1,77 @@
-<h1>ユーザーページ</h1>
-
-<%if @user.avatar.attached? %>
-  <%= image_tag @user.avatar, class: "w-20 h-20 object-cover rounded-full border-2 border-indigo-500" %>
+<% case @user %>
+<% when current_user %>
+  <% i = 'マイページ' %>
 <% else %>
-  <%= image_tag "no_avatar.png", size: "200×200", class: "w-20 h-20 object-cover rounded-full border-2 border-indigo-500" %>
+  <% i = "#{@user.name}さんのページ"%>
 <% end %>
-      <img class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80">
+<% provide(:title, "#{i}") %>
+<div class="-mt-12">
+  <section>
+    <div class="profile__icon">
+    <%# 背景画像をupdateで設定できるようにする %>
+      <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "w-full h-64 md:h-96 object-center object-cover" %>
+      <div class="flex w-full flex-col justify-center items-center">
+        <span class ="relative -mt-10 md:-mt-16">
+          <%if  @user.avatar.attached? %>
+            <% if @user == current_user %>
+              <%= image_tag(current_user.avatar, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-emerald-500") %>
+            <% else %>
+              <%= image_tag(@user.avatar, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-indigo-500") %>
+            <% end %>
+          <% else %>
+            <%= image_tag "no_avatar.png", class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-pink-500" %>
+          <% end %>
+        </span>
+        <p class="mt-2 font-semibold"><%= @user.name %></p>
+      </div>
+    </div>
+    <div class="profile__details">
+      <div class="flex w-full flex-col justify-center items-center bg-yellow-100">
+        <div class="text-md font-medium bg-yellow-200">
+          <%= @user.profile %>
+        </div>
+        
+        <p>日記一覧</p>
+        <p>掲示板投稿一覧</p>
+        <p>フォロー一覧</p>
+        <p>フォロワー一覧</p>
 
-<h3>名前</h3>
-<%= @user.name %>
-<h3>メールアドレス</h3>
-<%= @user.email %>
-<h3>プロフィール</h3>
-<%= @user.profile %>
-<%= link_to "投稿する", new_post_path %>
-<br>
-<%= link_to 'プロフィール確認', edit_user_registration_path, class: "block" %> 
-<br>
-
-<h3>いいねしている投稿</h3>
-<% @user.liked_posts.each do |post| %>
-  <%= post.user.name %>
-  <%= post.title %>
-<% end %>
+        <p>フォロー:<%= @user.following.count %></p>
+        <p>フォロワー:<%= @user.followers.count %></p>
+      </div>
+  </section>
 
 
-<p>フォロー:<%= @user.following.count %></p>
-<p>フォロワー:<%= @user.followers.count %></p>
 
-<% if current_user != @user %>
-  <% if current_user.following?(@user) %>
-    <%= form_with(model: current_user.active_relationships.find_by(followed_id: @user.id), html: { method: :delete }) do |f| %>
-      <%= f.submit "Unfollow" %>
-    <% end %>
-  <% else %>
-    <%= form_with(model: current_user.active_relationships.build) do |f| %>
-      <div><%= hidden_field_tag :followed_id, @user.id %></div>
-      <%= f.submit "Follow" %>
-    <% end %>
-  <% end %>
-<% end %>
 
-<p>実装予定</p>
-<div class="tabs">
-  <div class="tab1">"日誌"</div>
-  <div class="tab2">"Q&A"</div>
-  <div class="tab3">"いいねした日誌"</div>
-  <div class="tab4">"いいねした質問"</div>
+  
+  <section>
+    <div class="grid justify-center h-64 overflow-hidden bg-red-100 mt-8">
+      <div class="grid justify-center items-center">
+        <%if  @user.avatar.attached? %>
+          <% if @user == current_user %>
+            <%= image_tag(current_user.avatar, class: "w-20 h-20 rounded-full border-2 border-emerald-500") %>
+          <% else %>
+            <%= image_tag(@user.avatar, class: "w-20 h-20 rounded-full border-2 border-indigo-500") %>
+          <% end %>
+        <% else %>
+          <%= image_tag "no_avatar.png", class: "w-20 h-20 rounded-full border-2 border-pink-500" %>
+        <% end %>
+      </div>
+      <div class=" bg-red-300">
+        <p class=" bg-red-400">111111111111111111111111111111111111</p>
+        <p class="">sss</p>
+        <div class=" bg-red-500">
+          <span class=" bg-red-600">
+              <%= image_tag "no_avatar.png", class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-pink-500 " %>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>コメント一覧</h3>
+  </section>
+  <%= link_to '一覧に戻る', posts_path, class:"no-tap-highlighting" %>
 </div>
-<div class="tab__contents">
- <p> ユーザーに紐づくそれぞれのタブの一覧を表示</p>
-</div>
-<%= link_to "戻る", :back, class:"no-tap-highlighting" %>
