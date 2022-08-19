@@ -1,9 +1,10 @@
 <section>
   <% if user_signed_in? %>
-    <div class="fixed bottom-3 right-3 z-30">
-      <button type="submit" onclick="location.href='http://192.168.3.18:3000/posts/new'" class="relative inline-flex items-center justify-center overflow-hidden h-9 w-30 text-sm font-semibold text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
-        <span class="relative flex items-center px-2 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-lg group-hover:bg-opacity-0">
-          日記を書く
+    <div class="fixed bottom-3 right-6 z-30">
+      <button type="submit" onclick="location.href='http://192.168.3.18:3000/posts/new'" class="
+       overflow-hidden h-10 w-28 text-sm font-semibold text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+        <span class="relative inline-flex items-center px-1 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-lg group-hover:bg-opacity-0">
+          <span class="font-semibold">日記を書く</span>
         <%= image_tag("lead-pencil.png", size:"25x25", class: "ml-1") %>
         </span>
       </button>
@@ -11,6 +12,7 @@
   <% end %>
 </section>
 <section>
+  <div class="grid itmes-cneter">
   <%= search_form_for(
     @search,
       html: { 
@@ -20,25 +22,26 @@
       turbo_frame: "posts-list"
         }
       }) do |f| %>
-    <div class="mx-4 mb-4">
+    <div class="mx-8 mb-12">
       <div class="relative w-full" data-action="input->search-form#search">
         <%= f.label :title_or_content_cont, "キーワード検索" %>
         <%= f.search_field :title_or_content_cont,
           autocomplete: "off",
           placeholder: "キーワードを入力してください。",
           class: "relative block p-2.5 w-full z-20 text-sm text-slate-600 bg-gray-50 appearance-none rounded-lg  border border-slate-300 focus:ring  dark:bg-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" %>
+        <%= link_to "クリア", posts_path, class:"absolute right-0 top-18 px-1 inline-flex items-center justify-center rounded-md bg-gray-300" %> 
       </div>
-      <%= link_to "クリア", posts_path %>
     </div>
   <% end %>
+  </div>
 </section>
 
 <section>
   <%= turbo_frame_tag "posts-list", target: "_top" do %>
     <% if @posts.present? %>
-      <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-3 mx-4">
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-3 mx-8">
         <% @posts.each do |post| %>
-          <div class="border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden no-tap-highlighting">
+          <div class="border-2 border-gray-200 border-opacity-60 rounded-xl overflow-hidden no-tap-highlighting">
             <% if post.images.attached? %>
               <%= link_to image_tag(post.thumbnail, alt: "サムネイル画像"), post_path(post), class: "rounded-t-xl w-full h-54 object-center" %>
             <% else %>
@@ -82,8 +85,12 @@
         <%= pagy_nav(@pagy).html_safe %>
       </div>
     <% else %>
-      <div class="flex justify-center pb-6 my-3">
-        <p>検索結果が見つかりませんでした。</p>
+      <div class="flex w-full flex-col justify-center items-center mb-48">
+        <span class ="relative">
+          <div class="h-36 w-36 bg-white rounded-full -ml-1.5 "></div>
+          <%= image_tag 'ojigi_animal_kuma.png', class:' absolute top-6 left-4 z-10 w-24 h-28 p-4' %>
+        </span>
+        <p class="font-medium py-2">検索結果が見つかりませんでした。</p>
       </div>
     <% end %>
   <% end %>

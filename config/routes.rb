@@ -24,9 +24,8 @@ Rails.application.routes.draw do
   get "/term", to: 'static_pages#term', as: 'term'
   get "/manual", to: 'static_pages#manual', as: 'manual'
   
-  
-    get "/:id/profile", to: "users/accounts#show", as: 'profile'
-    get '/:id/unsubscribe', to: 'users/accounts#unsubscribe', as: 'unsubscribe'
-    get '/:id/following', to: 'users/accounts#following', as: 'following'
-    get '/:id/followers', to: 'users/accounts#followers', as: 'followers'
+  get "/:id/profile", to: "users/accounts#show", as: 'profile'
+  get '/:id/unsubscribe', to: 'users/accounts#unsubscribe', as: 'unsubscribe'
+  get '/:id/following', to: 'users/accounts#following', as: 'following'
+  get '/:id/followers', to: 'users/accounts#followers', as: 'followers'
 end
