@@ -19,7 +19,7 @@
               <%= image_tag(@user.avatar, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-indigo-500") %>
             <% end %>
           <% else %>
-            <%= image_tag "no_avatar.png", class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-pink-500" %>
+            <%= image_tag "no_avatar.png", class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-yellow-300" %>
           <% end %>
         </span>
         <p class="mt-2 font-semibold"><%= @user.name %></p>
@@ -27,7 +27,7 @@
     </div>
     <div class="profile__details">
       <div class="flex w-full flex-col justify-center items-center bg-yellow-100">
-        <div class="text-md font-medium bg-yellow-200">
+        <div class="text-md font-medium whitespace-pre-wrap bg-yellow-200">
           <%= @user.profile %>
         </div>
         

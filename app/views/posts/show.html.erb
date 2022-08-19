@@ -22,7 +22,7 @@
                       <%= link_to image_tag(@post.user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-indigo-500"), user_page_path(@post.user) %>
                   <% end %>
                 <% else %>
-                  <%= image_tag "no_avatar.png", class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-pink-500" %>
+                  <%= image_tag "no_avatar.png", class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-yellow-300" %>
                 <% end %>
                 <p class="text-xs font-semibold hover:underline hover:underline-offset-2 mr-2 ml-2"><%= link_to @post.user.name, profile_path(@post.user) %></p>
               </span>

@@ -11,8 +11,8 @@
 
                 <div class="field mt-6">
                     <div class="flex justify-between mb-2">
-                        <%= f.label :password, "パスワード" ,class: "text-lg font-bold text-gray-600 dark:text-gray-200"%>
-                        <div class="-mb-2">
+                        <%= f.label :password, "パスワード" ,class: "w-32 text-lg font-bold text-gray-600 dark:text-gray-200" %>
+                        <div class="-mb-2 ml-8">
                           <%= link_to "パスワードをお忘れですか?" ,new_user_password_path ,class: "text-sm text-gray-400 focus:text-blue-500 hover:text-blue-500 hover:underline" %>
                         </div>
                     </div>
@@ -34,4 +34,3 @@
         </div>
     </div>
 </div>
-<%= link_to "戻る", :back, class:"no-tap-highlighting" %>

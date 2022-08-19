@@ -15,6 +15,8 @@
         </div>
     </div>
 </div>
-<%= render "users/shared/links" %>
+<% if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+  <%= link_to "確認メールが届かない場合", new_confirmation_path(resource_name) %><br />
+<% end %>
 
 

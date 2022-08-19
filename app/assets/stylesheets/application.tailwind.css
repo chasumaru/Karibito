@@ -83,7 +83,7 @@ turbo-frame::before {
 
 .pagy-nav,
 .pagy-nav-js {
-   @apply flex w-full justify-center items-center space-x-3 md:space-x-4 lg:space-x-8 mx-2;
+   @apply flex w-full justify-center items-center space-x-2 md:space-x-4 lg:space-x-8 mx-2;
 }
 
 .pagy-nav .page a,
