@@ -46,11 +46,7 @@
       </div>
       <div class="relative mr-12">
         <label class="sr-only" for="search"> Search </label>
-        <button
-          class="absolute p-2 text-gray-600 transition -translate-y-1/2 rounded-full hover:text-black bg-gray-50 top-1/2 right-1"
-          type="button"
-          aria-label="Submit Search"
-        >
+        <%= button_to posts_path, method: :get, class: "absolute p-2 text-gray-600 transition -translate-y-1/2 rounded-full hover:text-black bg-gray-50 top-1/2 right-1" do %>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="w-4 h-4"
@@ -65,33 +61,33 @@
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             />
           </svg>
-        </button>
+        <% end %>
       </div>
       <div class="user-info hidden lg:block">
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-          <button type="button" class="bg-white p-1 rounded-full text-gray-400 hover:text-black hover:bg-gray-100">
+          <%= button_to profile_path(current_user), method: :get, class: "bg-white p-1 rounded-full text-gray-400 hover:text-black hover:bg-gray-100" do %>
             <span class="sr-only">View notifications</span>
             <!-- Heroicon name: outline/bell -->
             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
             </svg>
-          </button>
+          <% end %>
 
           <!-- Profile dropdown -->
           <div class="ml-3 mr-10 lg:mr-2 relative">
             <div>
-              <button type="button" class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+              <%= button_to profile_path(current_user), method: :get, class: "bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" do %>
                 <span class="sr-only">Open user menu</span>
                 <%if user_signed_in?  %>
-                   <% if current_user.avatar.attached? %>
-                     <%= link_to image_tag(current_user.avatar, class: "w-8 h-8 rounded-full border-2 border-emerald-500"),profile_path(current_user) %>
-                   <% else %>
-                     <%= link_to image_tag("no_avatar.png"),profile_path(current_user), class: "w-8 h-8 rounded-full border-2 border-yellow-300" %>
-                   <% end %>
-                 <% else %>
-                   <%= link_to image_tag("no_avatar.png"), new_user_session_path, class: "w-8 h-8 rounded-full border-2 border-yellow-300" %>
-                 <% end %>
-              </button>
+                  <% if current_user.avatar.attached? %>
+                    <%= link_to image_tag(current_user.avatar, class: "w-8 h-8 rounded-full border-2 border-emerald-500"),profile_path(current_user) %>
+                  <% else %>
+                    <%= link_to image_tag("no_avatar.png"),profile_path(current_user), class: "w-8 h-8 rounded-full border-2 border-yellow-300" %>
+                  <% end %>
+                <% else %>
+                  <%= link_to image_tag("no_avatar.png"), new_user_session_path, class: "w-8 h-8 rounded-full border-2 border-yellow-300" %>
+                <% end %>
+              <% end %>
             </div>
           </div>
         </div>
