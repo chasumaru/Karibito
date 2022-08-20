@@ -6,18 +6,36 @@ class Post < ApplicationRecord
   has_many :liked_users, through: :likes, source: :user
   validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: 75 }
-  validates :content, presence: true, length: { maximum: 255 }
+  validates :content, length: { maximum: 255 }
   validate :image_size, :image_count
   
   def thumbnail
     return self.images.first.variant(resize_to_fill: [800, 600], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed
   end
 
-  def processed_images
-    self.images.each do |i|
-      i.variant(resize_to_fill: [800, 600], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed
+  # def processed_images
+  #   self.posts.each do |i|
+  #     i.variant(resize_to_fill: [800, 600], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed
+  #   end
+  # end
+
+  def image_processing
+    
+    (self.images.count - 1).times do |i|
+    self.images[i+1].variant(resize_to_fill: [800, 600], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed
     end
+
+
+    # self.each do |i|
+    #   i.variant(resize_to_fill: [800, 600], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed
+    # end
   end
+
+
+
+
+
+
 
   private
   # 10MB以上の画像ファイルを許可しない

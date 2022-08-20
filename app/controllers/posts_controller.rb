@@ -23,7 +23,7 @@ class PostsController < ApplicationController
     @post.user = current_user
     if @post.save
       if @post.images.attached?
-        @post.processed_images
+        # @post.processed_images
         redirect_to post_path(@post), notice: "新しい日記を作成しました。" and return
       else
         redirect_to post_path(@post), notice: "新しい日記を作成しました。" and return
@@ -35,12 +35,9 @@ class PostsController < ApplicationController
   end
 
   def show
-    @comment = Comment.new
+    @comment  = Comment.new
     @comments = @post.comments.includes(:user)
-    @like = Like.new
-    if @post.images.attached?
-      @processed = @post.processed_images
-    end
+    @like     = Like.new
   end
 
   def update
