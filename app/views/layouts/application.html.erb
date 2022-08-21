@@ -11,19 +11,23 @@
     <%= yield(:head) %>
   </head>
   <body data-controller="sidebar" class="font-body text-stone-700 bg-neutral-100">
-    <header>
-      <%= render "shared/navbar" %>
-      <%= render "shared/sidebar" %>
-    </header>
-    <main>
-      <div class="relative z-0 pt-15">
-        <%= render "shared/flash" %>
-        <%= yield %>
-        <div data-sidebar-target="covering"></div>
+    <div class="grid grid-cols-1 mx-auto max-w-screen-lg">
+      <div class="grid grid-cols-1 bg-white">
+        <header>
+          <%= render "shared/navbar" %>
+          <%= render "shared/sidebar" %>
+        </header>
+        <main>
+          <div class="relative z-0 pt-15">
+            <%= render "shared/flash"%>
+            <%= yield %>
+            <div data-sidebar-target="covering"></div>
+          </div>
+        </main>
+        <footer>
+          <%= render "shared/footer" %>
+        </footer>
       </div>
-    </main>
-    <footer>
-      <%= render "shared/footer" %>
-    </footer>
+    </div>
   </body>
 </html>

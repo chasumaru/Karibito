@@ -39,6 +39,7 @@ module.exports = {
         '30': '7.5rem',
         '48': '12rem',
         '88': '22rem',
+        '160': '40rem',
       },
       boxShadow: {
         'md': '1px 1px 1px 1px rgba(0, 0, 0, 0.1),-1px -1px 1px 1px rgba(0, 0, 0, 0.1)'

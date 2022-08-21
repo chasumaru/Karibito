@@ -21,8 +21,3 @@ application.register('popover', Popover)
 application.register('toggle', Toggle)
 application.register('slideover', Slideover)
 
-// import TextareaAutogrow from "stimulus-textarea-autogrow"
-// application.register("textarea-autogrow", TextareaAutogrow)
-
-// import ScrollTo from "stimulus-scroll-to"
-// application.register("scroll-to", ScrollTo)

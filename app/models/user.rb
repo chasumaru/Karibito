@@ -11,7 +11,7 @@ class User < ApplicationRecord
   #  :omniauthable, omniauth_providers: [:twitter]
 
   # Valdation
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 30 }
   validates :profile, length: { maximum: 200 }
   validates :avatar, presence: true, unless: :not_attached?
   validate :image_size, unless: :not_attached?

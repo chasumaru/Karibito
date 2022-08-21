@@ -5,12 +5,12 @@ class Post < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
   validates :user_id, presence: true
-  validates :title, presence: true, length: { maximum: 75 }
+  validates :title, presence: true, length: { maximum: 50 }
   validates :content, length: { maximum: 255 }
   validate :image_size, :image_count
   
   def thumbnail
-    return self.images.first.variant(resize_to_fill: [800, 600], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed
+    return self.images.first.variant(resize_to_fill: [1200, 900], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed
   end
 
   # def processed_images

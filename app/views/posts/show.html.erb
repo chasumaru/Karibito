@@ -1,167 +1,176 @@
-<div class="">
-  <article>
-    <div class="py-2 bg-white">
-      <p class="text-xl font-bold text-black mx-2"><%= @post.title %></p>
-      <p class="text-xs text-slate-600 mx-2 -mb-2"><%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
-    </div>
-    <div class="flex flex-row justify-start relative py-2 mt-1 bg-white">
-      <span class="flex flex-row items-center ml-3">
-        <%if @post.user.avatar.attached? %>
-          <% if @post.user == current_user %>
-            <%= link_to image_tag(current_user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-emerald-500"), profile_path(current_user) %>
+<div class="grid grid-cols-1 mx-auto max-w-screen-lg">
+  <div class="grid grid-cols-1 bg-white">
+    <article>
+      <div class="py-2 ml-1 bg-white">
+        <p class="text-xl font-bold text-black mx-2"><%= @post.title %></p>
+        <p class="text-xs text-slate-600 mx-2 -mb-2"><%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+      </div>
+      <div class="grid grid-cols-1 relative">
+        <span class="flex justify-start items-center ml-3 py-1 bg-white border-t">
+          <%if @post.user.avatar.attached? %>
+            <% if @post.user == current_user %>
+              <%= link_to image_tag(current_user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-emerald-500"), profile_path(current_user) %>
+            <% else %>
+              <%= link_to image_tag(@post.user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-indigo-500"), user_page_path(@post.user) %>
+            <% end %>
           <% else %>
-            <%= link_to image_tag(@post.user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-indigo-500"), user_page_path(@post.user) %>
+            <%= image_tag "no_avatar.png", class: "w-8 h-8 md:w-12 md:h-12 object-cover rounded-full border border-yellow-300" %>
           <% end %>
+          <p class="text-sm font-bold mr-2 ml-2 hover:underline hover:underline-offset-2"><%= link_to @post.user.name, profile_path(@post.user) %></p>
+        </span>
+      </div>
+      <div class="h-full overflow-hidden">
+        <% if @post.images.present?  %>
+          <%= image_tag @post.thumbnail, class: "w-full object-center" %>
         <% else %>
-          <%= image_tag "no_avatar.png", class: "w-8 h-8 md:w-12 md:h-12 object-cover rounded-full border border-yellow-300" %>
+          <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "w-full object-center" %>
         <% end %>
-        <p class="text-sm font-bold mr-2 ml-2 hover:underline hover:underline-offset-2"><%= link_to @post.user.name, profile_path(@post.user) %></p>
-      </span>
-    </div>
-    <div class="h-full overflow-hidden">
-      <% if @post.images.present?  %>
-        <%= image_tag @post.thumbnail, class: "w-full object-center" %>
-      <% else %>
-        <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "w-full object-center" %>
-      <% end %>
-      <div class="flex justify-end bg-white py-0.5 border-b">
-        <div class="mr-4">
-          <span class="text-gray-400 inline-flex h-6 items-center leading-none text-sm pr-3">
-            <svg class="w-4 h-4 mr-1"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-            </svg>
-            <%= @post.liked_users.count %>
-          </span>
-          <span class="text-gray-400 inline-flex items-center leading-none text-sm ml-1">
-            <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
-            </svg>
-            <%= @post.comments.count %>
-          </span>
+        <div class="flex justify-end bg-white py-0.5 border-b">
+          <div class="mr-4">
+            <span class="text-gray-400 inline-flex h-6 items-center leading-none text-sm pr-3">
+              <svg class="w-4 h-4 mr-1"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg>
+              <%= @post.liked_users.count %>
+            </span>
+            <span class="text-gray-400 inline-flex items-center leading-none text-sm ml-1">
+              <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+              </svg>
+              <%= @post.comments.count %>
+            </span>
+          </div>
         </div>
       </div>
-    </div>
-  </article>
-  <section>
-    <div class="flex w-full items-center px-6 py-1 bg-white border-b">
-      <% if signed_in? %>
-        <% if current_user.already_liked?(@post) %>
-          <%= button_to post_like_path(@post), method: :delete, class: "flex justify-center items-center transition-colors ease-in-out duration-200 hover:text-stone-300 bg-white text-pink-600 ring-1 ring-gray-300 h-10 w-10 px-2 py-2 ml-1 mr-1 text-center rounded-full cursor-pointer" do %>
-            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
-            </svg>
-          <% end %>
-        <% else %>
-          <div class="flex justify-start items-center h-12">
-            <%= button_to post_likes_path(@post), method: :create, class: "flex justify-center items-center transition-colors ease-in-out duration-200 text-stone-300 bg-white hover:bg-white hover:text-pink-600 ring-1 ring-gray-300 h-10 w-10 px-2 py-2 ml-1 text-center rounded-full cursor-pointer" do %>
+    </article>
+    <section>
+      <div class="flex items-center px-6 py-1 bg-white border-b">
+        <% if signed_in? %>
+          <% if current_user.already_liked?(@post) %>
+            <%= button_to post_like_path(@post), method: :delete, class: "flex justify-center items-center transition-colors ease-in-out duration-200 hover:text-stone-300 bg-white text-pink-600 ring-1 ring-gray-300 h-10 w-10 px-2 py-2 ml-1 mr-1 text-center rounded-full cursor-pointer" do %>
               <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
               </svg>
             <% end %>
-            <p class="text-sm font-bold my-auto w-16 ml-2">いいね</p>
-          </div>
-        <% end %>
-      <% else %>
-        <%= button_to new_user_session_path, method: :get, class: "flex justify-center items-center transition-colors ease-in-out duration-200 text-stone-300 bg-white hover:bg-white hover:text-pink-600 ring-1 ring-gray-300 h-10 w-10 px-2 py-2 ml-1 mr-1 text-center rounded-full cursor-pointer" do %>
-          <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
-          </svg>
-        <% end %>
-      <% end %>
-      <div class="flex w-full justify-end items-center mr-3 bg-white">
-        <% if signed_in? %>
-          <% if current_user == @post.user %>
-            <%= button_to "編集", edit_post_path(@post), method: :get, class: "inline-block px-6 py-2 border-2 border-blue-400 text-blue-400 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out" %>
-            <span class="inline-block px-6 py-2 ml-2 border-2 border-red-600 text-red-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">
-              <%= button_to "削除", @post, { method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } } %>
-            <span>
+          <% else %>
+            <div class="flex justify-start items-center h-12">
+              <%= button_to post_likes_path(@post), method: :create, class: "flex justify-center items-center transition-colors ease-in-out duration-200 text-stone-300 bg-white hover:bg-white hover:text-pink-600 ring-1 ring-gray-300 h-10 w-10 px-2 py-2 ml-1 text-center rounded-full cursor-pointer" do %>
+                <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+                </svg>
+              <% end %>
+              <p class="text-sm font-bold my-auto w-16 ml-2">いいね</p>
+            </div>
+          <% end %>
+        <% else %>
+          <%= button_to new_user_session_path, method: :get, class: "flex justify-center items-center transition-colors ease-in-out duration-200 text-stone-300 bg-white hover:bg-white hover:text-pink-600 ring-1 ring-gray-300 h-10 w-10 px-2 py-2 ml-1 mr-1 text-center rounded-full cursor-pointer" do %>
+            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+            </svg>
           <% end %>
         <% end %>
+        <div class="flex w-full justify-end items-center mr-3 bg-white">
+          <% if signed_in? %>
+            <% if current_user == @post.user %>
+              <%= button_to "編集", edit_post_path(@post), method: :get, class: "inline-block px-6 py-2 border-2 border-blue-400 text-blue-400 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out" %>
+              <span class="inline-block px-6 py-2 ml-2 border-2 border-red-600 text-red-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">
+                <%= button_to "削除", @post, { method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } } %>
+              <span>
+            <% end %>
+          <% end %>
+        </div>
       </div>
-    </div>
-  </section>
-  <section>
-    <div class="bg-white">
-      <p class="tracking-wide leading-loose font-medium md:text-base py-4 mx-2"><%= @post.content %></p>
-    </div>
-    <div class="grid grid-cols-1 gap-2 py-4 bg-white">
-      <% ((@post.images.count) -1).times  do |i| %>
-        <%= image_tag((@post.images[i+1].variant(resize_to_fill: [800, 600], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed), class: "w-full object-center") %>
-      <% end %>
-    </div>
-  </section>
-
-  <section>
-    <% if user_signed_in? %>
-      <%= form_with model: [@post, @comment] do |f| %>
-        <%= f.text_area :context, placeholder: "コメントを入力..." %>
-        <%= f.submit "SEND" %>
-      <% end %>
-    <% end %>
-  </section>
-
-  <section>
-    <h3>コメント一覧</h3>
-    <% if @comments.present? %>
-      <% @comments.each do |c| %>  
-        <% if c.reply_comment_id.present? %>
-          <% next %>
+    </section>
+    <section>
+      <div class="bg-white ml-1">
+        <p class="tracking-wide leading-loose font-medium text-sm md:text-base py-4 mx-2"><%= @post.content %></p>
+      </div>
+      <div class="grid grid-cols-1 gap-2 py-4 bg-white">
+        <% ((@post.images.count) -1).times  do |i| %>
+          <%= image_tag((@post.images[i+1].variant(resize_to_fill: [1200, 900], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed), class: "w-full object-center") %>
         <% end %>
-          <span id="comment_<%= c.id %>">
-            <%= link_to mypage_path(c.user), class: "text-dark" do %> 
-               <%if  c.user.avatar.attached? %>
-                  <% if c.user == current_user %>
-                    <%= image_tag(current_user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-emerald-500") %>
-                  <% else %>
-                    <%= image_tag(c.user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-indigo-500") %>
-                  <% end %>
-                <% else %>
-                  <%= image_tag "no_avatar.png", class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-pink-500" %>
-                <% end %>
-              <strong><%= c.user.name %></strong>
-            <% end %>
-            <%= c.context %>
-            <p><%= how_long_ago(c) %></p>
-            <% if user_signed_in? && current_user == c.user %>
-              <%= link_to "編集", edit_post_comment_path(@post, c) %>
-              <%= link_to "削除", post_comment_path(@post, c), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
-            <% end %>
+      </div>
+    </section>
 
-            <div class="row mt-1">
-              <div class="col-sm-8">
-                <%= form_with model: [@post, @comment] do |f| %>
-                  <%= f.text_field :context, class: "rounded-pill form-control", placeholder: "コメントへの返信を入力..." %>
-                  <%= f.hidden_field :reply_comment_id, :value => c.id  %>
-                  <%= f.submit "返信", class: "btn" %>
-                <% end %>
-              </div>
-            </div>
-
-            <% if c.replies.present? %>
-              <div class="ml-5">
-                <% c.replies.each do |reply| %>
-                  <%if c.user.avatar.attached? %>
-                    <%= image_tag c.user.avatar, size: "50×50", class: "avatar" %>
+    <section>
+      <h3>コメント一覧</h3>
+      <% if @comments.present? %>
+        <% @comments.each do |c| %>  
+          <% if c.reply_comment_id.present? %>
+            <% next %>
+          <% end %>
+            <span id="comment_<%= c.id %>">
+              <%= link_to profile_path(c.user), class: "text-dark" do %> 
+                <%if  c.user.avatar.attached? %>
+                    <% if c.user == current_user %>
+                      <%= image_tag(current_user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-emerald-500") %>
+                    <% else %>
+                      <%= image_tag(c.user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-indigo-500") %>
+                    <% end %>
                   <% else %>
-                    <%= image_tag "no_avatar.png", size: "200×200", class: "avatar" %>
+                    <%= image_tag "no_avatar.png", class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-pink-500" %>
                   <% end %>
-                  <%= reply.user.name %>
-                  <%= reply.context %>
-                  <p><%= how_long_ago(reply) %></p>
-                  <% if user_signed_in? && current_user == reply.user %>
-                    <%= link_to "編集", edit_post_comment_path(@post, reply) %>
-                    <%= link_to "削除", post_comment_path(@post, reply), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
+                <strong><%= c.user.name %></strong>
+              <% end %>
+              <%= c.context %>
+              <p><%= how_long_ago(c) %></p>
+              <% if user_signed_in? && current_user == c.user %>
+                <%= link_to "編集", edit_post_comment_path(@post, c) %>
+                <%= link_to "削除", post_comment_path(@post, c), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
+              <% end %>
+
+              <div class="row mt-1">
+                <div class="col-sm-8">
+                  <%= form_with model: [@post, @comment] do |f| %>
+                    <%= f.text_field :context, class: "rounded-pill form-control", placeholder: "コメントへの返信を入力..." %>
+                    <%= f.hidden_field :reply_comment_id, :value => c.id  %>
+                    <%= f.submit "返信", class: "btn" %>
                   <% end %>
-                <% end %>
+                </div>
               </div>
-            <% end %>
-          </span><br/>
+
+              <% if c.replies.present? %>
+                <div class="ml-5">
+                  <% c.replies.each do |reply| %>
+                    <%if c.user.avatar.attached? %>
+                      <%= image_tag c.user.avatar, size: "50×50", class: "avatar" %>
+                    <% else %>
+                      <%= image_tag "no_avatar.png", size: "200×200", class: "avatar" %>
+                    <% end %>
+                    <%= reply.user.name %>
+                    <%= reply.context %>
+                    <p><%= how_long_ago(reply) %></p>
+                    <% if user_signed_in? && current_user == reply.user %>
+                      <%= link_to "編集", edit_post_comment_path(@post, reply) %>
+                      <%= link_to "削除", post_comment_path(@post, reply), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
+                    <% end %>
+                  <% end %>
+                </div>
+              <% end %>
+            </span><br/>
+        <% end %>
+      <% else %>
+        <p>まだコメントがありません</p>
       <% end %>
-    <% else %>
-      <p>まだコメントがありません</p>
-    <% end %>
-  </section>
-  <%= link_to '一覧に戻る', posts_path, class:"no-tap-highlighting" %>
+    </section>
+    <section>
+      <div class="grid grid-cols-1 justify-center bg-neutral-100 px-2">
+        <% if user_signed_in? %>
+          <div class="w-full py-2 px-4 mt-2 bg-lime-100">
+            <%= form_with model: [@post, @comment] do |f| %>
+              <%= f.text_area :context, placeholder: "コメントする...", data: {controller: "autogrow" }, class: "block w-full rounded-sm bg-amber-100" %>
+              <div class="flex justify-center bg-green-100 ">
+                <%= f.submit "投稿", class:"px-4 py-1 rounded-2xl tracking-widest bg-red-300" %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </section>
+
+
+    <%= link_to '一覧に戻る', posts_path, class:"no-tap-highlighting" %>
+  </div>
 </div>
 
 
