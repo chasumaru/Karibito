@@ -19,17 +19,14 @@ class Post < ApplicationRecord
   #   end
   # end
 
-  def image_processing
-    
-    (self.images.count - 1).times do |i|
-    self.images[i+1].variant(resize_to_fill: [800, 600], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed
-    end
+  # def image_processing
+  #   (self.images.count - 1).times do |i|
+  #   self.images[i+1].variant(resize_to_fill: [800, 600], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed
+  #   end
 
-
-    # self.each do |i|
-    #   i.variant(resize_to_fill: [800, 600], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed
-    # end
-  end
+  # def other_images
+  #   return self.images[i+1].variant(resize_to_fill: [800, 600], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed
+  # end
 
 
 
