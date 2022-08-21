@@ -72,8 +72,8 @@
         <div class="flex w-full justify-end items-center mr-3 bg-white">
           <% if signed_in? %>
             <% if current_user == @post.user %>
-              <%= button_to "編集", edit_post_path(@post), method: :get, class: "inline-block px-6 py-2 border-2 border-blue-400 text-blue-400 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out" %>
-              <span class="inline-block px-6 py-2 ml-2 border-2 border-red-600 text-red-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">
+              <%= button_to "編集", edit_post_path(@post), method: :get, class: "inline-block px-6 py-2 border-2 border-blue-400 text-blue-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out" %>
+              <span class="inline-block px-6 py-2 ml-2 border-2 border-red-600 text-red-600 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">
                 <%= button_to "削除", @post, { method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } } %>
               <span>
             <% end %>
@@ -83,90 +83,122 @@
     </section>
     <section>
       <div class="bg-white ml-1">
-        <p class="tracking-wide leading-loose font-medium text-sm md:text-base py-4 mx-2"><%= @post.content %></p>
+        <p class="tracking-wide leading-loose whitespace-pre-wrap font-medium text-sm md:text-base py-4 mx-2"><%= @post.content %></p>
       </div>
       <div class="grid grid-cols-1 gap-2 py-4 bg-white">
+      順番がtimesメソッドのせいでランダム
         <% ((@post.images.count) -1).times  do |i| %>
           <%= image_tag((@post.images[i+1].variant(resize_to_fill: [1200, 900], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed), class: "w-full object-center") %>
         <% end %>
       </div>
     </section>
 
-    <section>
-      <h3>コメント一覧</h3>
-      <% if @comments.present? %>
-        <% @comments.each do |c| %>  
-          <% if c.reply_comment_id.present? %>
-            <% next %>
-          <% end %>
-            <span id="comment_<%= c.id %>">
-              <%= link_to profile_path(c.user), class: "text-dark" do %> 
-                <%if  c.user.avatar.attached? %>
-                    <% if c.user == current_user %>
-                      <%= image_tag(current_user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-emerald-500") %>
-                    <% else %>
-                      <%= image_tag(c.user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-indigo-500") %>
+    <div class="grid grid-cols-1 justify-center bg-neutral-100 px-2">
+      <div class="w-full py-2 px-4 mt-2 bg-lime-100">
+        <section>
+          <h3 class="font-bold">コメント一覧</h3>
+            <div class="bg-lime-300">
+              <div class="text-xs font-medium">
+                <div class="">
+                  <% if @comments.present? %>
+                    <% @comments.each do |c| %>  
+                      <% if c.reply_comment_id.present? %>
+                        <% next %>
+                      <% end %>
+                        <div class="grid grid-cols-1 bg-orange-100">
+                          <div class="flex bg-orange-200 bordre-b">
+                            <div class="flex justify-center w-12 bg-white">
+                              <%if c.user.avatar.attached? %>
+                                <% if c.user == current_user %>
+                                  <%= image_tag(current_user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-emerald-500") %>
+                                <% else %>
+                                  <%= image_tag(c.user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-indigo-500") %>
+                                <% end %>
+                              <% else %>
+                                <%= image_tag "no_avatar.png", class: "w-8 h-8 md:w-12 md:h-12 object-cover rounded-full border border-yellow-300" %>
+                              <% end %>
+                            </div>
+                            <div class="flex flex-col w-full bg-lime-200">
+                              <div class="flex">
+                                <strong><%= c.user.name %></strong>
+                                <p class="ml-2"><%= how_long_ago(c) %></p>
+                              </div>
+                              <p class="whitespace-pre-wrap"><%= c.context %></p>
+                              <div class="flex h-4">
+                                <% if user_signed_in? && current_user == c.user %>
+                                  <%= link_to "編集", edit_post_comment_path(@post, c) %>
+                                  <%= link_to "削除", post_comment_path(@post, c), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
+                                <% end %>
+                              </div>
+
+                              <div class="row mt-1 bg-yellow-300">
+                                <div class="col-sm-8">
+                                  <%= form_with model: [@post, @comment] do |f| %>
+                                    <%= f.text_field :context, data: {controller: "autogrow" }, class: "rounded-pill form-control", placeholder: "コメントに返信する..." %>
+                                    <%= f.hidden_field :reply_comment_id, :value => c.id  %>
+                                    <%= f.submit "返信" ,class:"px-2 py-1 rounded-xl tracking-widest font-semibold bg-white border hover:text-stone-300 border-lime-200 hover:border-lime-400" %>
+                                  <% end %>
+                                </div>
+                              </div>
+
+                              <% if c.replies.present? %>
+                                <% c.replies.each do |reply| %>
+                                  <div class="grid grid-cols-1 bg-green-500">
+                                    <div class="flex bg-orange-200 bordre-b">
+                                      <div class="flex justify-center w-12 bg-red-300">
+                                        <%if c.user.avatar.attached? %>
+                                          <% if c.user == current_user %>
+                                            <%= image_tag(current_user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-emerald-500") %>
+                                          <% else %>
+                                            <%= image_tag(c.user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-indigo-500") %>
+                                          <% end %>
+                                        <% else %>
+                                          <%= image_tag "no_avatar.png", class: "w-8 h-8 md:w-12 md:h-12 object-cover rounded-full border border-yellow-300" %>
+                                        <% end %>
+                                      </div>
+                                      <div class="flex flex-col w-full bg-lime-400">
+                                        <div class="flex">
+                                          <strong><%= reply.user.name %></strong>
+                                          <p class="ml-2"><%= how_long_ago(reply) %></p>
+                                        </div>
+                                        <p class="whitespace-pre-wrap"><%= reply.context %></p>
+                                        <div class="flex h-4">
+                                          <% if user_signed_in? && current_user == reply.user %>
+                                            <%= link_to "編集", edit_post_comment_path(@post, reply) %>
+                                            <%= link_to "削除", post_comment_path(@post, reply), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
+                                          <% end %>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                <% end %>
+                              <% end %>
+                            </div>
+                          </div>
+                        </div>
                     <% end %>
                   <% else %>
-                    <%= image_tag "no_avatar.png", class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-pink-500" %>
+                    <p>まだコメントがありません</p>
                   <% end %>
-                <strong><%= c.user.name %></strong>
-              <% end %>
-              <%= c.context %>
-              <p><%= how_long_ago(c) %></p>
-              <% if user_signed_in? && current_user == c.user %>
-                <%= link_to "編集", edit_post_comment_path(@post, c) %>
-                <%= link_to "削除", post_comment_path(@post, c), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
-              <% end %>
-
-              <div class="row mt-1">
-                <div class="col-sm-8">
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <div class="grid grid-cols-1 justify-center">
+              <% if user_signed_in? %>
                   <%= form_with model: [@post, @comment] do |f| %>
-                    <%= f.text_field :context, class: "rounded-pill form-control", placeholder: "コメントへの返信を入力..." %>
-                    <%= f.hidden_field :reply_comment_id, :value => c.id  %>
-                    <%= f.submit "返信", class: "btn" %>
+                    <%= f.text_area :context, placeholder: "コメントする...", data: {controller: "autogrow" }, class: "block w-full rounded-sm bg-amber-100 pb-6" %>
+                    <div class="flex justify-center bg-white">
+                      <%= f.submit "投稿", class:"px-5 py-1 my-1 rounded-2xl tracking-widest font-semibold bg-white border-2 hover:text-stone-300 border-lime-200 hover:border-lime-400" %>
+                    </div>
                   <% end %>
-                </div>
-              </div>
-
-              <% if c.replies.present? %>
-                <div class="ml-5">
-                  <% c.replies.each do |reply| %>
-                    <%if c.user.avatar.attached? %>
-                      <%= image_tag c.user.avatar, size: "50×50", class: "avatar" %>
-                    <% else %>
-                      <%= image_tag "no_avatar.png", size: "200×200", class: "avatar" %>
-                    <% end %>
-                    <%= reply.user.name %>
-                    <%= reply.context %>
-                    <p><%= how_long_ago(reply) %></p>
-                    <% if user_signed_in? && current_user == reply.user %>
-                      <%= link_to "編集", edit_post_comment_path(@post, reply) %>
-                      <%= link_to "削除", post_comment_path(@post, reply), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
-                    <% end %>
-                  <% end %>
-                </div>
               <% end %>
-            </span><br/>
-        <% end %>
-      <% else %>
-        <p>まだコメントがありません</p>
-      <% end %>
-    </section>
-    <section>
-      <div class="grid grid-cols-1 justify-center bg-neutral-100 px-2">
-        <% if user_signed_in? %>
-          <div class="w-full py-2 px-4 mt-2 bg-lime-100">
-            <%= form_with model: [@post, @comment] do |f| %>
-              <%= f.text_area :context, placeholder: "コメントする...", data: {controller: "autogrow" }, class: "block w-full rounded-sm bg-amber-100" %>
-              <div class="flex justify-center bg-green-100 ">
-                <%= f.submit "投稿", class:"px-4 py-1 rounded-2xl tracking-widest bg-red-300" %>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
+            </div>
+          </section>
+        </section>
       </div>
-    </section>
+    </div>
 
 
     <%= link_to '一覧に戻る', posts_path, class:"no-tap-highlighting" %>
