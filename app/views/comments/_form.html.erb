@@ -3,7 +3,7 @@
 
   <div class="field">
     <%= f.label :context, "コメント編集" %><br>
-    <%= f.text_field :context %>
+    <%= f.text_area :context, data: {controller: "autogrow" } %>
   </div>
 
   <div class="submit">
