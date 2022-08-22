@@ -1,3 +1,5 @@
+<% provide(:title, "プロフィール編集") %>
+
 <h1>プロフィール編集</h1>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -41,6 +43,7 @@
   </div>
 <% end %>
 <%= render "users/shared/links" %>
+
 
 <%= link_to "戻る", :back %>
 
