@@ -13,9 +13,10 @@ class User < ApplicationRecord
   # Valdation
   validates :name, presence: true, length: { maximum: 30 }
   validates :profile, length: { maximum: 200 }
-  validates :avatar, presence: true, unless: :not_attached?
-  validate :image_size, unless: :not_attached?
-
+  validates :avatar, presence: true, unless: :avatar_not_attached?
+  validates :background, presence: true, unless: :background_not_attached?
+  validate :avatar_size, unless: :avatar_not_attached?
+  validate :background_size, unless: :background_not_attached?
 
   # Assortiation
   has_many :posts, dependent: :destroy
@@ -23,6 +24,7 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :liked_posts, through: :likes, source: :post
   has_one_attached :avatar
+  has_one_attached :background
   has_many :active_relationships, class_name:  "Relationship",
                                   foreign_key: "follower_id",
                                   dependent:   :destroy
@@ -64,14 +66,24 @@ class User < ApplicationRecord
 
   private
 
-  def not_attached?
+  def avatar_not_attached?
    !( self.avatar.attached?)
   end
 
+  def background_not_attached?
+   !( self.background.attached?)
+  end
+
   # 10MB以上のファイルを許可しない
-  def image_size
+  def avatar_size
     if avatar.blob.byte_size > 10485760
       errors.add :avatar, 'ファイルサイズが大きすぎます。'
+    end
+  end
+
+  def background_size
+    if background.blob.byte_size > 10485760
+      errors.add :background, 'ファイルサイズが大きすぎます。'
     end
   end
 end

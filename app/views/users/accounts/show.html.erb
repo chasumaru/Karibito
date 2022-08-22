@@ -8,8 +8,15 @@
 <div class="-mt-12 bg-white">
   <section>
     <div class="profile__icon">
-    <%# 背景画像をavatarと同様に設定できるようにする %>
-      <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "w-full h-64 md:h-96 object-center object-cover" %>
+      <%if @user.background.attached? %>
+        <% if @user == current_user %>
+          <%= image_tag(current_user.background, class: "w-full h-64 md:h-96 object-center object-cover") %>
+        <% else %>
+          <%= image_tag(@user.background, class: "w-full h-64 md:h-96 object-center object-cover") %>
+        <% end %>
+      <% else %>
+        <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "w-full h-64 md:h-96 object-center object-cover" %>
+      <% end %>
       <div class="flex w-full flex-col justify-center items-center">
         <span class ="relative -mt-10 md:-mt-16">
           <%if  @user.avatar.attached? %>
