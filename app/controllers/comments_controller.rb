@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
       redirect_to request.referer, notice: "コメントを投稿しました。"
     else
       flash.now.alert = 'コメントの作成に失敗しました。'
-      redirect_to request.referer, notice: "コメントの作成に失敗しました。", status: :see_other 
+      render template: "posts/show", status: :unprocessable_entity
     end
   end
 

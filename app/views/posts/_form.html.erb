@@ -1,8 +1,6 @@
 <%= form_with(model: post) do |f| %>
   <% if post.errors.any? %>
     <div id="error_explanation">
-      <%# <h2><%= pluralize(post.errors.count, "error") prohibited this post from being saved:</h2> %>
-
       <ul>
         <% post.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,6 +8,7 @@
       </ul>
     </div>
   <% end %>
+
 
 
   <div class="field">
@@ -49,3 +48,24 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+
+<div class="grid grid-cols-1 mx-auto max-w-screen-lg bg-lime-100">
+  <div class="grid grid-cols-1 bg-lime-200">
+    <article>
+      <div class="py-2 ml-1 bg-lime-300">
+        <p class="text-xl font-bold text-black mx-2">タイトル</p>
+        <p class="text-xs text-slate-600 mx-2 -mb-2"> 2022/2/2 </p>
+      </div>
+      <div class="grid grid-cols-1 relative">
+        <span class="flex justify-start items-center ml-3 py-1 bg-white border-t">
+          <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border border-yellow-300" %>
+          <p class="text-sm font-bold mr-2 ml-2 hover:underline hover:underline-offset-2">ユーザ名</p>
+        </span>
+      </div>
+      <div class="h-full overflow-hidden">
+          <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "w-full object-center" %>
+      </div>
+    </article>
+  </div>
+</div>

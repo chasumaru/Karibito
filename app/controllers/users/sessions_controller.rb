@@ -16,9 +16,9 @@ class Users::SessionsController < Devise::SessionsController
     if user_signed_in?
       flash[:notice] = 'ログインしました。'
       if session[:previous_url].present?
-        redirect_to session[:previous_url] 
+        redirect_to session[:previous_url] ,status: :see_other 
       else
-        redirect_to posts_path
+        redirect_to posts_path, status: :see_other 
       end
     else
       flash[:alert] = 'メールアドレスまたはパスワードが正しくありません。'

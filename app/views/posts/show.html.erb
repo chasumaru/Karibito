@@ -1,9 +1,9 @@
 <% provide(:title, "#{@post.title}") %>
 
-<div class="grid grid-cols-1 mx-auto max-w-screen-lg">
-  <div class="grid grid-cols-1 bg-white">
+<div class="grid grid-cols-1 mx-auto max-w-screen-lg bg-lime-100">
+  <div class="grid grid-cols-1 bg-lime-200">
     <article>
-      <div class="py-2 ml-1 bg-white">
+      <div class="py-2 ml-1 bg-lime-300">
         <p class="text-xl font-bold text-black mx-2"><%= @post.title %></p>
         <p class="text-xs text-slate-600 mx-2 -mb-2"><%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
       </div>
