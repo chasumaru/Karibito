@@ -9,12 +9,12 @@
         <span class="flex justify-start items-center ml-3 py-1 bg-white border-t">
           <%if @post.user.avatar.attached? %>
             <% if @post.user == current_user %>
-              <%= link_to image_tag(current_user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-emerald-500"), profile_path(current_user) %>
+              <%= link_to image_tag(current_user.avatar, class: "w-8 h-8 rounded-full border-2 border-emerald-500"), profile_path(current_user) %>
             <% else %>
-              <%= link_to image_tag(@post.user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-indigo-500"), user_page_path(@post.user) %>
+              <%= link_to image_tag(@post.user.avatar, class: "w-8 h-8 rounded-full border-2 border-indigo-500"), user_page_path(@post.user) %>
             <% end %>
           <% else %>
-            <%= image_tag "no_avatar.png", class: "w-8 h-8 md:w-12 md:h-12 object-cover rounded-full border border-yellow-300" %>
+            <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border border-yellow-300" %>
           <% end %>
           <p class="text-sm font-bold mr-2 ml-2 hover:underline hover:underline-offset-2"><%= link_to @post.user.name, profile_path(@post.user) %></p>
         </span>
@@ -88,69 +88,68 @@
         <p class="tracking-wide leading-loose whitespace-pre-wrap font-medium text-sm md:text-base py-4 mx-2"><%= @post.content %></p>
       </div>
       <div class="grid grid-cols-1 gap-2 py-4 bg-white">
-      順番がtimesメソッドのせいでランダム
         <% ((@post.images.count) -1).times  do |i| %>
           <%= image_tag((@post.images[i+1].variant(resize_to_fill: [1200, 900], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed), class: "w-full object-center") %>
         <% end %>
       </div>
     </section>
 
-    <div class="grid grid-cols-1 justify-center bg-neutral-100 px-2">
-      <div class="w-full py-2 px-4 mt-2 bg-white">
+    <div class="grid grid-cols-1 justify-center bg-neutral-100 px-3">
+      <div class="w-full py-2 px-4 my-3 bg-white">
         <section>
           <h3 class="font-bold">コメント一覧</h3>
-            <div class="">
-              <div class="text-xs font-medium">
-                <div class="">
-                  <% if @comments.present? %>
-                    <% @comments.each do |c| %>  
-                      <% if c.reply_comment_id.present? %>
-                        <% next %>
-                      <% end %>
-                        <div class="grid grid-cols-1">
-                          <div class="flex pt-1">
-                            <div class="flex justify-center w-12 bg-white">
-                              <%if c.user.avatar.attached? %>
-                                <% if c.user == current_user %>
-                                  <%= image_tag(current_user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-emerald-500") %>
-                                <% else %>
-                                  <%= image_tag(c.user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-indigo-500") %>
-                                <% end %>
+            <div class="text-xs font-medium">
+              <div class="">
+                <% if @comments.present? %>
+                  <% @comments.each do |c| %>  
+                    <% if c.reply_comment_id.present? %>
+                      <% next %>
+                    <% end %>
+                      <div class="grid grid-cols-1">
+                        <div class="flex pt-1">
+                          <div class="flex justify-center w-12 h-12">
+                            <%if c.user.avatar.attached? %>
+                              <% if c.user == current_user %>
+                                <%= image_tag(current_user.avatar, class: "w-8 h-8 rounded-full border-2 border-emerald-500") %>
                               <% else %>
-                                <%= image_tag "no_avatar.png", class: "w-6 h-6 md:w-12 md:h-12 object-cover rounded-full border border-yellow-300" %>
+                                <%= image_tag(c.user.avatar, class: "w-8 h-8 rounded-full border-2 border-indigo-500") %>
                               <% end %>
+                            <% else %>
+                              <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border border-yellow-300" %>
+                            <% end %>
+                          </div>
+                          <div class="flex flex-col w-full">
+                            <div class="flex">
+                              <strong><%= c.user.name %></strong>
+                              <p class="ml-3 text-slate-400"><%= how_long_ago(c) %></p>
                             </div>
-                            <div class="flex flex-col w-full">
-                              <div class="flex">
-                                <strong><%= c.user.name %></strong>
-                                <p class="ml-3 text-slate-400"><%= how_long_ago(c) %></p>
+                            <p class="tracking-wide whitespace-pre-wrap pt-1 pb-4 ml-1"><%= c.context %></p>
+                            <% if user_signed_in? && current_user == c.user %>
+                              <div class="flex justify-end h-7 pt-0.5 mr-18">
+                                <span>
+                                  <%= button_to "編集", edit_post_comment_path(@post, c), method: :get, class: "inline-block px-2 py-1 ml-1 border border-blue-400 text-blue-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+                                </span>
+                                <span class="inline-block px-2 h-6 py-1 ml-1 border border-red-400 text-red-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting">
+                                  <%= button_to "削除", post_comment_path(@post, c), { method: :delete, form: { data: { turbo_confirm: "コメントを削除しますか？" } } } %>
+                                </span>
                               </div>
-                              <p class="tracking-wide whitespace-pre-wrap pt-1 pb-4"><%= c.context %></p>
-                              <% if user_signed_in? && current_user == c.user %>
-                                <div class="flex h-7 pt-0.5">
-                                  <span>
-                                    <%= button_to "編集", edit_post_comment_path(@post, c), method: :get, class: "inline-block px-2 py-1 ml-1 border border-blue-400 text-blue-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
-                                  </span>
-                                  <span class="inline-block px-2 h-6 py-1 ml-1 border border-red-400 text-red-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting">
-                                    <%= button_to "削除", post_comment_path(@post, c), { method: :delete, form: { data: { turbo_confirm: "コメントを削除しますか？" } } } %>
-                                  </span>
-                                </div>
-                              <% end %>
-
-                              <div class="mb-2">
+                            <% end %>
+                            <section>
+                              <div class="mb-2 border-b">
                                 <% if user_signed_in? %>
                                   <%= form_with model: [@post, @comment] do |f| %>
                                     <div class="flex items-end my-2">
-                                      <%= f.text_area :context, data: {controller: "autogrow" }, class: "text-sm bg-amber-50 rounded-md pl-1 pr-12", placeholder: "コメントに返信する..." %>
+                                      <%= f.text_area :context, data: {controller: "autogrow" }, class: "inline-block text-sm bg-amber-100 rounded-md pl-1 w-3/4", placeholder: "コメントに返信する..." %>
                                       <%= f.hidden_field :reply_comment_id, :value => c.id  %>
-                                      <%= f.submit "返信" ,class:"tracking-widest rounded-2xl font-semibold bg-white border px-3 py-2 ml-0.5 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+                                      <%= f.submit "返信" ,class:"tracking-widest rounded-2xl font-semibold bg-white border px-4 py-1.5 ml-0.5 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
                                     </div>
                                   <% end %>
                                 <% else %>
                                   <%= button_to "返信する", new_user_session_path, method: :get, class:"tracking-widest rounded-2xl font-semibold bg-white border px-3 py-2 ml-0.5 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
                                 <% end %>
                               </div>
-
+                            </section>
+                            <section>
                               <% if c.replies.present? %>
                                 <% c.replies.each do |reply| %>
                                   <div class="grid grid-cols-1">
@@ -158,12 +157,12 @@
                                       <div class="flex justify-center w-12">
                                         <%if c.user.avatar.attached? %>
                                           <% if c.user == current_user %>
-                                            <%= image_tag(current_user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-emerald-500") %>
+                                            <%= image_tag(current_user.avatar, class: "w-8 h-8 rounded-full border-2 border-emerald-500") %>
                                           <% else %>
-                                            <%= image_tag(c.user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-indigo-500") %>
+                                            <%= image_tag(c.user.avatar, class: "w-8 h-8 rounded-full border-2 border-indigo-500") %>
                                           <% end %>
                                         <% else %>
-                                          <%= image_tag "no_avatar.png", class: "w-8 h-8 md:w-12 md:h-12 object-cover rounded-full border border-yellow-300" %>
+                                          <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border border-yellow-300" %>
                                         <% end %>
                                       </div>
                                       <div class="flex flex-col w-full">
@@ -171,9 +170,9 @@
                                           <strong><%= reply.user.name %></strong>
                                           <p class="text-slate-400 ml-3"><%= how_long_ago(reply) %></p>
                                         </div>
-                                        <p class="tracking-wide whitespace-pre-wrap pt-1 pb-3"><%= reply.context %></p>
+                                        <p class="tracking-wide whitespace-pre-wrap pt-1 pb-3 ml-1"><%= reply.context %></p>
                                         <% if user_signed_in? && current_user == reply.user %>
-                                          <div class="flex h-7 pt-0.5">
+                                          <div class="flex justify-end h-7 pt-0.5 mr-18">
                                             <span>
                                               <%= button_to "編集", edit_post_comment_path(@post, reply), method: :get, class: "inline-block px-2 py-1 ml-1 border border-blue-400 text-blue-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
                                             </span>
@@ -187,14 +186,14 @@
                                   </div>
                                 <% end %>
                               <% end %>
-                            </div>
+                            </section>
                           </div>
                         </div>
-                    <% end %>
-                  <% else %>
-                    <p>まだコメントがありません</p>
+                      </div>
                   <% end %>
-                </div>
+                <% else %>
+                  <p class="test-lg">まだコメントがありません</p>
+                <% end %>
               </div>
             </div>
           </section>
@@ -217,12 +216,6 @@
         </section>
       </div>
     </div>
-
-
     <%= link_to '一覧に戻る', posts_path, class:"no-tap-highlighting" %>
   </div>
 </div>
-
-
-
-                        

@@ -11,7 +11,6 @@
                 <span data-sidebar-target="line3"  class="inner_line bottom-0"></span>
             </nav>
         </div>
-
       </div>
       <div class="relative flex-1 flex items-center sm:items-stretch sm:justify-start">
         <div class="flex-shrink-0 flex items-center">
@@ -44,7 +43,7 @@
           </div>
         </div>
       </div>
-      <div class="relative mr-12">
+      <div class="relative mr-12 lg:mr-0">
         <label class="sr-only" for="search"> Search </label>
         <%= button_to posts_path, method: :get, class: "absolute p-2 text-gray-600 transition -translate-y-1/2 rounded-full hover:text-black bg-gray-50 top-1/2 right-1" do %>
           <svg
@@ -75,7 +74,6 @@
 
           <!-- Profile dropdown -->
           <div class="ml-3 mr-10 lg:mr-2 relative">
-            <div>
             <% if signed_in? %>
               <%= button_to profile_path(current_user), method: :get, class: "bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" do %>
                 <span class="sr-only">Open user menu</span>
@@ -89,9 +87,7 @@
                   <%= link_to image_tag("no_avatar.png"), new_user_session_path, class: "w-8 h-8 rounded-full border-2 border-yellow-300" %>
                 <% end %>
               <% end %>
-              
             <% end %>
-            </div>
           </div>
         </div>
       </div>
