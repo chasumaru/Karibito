@@ -1,16 +1,13 @@
 class CommentsController < ApplicationController
-  # コメントにはedit,updateが不要。new はturbo-streamに必要か？
 
   def create
     @post = Post.find(params[:post_id])
     @comment = current_user.comments.new(comment_params)
     if @comment.save
-            # # この記述は通知機能の記述になるので気にしないでください
-            # @comment.create_notification_comment!(current_user, @comment.id)
-      redirect_to request.referer, notice: "コメントを投稿しました"
+      redirect_to request.referer, notice: "コメントを投稿しました。"
     else
-      flash.now.alert = 'コメントの作成に失敗しました'
-      render template: "posts/show", status: :unprocessable_entity
+      flash.now.alert = 'コメントの作成に失敗しました。'
+      redirect_to request.referer, notice: "コメントの作成に失敗しました。", status: :see_other 
     end
   end
 
@@ -23,9 +20,9 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = Comment.find(params[:id])
     if @comment.update(comment_params)
-      redirect_to post_path(@post), notice: "コメントを編集しました"
+      redirect_to post_path(@post), notice: "コメントを編集しました。"
     else
-      flash.now.alert = "コメントの編集に失敗しました"
+      flash.now.alert = "コメントの編集に失敗しました。"
       render :edit, status: :unprocessable_entity 
     end
   end
