@@ -54,7 +54,7 @@
             <% end %>
           <% else %>
             <div class="flex justify-start items-center h-12">
-              <%= button_to post_likes_path(@post), method: :create, class: "flex justify-center items-center text-stone-300 bg-white ring-1 ring-gray-300 h-10 w-10 px-2 py-2 ml-1 text-center rounded-full cursor-pointer no-tap-highlighting" do %>
+              <%= button_to post_likes_path(@post), class: "flex justify-center items-center text-stone-300 bg-white ring-1 ring-gray-300 h-10 w-10 px-2 py-2 ml-1 text-center rounded-full cursor-pointer no-tap-highlighting" do %>
                 <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
                 </svg>
@@ -117,7 +117,7 @@
                                   <%= image_tag(c.user.avatar, class: "w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-indigo-500") %>
                                 <% end %>
                               <% else %>
-                                <%= image_tag "no_avatar.png", class: "w-8 h-8 md:w-12 md:h-12 object-cover rounded-full border border-yellow-300" %>
+                                <%= image_tag "no_avatar.png", class: "w-6 h-6 md:w-12 md:h-12 object-cover rounded-full border border-yellow-300" %>
                               <% end %>
                             </div>
                             <div class="flex flex-col w-full">
@@ -138,12 +138,16 @@
                               <% end %>
 
                               <div class="mb-2">
-                                <%= form_with model: [@post, @comment] do |f| %>
-                                  <div class="flex items-end my-2">
-                                    <%= f.text_area :context, data: {controller: "autogrow" }, class: "text-sm bg-amber-50 rounded-md pl-1 pr-12", placeholder: "コメントに返信する..." %>
-                                    <%= f.hidden_field :reply_comment_id, :value => c.id  %>
-                                    <%= f.submit "返信" ,class:"tracking-widest rounded-2xl font-semibold bg-white border px-3 py-2 ml-0.5 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
-                                  </div>
+                                <% if user_signed_in? %>
+                                  <%= form_with model: [@post, @comment] do |f| %>
+                                    <div class="flex items-end my-2">
+                                      <%= f.text_area :context, data: {controller: "autogrow" }, class: "text-sm bg-amber-50 rounded-md pl-1 pr-12", placeholder: "コメントに返信する..." %>
+                                      <%= f.hidden_field :reply_comment_id, :value => c.id  %>
+                                      <%= f.submit "返信" ,class:"tracking-widest rounded-2xl font-semibold bg-white border px-3 py-2 ml-0.5 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+                                    </div>
+                                  <% end %>
+                                <% else %>
+                                  <%= button_to "返信する", new_user_session_path, method: :get, class:"tracking-widest rounded-2xl font-semibold bg-white border px-3 py-2 ml-0.5 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
                                 <% end %>
                               </div>
 
@@ -198,7 +202,7 @@
             <div class="grid grid-cols-1 justify-center mt-6">
               <% if user_signed_in? %>
                 <%= form_with model: [@post, @comment] do |f| %>
-                  <%= f.text_area :context, placeholder: "コメントする...", data: {controller: "autogrow" }, class: "block w-full rounded-xl bg-amber-100 pl-2 pb-6" %>
+                  <%= f.text_area :context, data: {controller: "autogrow" }, class: "block w-full rounded-xl bg-amber-100 pl-2 pb-6" , placeholder: "コメントする..." %>
                   <div class="flex justify-center bg-white">
                     <%= f.submit "投稿", class:"px-5 py-1 mt-2 rounded-2xl tracking-widest font-semibold bg-white border-2 text-stone-400 hover:text-black border-lime-200 hover:border-lime-400 no-tap-highlighting" %>
                   </div>
