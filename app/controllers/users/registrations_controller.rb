@@ -17,8 +17,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
       flash[:notice] = 'ユーザー認証メールを送信いたしました。認証が完了しましたらログインしてください。'
       redirect_to root_path
     else
-      flash[:alert] = 'ユーザー登録に失敗しました。'
-      render :new, status: :unprocessable_entity
+      # flash[:alert] = 'ユーザー登録に失敗しました。'
+      # render :new, status: :unprocessable_entity
+      redirect_to request.referer, notice: "コメントの作成に失敗しました。", status: :see_other 
     end
   end
 
