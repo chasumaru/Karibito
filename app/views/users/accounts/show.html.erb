@@ -52,26 +52,26 @@
             <p class="text-xs font-black mb-2">掲示板</p>
             <p class="text-md font-black underline underline-offset-4">0</p>
           </div>
-          <div class="grid col-start-7 col-span-2 justify-items-center -ml-6">
+          <%= link_to following_path(@user), class: "grid col-start-7 col-span-2 justify-items-center -ml-6 no-tap-highlighting" do %>
             <p class="text-xs font-black mb-2">フォロー</p>
             <p class="text-md font-black underline underline-offset-4"><%= @user.following.count %></p>
-          </div>
-          <div class="grid col-start-10 col-span-2 justify-items-center -ml-16">
-              <p class="text-xs font-black mb-2">フォロワー</p>
-              <p class="text-md font-black underline underline-offset-4"><%= @user.followers.count %></p>
-          </div>
+          <% end %>
+          <%= link_to followers_path(@user), class: "grid col-start-10 col-span-2 justify-items-center -ml-16 no-tap-highlighting" do %>
+            <p class="text-xs font-black mb-2">フォロワー</p>
+            <p class="text-md font-black underline underline-offset-4"><%= @user.followers.count %></p>
+          <% end %>
         </div>
         <div class="grid justify-center">
           <div class="my-8">
             <% if current_user != @user %>
               <% if current_user.following?(@user) %>
                 <%= form_with(model: current_user.active_relationships.find_by(followed_id: @user.id), html: { method: :delete }) do |f| %>
-                  <p class="text-slate-600 bg-white border border-yellow-400 font-extrabold rounded-3xl px-6 py-2 mr-2 mb-2 focus:outline-none dark:focus:ring-yellow-900"><%= f.submit "フォロー中" %></p>
+                  <p class="text-slate-800 bg-white border-2 border-slate-300 font-extrabold rounded-3xl px-6 py-2 mr-2 mb-2 focus:outline-none"><%= f.submit "フォロー中" %></p>
                 <% end %>
               <% else %>
                 <%= form_with(model: current_user.active_relationships.build) do |f| %>
                   <div><%= hidden_field_tag :followed_id, @user.id %></div>
-                  <p class="text-slate-600 bg-yellow-200 font-extrabold rounded-3xl px-6 py-2 mr-2 mb-2 focus:outline-none dark:focus:ring-yellow-900"><%= f.submit "フォローする" %></p>
+                  <p class="text-slate-800 bg-slate-300 font-extrabold rounded-3xl px-6 py-2 mr-2 mb-2 focus:outline-none"><%= f.submit "フォローする" %></p>
                 <% end %>
               <% end %>
             <% end %>
