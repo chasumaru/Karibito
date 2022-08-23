@@ -2,6 +2,13 @@ ja:
   activerecord:
     attributes:
       user:
+        name: '名前'
+        email: 'メールアドレス'
+        profile: 'プロフィール'
+        avatar: 'アバター画像'
+        background: '背景画像'
+
+
         confirmation_sent_at: パスワード確認送信時刻
         confirmation_token: パスワード確認用トークン
         confirmed_at: パスワード確認時刻

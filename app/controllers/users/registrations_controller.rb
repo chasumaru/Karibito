@@ -17,9 +17,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       flash[:notice] = 'ユーザー認証メールを送信いたしました。認証が完了しましたらログインしてください。'
       redirect_to root_path
     else
-      # flash[:alert] = 'ユーザー登録に失敗しました。'
-      # render :new, status: :unprocessable_entity
-      redirect_to request.referer, notice: "コメントの作成に失敗しました。", status: :see_other 
+      flash[:alert] = 'ユーザー登録に失敗しました。'
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -49,7 +48,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       clean_up_passwords resource
       set_minimum_password_length
-      respond_with resource
+      flash[:alert] = 'プロフィール編集に失敗しました。'
+      render :edit, status: :unprocessable_entity
+
     end
   end
 
