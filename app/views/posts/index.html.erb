@@ -49,7 +49,7 @@
             <% end %>
             <div class="flex flex-col p-4 -mt-2 h-full">
               <p class="text-base font-bold text-black"><%= link_to truncate(post.title, length:18), post_path(post) %></p>
-              <p class="tracking-tight leading-tight text-slate-600 md:text-sm"><%= truncate(post.content, length:38) %></p>
+              <p class="tracking-tight leading-tight text-slate-600 md:text-sm"><%= truncate(post.content, length:36) %></p>
               <div class="flex w-full flex-row mt-5 justify-start relative">
                 <span class="flex flex-row items-center">
                   <%if post.user.avatar.attached? %>
