@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments, only: [:create, :edit, :update, :destroy]
     resources :likes, only: [:create, :destroy]
+    get '/:id/likes', to: 'accounts#liked_users', as: 'likes', on: :member
   end
   resources :relationships, only: [:create, :destroy]
 

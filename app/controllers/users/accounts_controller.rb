@@ -24,7 +24,9 @@ class Users::AccountsController < ApplicationController
 
   def liked_users
     @post = Post.find_by(params[:id])
-    @users = @post.liked
+    if @post.liked_users.present?
+      @users = @post.liked_users
+    end
   end
 end
 

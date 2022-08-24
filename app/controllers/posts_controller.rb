@@ -30,9 +30,12 @@ class PostsController < ApplicationController
   end
 
   def show
-    @comment  = Comment.new
-    @comments = @post.comments.includes(:user)
-    @like     = Like.new
+    @comment     = Comment.new
+    @comments    = @post.comments.includes(:user)
+    @like        = Like.new
+    if @post.liked_users.present?
+      @liked_users = @post.liked_users
+    end
   end
 
   def update
@@ -56,10 +59,12 @@ class PostsController < ApplicationController
     @post.destroy
     redirect_to posts_path, notice: "日記を削除しました。", status: :see_other 
     # flash.now.notice = "日記を削除しました。"
-
   end
 
-
+  def liked_users
+    @post = Post.find_by(params[:id])
+    @users = @post.liked
+  end
 
 
   private
