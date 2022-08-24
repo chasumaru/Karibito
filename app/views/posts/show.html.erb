@@ -72,7 +72,7 @@
             <% end %>
           <% end %>
           <% if @post.liked_users.present? %>
-            <%= button_to new_post_path, method: :get, class: "overflow-hidden h-10 w-22 bg-gray-400 focus:outline-none" do %>
+            <%= button_to favorite_users_path(@post), method: :get, class: "overflow-hidden h-10 w-22 bg-gray-400 focus:outline-none" do %>
               <div class="flex -space-x-4 itmes-center mx-2">
                 <% if @liked_users.first.avatar.present? %>
                   <%= image_tag(@liked_users.first.avatar, class: "w-8 h-8 rounded-full border-2 border-white dark:border-gray-800") %>
@@ -93,9 +93,7 @@
                     <%= image_tag "no_avatar.png", class: "w-8 h-8 rounded-full border-2 border-white dark:border-gray-800" %>
                   <% end %>
                 <% end %>
-                <div class="">
-                  <a class="flex justify-center items-center w-8 h-8 text-xs font-medium text-white bg-gray-700 rounded-full border-2 border-white hover:bg-gray-600 dark:border-gray-800" href="#"><%= @liked_users.count %></a>
-                </div>
+                <p class="flex justify-center items-center w-8 h-8 text-xs font-medium text-white bg-gray-700 rounded-full border-2 border-white hover:bg-gray-600 dark:border-gray-800"><%= @liked_users.count %></p>
               </div>
             <% end %>
           <% end %>

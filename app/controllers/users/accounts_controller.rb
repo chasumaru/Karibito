@@ -22,10 +22,10 @@ class Users::AccountsController < ApplicationController
     @users = @user.followers
   end
 
-  def liked_users
+  def favorite
     @post = Post.find_by(params[:id])
     if @post.liked_users.present?
-      @users = @post.liked_users
+      @liked_users = @post.liked_users
     end
   end
 end
