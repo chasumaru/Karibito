@@ -21,12 +21,5 @@ class Users::AccountsController < ApplicationController
     @user = User.find(params[:id])
     @users = @user.followers
   end
-
-  def favorite
-    @post = Post.find_by(params[:id])
-    if @post.liked_users.present?
-      @liked_users = @post.liked_users
-    end
-  end
 end
 

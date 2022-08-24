@@ -61,9 +61,14 @@ class PostsController < ApplicationController
     # flash.now.notice = "日記を削除しました。"
   end
 
-  def liked_users
-    @post = Post.find_by(params[:id])
-    @users = @post.liked
+
+  def liked
+    @post = Post.find(params[:id])
+    if @post.liked_users.present?
+      @liked_users = @post.liked_users
+      # liked = Like.where(post_id: @post.id).pluck(:user_id)
+      # @liked_users = User.find(liked)
+    end
   end
 
 

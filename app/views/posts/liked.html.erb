@@ -1,10 +1,10 @@
-<%= provide("#{@post.title}にいいねしたユーザー") %>
+<%= provide("#{@post.title}のいいねユーザー") %>
 
 
 <section>
   <div class="grid grid-cols-1 justify-center bg-neutral-100 px-3 py-3">
-      <% if @users.present? %>
-        <% @users.each do |user| %>
+      <% if @liked_users.present? %>
+        <% @liked_users.each do |user| %>
           <div class="flex justify-end items-center border-b py-2 px-3 bg-white">
             <div class="flex w-full justify-self-start items-cneter">
               <div class="mr-4 no-tap-highlighting">
