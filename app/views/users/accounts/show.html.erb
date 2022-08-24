@@ -78,14 +78,14 @@
           </div>
         </div>
         <div>
-          <% if @user.posts.present? %>
+          <% if @posts.present? %>
             <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-3 mx-8">
-              <% (@user.posts).each do |post| %>
+              <% (@posts).each do |post| %>
                 <%= render partial: "post", locals: { post: post} %> 
               <% end %>
             </div>
             <div class="flex justify-center mt-10 mb-6">
-              <%= pagy_nav(@pagy).html_safe %>
+              <%= pagy_nav(@pagy_post).html_safe %>
             </div>
           <% else %>
             <div class="flex w-full flex-col justify-center items-center mb-48">

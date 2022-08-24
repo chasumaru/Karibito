@@ -6,7 +6,7 @@ class Users::AccountsController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @pagy_post, @posts = pagy(@user.posts)
+    @pagy_post, @posts = pagy(@user.posts, items: 18)
     # @pagy_post = pagy(@user.posts)
   end
 
