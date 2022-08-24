@@ -4,6 +4,8 @@ class Users::AccountsController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @pagy_post, @posts = pagy( Post.where(user_id: @user.id), page_param: :page_post )
+    # @pagy_post = pagy(@user.posts)
   end
 
   def unsubscribe; end

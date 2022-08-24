@@ -16,6 +16,7 @@ require 'pagy/extras/i18n'
 # See https://ddnexus.github.io/pagy/api/pagy#instance-variables
 # Pagy::DEFAULT[:page]   = 1                                  # default
 # Pagy::DEFAULT[:items]  = 20                                 # default
+Pagy::DEFAULT[:items]  = 24
 # Pagy::DEFAULT[:outset] = 0                                  # default
 
 
