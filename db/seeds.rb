@@ -20,7 +20,7 @@ if Rails.env == "development"
   end
 
   (1..10).each do |t|
-    (1..10).each do |i|
+    (1..30).each do |i|
       Post.create!(
         title: "投稿サンプル(#{t}の#{i})",
         content: "This is an sample post. This is useful for developer to check and modify layout (#ユーザー#{t}の#{i}番目の投稿)",

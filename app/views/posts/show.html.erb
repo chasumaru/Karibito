@@ -46,22 +46,22 @@
       </div>
     </article>
     <section>
-      <div class="flex items-center px-6 py-1 bg-white border-b-2">
+      <div class="flex items-center px-6 py-1 bg-lime-100 border-b-2">
         <% if signed_in? %>
           <% if current_user.already_liked?(@post) %>
-            <%= button_to post_like_path(@post), method: :delete, class: "flex justify-center items-center bg-white text-pink-600 ring-1 ring-gray-300 h-10 w-10 px-2 py-2 ml-1 mr-1 text-center rounded-full cursor-pointer no-tap-highlighting" do %>
+            <%= button_to post_like_path(@post), method: :delete, class: "flex justify-center items-center bg-white text-pink-600 ring-1 ring-gray-300 h-10 w-10 px-2 py-2 ml-1 mr-1 text-center rounded-full cursor-pointer no-tap-highlighting bg-lime-200" do %>
               <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
               </svg>
             <% end %>
           <% else %>
             <div class="flex justify-start items-center h-12">
-              <%= button_to post_likes_path(@post), class: "flex justify-center items-center text-stone-300 bg-white ring-1 ring-gray-300 h-10 w-10 px-2 py-2 ml-1 text-center rounded-full cursor-pointer no-tap-highlighting" do %>
+              <%= button_to post_likes_path(@post), class: "flex justify-center items-center text-stone-300 bg-white ring-1 ring-gray-300 h-10 w-10 px-2 py-2 ml-1 text-center rounded-full cursor-pointer no-tap-highlighting bg-lime-200" do %>
                 <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
                 </svg>
               <% end %>
-              <p class="text-sm font-bold my-auto w-16 ml-2">いいね</p>
+              <p class="text-sm font-bold my-auto w-16 ml-2 bg-lime-200">いいね</p>
             </div>
           <% end %>
         <% else %>
@@ -71,7 +71,7 @@
             </svg>
           <% end %>
         <% end %>
-        <div class="flex w-full justify-end items-center mr-3 bg-white">
+        <div class="flex w-full justify-end items-center mr-3 bg-lime-200">
           <% if signed_in? %>
             <% if current_user == @post.user %>
               <span>
