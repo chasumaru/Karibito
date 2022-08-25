@@ -4,3 +4,12 @@
 <% if flash[:alert] %>
     <p class="px-6 py-4 bg-blue-50 rounded-lg text-blue-500"><%= alert %></p>
 <% end %>
+
+<%# SNS共有リンクを表示 %>
+<% if flash[:success] %>
+  <div>
+    <%= message %>
+  </div>
+  <p>当サイトを気に入っていただけましたら、ぜひSNSでシェアをお願いします!</p>
+  <%= render 'layouts/snsbutton' %>
+<% end %>

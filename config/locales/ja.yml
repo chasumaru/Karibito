@@ -8,13 +8,13 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
 
     models:
-      user: ユーザー
       post: 日記
+      comment: コメント
       # Board: 掲示板
     attributes:
         title: タイトル
         content: 本文
-      # comment: コメント
+        context: 入力内容
       # like: いいね
       # contact: お問い合わせ
     

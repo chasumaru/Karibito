@@ -8,7 +8,6 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <%= yield(:head) %>
   </head>
   <body data-controller="sidebar" class="font-body text-stone-700 bg-neutral-100">
     <div class="grid grid-cols-1 mx-auto max-w-screen-lg">
@@ -19,7 +18,7 @@
         </header>
         <main>
           <div class="relative z-0 pt-15">
-            <%= render "shared/flash"%>
+            <%= render "shared/flash" %>
             <%= yield %>
             <div data-sidebar-target="covering"></div>
           </div>
