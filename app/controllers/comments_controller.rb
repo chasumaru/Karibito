@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to request.referer, notice: "コメントを投稿しました。"
     else
-      redirect_to request.referer, notice: "コメントの作成に失敗しました。", status: :see_other 
+      redirect_to request.referer, alert: "コメントの作成に失敗しました。", status: :see_other 
     end
   end
 
