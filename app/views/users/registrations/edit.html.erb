@@ -19,7 +19,7 @@
 
   <div class="field">
     <%= f.label :name, "名前" %><br>
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", maxlength: 30 %>
   </div>
 
   <div class="field">
@@ -34,7 +34,7 @@
 
   <div class="field">
     <%= f.label :profile, "プロフィール文" %><br />
-    <%= f.text_area :profile, autofocus: true %>
+    <%= f.text_area :profile, autofocus: true, maxlength: 200 %>
   </div>
   
 
