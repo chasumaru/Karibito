@@ -10,12 +10,12 @@
     <div class="profile__icon">
       <%if @user.background.attached? %>
         <% if @user == current_user %>
-          <%= image_tag(current_user.background, class: "w-full h-64 md:h-96 object-center object-cover") %>
+          <%= image_tag(current_user.background, class: "w-full h-64 md:h-96 object-cover") %>
         <% else %>
-          <%= image_tag(@user.background, class: "w-full h-64 md:h-96 object-center object-cover") %>
+          <%= image_tag(@user.background, class: "w-full h-64 md:h-96 object-cover") %>
         <% end %>
       <% else %>
-        <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "w-full h-64 md:h-96 object-center object-cover" %>
+        <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "w-full h-64 md:h-96 object-cover" %>
       <% end %>
       <div class="flex w-full flex-col justify-center items-center">
         <span class ="relative -mt-10 md:-mt-16">
@@ -33,9 +33,9 @@
       </div>
     </div>
     <div class="profile__details">
-      <div class="grid mx-3 md:mx-12 my-4 bg-lime-100">
+      <div class="grid mx-3 md:mx-12 my-4">
         <div class="mx-4">
-          <div class="border-y leading-loose font-light text-sm pb-6 ml-2 my-2">
+          <div class="border-y leading-loose tracking-wide font-light text-sm pb-6 ml-2 my-2">
             <% if @user.profile.present? %>
                 <p class="whitespace-pre-wrap my-2"><%= @user.profile %></p>
               <% else %>
@@ -61,7 +61,7 @@
             <p class="text-md font-black underline underline-offset-4"><%= @user.followers.count %></p>
           <% end %>
         </div>
-        <div class="grid justify-center bg-lime-200">
+        <div class="grid justify-center">
           <div class="my-8">
             <% if current_user != @user %>
               <% if current_user.following?(@user) %>

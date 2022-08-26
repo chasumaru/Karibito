@@ -1,49 +1,61 @@
 <% provide(:title, "プロフィール編集") %>
 
-<h1>プロフィール編集</h1>
+<section>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
+      <div class="grid grid-cols-1 items-center">
+        <div class="profile__icon bg-white">
+          <%if current_user.background.attached? %>
+            <%= image_tag(current_user.background, class: "w-full h-64 md:h-96 object-center object-cover") %>
+          <% else %>
+            <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "w-full h-64 md:h-96 object-center object-cover" %>
+          <% end %>
+          <div class="flex w-full flex-col justify-center items-center">
+            <span class ="relative -mt-10 md:-mt-16">
+              <%if  current_user.avatar.attached? %>
+                <%= image_tag(current_user.avatar, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-emerald-500") %>
+              <% else %>
+                <%= image_tag "no_avatar.png", class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-yellow-300" %>
+              <% end %>
+            </span>
+            <div class="my-2 mx-6">
+              <%= f.label :name, "(名前)", class: "font-semibold block" %>
+              <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "(必須)", maxlength: 30, class: " w-full bg-amber-100 font-bold text-black text-lg rounded-md font-semibold py-1 pl-2" %>
+            </div>
+          </div>
+          <%# 全体がずれる原因 %>
+          <div class="flex flex-col ml-4 mt-8 mb-6">
+            <%= f.label :avatar, "(プロフィール画像の設定)",class:"font-semibold mb-1" %>
+            <%= f.file_field :avatar, class: "ml-1" %>
+            <%= f.label :background, "(背景画像の設定)", class: "font-semibold mb-1 mt-4" %>
+            <%= f.file_field :background, class: "ml-1" %>
+          </div>
+        </div>
+        <div class="profile__details">
+          <div class="grid py-3 bg-gray-100">
+            <div class="mx-2 bg-white">
+              <div class="ml-3 mt-2 mb-3">
+                <%= f.label :email, "(メールアドレス)", class: "font-semibold block mb-1" %>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "(必須)", class: "bg-amber-100 font-bold text-black rounded-md font-semibold py-1 pl-2" %>
+              </div>
+              <div class="border-y tracking-wide leading-relaxed font-medium  text-base pb-6 mx-2">
+                <%= f.label :profile, "(プロフィール文)", class: "font-semibold block mb-1" %>
+                <%= f.text_area :profile, data: {controller: "autogrow" }, autofocus: true, maxlength: 200, placeholder: "プロフィール文を入力", class: "w-full whitespace-pre-wrap pt-1 pl-2 pb-2 font-medium text-lg rounded-md bg-amber-100" %>
+              </div>
+            </div>
+          </div>
+        </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>メール認証を完了してください : <%= resource.unconfirmed_email %></div>
+      <% end %>
 
-<%# 画像変更機能の追加 %>
-  <div class="field">
-    <%= f.label :avatar, "プロフィール画像" %><br>
-    <%= f.file_field :avatar %><br>
-  </div>
-
-  <div class="field">
-    <%= f.label :background, "背景画像" %><br>
-    <%= f.file_field :background %><br>
-  </div>
-
-
-  <div class="field">
-    <%= f.label :name, "名前" %><br>
-    <%= f.text_field :name, autofocus: true, autocomplete: "name", maxlength: 30 %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email, "メールアドレス" %><br>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>メール認証を完了してください : <%= resource.unconfirmed_email %></div>
+      <div class="flex justify-center bg-white  my-4">
+        <%= f.submit "更新する", class:"px-3 py-1 rounded-2xl tracking-widest font-semibold bg-white border-2 text-stone-600 hover:text-black border-cyan-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+      </div>
+    </div>
   <% end %>
 
+</section>
 
-  <div class="field">
-    <%= f.label :profile, "プロフィール文" %><br />
-    <%= f.text_area :profile, autofocus: true, maxlength: 200 %>
-  </div>
-  
-
-  <div class="actions">
-    <%= f.submit "更新する" %>
-  </div>
-<% end %>
-<%= render "users/shared/links" %>
-
-
-<%= link_to "戻る", :back %>
 
