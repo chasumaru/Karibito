@@ -3,8 +3,8 @@
   <div class="grid grid-cols-1 mx-auto max-w-screen-lg bg-white">
     <div class="grid grid-cols-1">
       <article>
-        <div class="py-2 border-b-2 ml-1">
-          <%= f.text_field :title, placeholder: "タイトル(必須)", maxlength: 50, class: "bg-amber-100 text-xl font-bold text-black rounded-md mx-2"%>
+        <div class="py-2 border-b-2 px-2 bg-lime-200">
+          <%= f.text_field :title, placeholder: "タイトル(必須)", maxlength: 50, class: "w-full bg-amber-100 text-xl font-bold text-black rounded-md pl-2"%>
         </div>
         <div class="grid grid-cols-1 relative border-t-2">
           <span class="flex justify-start items-center ml-3 py-1 bg-white border-t">
@@ -31,7 +31,7 @@
             <p class="font-semibold text-stone-500 ml-2">その他の画像</p>
             <p class="text-sm font-medium text-stone-500  ml-3">※1・・・追加した画像の一枚目がサムネイルになります。</p>
             <% if post.images.attached? %>
-              <% @post.images.each do |image| %>
+              <% post.images.each do |image| %>
                 <div class="bg-lime-400">
                   <%= f.check_box :image_ids, {multiple: true }, image.id, false %>
                   <label for="post_image_ids_<%= image.id %>" >
@@ -44,7 +44,7 @@
             <% end %>
           </div>
 
-        <div class="flex flex-col no-tap-highlighting">
+        <div class="flex flex-col no-tap-highlighting bg-red-200 py-4">
           <%= f.label :images, "画像を追加", class: "font-semibold text-black ml-4" %>
           <%= f.file_field :images, multiple: true, class: "ml-2" %>
         </div>

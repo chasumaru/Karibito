@@ -21,7 +21,7 @@ class Users::SessionsController < Devise::SessionsController
         redirect_to posts_path, status: :see_other 
       end
     else
-      flash[:alert] = 'メールアドレスまたはパスワードが正しくありません。'
+      flash.now.alert = 'メールアドレスまたはパスワードが正しくありません。'
       render :new, status: :unprocessable_entity
     end
   end

@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+  before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_account_update_params, only: [:update]
+  before_action :sign_in_required, only: [:edit, :update, :destroy]
 
   # GET /resource/sign_up
   def new
@@ -17,7 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       flash[:notice] = 'ユーザー認証メールを送信いたしました。認証が完了しましたらログインしてください。'
       redirect_to root_path
     else
-      flash[:alert] = 'ユーザー登録に失敗しました。'
+      flash.now.alert = 'ユーザー登録に失敗しました。'
       render :new, status: :unprocessable_entity
     end
   end
@@ -48,7 +49,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       clean_up_passwords resource
       set_minimum_password_length
-      flash[:alert] = 'プロフィール編集に失敗しました。'
+      flash.now.alert = 'プロフィール編集に失敗しました。'
       render :edit, status: :unprocessable_entity
 
     end
@@ -100,6 +101,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar, :background)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar, :background, :avatar_id)
   end
 end

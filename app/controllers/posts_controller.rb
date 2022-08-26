@@ -89,8 +89,4 @@ class PostsController < ApplicationController
     redirect_to posts_path, notice: "権限がありません"
     end
   end
-
-  # def search_params
-  #   params.require(:q).permit!
-  # end
 end
