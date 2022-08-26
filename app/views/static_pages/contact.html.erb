@@ -1,21 +1,24 @@
 <h1 class="font-bold text-center">お問い合わせ</h1>
 <div class="flex w-full items-center space-y-8" data-turbo="false">
-    <div class="flex-1 px-8 md:px-32 lg:px-24">
-        <div class="my-8 bg-white rounded-md shadow-md p-5">
-        <h3>次の項目を記載していただき、下記のメールアドレス宛にメールをお送りください</h3>
-        <p>・お問い合わせ種別</p>
-        <ul>
-          <li>1. 不具合報告</li>
-          <li>2. サービス改善要望</li>
-          <li>3. その他</li>
-        </ul>
-        <p>・お問い合わせ内容</p>
-        <div class="block my-2">
-            <p class="font-bold">メールアドレス</p>
-            <p>E-mail：karibito.service@gmail.com</p>
-          </div>
-        </div>
+  <div class="flex-1 px-8 md:px-32 lg:px-24">
+    <div class="my-8 bg-white rounded-md shadow-md p-5">
+    <h3>次の項目を記載していただき、下記のメールアドレス宛にメールをお送りください</h3>
+    <p>・お問い合わせ種別</p>
+    <ul>
+      <li>1. 不具合報告</li>
+      <li>2. サービス改善要望</li>
+      <li>3. その他</li>
+    </ul>
+    <p>・お問い合わせ内容</p>
+    <div class="block my-2">
+        <p class="font-bold">メールアドレス</p>
+        <p>E-mail：karibito.service@gmail.com</p>
+      </div>
     </div>
+  </div>
 </div>
-<%= link_to "戻る", :back, class:"no-tap-highlighting" %>
+  <%= link_to :back, class: "inline-flex items-center h-6 w-22 px-1 py-4 ml-6 my-2 rounded-lg dark:text-white dark:bg-gray-600 border dark:hover:text-gray-900 focus:outline-none no-tap-highlighting" do %>
+    <p class="text-xs font-semibold">一覧に戻る</p>
+    <%= image_tag("Uターン矢印 1.png", class: "w-4 h-4 ml-0.5 -mt-0.5") %>
+  <% end %>
 
