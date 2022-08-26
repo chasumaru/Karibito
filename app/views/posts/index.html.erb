@@ -1,7 +1,7 @@
 <% provide(:title, "#日記一覧") %>
 <section>
   <% if user_signed_in? %>
-    <div class="fixed bottom-3 right-6 z-30">
+    <div class="fixed bottom-3 right-6 z-30 lg:right-16 xl:right-24">
       <%= button_to new_post_path, method: :get, class: "overflow-hidden h-10 w-28 text-sm font-semibold text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800" do %>
         <span class="relative inline-flex items-center px-1 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-lg group-hover:bg-opacity-0">
           <span class="font-semibold">日記を書く</span>

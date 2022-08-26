@@ -126,7 +126,7 @@
     </section>
     <section>
       <div class="grid grid-cols-1 justify-center bg-neutral-100 border-x-8 border-white px-3">
-        <div class="w-full py-2 px-4 my-3">
+        <div class="w-full bg-white py-2 px-4 my-3">
           <h3 class="font-bold">コメント一覧</h3>
           <section>
             <div class="text-xs font-medium">
@@ -155,7 +155,7 @@
                           </div>
                           <p class="tracking-wide whitespace-pre-wrap pt-1 pb-4 ml-1"><%= c.context %></p>
                           <% if user_signed_in? && current_user == c.user %>
-                            <div class="flex justify-end h-7 pt-0.5 mr-18">
+                            <div class="flex justify-end h-7 w-3/4 pt-0.5 ">
                               <span>
                                 <%= button_to "編集", edit_post_comment_path(@post, c), method: :get, class: "inline-block px-2 py-1 ml-1 border border-blue-400 text-blue-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
                               </span>
@@ -169,9 +169,9 @@
                               <% if user_signed_in? %>
                                 <%= form_with model: [@post, @comment] do |f| %>
                                   <div class="flex items-end my-2">
-                                    <%= f.text_area :context, data: {controller: "autogrow" }, class: "inline-block text-sm bg-amber-100 rounded-md pl-1 w-3/4", placeholder: "コメントに返信する..." %>
+                                    <%= f.text_area :context, data: {controller: "autogrow" }, class: "inline-block text-sm bg-amber-100 rounded-md pl-1 pt-1 w-3/4", placeholder: "コメントに返信する..." %>
                                     <%= f.hidden_field :reply_comment_id, :value => c.id  %>
-                                    <%= f.submit "返信" ,class:"tracking-widest rounded-2xl font-semibold bg-white border px-4 py-1.5 ml-0.5 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+                                    <%= f.submit "返信" ,class:"tracking-widest rounded-2xl font-semibold bg-white border-2 px-4 py-1.5 ml-2 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
                                   </div>
                                 <% end %>
                               <% else %>
@@ -231,7 +231,7 @@
             <div class="grid grid-cols-1 justify-center mt-6">
               <% if user_signed_in? %>
                 <%= form_with model: [@post, @comment] do |f| %>
-                  <%= f.text_area :context, data: {controller: "autogrow" }, class: "block w-full rounded-xl bg-amber-100 pl-2 pb-6" , placeholder: "コメントする..." %>
+                  <%= f.text_area :context, data: {controller: "autogrow" }, class: "block w-full rounded-xl bg-amber-100 pl-2 pt-1 pb-6" , placeholder: "コメントする..." %>
                   <div class="flex justify-center bg-white">
                     <%= f.submit "投稿", class:"px-5 py-1 mt-2 rounded-2xl tracking-widest font-semibold bg-white border-2 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
                   </div>
@@ -246,6 +246,6 @@
         </div>
       </div>
     </section>
-    <%= link_to '一覧に戻る', posts_path, class:"no-tap-highlighting" %>
+    <%= link_to "一覧に戻る", :back, class:"no-tap-highlighting" %>
   </div>
 </div>
