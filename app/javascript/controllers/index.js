@@ -22,3 +22,6 @@ application.register('slideover', Slideover)
 
 import Notification from 'stimulus-notification'
 application.register('notification', Notification)
+
+import CharacterCounter from 'stimulus-character-counter'
+application.register('character-counter', CharacterCounter)

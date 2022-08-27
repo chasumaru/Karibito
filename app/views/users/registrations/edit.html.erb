@@ -38,9 +38,15 @@
                 <%= f.label :email, "(メールアドレス)", class: "font-semibold block mb-1" %>
                 <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "(必須)", class: "bg-amber-100 font-bold text-black rounded-md font-semibold py-1 pl-2" %>
               </div>
-              <div class="border-y tracking-wide leading-relaxed font-medium  text-base pb-6 mx-2">
+              <div 
+              data-controller="character-counter" 
+              data-character-counter-countdown-value="true" 
+              class="border-y tracking-wide leading-relaxed font-medium  text-base pb-6 mx-2">
                 <%= f.label :profile, "(プロフィール文)", class: "font-semibold block mb-1" %>
-                <%= f.text_area :profile, data: {controller: "autogrow" }, autofocus: true, maxlength: 200, placeholder: "プロフィール文を入力", class: "w-full whitespace-pre-wrap pt-1 pl-2 pb-2 font-medium text-lg rounded-md bg-amber-100" %>
+                <%= f.text_area :profile, data: {controller: "autogrow", character_counter_target: "input"}, autofocus: true, maxlength: 200, placeholder: "プロフィール文を入力", class: "w-full whitespace-pre-wrap pt-1 pl-2 pb-2 font-medium text-lg rounded-md bg-amber-100" %>
+                <p class="flex justify-end items-center text-xs md:text-base font-semibold mr-2">
+                  <strong data-character-counter-target="counter" class="font-bold text-sm md:text-lg px-0.5"></strong>文字
+                </p>
               </div>
             </div>
           </div>
