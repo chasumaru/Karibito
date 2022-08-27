@@ -28,7 +28,6 @@ Rails.application.routes.draw do
     
     scope controller: 'static_pages' do
       get '/about', action: 'about', as: 'about'
-      get '/contact', action: 'contact', as: 'contact'
       get '/privacy', action: 'privacy', as: 'privacy'
       get '/faq', action: 'faq', as: 'faq'
       get '/term', action: 'term', as: 'term'

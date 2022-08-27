@@ -6,8 +6,6 @@ class StaticPagesController < ApplicationController
   end
 
   def show
-    # @user = User.find_by...?
-    # ユーザのプロフィール画面を表示
   end
 
   def about; end

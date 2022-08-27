@@ -13,7 +13,7 @@
         <li class="mb-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-20"><%= link_to '利用規約',term_path, class: "block" %> 
         <li class="my-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-40"><%= link_to 'プライバシーポリシー',privacy_path, class: "block" %> 
         <li class="my-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-24"><%= link_to 'よくある質問',about_path, class: "block" %> 
-        <li class="my-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-24"><%= link_to 'お問い合わせ',contact_path, class: "block" %> 
+        <li class="my-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-24"><%= link_to 'お問い合わせ',"https://forms.gle/Z8WNE7HpJw3NnH8F6", class: "block" %> 
         <% if user_signed_in? %>
         <li class="my-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-20"><%= link_to "退会する", unsubscribe_path(current_user) %>
         <% end %>

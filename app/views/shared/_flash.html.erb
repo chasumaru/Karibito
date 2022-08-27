@@ -1,3 +1,9 @@
+<% if flash.any? %>
+
+<% if flash[:timedout] %>
+<% flash.discard(:timedout) %>
+<% end %>
+
 <% if flash[:notice] %>
   <div class="max-w-screen-lg fixed inset-x-0 top-10 flex items-end justify-right px-4 py-2 mt-3 justify-end z-30 pointer-events-none">
     <div data-controller="notification"
@@ -52,4 +58,5 @@
       </div>
     </div>
   </div>
+<% end %>
 <% end %>
