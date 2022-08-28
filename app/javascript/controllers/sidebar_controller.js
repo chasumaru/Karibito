@@ -4,15 +4,16 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = 
     ["displaySidebar", "hamburger", "line1", "line2", "line3", "covering"]
-    // static get targets() {
-    //   // ターゲットの更新
-    //   return ["displaySidebar", "hamburger", "line1", "line2", "line3", "covering"]
-    // }
-    
-  
-  toggle() {
-  //  sidebar-containerターゲットを持つ要素のdata-expanded属性が0であるか判定
-    if (this.hamburgerTarget.dataset.expanded === "0") {
+
+  static values = { open: Boolean }
+
+    // open valueのboolean値による切り替え
+    toggle() {
+      this.openValue = !this.openValue
+    }
+
+    openValueChanged() {
+    if (this.openValue) {
       this.hamburgerOn()
       this.expand()
       this.cover()
@@ -22,11 +23,15 @@ export default class extends Controller {
       this.uncover()
     }
   }
+
   close() {
+    if (!this.openValue) {
       this.hamburgerOff()
       this.collapse()
       this.uncover()
     } 
+  }
+  
 
   hamburgerOn() {
     this.line1Target.classList.add('line_1')
@@ -36,7 +41,7 @@ export default class extends Controller {
 
   expand() {
     this.displaySidebarTarget.classList.add('sidebar')
-    this.hamburgerTarget.dataset.expanded = "1"
+    this.openValue = true;
   }
 
   hamburgerOff() {
@@ -47,7 +52,7 @@ export default class extends Controller {
 
   collapse() {
     this.displaySidebarTarget.classList.remove('sidebar')
-    this.hamburgerTarget.dataset.expanded = "0"
+    this.openValue = false;
   }
   
   cover() {
@@ -57,5 +62,4 @@ export default class extends Controller {
   uncover() {
     this.coveringTarget.classList.remove('sidebar__cover')
   }
-
 }
