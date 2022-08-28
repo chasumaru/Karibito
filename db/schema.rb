@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_16_151303) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_28_084637) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_16_151303) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "board_comments", charset: "utf8mb3", force: :cascade do |t|
+    t.text "description"
+    t.integer "user_id"
+    t.bigint "board_id", null: false
+    t.integer "reply_comment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["board_id"], name: "index_board_comments_on_board_id"
+    t.index ["user_id"], name: "index_board_comments_on_user_id"
+  end
+
+  create_table "boards", charset: "utf8mb3", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_boards_on_user_id"
   end
 
   create_table "comments", charset: "utf8mb3", force: :cascade do |t|
@@ -112,6 +132,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_16_151303) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "board_comments", "boards"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "likes", "posts"

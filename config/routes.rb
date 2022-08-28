@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   end
   resources :relationships, only: [:create, :destroy]
 
+  resources :boards do
+    resources :boardcomments, only: [:create, :edit, :update, :destroy]
+  end
+
   
   devise_for :users,
   module: 'users',
@@ -34,5 +38,5 @@ Rails.application.routes.draw do
       get '/manual', action: 'manual', as: 'manual'
     end
 
-    # get '/:id/likes', to: 'accounts#favorite', as: 'favorite_users'
+
 end

@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :sign_in_required, except: [:index, :show]
-  before_action :set_post, only: %i[ show edit update destroy]
-  before_action :ensure_correct_user,{only: [:edit,:update,:destroy]}
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
 
 
   require "mini_magick"
@@ -22,7 +22,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
     if @post.save
-      redirect_to post_path(@post), notice: "新しい日記を作成しました。"
+      redirect_to @post, notice: "新しい日記を作成しました。"
     else
       flash.now.alert = '日記の作成に失敗しました。'
       render :new, status: :unprocessable_entity
@@ -48,7 +48,7 @@ class PostsController < ApplicationController
     end
 
     if @post.update(post_params)
-      redirect_to @post, notice: "日記の内容が更新されました."
+      redirect_to @post, notice: "日記の内容が更新されました。"
     else
       flash.now.alert = '日記の作成に失敗しました。'
       render :edit, status: :unprocessable_entity 
@@ -58,7 +58,6 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     redirect_to posts_path, notice: "日記を削除しました。", status: :see_other 
-    # flash.now.notice = "日記を削除しました。"
   end
 
 

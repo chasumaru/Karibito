@@ -1,0 +1,54 @@
+<% provide(:title, "#掲示板一覧") %>
+<section>
+  <% if user_signed_in? %>
+    <div class="fixed bottom-3 right-6 z-30 lg:right-16 xl:right-24">
+      <%= button_to new_board_path, method: :get, class: "overflow-hidden h-10 w-28 text-sm font-semibold text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800" do %>
+        <span class="relative inline-flex items-center px-1 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-lg group-hover:bg-opacity-0">
+          <span class="font-semibold">スレッドを立てる</span>
+          <%= image_tag("lead-pencil.png", size:"25x25", class: "ml-1") %>
+        </span>
+      <% end %>
+    </div>
+  <% end %>
+</section>
+
+<section>
+  <%= turbo_frame_tag "boards-list", target: "_top" do %>
+    <% if @boards.present? %>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-3 mx-8">
+        <% @boards.each do |board| %>
+          <div class="border-2 border-gray-200 border-opacity-60 rounded-xl overflow-hidden no-tap-highlighting">
+            <div class="flex flex-col p-4 -mt-2 h-full">
+              <p class="text-base font-bold text-black"><%= link_to truncate(board.title, length:18), board_path(board) %></p>
+              <p class="tracking-tight leading-tight text-slate-600 md:text-sm"><%= truncate(board.description, length:36) %></p>
+              <div class="flex w-full flex-row mt-5 justify-start relative">
+                <span class="flex flex-row items-center">
+                  <%if board.user.avatar.attached? %>
+                    <% if board.user == current_user %>
+                      <%= link_to image_tag(current_user.avatar, class: "w-8 h-8 rounded-full border-2 border-emerald-500"), profile_path(current_user) %>
+                    <% else %>
+                      <%= link_to image_tag(board.user.avatar, class: "w-8 h-8 rounded-full border-2 border-indigo-500"), user_page_path(board.user) %>
+                    <% end %>
+                  <% else %>
+                    <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border-2 border-yellow-300" %>
+                  <% end %>
+                  <p class="text-sm font-medium mr-2 ml-2 hover:underline hover:underline-offset-2"><%= link_to truncate(board.user.name, length:17), profile_path(board.user) %></p>
+                </span>
+              </div>
+              <p class="text-xs text-slate-500 ml-8"><%= how_long_ago(board) %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="flex w-full flex-col justify-center items-center mb-48">
+        <span class ="relative">
+          <div class="h-36 w-36 bg-white rounded-full -ml-1.5 "></div>
+          <%= image_tag 'ojigi_animal_kuma.png', class:' absolute top-6 left-4 z-10 w-24 h-28 p-4' %>
+        </span>
+        <p class="font-medium py-2">検索結果が見つかりませんでした。</p>
+      </div>
+    <% end %>
+  <% end %>
+</section>
+

@@ -5,7 +5,7 @@
       <div class="absolute inset-y-0 flex items-center lg:hidden">
         <!-- Mobile menu button-->
         <div data-sidebar-target="hamburger" data-action="click->sidebar#toggle click@window->sidebar#close">
-            <nav class="hamburger fixed z-50 no-tap-highlighting">
+            <nav class="hamburger fixed z-50 no-tap-highlighting mt-1">
                 <span data-sidebar-target="line1" class="inner_line top-0"></span>
                 <span data-sidebar-target="line2"  class="inner_line top-2.5"></span>
                 <span data-sidebar-target="line3"  class="inner_line bottom-0"></span>
@@ -14,17 +14,17 @@
       </div>
       <div class="relative flex-1 flex items-center sm:items-stretch sm:justify-start">
         <div class="flex-shrink-0 flex items-center">
-        <%= link_to "Karibito", root_path, class:"text-xl md:text-2xl block absolute items-center left-14 md:left-16 font-semibold no-tap-highlighting" %>
-        <%= link_to image_tag('Karibito_logo.png', class:'w-10 md:w-12 no-tap-highlighting'), root_path %>
+          <%= link_to "Karibito", root_path, class:"text-xl md:text-2xl block absolute items-center left-14 md:left-16 font-semibold no-tap-highlighting" %>
+          <%= link_to image_tag('Karibito_logo.png', class:'w-10 md:w-12 no-tap-highlighting'), root_path %>
         </div>
-        <div class="w-full hidden lg:block ml-56 mt-2">
-          <div class="flex flax-auto space-x-4 lg:space-x-8 items-center">
+        <div class="w-full hidden lg:block">
+          <div class="flex w-full flax-auto justify-center items-center space-x-3 py-2 ml-28">
             <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black">
               <%= button_to 'サービス概要', about_path, method: :get %> 
             </div>
-            <%# <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black">
+            <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black">
               <%= button_to 'ヘルプ', faq_path, method: :get %> 
-            <%# </div> %>
+            </div>
             <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black">
               <%= button_to 'お問い合せ', "https://forms.gle/Z8WNE7HpJw3NnH8F6", method: :get %> 
             </div>
@@ -42,28 +42,18 @@
             <% end %>
           </div>
         </div>
+        <div class='flex w-full lg:w-32 justify-end items-end py-0.5 mr-18 mt-1 lg:-mt-1 lg:mr-4'>
+          <%= button_to boards_path, method: :get, class: "inline-flex rounded-full p-2 mr-4 lg:mr-5 hover:bg-gray-100" do %>
+            <img src="https://img.icons8.com/ios-filled/50/000000/noticeboard.png" class='w-6 h-6' />
+          <% end %>
+          <%= button_to posts_path, method: :get, class: "inline-flex rounded-full p-2 hover:bg-gray-100" do %>
+            <img src="https://img.icons8.com/ios/100/000000/edit-chat-history.png" class='w-6 h-6' />
+          <% end %>
+        </div>
       </div>
-      <div class="relative mr-12 lg:mr-0">
-        <label class="sr-only" for="search"> Search </label>
-        <%= button_to posts_path, method: :get, class: "absolute p-2 text-gray-600 transition -translate-y-1/2 rounded-full hover:text-black bg-gray-50 top-1/2 right-1" do %>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-4 h-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-        <% end %>
-      </div>
+
       <div class="user-info hidden lg:block">
-        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+        <div class="absolute inset-y-0 right-0 flex items-center pr-2 mt-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <%= button_to posts_path, method: :get, class: "bg-white p-1 rounded-full text-gray-400 hover:text-black hover:bg-gray-100" do %>
             <span class="sr-only">View notifications</span>
             <!-- Heroicon name: outline/bell -->
@@ -73,18 +63,18 @@
           <% end %>
 
           <!-- Profile dropdown -->
-          <div data-controller="dropdown" class="ml-3 mr-10 lg:mr-2 relative">
+          <div data-controller="dropdown" class="ml-3 mr-10 lg:mr-0 mt-1 relative">
             <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" data-dropdown-target="button" tabindex="0" class="inline-block select-none">
               <span class="appearance-none flex items-center text-gray-700">
                 <span class="sr-only">Open user menu</span>
                   <% if signed_in? %>
                     <% if current_user.avatar.attached? %>
-                      <%= image_tag current_user.avatar, class: "w-8 h-8 rounded-full border-2 border-emerald-500" %>
+                      <%= image_tag current_user.avatar, class: "w-10 h-10 rounded-full border-2 border-emerald-500" %>
                     <% else %>
-                      <%= image_tag "no_avatar.png", class: "w-8 h-8 rounded-full border-2 border-yellow-300" %>
+                      <%= image_tag "no_avatar.png", class: "w-10 h-10 rounded-full border-2 border-yellow-300" %>
                     <% end %>
                   <% else %>
-                    <%= image_tag "no_avatar.png", class: "w-8 h-8 rounded-full border-2 border-yellow-300" %>
+                    <%= image_tag "no_avatar.png", class: "w-10 h-10 rounded-full border-2 border-yellow-300" %>
                   <% end %>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-4 w-4"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
                 </span>
