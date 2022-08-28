@@ -22,9 +22,9 @@
             <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black">
               <%= button_to 'サービス概要', about_path, method: :get %> 
             </div>
-            <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black">
+            <%# <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black">
               <%= button_to 'ヘルプ', faq_path, method: :get %> 
-            </div>
+            <%# </div> %>
             <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black">
               <%= button_to 'お問い合せ', "https://forms.gle/Z8WNE7HpJw3NnH8F6", method: :get %> 
             </div>
@@ -73,21 +73,34 @@
           <% end %>
 
           <!-- Profile dropdown -->
-          <div class="ml-3 mr-10 lg:mr-2 relative">
-            <% if signed_in? %>
-              <%= button_to profile_path(current_user), method: :get, class: "bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" do %>
+          <div data-controller="dropdown" class="ml-3 mr-10 lg:mr-2 relative">
+            <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" data-dropdown-target="button" tabindex="0" class="inline-block select-none">
+              <span class="appearance-none flex items-center text-gray-700">
                 <span class="sr-only">Open user menu</span>
-                <%if user_signed_in?  %>
-                  <% if current_user.avatar.attached? %>
-                    <%= link_to image_tag(current_user.avatar, class: "w-8 h-8 rounded-full border-2 border-emerald-500"),profile_path(current_user) %>
+                  <% if signed_in? %>
+                    <% if current_user.avatar.attached? %>
+                      <%= image_tag current_user.avatar, class: "w-8 h-8 rounded-full border-2 border-emerald-500" %>
+                    <% else %>
+                      <%= image_tag "no_avatar.png", class: "w-8 h-8 rounded-full border-2 border-yellow-300" %>
+                    <% end %>
                   <% else %>
-                    <%= link_to image_tag("no_avatar.png"),profile_path(current_user), class: "w-8 h-8 rounded-full border-2 border-yellow-300" %>
+                    <%= image_tag "no_avatar.png", class: "w-8 h-8 rounded-full border-2 border-yellow-300" %>
                   <% end %>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-4 w-4"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+                </span>
+              </span>
+            </div>
+            <div data-dropdown-target="menu" class="absolute right-0 mt-2 hidden">
+              <div class="bg-white shadow rounded border overflow-hidden">
+                <% if user_signed_in? %>
+                  <%= link_to 'マイページ', profile_path(current_user), data: {action: "click->dropdown#toggle"}, class: 'no-underline block pl-6 py-2 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
+                  <%= link_to 'ユーザー設定', edit_user_registration_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block pl-6 py-2 pr-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
                 <% else %>
-                  <%= link_to image_tag("no_avatar.png"), new_user_session_path, class: "w-8 h-8 rounded-full border-2 border-yellow-300" %>
+                  <%= link_to '会員登録', new_user_registration_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-6 py-2 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
+                  <%= link_to 'ログイン', new_user_session_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-6 py-2 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
                 <% end %>
-              <% end %>
-            <% end %>
+              </div>
+            </div>
           </div>
         </div>
       </div>
