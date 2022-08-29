@@ -1,8 +1,8 @@
 class Board < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, foreign_key: :user_id, optional: true
   has_many :board_comment, dependent: :destroy
   
-  validates :user_id, presence: true
+  # validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: 100 }
   validates :description, length: { maximum: 400 }
   # validate :image_size,
