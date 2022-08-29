@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
 
   resources :boards do
-    resources :boardcomments, only: [:create, :edit, :update, :destroy]
+    resources :board_comments, only: [:create, :edit, :update, :destroy]
   end
 
   

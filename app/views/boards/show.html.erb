@@ -42,13 +42,155 @@
           <p class="text-xs font-medium text-slate-500 my-2 ml-5">このスレッドの説明</p>
           <div class="flex flex-row border border-gray-200 border-opacity-60 rounded-md overflow-hidden no-tap-highlighting bg-lime-100">
               <div class="flex flex-col w-full bg-red-200">
-                <p class="tracking-wider leading-relaxed text-slate-600 text-sm pl-0.5 pt-0.5 ml-0.5 h-18 bg-green-300"><%= truncate(@board.description, length:400) %></p>
+                <p class="tracking-wider leading-relaxed text-slate-600 text-sm pl-0.5 pt-0.5 h-18 bg-green-300"><%= truncate(@board.description, length:400) %></p>
               </div>
             </div>
           </div>
     </section>
     <section class="board__content">
+      <div class="grid grid-cols-1 justify-center bg-neutral-100 border-x-8 border-white px-3">
+        <div class="w-full bg-white py-2 px-4 my-3">
+          <h3 class="font-bold">掲示板コメント一覧</h3>
+          <section>
+            <div class="text-xs font-medium">
+              <% if @board_comments.present? %>
+                <% @board_comments.each do |c| %>  
+                  <% if c.reply_comment_id.present? %>
+                    <% next %>
+                  <% end %>
+                    <div class="grid grid-cols-1">
+                      <div class="flex pt-1">
+                        <div class="flex justify-center w-12 h-12">
+                        <% if c.user.present? %>
+                          <%if c.user.avatar.attached? %>
+                            <% if c.user == current_user %>
+                              <%= image_tag(current_user.avatar, class: "w-8 h-8 rounded-full border-2 border-emerald-500") %>
+                            <% else %>
+                              <%= image_tag(c.user.avatar, class: "w-8 h-8 rounded-full border-2 border-indigo-500") %>
+                            <% end %>
+                          <% else %>
+                            <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border-2 border-yellow-300" %>
+                          <% end %>
+                        <% else %>
+                            <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border-2 border-yellow-300" %>
+                        <% end %>
+                        </div>
+                        <div class="flex flex-col w-full">
+                          <div class="flex">
+                            <% if c.user.present? %>
+                              <strong><%= c.user.name %></strong>
+                            <% else %>
+                            <strong>名無しさん</strong>
+                            <% end %>
+                            <p class="ml-3 text-slate-400"><%= how_long_ago(c) %></p>
+                          </div>
+                          <p class="tracking-wide whitespace-pre-wrap pt-1 pb-4 ml-1"><%= c.description %></p>
+                          <% if user_signed_in? && current_user == c.user %>
+                            <div class="flex justify-end h-7 w-3/4 pt-0.5 ">
+                              <span>
+                                <%= button_to "編集", edit_board_board_comment_path(@board, c), method: :get, class: "inline-block px-2 py-1 ml-1 border border-blue-400 text-blue-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+                              </span>
+                              <span class="inline-block px-2 h-6 py-1 ml-1 border border-red-400 text-red-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting">
+                                <%= button_to "削除", board_board_comment_path(@board, c), { method: :delete, form: { data: { turbo_confirm: "コメントを削除しますか？" } } } %>
+                              </span>
+                            </div>
+                          <% end %>
+                          <section>
+                            <div class="mb-2 border-b">
+                              <% if user_signed_in? %>
+                                <%= form_with model: [@board, @board_comment] do |f| %>
+                                  <div class="flex items-end my-2">
+                                    <%= f.text_area :description, data: {controller: "autogrow" }, class: "inline-block text-sm bg-amber-100 rounded-md pl-1 pt-1 w-3/4", placeholder: "コメントに返信する..." %>
+                                    <%= f.hidden_field :reply_comment_id, :value => c.id  %>
+                                    <%= f.submit "返信" ,class:"tracking-widest rounded-2xl font-semibold bg-white border-2 px-4 py-1.5 ml-2 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+                                  </div>
+                                <% end %>
+                              <% else %>
+                                <%= button_to "返信する", new_user_session_path, method: :get, class:"tracking-widest rounded-2xl font-semibold bg-white border px-3 py-1
+                                 ml-0.5 mb-2 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+                              <% end %>
+                            </div>
+                          </section>
+                          <section>
+                            <% if c.replies.present? %>
+                              <% c.replies.each do |reply| %>
+                                <div class="grid grid-cols-1">
+                                  <div class="flex border-b">
+                                    <div class="flex justify-center w-12">
+                                      <%if c.user.avatar.attached? %>
+                                        <% if c.user == current_user %>
+                                          <%= image_tag(current_user.avatar, class: "w-8 h-8 rounded-full border-2 border-emerald-500") %>
+                                        <% else %>
+                                          <%= image_tag(c.user.avatar, class: "w-8 h-8 rounded-full border-2 border-indigo-500") %>
+                                        <% end %>
+                                      <% else %>
+                                        <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border border-yellow-300" %>
+                                      <% end %>
+                                    </div>
+                                    <div class="flex flex-col w-full">
+                                      <div class="flex">
+                                        <strong><%= reply.user.name %></strong>
+                                        <p class="text-slate-400 ml-3"><%= how_long_ago(reply) %></p>
+                                      </div>
+                                      <p class="tracking-wide whitespace-pre-wrap pt-1 pb-3 ml-1"><%= reply.description %></p>
+                                      <% if user_signed_in? && current_user == reply.user %>
+                                        <div class="flex justify-end h-7 pt-0.5 mr-18">
+                                          <span>
+                                            <%= button_to "編集", edit_board_board_comment_path(@board, reply), method: :get, class: "inline-block px-2 py-1 ml-1 border border-blue-400 text-blue-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+                                          </span>
+                                          <span class="inline-block px-2 h-6 py-1 ml-1 border border-red-400 text-red-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting">
+                                            <%= button_to "削除", board_board_comment_path(@board, reply), { method: :delete, form: { data: { turbo_confirm: "コメントを削除しますか？" } } } %>
+                                          </span>
+                                        </div>
+                                      <% end %>
+                                    </div>
+                                  </div>
+                                </div>
+                              <% end %>
+                            <% end %>
+                          </section>
+                        </div>
+                      </div>
+                    </div>
+                <% end %>
+              <% else %>
+                <p class="test-lg">まだコメントがありません</p>
+              <% end %>
+            </div>
+          </section>
+          <section>
+            <div class="grid grid-cols-1 justify-center mt-6">
+              <% if user_signed_in? %>
+                <%= form_with model: [@board, @board_comment] do |f| %>
+                  <%= f.text_area :description, data: {controller: "autogrow" }, class: "block w-full rounded-xl bg-amber-100 pl-2 pt-1 pb-6" , placeholder: "コメントする..." %>
+                  <div class="flex justify-center bg-white">
+                    <%= f.submit "投稿", class:"px-5 py-1 mt-2 rounded-2xl tracking-widest font-semibold bg-white border-2 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+                  </div>
+                <% end %>
+              <% else %>
+                <div class="flex justify-center bg-white">
+                  <%= button_to "コメントする", new_user_session_path, method: :get, class:"px-5 py-1 my-1 rounded-2xl tracking-widest font-semibold bg-white border-2 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+                </div>
+              <% end %>
+            </div>
+          </section>
+        </div>
+      </div>
     </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <%= link_to boards_path, class: "inline-flex items-center h-6 w-22 px-1 py-4 ml-6 my-2 rounded-lg dark:text-white dark:bg-gray-600 border dark:hover:text-gray-900 focus:outline-none no-tap-highlighting" do %>
       <p class="text-xs font-semibold">一覧に戻る</p>
       <%= image_tag("Uターン矢印 1.png", class: "w-4 h-4 ml-0.5 -mt-0.5") %>

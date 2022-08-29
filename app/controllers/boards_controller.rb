@@ -22,14 +22,16 @@ class BoardsController < ApplicationController
   end
 
   def show
-    @board = Board.find(params[:id])
+    @board          = Board.find(params[:id])
+    @board_comment  = BoardComment.new
+    @board_comments = @board.board_comment.includes(:user)
   end
 
   def edit
   end
 
   def update
-    if @post.update(board_params)
+    if @board.update(board_params)
       redirect_to @board, notice: "スレッドの内容が更新されました。"
     else
       flash.now.alert = 'スレッドの作成に失敗しました。'
@@ -52,7 +54,7 @@ class BoardsController < ApplicationController
 
   def ensure_correct_user
     @board = Board.find_by(id: params[:id])
-    if @border.user_id.nil?
+    if @board.user_id.nil?
       redirect_to boards_path, notice: "権限がありません"
     elsif
       @board.user_id != current_user.id
