@@ -11,14 +11,8 @@ class BoardsController < ApplicationController
   end
 
   def create
-    # 匿名ユーザーは投稿しかできない
-    if current_user
-      @board = Board.new(board_params)
-      @board.user = current_user
-    else
-      @board = Board.new(board_params)
-    end
-  
+    @board = Board.new(board_params)
+    @board.user = current_user
     if @board.save
       redirect_to @board, notice: "新しいスレッドを作成しました。"
     else
@@ -53,7 +47,7 @@ class BoardsController < ApplicationController
 
 
   def board_params
-    params.require(:board).permit(:title, :description)
+    params.require(:board).permit(:title, :description, :anonymous_flag)
   end
 
   def ensure_correct_user

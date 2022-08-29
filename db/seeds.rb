@@ -26,6 +26,11 @@ if Rails.env == "development"
         content: "This is an sample post. This is useful for developer to check and modify layout (#ユーザー#{t}の#{i}番目の投稿)",
         created_at: DateTime.now,
         user_id: "#{t}")
+      Board.create!(
+        title: "投稿サンプル(#{t}の#{i})",
+        description: "This is an sample Board. This is useful for developer to check and modify layout (#ユーザー#{t}の#{i}番目の投稿)",
+        created_at: DateTime.now,
+        user_id: "#{t}")
     end
   end 
 end

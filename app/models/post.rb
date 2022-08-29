@@ -45,7 +45,7 @@ class Post < ApplicationRecord
   end
 
   def image_count
-    if images.blobs.count > 10
+    if images.blobs.count > 20
       images.purge
       errors.add :images, '画像枚数の上限を超えています。'
     end

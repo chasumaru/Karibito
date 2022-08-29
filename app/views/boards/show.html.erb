@@ -2,57 +2,52 @@
 
 <div class="grid grid-cols-1 mx-auto max-w-screen-lg bg-white">
   <div class="grid grid-cols-1">
-    <section>
+    <section class="board__introduction">
       <div class="grid grid-cols-1 justify-center bg-neutral-100 border-x-8 border-white px-3">
         <div class="w-full bg-white py-2 px-4 my-3">
-          <h3 class="font-bold">掲示板一覧</h3>
-              <article>
-      <div class="py-2 border-b-2 px-2">
-        <p class="text-xl font-bold text-black py-0.5 ml-3"><%= @board.title %></p>
-        <p class="text-xs text-slate-600 mx-2 -mb-2 ml-3"><%= @board.created_at.strftime('%Y/%m/%d %H:%M') %></p>
-      </div>
-      <div class="grid grid-cols-1 relative border-t-2">
-        <span class="flex justify-start items-center ml-3 py-2 bg-white">
-          <%if @board.user.avatar.attached? %>
-            <% if @board.user == current_user %>
-              <%= link_to image_tag(current_user.avatar, class: "w-8 h-8 rounded-full border-2 border-emerald-500"), profile_path(current_user) %>
-            <% else %>
-              <%= link_to image_tag(@board.user.avatar, class: "w-8 h-8 rounded-full border-2 border-indigo-500"), user_page_path(@board.user) %>
-            <% end %>
-          <% else %>
-            <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border border-yellow-300" %>
-          <% end %>
-          <p class="text-sm font-bold mr-2 ml-2 hover:underline hover:underline-offset-2"><%= link_to @board.user.name, profile_path(@board.user) %></p>
-        </span>
-      </div>
-    </article>
-    <section>
-      <div class="flex justify-between items-center px-6 py-1 border-b-2">
-        <div class="flex items-center">
-        </div>
-        <div class="flex">
-          <div class="flex items-center">
-            <% if signed_in? %>
-              <% if current_user == @board.user %>
-                <span>
-                <%= button_to "編集", edit_board_path(@board), method: :get, class: "inline-block px-6 py-2 border-2 border-blue-400 text-blue-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
-                </span>
-                <span class="inline-block px-6 py-2 ml-2 border-2 border-red-600 text-red-600 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting">
-                  <%= button_to "削除", @board, { method: :delete, form: { data: { turbo_confirm: "この投稿を削除しますか？" } } } %>
-                </span>
+        <h4 class="font-bold text-slate-400">掲示板タイトル</h4>
+          <article>
+            <div class="py-2 border-b-2 px-2">
+              <p class="text-xl font-bold text-black py-0.5 ml-3"><%= @board.title %></p>
+              <p class="text-xs text-slate-600 mx-2 -mb-2 ml-3"><%= @board.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+            </div>
+            <div class="grid grid-cols-1 relative border-t-2">
+              <span class="flex justify-start items-center ml-3 py-2 bg-white">
+              <% if @board.anonymous_flag? %>
+                <p class="text-sm mr-2 ml-2">このスレは<span class="text-sm font-bold">名無しさん</span>によって立てられました。</p>
+              <% else %>
+                <p class="text-sm mr-2 ml-2">このスレは<span class="text-sm font-bold hover:underline hover:underline-offset-2"><%= link_to @board.user.name, profile_path(@board.user) %>さん</span>によって立てられました。</p>
               <% end %>
-            <% end %>
+              </span>
+            </div>
+          </article>
+            <div class="flex justify-between items-center px-6 py-1 border-b-2">
+              <div class="flex items-center">
+              </div>
+              <div class="flex">
+                <div class="flex items-center">
+                  <% if signed_in? %>
+                    <% if current_user == @board.user %>
+                      <span>
+                      <%= button_to "編集", edit_board_path(@board), method: :get, class: "inline-block px-6 py-2 border-2 border-blue-400 text-blue-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+                      </span>
+                      <span class="inline-block px-6 py-2 ml-2 border-2 border-red-600 text-red-600 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting">
+                        <%= button_to "削除", @board, { method: :delete, form: { data: { turbo_confirm: "この投稿を削除しますか？" } } } %>
+                      </span>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <p class="text-xs font-medium text-slate-500 my-2 ml-5">このスレッドの説明</p>
+          <div class="flex flex-row border border-gray-200 border-opacity-60 rounded-md overflow-hidden no-tap-highlighting bg-lime-100">
+              <div class="flex flex-col w-full bg-red-200">
+                <p class="tracking-wider leading-relaxed text-slate-600 text-sm pl-0.5 pt-0.5 ml-0.5 h-18 bg-green-300"><%= truncate(@board.description, length:400) %></p>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
     </section>
-    <section>
-      <div class="bg-white ml-1">
-        <p class="tracking-wide leading-loose whitespace-pre-wrap font-medium text-sm md:text-base py-4 mx-2"><%= @board.description %></p>
-      </div>
-    </section>
-        </div>
-      </div>
+    <section class="board__content">
     </section>
     <%= link_to boards_path, class: "inline-flex items-center h-6 w-22 px-1 py-4 ml-6 my-2 rounded-lg dark:text-white dark:bg-gray-600 border dark:hover:text-gray-900 focus:outline-none no-tap-highlighting" do %>
       <p class="text-xs font-semibold">一覧に戻る</p>
