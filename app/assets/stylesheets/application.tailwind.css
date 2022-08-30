@@ -45,7 +45,21 @@ turbo-frame::before {
   border: 1px red solid;
 }
 
+.board-loading {
+   background-image: url("Spinner-1s-128px.gif");
+   background-repeat: no-repeat;
+   background-position: center center;
+   background-size: cover;
+}
 
+.post-loading {
+   background-image: url("Spinner-1s-580px.gif");
+   background-repeat: no-repeat;
+   background-position: center center;
+   background-size: cover;
+   width: 60vh;
+   height: 60vh;
+}
 
   /* サイドバーのモーション */
 

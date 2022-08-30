@@ -15,8 +15,8 @@ class Board < ApplicationRecord
   private
   # 10MB以上の画像ファイルを許可しない
   def image_size
-    illustration.blobs.each do |image|
-      if image.byte_size > 10485760
+    if illustration.present?
+      if illustration.blob.byte_size > 10485760
         errors.add :illustration, 'ファイルサイズが大きすぎます。'
       end
     end
