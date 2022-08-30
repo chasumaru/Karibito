@@ -12,7 +12,7 @@
   <% end %>
 </section>
 <section>
-  <div class="grid itmes-cneter">
+  <div class="grid itmes-cneter mt-2">
     <%= search_form_for(
       @search,
         html: { 
@@ -24,12 +24,12 @@
         }) do |f| %>
       <div class="mx-8 mb-12">
         <div class="relative w-full" data-action="input->search-form#search">
-          <%= f.label :title_or_content_cont, "キーワード検索" %>
+          <%= f.label :title_or_content_cont, "キーワード検索" , class: 'text-sm text-slate-500 font-medium mt-2' %>
           <%= f.search_field :title_or_content_cont,
             autocomplete: "off",
             placeholder: "キーワードを入力してください。",
-            class: "relative block p-2.5 w-full z-20 text-sm text-slate-600 bg-gray-50 appearance-none rounded-lg  border border-slate-300 focus:ring  dark:bg-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" %>
-          <%= link_to "クリア", posts_path, class:"absolute right-0 top-18 px-1 inline-flex items-center justify-center rounded-md bg-gray-300" %> 
+            class: "relative block p-2 mb-1 w-full z-20 text-base text-slate-600 bg-gray-50 appearance-none rounded-lg  border border-slate-300 focus:ring  dark:bg-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" %>
+          <%= link_to "クリア", posts_path, class:"absolute right-1 top-18 px-2 py-1 inline-flex items-center justify-center rounded-md bg-gray-300" %> 
         </div>
       </div>
     <% end %>

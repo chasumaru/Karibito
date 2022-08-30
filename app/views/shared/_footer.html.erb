@@ -15,7 +15,7 @@
         <li class="my-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-24"><%= link_to 'よくある質問',about_path, class: "block" %> 
         <li class="my-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-24"><%= link_to 'お問い合わせ',"https://forms.gle/Z8WNE7HpJw3NnH8F6", class: "block" %> 
         <% if user_signed_in? %>
-        <li class="my-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-28"><%= link_to "アカウント情報", unsubscribe_path(current_user) %>
+        <li class="my-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-28"><%= link_to "アカウント設定", unsubscribe_path(current_user) %>
         <% end %>
     </ul>
 </div>
