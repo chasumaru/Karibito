@@ -18,7 +18,11 @@
       <div class="grid md:grid-cols-2 gap-x-2 gap-y-2 mx-4 my-2">
         <% @boards.each do |board| %>
           <div class="flex flex-row border border-gray-200 border-opacity-60 overflow-hidden no-tap-highlighting bg-lime-100">
-              <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: " w-32 h-32 object-center" %>
+            <% if board.illustration.attached? %>
+              <%= image_tag board.thumbnail, class: "w-32 h-32 object-center object-cover"%>
+            <% else %>
+              <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "w-32 h-32 object-center object-cover" %>
+            <% end %>
             <div class="flex flex-col w-full ml-1 max-h-32 bg-red-200">
               <p class="leading-tight text-base font-bold text-black bg-lime-300 pl-0.5 pt-0.5"><%= link_to truncate(board.title, length:26), board_path(board) %></p>
               <% if board.description %>
@@ -26,7 +30,7 @@
               <% else %>
                 <p class="tracking-wider leading-snug text-slate-600 text-xs pl-0.5 pt-0.5 ml-0.5 h-18">説明がありません</p>
               <% end %>
-              <div class="flex w-full flex-row justify-start relative bg-red-400">
+              <div class="flex w-full flex-row justify-start relative bg-red-400 leading-">
                 <span class="flex flex-row items-center">
                   <% if board.anonymous_flag? %>
                     <%= image_tag "no_avatar.png", class: "w-6 h-6 rounded-full border border-yellow-300" %>
@@ -47,7 +51,7 @@
                   <% end %>
                 </span>
               </div>
-              <p class="text-xs text-slate-500 ml-5"><%= how_long_ago(board) %></p>
+              <p class="text-xs text-slate-500 ml-5 -mt-0.5"><%= how_long_ago(board) %></p>
             </div>
           </div>
         <% end %>

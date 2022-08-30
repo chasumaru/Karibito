@@ -4,14 +4,20 @@
     <div class="grid grid-cols-1">
       <article>
         <div 
-        data-controller="character-counter" 
-        data-character-counter-countdown-value="true" 
-        class="py-2 border-b-2 px-2">
+          data-controller="character-counter" 
+          data-character-counter-countdown-value="true" 
+          class="py-2 border-b-2 px-2">
           <%= f.text_field :title, placeholder: "タイトル(必須)", data: {character_counter_target: "input"}, maxlength: 100, class: "w-full bg-amber-100 text-xl font-bold text-black rounded-md pl-2 py-1 mb-1" %>
            <p class="flex justify-end items-center text-xs md:text-base font-semibold mr-2">
             <strong data-character-counter-target="counter" class="font-bold text-sm md:text-lg px-0.5"></strong>文字
           </p>
         </div>
+
+        <div class="flex flex-col no-tap-highlighting bg-red-200 py-4">
+          <%= f.label :images, "サムネイル画像を設定", class: "font-semibold text-black ml-4" %>
+          <%= f.file_field :illustration, class: "ml-2" %>
+        </div>
+
         <div class="grid grid-cols-1 relative border-t-2">
           <span class="flex justify-start items-center ml-3 py-1 bg-white border-t">
             <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border border-yellow-300" %>
@@ -22,9 +28,9 @@
       </article>
       <section>
         <div 
-        data-controller="character-counter" 
-        data-character-counter-countdown-value="true" 
-        class="mx-2 mt-6 mb-2">
+          data-controller="character-counter" 
+          data-character-counter-countdown-value="true" 
+          class="mx-2 mt-6 mb-2">
           <span class="flex mb-1 tracking-wide  whitespace-pre-wrap font-medium text-base">
             <%= f.text_area :description, data: {controller: "autogrow", character_counter_target: "input"}, maxlength: 400, placeholder: "本文を入力", class: "text-black w-full pt-3 pl-1 pb-5 rounded-md bg-amber-100" %>
           </span>

@@ -38,6 +38,9 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def update
     #チェックした削除がある場合にのみ個別削除
     if params[:post][:image_ids]

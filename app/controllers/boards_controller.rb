@@ -1,6 +1,10 @@
 class BoardsController < ApplicationController
   before_action :sign_in_required, except: [:index, :show, :new, :create]
+  before_action :set_board, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
+
+
+  require "mini_magick"
 
   def index
     @boards  = Board.all
@@ -14,7 +18,7 @@ class BoardsController < ApplicationController
     @board = Board.new(board_params)
     @board.user = current_user
     if @board.save
-      redirect_to @board, notice: "新しいスレッドを作成しました。"
+      redirect_to boards_path, notice: "新しいスレッドを作成しました。"
     else
       flash.now.alert = 'スレッドの作成に失敗しました。'
       render :new, status: :unprocessable_entity
@@ -44,12 +48,14 @@ class BoardsController < ApplicationController
     redirect_to boards_path, notice: "スレッドを削除しました。", status: :see_other 
   end
   
-
   private
 
+  def set_board
+    @board = Board.find(params[:id])
+  end
 
   def board_params
-    params.require(:board).permit(:title, :description, :anonymous_flag)
+    params.require(:board).permit(:title, :description, :anonymous_flag, :illustration)
   end
 
   def ensure_correct_user
