@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
-    @comment = @current_user.comments.new(comment_params)
+    @comment = current_user.comments.new(comment_params)
     if @comment.save
       redirect_to request.referer, notice: "コメントを投稿しました。"
     else
@@ -37,9 +37,4 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:context, :reply_comment_id).merge(post_id: params[:post_id])
   end
 
-  def current_user
-    if session[:user_id]
-      @current_user = User.find_by(id: session[:user_id])
-    end
-  end
 end
