@@ -9,7 +9,9 @@ class PostsController < ApplicationController
 
 
   def index
-    @search = Post.ransack(params[:q])
+    @q = params[:q]
+    @q = @q.to_unsafe_hash.transform_values { |v| v.split(/[ |　]/) } if params[:q]
+    @search = Post.ransack(@q)
     @search.sorts = 'id desc' if @search.sorts.empty?
     @pagy, @posts = pagy @search.result
   end
