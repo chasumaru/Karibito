@@ -11,7 +11,11 @@ class PostsController < ApplicationController
   def index
     @q = params[:q]
     @q = @q.to_unsafe_hash.transform_values { |v| v.split(/[ |　]/) } if params[:q]
-    @search = Post.ransack(@q)
+    if params[:tag_name]
+      @search = Post.tagged_with("#{params[:tag_name]}").ransack(@q)
+    else
+      @search = Post.ransack(@q)
+    end 
     @search.sorts = 'id desc' if @search.sorts.empty?
     @pagy, @posts = pagy @search.result
   end
@@ -38,7 +42,8 @@ class PostsController < ApplicationController
     if @post.liked_users.present?
       @liked_users = @post.liked_users
     end
-    @tags = @post.tag_counts_on(:tags)
+    @tags = @post.tags
+    # @tags = @post.tag_counts_on(:tags)
   end
 
   def edit

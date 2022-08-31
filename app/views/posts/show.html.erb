@@ -8,6 +8,8 @@
         <p class="text-xs text-slate-600 mx-2 -mb-2 ml-3"><%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
         <% @tags.each do |tag| %>
           <%= "#{tag.name}(#{tag.taggings_count})" %>
+          <%= link_to tag, posts_path(tag_name: tag.name) %>
+          <%= tag.taggings_count %>
         <% end %>
       </div>
       <div class="grid grid-cols-1 relative border-t-2">
