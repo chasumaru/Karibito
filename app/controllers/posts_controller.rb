@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :sign_in_required, except: [:index, :show]
+  before_action :sign_in_required, except: [:index, :show, :tags]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
 
@@ -79,6 +79,10 @@ class PostsController < ApplicationController
       # liked = Like.where(post_id: @post.id).pluck(:user_id)
       # @liked_users = User.find(liked)
     end
+  end
+
+  def tags
+    @tags =  @tags = ActsAsTaggableOn::Tag.all.order("name")
   end
 
 
