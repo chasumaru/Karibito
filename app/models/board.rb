@@ -2,6 +2,7 @@ class Board < ApplicationRecord
   belongs_to :user, foreign_key: :user_id, optional: true
   has_many :board_comment, dependent: :destroy
   has_one_attached :illustration
+  acts_as_taggable
   
   # validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: 100 }

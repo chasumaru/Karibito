@@ -6,6 +6,9 @@
       <div class="py-2 border-b-2 px-2">
         <p class="text-xl font-bold text-black py-0.5 ml-3"><%= @post.title %></p>
         <p class="text-xs text-slate-600 mx-2 -mb-2 ml-3"><%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+        <% @tags.each do |tag| %>
+          <%= "#{tag.name}(#{tag.taggings_count})" %>
+        <% end %>
       </div>
       <div class="grid grid-cols-1 relative border-t-2">
         <span class="flex justify-start items-center ml-3 py-2 bg-white">

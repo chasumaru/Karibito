@@ -89,3 +89,5 @@ end
 
 
 gem "inline_svg", "~> 1.8"
+
+gem "acts-as-taggable-on", "~> 9.0"

@@ -30,12 +30,13 @@ class PostsController < ApplicationController
   end
 
   def show
-    @comment     = Comment.new
-    @comments    = @post.comments.includes(:user)
-    @like        = Like.new
+    @comment  = Comment.new
+    @comments = @post.comments.includes(:user)
+    @like     = Like.new
     if @post.liked_users.present?
       @liked_users = @post.liked_users
     end
+    @tags = @post.tag_counts_on(:tags)
   end
 
   def edit
@@ -79,10 +80,10 @@ class PostsController < ApplicationController
   def set_post
     @post = Post.find(params[:id])
   end
-
+  
 
   def post_params
-    params.require(:post).permit(:title, :content, images: [])
+    params.require(:post).permit(:title, :content, :tag_list, images: [])
   end
 
   def ensure_correct_user

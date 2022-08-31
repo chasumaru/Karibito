@@ -37,6 +37,7 @@ class User < ApplicationRecord
                                   dependent:   :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+  acts_as_taggable
 
   def send_devise_notification(notification, *args)
     # deliver_laterを使って非同期送信するように修正
