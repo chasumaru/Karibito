@@ -30,7 +30,7 @@
             placeholder: "キーワードを入力してください。",
             class: "relative block p-2 mb-1 w-full z-20 text-base text-slate-600 bg-gray-50 hover:bg-gray-200 appearance-none rounded-lg border border-slate-300 focus:ring dark:bg-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" %>
           <%= link_to "クリア", posts_path, class:"absolute right-1 top-18 px-2 py-1 inline-flex items-center justify-center rounded-md bg-gray-300 no-tap-highlighting" %> 
-          <%= link_to "タグ一覧", tags_posts_path, class:"absolute right-22 top-18 inline-flex items-center justify-center rounded-md tracking-wider px-2 py-1 bg-blue-100 text-blue-800 font-semibold rounded dark:bg-blue-200 dark:text-blue-800 hover:bg-blue-300 no-tap-highlighting" %> 
+          <%= link_to "タグ一覧", tags_posts_path, class:"absolute right-22 top-18 inline-flex items-center justify-center rounded-md tracking-wider px-2 py-1 bg-green-100 text-green-800 font-semibold rounded dark:bg-green-200 dark:text-green-900 hover:bg-green-300 no-tap-highlighting" %>
         </div>
       </div>
     <% end %>
@@ -42,7 +42,7 @@
     <% if @posts.present? %>
       <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-3 mx-8">
         <% @posts.each do |post| %>
-          <div class="border-2 border-gray-200 border-opacity-60 rounded-xl overflow-hidden no-tap-highlighting bg-green-200">
+          <div class="border-2 border-gray-200 border-opacity-60 rounded-xl overflow-hidden no-tap-highlighting">
             <% if post.images.attached? %>
               <%= link_to image_tag(post.thumbnail, alt: "サムネイル画像"), post_path(post), class: "rounded-t-xl w-full object-center" %>
             <% else %>
@@ -91,7 +91,7 @@
       <div class="flex w-full flex-col justify-center items-center mb-48">
         <span class ="relative">
           <div class="h-36 w-36 bg-white rounded-full -ml-1.5 "></div>
-          <%= image_tag 'ojigi_animal_kuma.png', class:' absolute top-6 left-4 z-10 w-24 h-28 p-4' %>
+          <%= image_tag 'ojigi_animal_usagi.png', class:' absolute top-6 left-4 z-10 w-24 h-28 p-4' %>
         </span>
         <p class="font-medium py-2">検索結果が見つかりませんでした。</p>
       </div>

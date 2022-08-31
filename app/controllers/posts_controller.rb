@@ -82,7 +82,7 @@ class PostsController < ApplicationController
   end
 
   def tags
-    @tags =  @tags = ActsAsTaggableOn::Tag.all.order("name")
+    @tags = Post.tag_counts_on(:tags).order("name")
   end
 
 

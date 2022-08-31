@@ -12,7 +12,10 @@
             <strong data-character-counter-target="counter" class="font-bold text-sm md:text-lg px-0.5"></strong>文字
           </p>
         </div>
-
+        <div class="py-2 border-b-2 px-2">
+          <p class='text-xs font-semibold text-stone-300 ml-2 my-1'> 複数の場合は(,) で区切って下さい。(例: シカ,罠猟..)</p>
+          <%= f.text_field :tag_list, data: {character_counter_target: "input"}, value: @board.tag_list.join(','), placeholder: "タグを入力", maxlength: 40, class: "w-full bg-amber-100 text-base font-bold text-black rounded-md pl-2 py-1 mb-1" %>
+        </div>
         <div class="flex flex-col no-tap-highlighting bg-red-200 py-4">
           <%= f.label :images, "サムネイル画像を設定", class: "font-semibold text-black ml-4" %>
           <%= f.file_field :illustration, class: "ml-2" %>

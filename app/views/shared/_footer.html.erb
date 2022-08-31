@@ -8,9 +8,7 @@
     </div>
     <div class="block mb-4">
       <li><%= link_to '狩猟掲示板',new_board_path, class: "block no-tap-highlighting hover:underline hover:underline-offset-4 block w-20" %></li>
-      <% if user_signed_in? %>
-        <li class="my-1"><%= link_to 'スレを立てる',new_post_path, class: "block no-tap-highlighting hover:underline hover:underline-offset-4 block w-24" %></li> 
-      <% end %> 
+      <li class="my-1"><%= link_to 'スレを立てる',new_post_path, class: "block no-tap-highlighting hover:underline hover:underline-offset-4 block w-24" %></li>  
     </div>
   </ul>
   <ul class="flex-auto w-48">

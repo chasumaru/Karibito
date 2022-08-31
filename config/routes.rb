@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :boards do
     resources :board_comments, only: [:create, :edit, :update, :destroy]
+    get :tags, on: :collection
   end
 
   
@@ -38,6 +39,4 @@ Rails.application.routes.draw do
       get '/term', action: 'term', as: 'term'
       get '/manual', action: 'manual', as: 'manual'
     end
-
-
 end

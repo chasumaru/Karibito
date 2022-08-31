@@ -1,5 +1,5 @@
 class BoardsController < ApplicationController
-  before_action :sign_in_required, except: [:index, :show, :new, :create]
+  before_action :sign_in_required, except: [:index, :show, :new, :create, :tags]
   before_action :set_board, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
 
@@ -7,7 +7,15 @@ class BoardsController < ApplicationController
   require "mini_magick"
 
   def index
-    @boards  = Board.all
+    @q = params[:q]
+    @q = @q.to_unsafe_hash.transform_values { |v| v.split(/[ |　]/) } if params[:q]
+    if params[:tag_name]
+      @search = Board.tagged_with("#{params[:tag_name]}").ransack(@q)
+    else
+      @search = Board.ransack(@q)
+    end 
+    @search.sorts = 'id desc' if @search.sorts.empty?
+    @pagy, @boards = pagy @search.result
   end
 
   def new
@@ -29,6 +37,7 @@ class BoardsController < ApplicationController
     @board          = Board.find(params[:id])
     @board_comment  = BoardComment.new
     @board_comments = @board.board_comment.includes(:user)
+    @tags = @board.tags
   end
 
   def edit
@@ -47,6 +56,10 @@ class BoardsController < ApplicationController
     @board.destroy
     redirect_to boards_path, notice: "スレッドを削除しました。", status: :see_other 
   end
+
+  def tags
+    @tags = Board.tag_counts_on(:tags).order("name")
+  end
   
   private
 
@@ -55,7 +68,7 @@ class BoardsController < ApplicationController
   end
 
   def board_params
-    params.require(:board).permit(:title, :description, :anonymous_flag, :illustration)
+    params.require(:board).permit(:title, :description, :anonymous_flag, :illustration, :tag_list)
   end
 
   def ensure_correct_user
