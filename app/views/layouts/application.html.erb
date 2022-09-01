@@ -28,5 +28,13 @@
         </footer>
       </div>
     </div>
+    <% if signed_in? %>
+      <% if unchecked_notifications.any? %>
+        <i class="fa fa-circle" style="color: gold;"></i>
+      <% end %>
+      <li>
+          <%= link_to "NOTICE", notifications_path, class: "btn-default" %>
+      </li>
+    <% end %>
   </body>
 </html>

@@ -25,8 +25,6 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :boards
   has_many :board_comments
-
-
   has_many :likes, dependent: :destroy
   has_many :liked_posts, through: :likes, source: :post
   has_one_attached :avatar
@@ -40,6 +38,8 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   acts_as_taggable_on :positions
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
 
   def send_devise_notification(notification, *args)
     # deliver_laterを使って非同期送信するように修正
@@ -64,6 +64,18 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
+
+  def create_notification_follow!(current_user)
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
+    if temp.blank?
+      notification = current_user.active_notifications.new(
+        visited_id: id,
+        action: 'follow'
+      )
+      notification.save if notification.valid?
+    end
+  end
+
 
   # # 現状、不要
   # def resized_avatar

@@ -15,6 +15,13 @@ Rails.application.routes.draw do
     get :tags, on: :collection
   end
 
+  resources :notifications, only: :index
+  resources :notifications do 
+    collection do
+      delete 'destroy_all'
+    end
+  end
+
   
   devise_for :users,
   module: 'users',
