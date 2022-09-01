@@ -23,7 +23,6 @@
               <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "(必須)", maxlength: 30, class: " w-full bg-amber-100 font-bold text-black text-lg rounded-md font-semibold py-1 pl-2" %>
             </div>
           </div>
-          <%# 全体がずれる原因 %>
           <div class="flex flex-col ml-4 mt-8 mb-6">
             <%= f.label :avatar, "(プロフィール画像の設定)",class:"font-semibold mb-1" %>
             <%= f.file_field :avatar, class: "ml-1" %>
@@ -37,6 +36,10 @@
               <div class="ml-3 mt-2 mb-3">
                 <%= f.label :email, "(メールアドレス)", class: "font-semibold block mb-1" %>
                 <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "(必須)", class: "bg-amber-100 font-bold text-black rounded-md font-semibold py-1 pl-2" %>
+              </div>
+              <div class="ml-3 mt-2 mb-3">
+                <p class='text-xs font-semibold ml-2 my-1'> 複数の場合は(,) で区切って下さい。(例: 罠猟師, 猟師見習い..)</p>
+                <%= f.text_field :position_list, data: {character_counter_target: "input"}, value: resource.position_list.join(','), placeholder: "タグ(肩書き)を入力", maxlength: 40, class: "w-full bg-amber-100 text-base font-bold text-black rounded-md pl-2 py-1 mb-1" %>
               </div>
               <div 
               data-controller="character-counter" 

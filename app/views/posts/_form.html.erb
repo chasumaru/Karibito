@@ -13,7 +13,7 @@
           </p>
         </div>
         <div class="py-2 border-b-2 px-2">
-          <p class='text-xs font-semibold text-stone-300 ml-2 my-1'> 複数の場合は(,) で区切って下さい。(例: シカ,罠猟..)</p>
+          <p class='text-xs font-semibold ml-2 my-1'> 複数の場合は(,) で区切って下さい。(例: シカ,罠猟..)</p>
           <%= f.text_field :tag_list, data: {character_counter_target: "input"}, value: @post.tag_list.join(','), placeholder: "タグを入力", maxlength: 40, class: "w-full bg-amber-100 text-base font-bold text-black rounded-md pl-2 py-1 mb-1" %>
         </div>
         <div class="grid grid-cols-1 relative border-t-2">

@@ -1,0 +1,8 @@
+<div class='grid grid-cols-1 justify-center mx-2 my-4'>
+  <h2 class='inline-flex justify-center font-bold'>肩書き一覧</h2>
+  <div class='grid grid-cols-1 sm:grid-cols-2 justify-center mx-2 py-2 my-3 border-2 rounded-md'>
+    <% @positions.each do |p| %>
+      <p class='inline-flex justify-center font-medium hover:underline mb-2'><%= link_to p, users_path(tag_name: p.name), class:'font-medium hover:underline mb0.5' %><%= "(#{p.taggings_count})" %></p>
+    <% end %>
+  </div>
+</div>

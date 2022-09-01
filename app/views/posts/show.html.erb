@@ -3,11 +3,13 @@
 <div class="grid grid-cols-1 mx-auto max-w-screen-lg bg-white">
   <div class="grid grid-cols-1">
     <article>
-      <span class='flex flex-wrap ml-5 mt-2'>
-        <% @tags.each do |tag| %>
-          <%= link_to tag, posts_path(tag_name: tag.name), class:'bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 mb-1 mr-1.5 rounded dark:bg-green-200 dark:text-green-900 hover:bg-green-300 no-tap-highlighting' %>
-        <% end %>
-      </span>
+      <% if @tags.present? %>
+        <span class='flex flex-wrap ml-5 mt-2'>
+          <% @tags.each do |tag| %>
+            <%= link_to tag, posts_path(tag_name: tag.name), class:'bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 mb-1 mr-1.5 rounded dark:bg-green-200 dark:text-green-900 hover:bg-green-300 no-tap-highlighting' %>
+          <% end %>
+        </span>
+      <% end %>
       <div class="py-2 border-b-2 px-2">
         <p class="text-xl font-bold text-black py-0.5 ml-3"><%= @post.title %></p>
         <p class="text-xs text-slate-600 mx-2 ml-3"><%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></p>

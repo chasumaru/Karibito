@@ -1,4 +1,14 @@
 class User < ApplicationRecord
+
+
+  # Valdation
+  validates :name, presence: true, length: { maximum: 30 }
+  validates :profile, length: { maximum: 200 }
+  validates :avatar, presence: true, unless: :avatar_not_attached?
+  validates :background, presence: true, unless: :background_not_attached?
+  validate :avatar_size, unless: :avatar_not_attached?
+  validate :background_size, unless: :background_not_attached?
+  
   # Include default devise modules.
   devise :database_authenticatable,
          :registerable,
@@ -9,14 +19,6 @@ class User < ApplicationRecord
          :validatable,
          :timeoutable
   #  :omniauthable, omniauth_providers: [:twitter]
-
-  # Valdation
-  validates :name, presence: true, length: { maximum: 30 }
-  validates :profile, length: { maximum: 200 }
-  validates :avatar, presence: true, unless: :avatar_not_attached?
-  validates :background, presence: true, unless: :background_not_attached?
-  validate :avatar_size, unless: :avatar_not_attached?
-  validate :background_size, unless: :background_not_attached?
 
   # Assortiation
   has_many :posts, dependent: :destroy
@@ -37,7 +39,7 @@ class User < ApplicationRecord
                                   dependent:   :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
-  acts_as_taggable
+  acts_as_taggable_on :positions
 
   def send_devise_notification(notification, *args)
     # deliver_laterを使って非同期送信するように修正

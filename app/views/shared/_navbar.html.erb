@@ -13,12 +13,12 @@
         </div>
       </div>
       <div class="relative flex-1 flex items-center sm:items-stretch sm:justify-start">
-        <div class="flex-shrink-0 flex items-center">
+        <div class="flex-shrink-0 flex items-center -mb-1">
           <%= link_to "Karibito", root_path, class:"text-xl md:text-2xl block absolute items-center left-14 md:left-16 font-semibold no-tap-highlighting" %>
           <%= link_to image_tag('Karibito_logo.png', class:'w-10 md:w-12 no-tap-highlighting'), root_path %>
         </div>
         <div class="w-full hidden lg:block">
-          <div class="flex w-full flax-auto justify-center items-center space-x-3 py-2 ml-28">
+          <div class="flex w-full flax-auto justify-center items-center space-x-3 py-2 ml-24">
             <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black">
               <%= button_to 'サービス概要', about_path, method: :get %> 
             </div>
@@ -42,7 +42,7 @@
             <% end %>
           </div>
         </div>
-        <div class='flex w-full lg:w-32 justify-end items-end py-0.5 mr-18 mt-1 lg:-mt-1 lg:mr-0'>
+        <div class='flex w-full lg:w-32 h-10 justify-end items-end py-0.5 mr-16 mt-2 lg:mr-0'>
           <%= button_to boards_path, method: :get, class: "inline-flex rounded-full p-2 mr-4 lg:mr-3 hover:bg-gray-100" do %>
             <img src="https://img.icons8.com/ios-filled/50/000000/noticeboard.png" class='w-6 h-6' />
           <% end %>
@@ -53,7 +53,7 @@
       </div>
 
       <div class="user-info hidden lg:block">
-        <div class="absolute inset-y-0 right-0 flex items-center pr-2 mt-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+        <div class="absolute inset-y-0 right-0 flex items-center pr-2 mt-1 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <%= button_to posts_path, method: :get, class: "bg-white p-1 rounded-full text-gray-400 hover:text-black hover:bg-gray-100" do %>
             <span class="sr-only">View notifications</span>
             <!-- Heroicon name: outline/bell -->

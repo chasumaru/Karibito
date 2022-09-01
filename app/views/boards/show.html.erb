@@ -3,11 +3,13 @@
 <div class="grid grid-cols-1 mx-auto max-w-screen-lg bg-white">
   <div class="grid grid-cols-1">
     <section class="board__introduction">
-      <span class='flex flex-wrap ml-5 mt-2 mb-4'>
-        <% @tags.each do |tag| %>
-          <%= link_to tag, boards_path(tag_name: tag.name), class:'bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 mb-1 mr-1.5 rounded dark:bg-blue-200 dark:text-blue-800 hover:bg-blue-300' %>
-        <% end %>
-      </span>
+      <% if @tags.present? %>
+        <span class='flex flex-wrap ml-5 mt-2 mb-4'>
+          <% @tags.each do |tag| %>
+            <%= link_to tag, boards_path(tag_name: tag.name), class:'bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 mb-1 mr-1.5 rounded dark:bg-blue-200 dark:text-blue-800 hover:bg-blue-300' %>
+          <% end %>
+        </span>
+      <% end %>
       <div class="grid grid-cols-1 justify-center bg-neutral-100 border-x-8 border-white px-3">
         <div class="w-full bg-white py-2 px-4 my-3">
         <h4 class="font-bold text-slate-400">掲示板タイトル</h4>

@@ -27,6 +27,8 @@ Rails.application.routes.draw do
     
     scope module: :users do
       get '/:id/profile', to: 'accounts#show', as: 'profile'
+      get '/users', to: 'accounts#index', as: 'users'
+      get '/users/status', to: 'accounts#positions', as: 'positions'
       get '/:id/unsubscribe', to: 'accounts#unsubscribe', as: 'unsubscribe'
       get '/:id/following', to: 'accounts#following', as: 'following'
       get '/:id/followers', to: 'accounts#followers', as: 'followers'

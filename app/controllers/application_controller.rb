@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
 
   # name属性のstrong parameterを追加
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-    devise_parameter_sanitizer.permit(:account_update, keys: %i[name profile avatar background])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name email password password_confirmation])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[name profile avatar background position_list])
   end
 end

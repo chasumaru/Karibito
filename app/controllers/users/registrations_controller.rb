@@ -11,7 +11,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    @user = User.new(user_params)
+    @user = User.new(sign_up_params)
     if @user.save
       flash[:notice] = 'ユーザー認証メールを送信いたしました。認証が完了しましたらログインしてください。'
       redirect_to root_path
@@ -83,7 +83,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_sign_up_path_for(resource)
   #   super(resource)
   # end
-  def after_update_path_for(_resource)
+  def after_update_path_for(resource)
     profile_path(current_user)
   end
 
@@ -96,9 +96,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource.update_without_password(params)
   end
 
-  private
-
-  def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar, :background, :avatar_id)
-  end
 end
