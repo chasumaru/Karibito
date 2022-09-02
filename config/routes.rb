@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     get :tags, on: :collection
   end
 
+  # 不要なルーティングが含まれるため省略して書きたい
   resources :notifications, only: :index
   resources :notifications do 
     collection do

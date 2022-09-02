@@ -5,19 +5,15 @@ class CreateNotifications < ActiveRecord::Migration[7.0]
       t.integer :visited_id, null: false
       t.integer :post_id
       t.integer :comment_id
-      t.integer :board_id
-      t.integer :board_comment_id
       t.string :action, default: '', null: false
       t.boolean :checked, default: false, null: false
 
       t.timestamps
     end
-    
+
     add_index :notifications, :visitor_id
     add_index :notifications, :visited_id
     add_index :notifications, :post_id
     add_index :notifications, :comment_id
-    add_index :notifications, :board_id
-    add_index :notifications, :board_comment_id
   end
 end

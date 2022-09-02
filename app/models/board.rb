@@ -2,7 +2,6 @@ class Board < ApplicationRecord
   belongs_to :user, foreign_key: :user_id, optional: true
   has_many :board_comment, dependent: :destroy
   has_one_attached :illustration
-  has_many :notifications, dependent: :destroy
   acts_as_taggable
   
   # validates :user_id, presence: true
