@@ -3,9 +3,8 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @comment = current_user.comments.new(comment_params)
-    @coment_post = @coment.post
     if @comment.save
-      @comment_post.create_notification_comment!(current_user, @comment.id)
+      @post.create_notification_comment!(current_user, @comment.id)
       redirect_to request.referer, notice: "コメントを投稿しました。"
     else
       redirect_to request.referer, alert: "コメントの作成に失敗しました。", status: :see_other 

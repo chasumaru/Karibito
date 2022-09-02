@@ -12,7 +12,7 @@ module NotificationsHelper
 	    when "like" then
 	      tag.a(notification.visitor.name, href:profile_path(@visitor), style:"font-weight: bold;")+"が"+tag.a('あなたの投稿', href:post_path(notification.post_id), style:"font-weight: bold;")+"にいいねしました"
 	    when "comment" then
-	    	@comment = Comment.find_by(id: @visitor_comment)&.content
+	    	@comment = Comment.find_by(id: @visitor_comment)&.context
 	    	tag.a(@visitor.name, href:profile_path(@visitor), style:"font-weight: bold;")+"が"+tag.a('あなたの投稿', href:post_path(notification.post_id), style:"font-weight: bold;")+"にコメントしました"
 	  end
 	end

@@ -1,4 +1,5 @@
 class NotificationsController < ApplicationController
+  before_action :sign_in_required, only: :index
 
 	def index
       #current_userの投稿に紐づいた通知一覧
