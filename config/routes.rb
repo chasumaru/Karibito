@@ -15,12 +15,9 @@ Rails.application.routes.draw do
     get :tags, on: :collection
   end
 
-  # 不要なルーティングが含まれるため省略して書きたい
   resources :notifications, only: :index
-  resources :notifications do 
-    collection do
-      delete 'destroy_all'
-    end
+  scope :notifications do
+    delete '/destroy_all', to: 'notifications#destroy_all', as: 'destroy_all_notifications'
   end
 
   

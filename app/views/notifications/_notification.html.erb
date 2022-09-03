@@ -1,13 +1,18 @@
-<% visitor = notification.visitor %>
-<% post = notification.post %>
+<div class="flex items-center relative border-b py-2 px-3 bg-white">
+  <div class="flex justify-start items-cneter">
+    <div class="no-tap-highlighting mr-2">
+      <% if notification.visitor.avatar.attached? %>
+        <% if notification.visitor == current_notification.visitor %>
+          <%= link_to(image_tag(current_notification.visitor.avatar, class: "w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-emerald-500"), profile_path(notification.visitor)) %>
+        <% else %>
+          <%= link_to(image_tag(notification.visitor.avatar, class: "w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-indigo-500"), profile_path(notification.visitor)) %>
+        <% end %>
+      <% else %>
+        <%=link_to(image_tag("no_avatar.png", class: "w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-yellow-300"), profile_path(notification.visitor)) %>
+      <% end %>
+    </div>
+  </div>
+    <%= notification_form(notification) %>
+    <p class="absolute right-1 bottom-1 w-12 text-xs text-slate-400"><%= how_long_ago(notification) %></p>
 
-<div class="user-view clearfix ">
-  <%= link_to profile_path(notification.visitor) do %>
-    <%= image_tag "no_avatar.png" %>
-  <% end %>
-  <%= notification_form(notification) %><span class="moderate-font"><%= " (#{time_ago_in_words(notification.created_at)} 前)" %></span>
-  <br>
-  <% if !@comment.nil? %>
-    <p class="moderate-font text-center" style="color: #C0C0C0;"><%= @comment %></p>
-  <% end %>
 </div>
