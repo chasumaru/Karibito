@@ -25,7 +25,7 @@
           </div>
           <div class="flex flex-col ml-4 mt-8 mb-6">
             <%= f.label :avatar, "(プロフィール画像の設定)",class:"font-semibold mb-1" %>
-            <%= f.file_field :avatar, class: "ml-1" %>
+            <%= f.file_field :avatar, direct_upload: true, class: "ml-1" %>
             <%= f.label :background, "(背景画像の設定)", class: "font-semibold mb-1 mt-4" %>
             <%= f.file_field :background, class: "ml-1" %>
           </div>

@@ -18,7 +18,7 @@
         </div>
         <div class="flex flex-col no-tap-highlighting bg-red-200 py-4">
           <%= f.label :images, "サムネイル画像を設定", class: "font-semibold text-black ml-4" %>
-          <%= f.file_field :illustration, class: "ml-2" %>
+          <%= f.file_field :illustration, direct_upload: true, class: "ml-2" %>
         </div>
 
         <div class="grid grid-cols-1 relative border-t-2">

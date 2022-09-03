@@ -62,7 +62,7 @@
 
         <div class="flex flex-col no-tap-highlighting bg-red-200 py-4">
           <%= f.label :images, "画像を追加", class: "font-semibold text-black ml-4" %>
-          <%= f.file_field :images, multiple: true, class: "ml-2" %>
+          <%= f.file_field :images, multiple: true, direct_upload: true, class: "ml-2" %>
         </div>
 
 
