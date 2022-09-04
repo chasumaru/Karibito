@@ -24,12 +24,13 @@ class Users::AccountsController < ApplicationController
 
   def following
     @user = User.find(params[:id])
-    @users = @user.following
+    @pagy, @users = pagy(@user.following)
+    
   end
 
   def followers
     @user = User.find(params[:id])
-    @users = @user.followers
+    @pagy, @users = pagy(@user.followers)
   end
 
   def positions
