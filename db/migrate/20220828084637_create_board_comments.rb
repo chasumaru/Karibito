@@ -4,7 +4,6 @@ class CreateBoardComments < ActiveRecord::Migration[7.0]
       t.text :description
       t.integer   :user_id, index: true
       t.references :board, null: false, foreign_key: true
-      t.integer :reply_comment_id
 
       t.timestamps
     end

@@ -43,9 +43,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_114016) do
     t.text "description"
     t.integer "user_id"
     t.bigint "board_id", null: false
-    t.integer "reply_comment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "anonymous_flag", default: false, null: false
     t.index ["board_id"], name: "index_board_comments_on_board_id"
     t.index ["user_id"], name: "index_board_comments_on_user_id"
   end

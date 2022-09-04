@@ -4,8 +4,6 @@ class BoardsController < ApplicationController
   before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
 
 
-  require "mini_magick"
-
   def index
     @q = params[:q]
     @q = @q.to_unsafe_hash.transform_values { |v| v.split(/[ |　]/) } if params[:q]
@@ -62,13 +60,13 @@ class BoardsController < ApplicationController
   end
   
   private
+  
+  def board_params
+    params.require(:board).permit(:title, :description, :anonymous_flag, :illustration, :tag_list)
+  end
 
   def set_board
     @board = Board.find(params[:id])
-  end
-
-  def board_params
-    params.require(:board).permit(:title, :description, :anonymous_flag, :illustration, :tag_list)
   end
 
   def ensure_correct_user
