@@ -39,12 +39,12 @@
     <% if @boards.present? %>
       <div class="grid md:grid-cols-2 gap-x-2 gap-y-2 mx-4 my-2">
         <% @boards.each do |board| %>
-          <div class="flex flex-row border-2 border-gray-200 rounded-sm border-opacity-60 no-tap-highlighting">
+          <div class="flex flex-row border-2 border-gray-200 rounded-md border-opacity-60 no-tap-highlighting">
             <div class="w-48 h-32">
               <% if board.illustration.attached? %>
-                <%= image_tag board.thumbnail, class: "w-full h-full object-center object-cover board-loading bg-red-200" %>
+                <%= image_tag board.thumbnail, class: "w-full h-full object-center object-cover board-loading bg-red-200 rounded-l-md" %>
               <% else %>
-                <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "w-full h-full object-center object-cover board-loading" %>
+                <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "w-full h-full object-center object-cover board-loading rounded-l-md" %>
               <% end %>
               </div>
             <div class="flex flex-col w-full ml-1 max-h-32">

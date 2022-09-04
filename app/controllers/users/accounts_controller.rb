@@ -4,8 +4,9 @@ class Users::AccountsController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @pagy_post, @posts = pagy(@user.posts, items: 18)
     @positions = @user.positions
+    @pagy_post, @posts = pagy(@user.posts, items: 18)
+    @pagy_board, @boards = pagy(@user.boards, items: 12)
   end
   
   def index

@@ -44,4 +44,14 @@ class CommentsController < ApplicationController
   def set_comment
     @comment = Comment.find(params[:id])
   end
+
+  def ensure_correct_user
+    @comment = Comment.find_by(id: params[:id])
+    if @comment.user_id.nil?
+      redirect_to comments_path, notice: "権限がありません"
+    elsif
+      @comment.user_id != current_user.id
+      redirect_to comments_path, notice: "権限がありません"
+    end
+  end
 end

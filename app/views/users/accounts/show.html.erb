@@ -40,7 +40,7 @@
       </span>
     </div>
     <div class="profile__details">
-      <div class="grid mx-3 md:mx-12 mb-4">
+      <div data-controller="tabs" class="grid mx-3 md:mx-12 mb-4">
         <div class="mx-4">
           <div class="border-y leading-loose tracking-wide font-light text-sm pb-6 ml-2 my-2">
             <% if @user.profile.present? %>
@@ -50,26 +50,26 @@
             <% end %>
           </div>
         </div>
-        <div class="grid grid-cols-11 py-2 mb-2 mr-1">
-          <div class="grid col-start-1 col-span-2 justify-items-center -mr-16">
-            <p class="text-xs font-black mb-2 ">日記</p>
+        <div class="grid grid-cols-12 py-2 mb-1 mr-12">
+          <div class="grid col-start-2 col-span-2 justify-items-center py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md" data-tabs-target="tab" data-action="click->tabs#change">
+            <p class="text-xs font-black mb-2">日記</p>
             <p class="text-md font-black underline underline-offset-4"><%= @user.posts.count %></p>
           </div>
-          <div class="grid col-start-4 col-span-2 justify-items-center -mr-6">
+          <div class="grid col-start-5 col-span-2 justify-items-center py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md" data-tabs-target="tab" data-action="click->tabs#change">
             <p class="text-xs font-black mb-2">掲示板</p>
             <p class="text-md font-black underline underline-offset-4">0</p>
           </div>
-          <%= link_to following_path(@user), class: "grid col-start-7 col-span-2 justify-items-center -ml-6 no-tap-highlighting" do %>
+          <%= link_to following_path(@user), class: "grid col-start-8 col-span-2 justify-items-center no-tap-highlighting py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md" do %>
             <p class="text-xs font-black mb-2">フォロー</p>
             <p class="text-md font-black underline underline-offset-4"><%= @user.following.count %></p>
           <% end %>
-          <%= link_to followers_path(@user), class: "grid col-start-10 col-span-2 justify-items-center -ml-16 no-tap-highlighting" do %>
+          <%= link_to followers_path(@user), class: "grid col-start-11 col-span-2 justify-items-center no-tap-highlighting py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md" do %>
             <p class="text-xs font-black mb-2">フォロワー</p>
             <p class="text-md font-black underline underline-offset-4"><%= @user.followers.count %></p>
           <% end %>
         </div>
         <div class="grid justify-center">
-          <div class="my-8">
+          <div class="my-6">
             <% if current_user != @user %>
               <% if current_user.following?(@user) %>
                 <%= form_with(model: current_user.active_relationships.find_by(followed_id: @user.id), html: { method: :delete }) do |f| %>
@@ -84,7 +84,9 @@
             <% end %>
           </div>
         </div>
-        <div>
+
+
+        <div data-tabs-target="panel" class="hidden">
           <% if @posts.present? %>
             <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-3 mx-8">
               <% (@posts).each do |post| %>
@@ -104,6 +106,29 @@
             </div>
           <% end %>
         </div>
+
+        <div data-tabs-target="panel" class="hidden">
+          <% if @boards.present? %>
+            <div class="grid grid-cols-1 gap-x-2 gap-y-3 mx-8">
+              <% (@boards).each do |board| %>
+                <%= render partial: "board", locals: { board: board} %> 
+              <% end %>
+            </div>
+            <div class="flex justify-center mt-10 mb-6">
+              <%= pagy_nav(@pagy_board).html_safe %>
+            </div>
+          <% else %>
+            <div class="flex w-full flex-col justify-center items-center mb-48">
+              <span class ="relative">
+                <div class="h-36 w-36 bg-white rounded-full -ml-1.5 "></div>
+                <%= image_tag 'ojigi_animal_kuma.png', class:' absolute top-6 left-4 z-10 w-24 h-28 p-4' %>
+              </span>
+              <p class="font-medium py-2">まだ日記がありません。</p>
+            </div>
+          <% end %>
+        </div>
+
+
       </div>
     </div>
   </section>
