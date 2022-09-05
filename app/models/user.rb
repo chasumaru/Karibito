@@ -17,7 +17,8 @@ class User < ApplicationRecord
          :confirmable,
          :lockable,
          :validatable,
-         :timeoutable
+         :timeoutable,
+         :omniauthable, :omniauth_providers => [:facebook]
   #  :omniauthable, omniauth_providers: [:twitter]
 
   # Assortiation
@@ -76,6 +77,25 @@ class User < ApplicationRecord
     end
   end
 
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.name = auth.info.name   # Userモデルにnameカラムがあるとする
+      user.image = auth.info.image # Userモデルにimageカラムがあるとする
+      # Deviseのconfirmableを使い、かつプロバイダがメールのバリデーションを行っている場合は、
+      # 以下の行のコメントを解除して確認メールをスキップする
+      # user.skip_confirmation!
+    end
+  end
+  
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
+  end
 
   # # 現状、不要
   # def resized_avatar

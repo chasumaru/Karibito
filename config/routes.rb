@@ -22,12 +22,13 @@ Rails.application.routes.draw do
 
   
   devise_for :users,
+  :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" },
   module: 'users',
     path: '',
     path_names: {
       sign_up: 'signup', sign_in: 'login', sign_out: 'logout',
       password: 'secret', confirmation: 'verification',
-      registration: 'register', edit: 'edit/profile'
+      registration: 'register', edit: 'edit/profile',
     }
     
     scope module: :users do
