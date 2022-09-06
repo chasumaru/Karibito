@@ -84,8 +84,11 @@
           </div>
         <% end %>
       </div>
-      <div class="flex justify-center mt-10 mb-6">
+      <div class="flex justify-center mt-10">
         <%= pagy_nav(@pagy).html_safe %>
+      </div>
+      <div class="flex justify-center mt-4 mb-10">
+        <%= pagy_info(@pagy).html_safe %>
       </div>
     <% else %>
       <div class="flex w-full flex-col justify-center items-center mb-48">
