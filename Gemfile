@@ -57,6 +57,9 @@ gem 'rails-i18n'
 
 gem 'devise'
 gem 'devise-i18n'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'dotenv-rails'
 gem 'omniauth-facebook'
 
 gem "acts-as-taggable-on", "~> 9.0"
