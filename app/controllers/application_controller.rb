@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
 
   include Pagy::Backend
 
+  rescue_from CanCan::AccessDenied do |exception|
+    respond_to do |format|
+      format.html { redirect_to root_path, alert: "管理者権限がないのでアクセスできません" }
+    end
+  end
+
   # unless Rails.env.development?
   #   rescue_from Exception,                      with: :_render_500
   #   rescue_from ActiveRecord::RecordNotFound,   with: :_render_404

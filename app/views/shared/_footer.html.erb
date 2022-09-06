@@ -10,9 +10,14 @@
       <li><%= link_to '狩猟掲示板',new_board_path, class: "block no-tap-highlighting hover:underline hover:underline-offset-4 block w-20" %></li>
       <li class="my-1"><%= link_to 'スレを立てる',new_post_path, class: "block no-tap-highlighting hover:underline hover:underline-offset-4 block w-24" %></li>  
     </div>
-    <div class="block mb-4">
+    <div class="block">
       <li><%= link_to 'ユーザー一覧',users_path, class: "block no-tap-highlighting hover:underline hover:underline-offset-4 block w-24" %></li>
     </div>
+    <% if user_signed_in? && current_user.admin == true %>
+      <div class="block mb-4">
+        <li><%= link_to '管理者ページ', '/admin', class: "block no-tap-highlighting hover:underline hover:underline-offset-4 block w-24" %></li>
+      </div>
+    <% end %>
   </ul>
   <ul class="flex-auto w-48">
     <li class="mb-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-30"><%= link_to 'Karibitoとは?',about_path, class: "block" %></li> 
@@ -26,5 +31,5 @@
   </ul>
 </div>
 <div class="flex w-full bottom-0 h-16 bg-stone-700 text-white">
- <p class="flex-none text-sm mt-8 ml-2 pb-2">©Karibito All Right Reserved</p>
+  <p class="flex-none text-sm mt-8 ml-2 pb-2">©Karibito All Right Reserved</p>
  </div>
