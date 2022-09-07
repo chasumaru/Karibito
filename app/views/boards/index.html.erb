@@ -7,6 +7,17 @@
         <%= image_tag("lead-pencil.png", size:"25x25", class: "ml-1") %>
       </span>
     <% end %>
+    <div class="fixed bottom-16 right-6 z-30 lg:right-16 md:bottom-20 xl:right-24 w-14 h-14">
+      <%= button_to boards_path, method: :get,
+      html: {
+        autoscroll: true,
+        data: {
+          turbo_frame: "boards-list",
+          data: { autoscroll_block: "start" }
+      }} do %>
+        <img src="https://img.icons8.com/office/80/000000/circled-chevron-up.png"/>
+      <% end %>
+    </div>
   </div>
 </section>
 <section>
@@ -35,7 +46,7 @@
   </div>
 </section>
 <section>
-  <%= turbo_frame_tag "boards-list", target: "_top" do %>
+  <%= turbo_frame_tag "boards-list", loading: :lazy , target: "_top" do %>
     <% if @boards.present? %>
       <div class="grid md:grid-cols-2 gap-x-2 gap-y-2 mx-4 my-2">
         <% @boards.each do |board| %>

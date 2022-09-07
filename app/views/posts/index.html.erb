@@ -10,6 +10,17 @@
       <% end %>
     </div>
   <% end %>
+  <div class="fixed bottom-16 right-6 z-30 lg:right-16 md:bottom-20 xl:right-24 w-14 h-14">
+    <%= button_to posts_path, method: :get,
+    html: {
+      autoscroll: true,
+      data: {
+        turbo_frame: "posts-list",
+        data: { autoscroll_block: "start" }
+    }} do %>
+      <img src="https://img.icons8.com/office/80/000000/circled-chevron-up.png"/>
+    <% end %>
+  </div>
 </section>
 <section>
   <div class="grid itmes-cneter mt-2">
@@ -38,7 +49,7 @@
 </section>
 
 <section>
-  <%= turbo_frame_tag "posts-list", target: "_top" do %>
+  <%= turbo_frame_tag "posts-list", loading: :lazy, target: "_top" do %>
     <% if @posts.present? %>
       <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-3 mx-8">
         <% @posts.each do |post| %>
@@ -102,3 +113,4 @@
   <% end %>
 </section>
 
+<a target="_blank" href="https://icons8.com/icon/47096/上">上 icon by Icons8</a>
