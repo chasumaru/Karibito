@@ -1,0 +1,48 @@
+<% if @tags.present? %>
+  <span class='flex flex-wrap ml-5 mt-2'>
+    <% @tags.each do |tag| %>
+      <%= link_to tag, posts_path(tag_name: tag.name), class:'bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 mb-1 mr-1.5 rounded dark:bg-green-200 dark:text-green-900 hover:bg-green-300 no-tap-highlighting' %>
+    <% end %>
+  </span>
+<% end %>
+<div class="py-2 border-b-2 px-2">
+  <p class="text-xl font-bold text-black py-0.5 ml-3"><%= post.title %></p>
+  <p class="text-xs text-slate-600 mx-2 ml-3"><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+</div>
+<div class="grid grid-cols-1 relative border-t-2">
+  <span class="flex justify-start items-center ml-3 py-2 bg-white">
+    <%if post.user.avatar.attached? %>
+      <% if post.user == current_user %>
+        <%= link_to image_tag(current_user.avatar, class: "w-8 h-8 rounded-full border-2 border-emerald-500"), profile_path(current_user) %>
+      <% else %>
+        <%= link_to image_tag(post.user.avatar, class: "w-8 h-8 rounded-full border-2 border-indigo-500"), profile_path(post.user) %>
+      <% end %>
+    <% else %>
+      <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border border-yellow-300" %>
+    <% end %>
+    <p class="text-sm font-bold mr-2 ml-2 hover:underline hover:underline-offset-2 no-tap-highlighting"><%= link_to post.user.name, profile_path(post.user) %></p>
+  </span>
+</div>
+<div class="h-full overflow-hidden">
+  <% if post.images.present?  %>
+    <%= image_tag post.thumbnail, class: "w-full object-center" %>
+  <% else %>
+    <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "w-full object-center" %>
+  <% end %>
+  <div class="flex justify-end bg-white py-0.5 border-b-2">
+    <div class="mr-4">
+      <span class="text-gray-400 inline-flex h-6 items-center leading-none text-sm pr-3">
+        <svg class="w-4 h-4 mr-1"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+        </svg>
+        <%= post.liked_users.count %>
+      </span>
+      <span class="text-gray-400 inline-flex items-center leading-none text-sm ml-1">
+        <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+        </svg>
+        <%= post.comments.count %>
+      </span>
+    </div>
+  </div>
+</div>

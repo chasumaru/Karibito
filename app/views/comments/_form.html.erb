@@ -1,14 +1,8 @@
 <%= form_with model: [@post, @comment] do |f| %>
-
-
-  <div class="field">
-    <%= f.label :context, "コメント編集" %><br>
-    <%= f.text_area :context, data: {controller: "autogrow" } %>
+  <%= f.label :context, "コメント内容" %><br>
+  <%= f.text_area :context, data: {controller: "autogrow" }, class: "block w-full rounded-xl bg-amber-100 pl-2 pt-1 pb-6" , placeholder: "コメントする..." %>
+  <div class="flex justify-center bg-white">
+    <%= f.submit "投稿", class:"px-5 py-1 mt-2 rounded-2xl tracking-widest font-semibold bg-white border-2 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
   </div>
-
-  <div class="submit">
-    <%= f.submit "送信" %>
-  </div>
-  
   <%= link_to "戻る", :back, class:"no-tap-highlighting" %>
 <% end %>

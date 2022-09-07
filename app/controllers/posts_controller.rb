@@ -43,7 +43,6 @@ class PostsController < ApplicationController
       @liked_users = @post.liked_users
     end
     @tags = @post.tags
-    # @tags = @post.tag_counts_on(:tags)
   end
 
   def edit
