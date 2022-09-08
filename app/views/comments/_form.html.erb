@@ -1,7 +1,6 @@
 <%= turbo_frame_tag @comment do %>
   <%= form_with model: [@post, @comment] do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-    <%= f.label :context, "コメント編集", class: "ml-2" %><br>
     <%= f.text_area :context, data: {controller: "autogrow" }, class: "block w-full rounded-xl bg-amber-100 pl-2 pt-1 pb-4 focus:outline-none focus:ring-0" , placeholder: "コメントする..." %>
     <div class="flex justify-center bg-white">
       <%= f.submit "更新", class:"px-3 py-1 mt-2 rounded-2xl tracking-widest font-semibold bg-white border-2 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>

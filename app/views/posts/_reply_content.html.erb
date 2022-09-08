@@ -2,7 +2,7 @@
   <p class="tracking-wide whitespace-pre-wrap pt-1 pb-3 ml-1"><%= reply.context %></p>
   <% if user_signed_in? && current_user == reply.user %>
     <span>
-      <%= button_to "編集", edit_post_comment_path(@post, reply), method: :get, class: "absolute bottom-1 right-18 inline-block px-2 py-1 ml-1 border border-blue-400 text-blue-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+      <%= button_to "編集", edit_post_comment_path(@post, reply), method: :get, class: "absolute bottom-1 right-18 w-11 h-6 inline-block px-2 py-1 ml-1 border border-blue-400 text-blue-400 text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
     </span>
   <% end %>
 <% end %>
