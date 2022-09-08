@@ -19,7 +19,7 @@
       <div class="relative">
         <%= render partial: "comment_content", locals: {comment: comment} %>
         <% if user_signed_in? && current_user == comment.user %>
-          <span class="absolute bottom-1 right-6 inline-flex justify-center w-11 h-6 px-2 py-1 ml-1 border border-red-400 text-red-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting">
+          <span class="absolute -bottom-6 right-6 inline-flex justify-center w-11 h-6 px-2 py-1 ml-1 border border-red-400 text-red-400 text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting">
             <%= button_to "削除", post_comment_path(@post, comment), { method: :delete, form: { data: { turbo_confirm: "コメントを削除しますか？" } } } %>
           </span>
         <% end %>
