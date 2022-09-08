@@ -18,7 +18,9 @@
         </header>
         <main>
           <div class="relative z-0 pt-15">
-            <%= render "shared/flash" %>
+           <div id="flash">
+             <%= render "shared/flash" %>
+           </div>
             <%= yield %>
             <div data-sidebar-target="covering"></div>
           </div>
