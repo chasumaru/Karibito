@@ -96,22 +96,15 @@
                     <% next %>
                   <% end %>
                     <div class="grid grid-cols-1">
-                      <div class="flex flex-col w-full pt-1 bg-yellow-200">
+                      <div class="flex flex-col w-full pt-1">
                         <%= render partial: "comment", locals: {comment: comment} %>
-                        <div class="flex flex-col w-full bg-red-300">
+                        <div class="flex flex-col w-full">
                           <section>
-                            <div class="mb-2 border-b bg-lime-300 ml-10">
+                            <div class="mb-2 border-b ml-11">
                               <% if user_signed_in? %>
-                                <%= form_with model: [@post, @comment] do |f| %>
-                                  <div class="flex items-end">
-                                    <%= f.text_area :context, data: {controller: "autogrow" }, class: "inline-block text-sm bg-amber-100 rounded-md pl-1 pt-1 w-3/4", placeholder: "コメントに返信する..." %>
-                                    <%= f.hidden_field :reply_comment_id, :value => comment.id  %>
-                                    <%= f.submit "返信" ,class:"tracking-widest rounded-2xl font-semibold bg-white border-2 px-4 py-1.5 ml-2 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
-                                  </div>
-                                <% end %>
+                                <button class="underline ml-1">返信する</button>
                               <% else %>
-                                <%= button_to "返信する", new_user_session_path, method: :get, class:"tracking-widest rounded-2xl font-semibold bg-white border px-3 py-1
-                                 ml-0.5 mb-2 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+                                <button class="ml-1 underline">返信する</button>
                               <% end %>
                             </div>
                           </section>
@@ -119,35 +112,8 @@
                             <% if comment.replies.present? %>
                               <% comment.replies.each do |reply| %>
                                 <div class="grid grid-cols-1">
-                                  <div class="flex border-b ml-10 bg-lime-400">
-                                    <div class="flex justify-center w-12">
-                                      <%if comment.user.avatar.attached? %>
-                                        <% if comment.user == current_user %>
-                                          <%= image_tag(current_user.avatar, class: "w-8 h-8 rounded-full border-2 border-emerald-500") %>
-                                        <% else %>
-                                          <%= image_tag(comment.user.avatar, class: "w-8 h-8 rounded-full border-2 border-indigo-500") %>
-                                        <% end %>
-                                      <% else %>
-                                        <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border border-yellow-300" %>
-                                      <% end %>
-                                    </div>
-                                    <div class="flex flex-col w-full">
-                                      <div class="flex">
-                                        <strong><%= reply.user.name %></strong>
-                                        <p class="text-slate-400 ml-3"><%= how_long_ago(reply) %></p>
-                                      </div>
-                                      <p class="tracking-wide whitespace-pre-wrap pt-1 pb-3 ml-1"><%= reply.context %></p>
-                                      <% if user_signed_in? && current_user == reply.user %>
-                                        <div class="flex justify-end h-7 pt-0.5 mr-18">
-                                          <span>
-                                            <%= button_to "編集", edit_post_comment_path(@post, reply), method: :get, class: "inline-block px-2 py-1 ml-1 border border-blue-400 text-blue-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
-                                          </span>
-                                          <span class="inline-block px-2 h-6 py-1 ml-1 border border-red-400 text-red-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting">
-                                            <%= button_to "削除", post_comment_path(@post, reply), { method: :delete, form: { data: { turbo_confirm: "コメントを削除しますか？" } } } %>
-                                          </span>
-                                        </div>
-                                      <% end %>
-                                    </div>
+                                  <div class="flex border-b ml-10">
+                                    <%= render partial: "reply", locals: {reply: reply} %>
                                   </div>
                                 </div>
                               <% end %>

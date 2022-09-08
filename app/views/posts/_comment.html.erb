@@ -1,5 +1,5 @@
-<%= turbo_frame_tag comment do %>
-  <div class="flex bg-yellow-300">
+
+  <div class="flex">
     <div class="flex justify-center w-12 h-12">
       <%if comment.user.avatar.attached? %>
         <% if comment.user == current_user %>
@@ -16,17 +16,13 @@
         <strong><%= comment.user.name %></strong>
         <p class="ml-3 text-slate-400"><%= how_long_ago(comment) %></p>
       </div>
-      <p class="tracking-wide whitespace-pre-wrap pt-1 pb-4 ml-1"><%= comment.context %></p>
-      <% if user_signed_in? && current_user == comment.user %>
-        <div class="flex justify-end h-7 pt-0.5 mr-18">
-          <span>
-            <%= button_to "編集", edit_post_comment_path(@post, comment), method: :get, class: "inline-block px-2 py-1 ml-1 border border-blue-400 text-blue-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
-          </span>
-          <span class="inline-block px-2 h-6 py-1 ml-1 border border-red-400 text-red-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting">
+      <div class="relative">
+        <%= render partial: "comment_content", locals: {comment: comment} %>
+        <% if user_signed_in? && current_user == comment.user %>
+          <span class="absolute bottom-1 right-6 inline-flex justify-center w-11 h-6 px-2 py-1 ml-1 border border-red-400 text-red-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting">
             <%= button_to "削除", post_comment_path(@post, comment), { method: :delete, form: { data: { turbo_confirm: "コメントを削除しますか？" } } } %>
           </span>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
-<% end %>
