@@ -4,7 +4,7 @@
       <div data-controller="reply" class="pb-3 border-b">
         <% if user_signed_in? %> 
           <button data-reply-target="trigger" data-action="reply#display" class="underline ml-1 -mb-1 no-tap-highlighting">返信する</button>
-          <%= form_with model: [post, Comment.new], data: {reply_target: "content", action: "reply#hide"} do |f| %>
+          <%= form_with model: [@post, Comment.new], data: {reply_target: "content", action: "reply#hide"}, id: "new_reply" do |f| %>
             <div data-reply-target="content" class="flex h-20 mt-1">
               <%= f.text_area :context, data: {controller: "autogrow" }, class: "text-sm bg-amber-100 rounded-md w-3/4 h-full pl-1 pt-1 pb-5 mt-6 focus:outline-none focus:ring-0", placeholder: "コメントに返信する..." %>
               <%= f.hidden_field :reply_comment_id, :value => comment.id  %>
@@ -17,5 +17,12 @@
         <% end %>
       </div>
     </div>
+  </section>
+  <section>
+    <% if comment.replies.present? %>
+      <% comment.replies.each do |reply| %>
+        <%= render partial: "reply", locals: {reply: reply} %>
+      <% end %>
+    <% end %>
   </section>
 </div>

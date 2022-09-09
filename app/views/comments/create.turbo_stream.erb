@@ -1,15 +1,15 @@
 <%# リプライコメントの場合、parent_comment_#{commnet.id}要素にappendし、そうでない場合はcomments要素にappendする。 %>
 <% if @comment.reply_comment_id.present? %>
   <%= turbo_stream.append "parent_comment_#{@comment.reply_comment_id}" do %>
-    <%= render partial: "posts/reply", locals: {reply: @comment, post: @post} %>
+    <%= render partial: "posts/reply", locals: {reply: @comment} %>
   <% end %>
   <%= turbo_stream.replace "new_reply" do %>
-    <%= render partial: "posts/new_reply", locals: {comment: @comment, post: @post} %>
+    <%= render partial: "posts/new_reply", locals: {comment: @comment} %>
   <% end %>
 <% else %>
   <%= turbo_stream.append "comments" do %>
     <%= render partial: "posts/comment", locals: {comment: @comment} %>
-    <%= render partial: "posts/reply_section", locals: {comment: @comment, post: @post} %>
+    <%= render partial: "posts/reply_section", locals: {comment: @comment} %>
   <% end %>
 <% end %>
 <%= turbo_stream.replace "new_comment" do %>
