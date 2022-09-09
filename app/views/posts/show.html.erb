@@ -90,13 +90,13 @@
           <h3 class="font-bold">コメント一覧</h3>
           <section>
             <% if @comments.present? %>
-              <div class="text-xs font-medium mt-5">
+              <div class="text-xs font-medium mt-5 bg-green-400" id="comments">
                 <% @comments.each do |comment| %>  
                   <% if comment.reply_comment_id.present? %>
                     <% next %>
                   <% end %>
-                    <div class="grid grid-cols-1">
-                      <div class="flex flex-col w-full pt-1 mb-1">
+                    <div class="grid grid-cols-1 bg-yellow-300">
+                      <div class="flex flex-col w-full pt-1 mb-1 bg-red-300" id="parent_comment_<%="#{comment.id}"%>">
                         <%= render partial: "comment", locals: {comment: comment} %>
                         <div class="flex flex-col w-full">
                           <section>
@@ -104,7 +104,7 @@
                               <div data-controller="reply" class="pb-3 border-b">
                                 <% if user_signed_in? %> 
                                   <button data-reply-target="trigger" data-action="reply#display" class="underline ml-1 -mb-1 no-tap-highlighting">返信する</button>
-                                  <%= form_with model: [@post, @comment], data: {reply_target: "content", action: "reply#hide"} do |f| %>
+                                  <%= form_with model: [@post, @comment], data: {reply_target: "content", action: "reply#hide"}, id: "new_reply" do |f| %>
                                     <div data-reply-target="content" class="flex h-20 mt-1">
                                       <%= f.text_area :context, data: {controller: "autogrow" }, class: "text-sm bg-amber-100 rounded-md w-3/4 h-full pl-1 pt-1 pb-5 mt-6 focus:outline-none focus:ring-0", placeholder: "コメントに返信する..." %>
                                       <%= f.hidden_field :reply_comment_id, :value => comment.id  %>
@@ -137,7 +137,7 @@
           <section>
             <div class="grid grid-cols-1 justify-center mt-6">
               <% if user_signed_in? %>
-                <%= form_with model: [@post, @comment] do |f| %>
+                <%= form_with model: [@post, @comment], id: "new_comment" do |f| %>
                   <%= f.text_area :context, data: {controller: "autogrow" }, class: "block w-full rounded-xl bg-amber-100 pl-2 pt-1 pb-6" , placeholder: "コメントする..." %>
                   <div class="flex justify-center bg-white">
                     <%= f.submit "投稿", class:"px-5 py-1 mt-2 rounded-2xl tracking-widest font-semibold bg-white border-2 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>

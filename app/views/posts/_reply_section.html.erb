@@ -1,0 +1,21 @@
+<div class="flex flex-col w-full">
+  <section>
+    <div class="mb-2 ml-11 py-0.5">
+      <div data-controller="reply" class="pb-3 border-b">
+        <% if user_signed_in? %> 
+          <button data-reply-target="trigger" data-action="reply#display" class="underline ml-1 -mb-1 no-tap-highlighting">返信する</button>
+          <%= form_with model: [post, Comment.new], data: {reply_target: "content", action: "reply#hide"} do |f| %>
+            <div data-reply-target="content" class="flex h-20 mt-1">
+              <%= f.text_area :context, data: {controller: "autogrow" }, class: "text-sm bg-amber-100 rounded-md w-3/4 h-full pl-1 pt-1 pb-5 mt-6 focus:outline-none focus:ring-0", placeholder: "コメントに返信する..." %>
+              <%= f.hidden_field :reply_comment_id, :value => comment.id  %>
+              <%= f.submit "返信" ,class:"self-end tracking-widest rounded-2xl font-semibold bg-white border-2 px-4 py-1.5 ml-2 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+            </div>
+          <% end %>
+          <button data-reply-target="closed" data-action="reply#hide" class="underline ml-1 my-1 no-tap-highlighting">キャンセル</button>
+        <% else %>
+          <%= link_to "返信する", new_user_session_path, class: "underline ml-1 -mb-1 no-tap-highlighting" %>
+        <% end %>
+      </div>
+    </div>
+  </section>
+</div>
