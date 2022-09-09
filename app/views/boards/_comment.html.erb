@@ -2,15 +2,7 @@
   <div class="flex pt-1 border-b">
     <div class="flex justify-center w-12 h-12 mb-4">
     <% if c.user.present? && !c.anonymous_flag %>
-      <%if c.user.avatar.attached? %>
-        <% if c.user == current_user %>
-          <%= link_to image_tag(current_user.avatar, class: "w-8 h-8 rounded-full border-2 border-emerald-500"), profile_path(current_user) %>
-        <% else %>
-          <%= link_to image_tag(c.avatar, class: "w-8 h-8 rounded-full border-2 border-indigo-500"), profile_path(current_user) %>
-        <% end %>
-      <% else %>
-        <%= link_to image_tag("no_avatar.png", class: "w-8 h-8 object-cover rounded-full border border-yellow-300"), profile_path(current_user) %>
-      <% end %>
+      <%= avatar_link(c) %>
     <% else %>
         <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border border-yellow-300" %>
     <% end %>

@@ -89,20 +89,20 @@
         <div class="w-full bg-white py-2 px-4 my-3">
           <h3 class="font-bold">コメント一覧</h3>
           <section>
-            <% if @comments.present? %>
-              <div class="text-xs font-medium mt-5" id="comments">
-                <% @comments.each do |comment| %>  
-                  <% if comment.reply_comment_id.present? %>
-                    <% next %>
+            <div class="text-xs font-medium mt-5" id="comments">
+              <% if @comments.present? %>
+                  <% @comments.each do |comment| %>  
+                    <% if comment.reply_comment_id.present? %>
+                      <% next %>
+                    <% end %>
+                      <div class="grid grid-cols-1">
+                        <%= render partial: "posts/comment_block", locals: {comment: comment} %>
+                      </div>
                   <% end %>
-                    <div class="grid grid-cols-1">
-                      <%= render partial: "posts/comment_block", locals: {comment: comment} %>
-                    </div>
-                <% end %>
-              </div>
-            <% else %>
-              <p class="text-base ml-1">まだコメントがありません</p>
-            <% end %>
+              <% else %>
+                <p class="text-base ml-1" id="no_comments">まだコメントがありません</p>
+              <% end %>
+            </div>
           </section>
           <section>
             <div class="grid grid-cols-1 justify-center mt-6">

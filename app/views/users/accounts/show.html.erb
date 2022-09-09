@@ -19,7 +19,7 @@
       <% end %>
       <div class="flex w-full flex-col justify-center items-center">
         <span class ="relative -mt-10 md:-mt-16">
-          <%if  @user.avatar.attached? %>
+          <%if @user.avatar.attached? %>
             <% if @user == current_user %>
               <%= image_tag(current_user.avatar, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-emerald-500") %>
             <% else %>

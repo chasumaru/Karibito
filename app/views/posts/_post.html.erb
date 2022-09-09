@@ -11,15 +11,7 @@
 </div>
 <div class="grid grid-cols-1 relative border-t-2">
   <span class="flex justify-start items-center ml-3 py-2 bg-white">
-    <%if post.user.avatar.attached? %>
-      <% if post.user == current_user %>
-        <%= link_to image_tag(current_user.avatar, class: "w-8 h-8 rounded-full border-2 border-emerald-500"), profile_path(current_user) %>
-      <% else %>
-        <%= link_to image_tag(post.user.avatar, class: "w-8 h-8 rounded-full border-2 border-indigo-500"), profile_path(post.user) %>
-      <% end %>
-    <% else %>
-      <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border border-yellow-300" %>
-    <% end %>
+    <%= avatar_link(post) %>
     <p class="text-sm font-bold mr-2 ml-2 hover:underline hover:underline-offset-2 no-tap-highlighting"><%= link_to post.user.name, profile_path(post.user) %></p>
   </span>
 </div>

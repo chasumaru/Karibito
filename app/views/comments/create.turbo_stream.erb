@@ -13,5 +13,6 @@
   <%= turbo_stream.replace "new_comment" do %>
     <%= render partial: "posts/new_comment" %>
   <% end %>
+  <%= turbo_stream.update "no_comments" , "" %>
 <% end %>
 <%= turbo_stream_flash %>

@@ -1,15 +1,7 @@
 <div class="flex items-center relative border-b pt-2 pb-4 px-3 mb-1 bg-white">
   <div class="flex justify-start items-cneter">
     <div class="no-tap-highlighting mr-2">
-      <% if notification.visitor.avatar.attached? %>
-        <% if notification.visitor == current_notification.visitor %>
-          <%= link_to(image_tag(current_notification.visitor.avatar, class: "w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-emerald-500"), profile_path(notification.visitor)) %>
-        <% else %>
-          <%= link_to(image_tag(notification.visitor.avatar, class: "w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-indigo-500"), profile_path(notification.visitor)) %>
-        <% end %>
-      <% else %>
-        <%=link_to(image_tag("no_avatar.png", class: "w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-yellow-300"), profile_path(notification.visitor)) %>
-      <% end %>
+      <%= notification_avatar_link(notification) %>
     </div>
   </div>
   <%= notification_form(notification) %>

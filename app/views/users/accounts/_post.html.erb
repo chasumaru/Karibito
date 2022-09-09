@@ -11,15 +11,7 @@
             <p class="tracking-tight leading-tight text-slate-600 md:text-sm"><%= truncate(post.content, length:36) %></p>
             <div class="flex w-full flex-row mt-5 justify-start relative">
               <span class="flex flex-row items-center">
-                <%if post.user.avatar.attached? %>
-                  <% if post.user == current_user %>
-                    <%= link_to image_tag(current_user.avatar, class: "w-8 h-8 rounded-full border-2 border-emerald-500"), profile_path(current_user) %>
-                  <% else %>
-                    <%= link_to image_tag(post.user.avatar, class: "w-8 h-8 rounded-full border-2 border-indigo-500"), user_page_path(post.user) %>
-                  <% end %>
-                <% else %>
-                  <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border-2 border-yellow-300" %>
-                <% end %>
+                <%= avatar_link(post) %>
                 <p class="text-sm font-medium mr-2 ml-2 hover:underline hover:underline-offset-2"><%= link_to truncate(post.user.name, length:17), profile_path(post.user) %></p>
               </span>
               <div class="flex items-center justify-items-end w-20 absolute top-6 right-1">

@@ -19,4 +19,12 @@ module NotificationsHelper
   def unchecked_notifications
     @notifications = current_user.passive_notifications.where(checked: false)
   end
+
+	def notification_avatar_link(item)
+		if item.visitor.avatar.attached? 
+			link_to image_tag(item.visitor.avatar, class: "w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-indigo-500 no-tap-highlighting"), profile_path(item.visitor) 
+    else 
+      link_to (image_tag "no_avatar.png", class: "w-10 h-10 md:w-12 md:h-12 object-cover rounded-full border border-yellow-300 no-tap-highlighting"), profile_path(item.visitor)
+    end
+	end
 end
