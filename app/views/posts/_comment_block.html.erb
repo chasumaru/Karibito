@@ -1,4 +1,4 @@
-<div class="flex flex-col w-full pt-1 mb-1 bg-yellow-300" id="parent_comment_<%="#{comment.id}"%>">
+<div class="flex flex-col w-full pt-1 mb-1" id="parent_comment_<%="#{comment.id}"%>">
   <%= render partial: "posts/comment", locals: {comment: comment} %>
   <%= render partial: "posts/reply_section", locals: {comment: comment} %>
 </div>
