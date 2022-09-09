@@ -1,4 +1,4 @@
-<div class="flex items-center relative border-b py-2 px-3 bg-white">
+<div class="flex items-center relative border-b pt-2 pb-4 px-3 mb-1 bg-white">
   <div class="flex justify-start items-cneter">
     <div class="no-tap-highlighting mr-2">
       <% if notification.visitor.avatar.attached? %>
@@ -12,7 +12,7 @@
       <% end %>
     </div>
   </div>
-    <%= notification_form(notification) %>
-    <p class="absolute right-1 bottom-1 w-12 text-xs text-slate-400"><%= how_long_ago(notification) %></p>
+  <%= notification_form(notification) %>
+  <p class="absolute right-1 bottom-1 w-20 text-xs text-slate-400"><%= how_long_ago(notification) %></p>
 
 </div>
