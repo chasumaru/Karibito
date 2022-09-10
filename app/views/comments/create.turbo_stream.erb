@@ -11,7 +11,7 @@
     <%= render partial: "posts/comment_block", locals: {comment: @comment} %>
   <% end %>
   <%= turbo_stream.replace "new_comment" do %>
-    <%= render partial: "posts/new_comment" , locals: {post: @post} %>
+    <%= render partial: "posts/new_comment" %>
   <% end %>
   <%= turbo_stream.update "no_comments" , "" %>
 <% end %>
