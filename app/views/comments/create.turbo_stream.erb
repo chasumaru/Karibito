@@ -1,4 +1,3 @@
-<%# リプライコメントの場合、parent_comment_#{commnet.id}要素にappendし、そうでない場合はcomments要素にappendする。 %>
 <% if @comment.reply_comment_id.present? %>
   <%= turbo_stream.append "parent_comment_#{@comment.reply_comment_id}" do %>
     <%= render partial: "posts/reply", locals: {reply: @comment} %>

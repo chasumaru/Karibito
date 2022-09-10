@@ -8,9 +8,9 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.create(comment_params)
     if @comment.save
       @post.create_notification_comment!(current_user, @comment.id)
-      flash.now.notice="コメントを投稿しました。"
+      flash.now.notice = "コメントを投稿しました。"
     else
-      redirect_to request.referer, alert: "コメントの作成に失敗しました。", status: :see_other 
+      redirect_to request.referer, alert: "コメントの作成に失敗しました。", status: :see_other
     end
   end
 

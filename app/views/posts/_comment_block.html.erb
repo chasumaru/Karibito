@@ -24,7 +24,7 @@
         <div data-controller="reply" class=" relative h-full">
           <% if user_signed_in? %>
             <button data-reply-target="trigger" data-action="reply#display" class="underline ml-1 -mb-1 no-tap-highlighting">返信する</button>
-            <%= render partial: "new_reply", locals: {comment: comment} %>
+            <%= render partial: "posts/new_reply", locals: {comment: comment} %>
             <button data-reply-target="closed" data-action="reply#hide" class="absolute underline ml-1 my-1 no-tap-highlighting">キャンセル</button>
           <% else %>
             <%= link_to "返信する", new_user_session_path, class: "underline ml-1 -mb-1 no-tap-highlighting" %>
