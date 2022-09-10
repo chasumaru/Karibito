@@ -1,6 +1,6 @@
 <%= form_with model: [post, Comment.new], data: {reply_target: "content", action: "reply#hide"}, id: "new_reply", class: "h-full pt-4" do |f| %>
   <div data-reply-target="content" class="flex h-full mt-1">
-    <%= f.text_area :context, data: {controller: ["autogrow", "form-reset"], form_reset_target: "context", action: "submit-end->formReset#clearForm"}, class: "text-sm bg-amber-100 rounded-md w-3/4 h-full pl-1 pt-1 pb-5 mt-6 focus:outline-none focus:ring-0", placeholder: "コメントに返信する..." %>
+    <%= f.text_area :context, data: {controller: "autogrow"}, class: "text-sm bg-amber-100 rounded-md w-3/4 h-full pl-1 pt-1 pb-5 mt-6 focus:outline-none focus:ring-0", placeholder: "コメントに返信する..." %>
     <%= f.hidden_field :reply_comment_id, :value => comment.id  %>
     <%= f.submit "返信" ,class:"self-end tracking-widest rounded-2xl font-semibold bg-white border-2 px-4 py-1.5 ml-2 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
   </div>
