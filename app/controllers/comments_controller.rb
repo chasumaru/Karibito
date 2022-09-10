@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
 
   def create
-    @comment = current_user.comments.new(comment_params)
+    @comment = current_user.comments.create(comment_params)
     if @comment.save
       @post.create_notification_comment!(current_user, @comment.id)
       flash.now.notice="コメントを投稿しました。"

@@ -1,4 +1,4 @@
-<%= form_with model: [post, Comment.new], data: {reply_target: "content", action: "reply#hide"}, id: "new_reply", class: "h-full pt-4" do |f| %>
+<%= form_with model: [@post, Comment.new], data: {reply_target: "content", action: "reply#hide"}, class: "h-full pt-4" do |f| %>
   <div data-reply-target="content" class="flex h-full mt-1">
     <%= f.text_area :context, data: {controller: "autogrow"}, class: "text-sm bg-amber-100 rounded-md w-3/4 h-full pl-1 pt-1 pb-5 mt-6 focus:outline-none focus:ring-0", placeholder: "コメントに返信する..." %>
     <%= f.hidden_field :reply_comment_id, :value => comment.id  %>

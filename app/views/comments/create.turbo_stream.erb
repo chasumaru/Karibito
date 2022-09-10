@@ -3,8 +3,8 @@
   <%= turbo_stream.append "parent_comment_#{@comment.reply_comment_id}" do %>
     <%= render partial: "posts/reply", locals: {reply: @comment} %>
   <% end %>
-  <%= turbo_stream.replace "new_reply" do %>
-    <%= render partial: "posts/new_reply", locals: {post: @post, comment: @comment} %>
+  <%= turbo_stream.replace "new_reply_#{@comment.id}" do %>
+    <%= render partial: "posts/new_reply", locals: {comment: @comment} %>
   <% end %>
 <% else %>
   <%= turbo_stream.append "comments" do %>
