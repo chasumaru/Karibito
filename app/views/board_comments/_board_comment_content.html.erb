@@ -1,0 +1,6 @@
+<p class="tracking-wide whitespace-pre-wrap pt-1 pb-4 ml-1"><%= comment.description %></p>
+<% if user_signed_in? && current_user == comment.user %>
+  <span class="absolute -bottom-4 right-14 inline-block w-11 h-6 px-2 py-1 ml-1 border border-blue-400 text-blue-400 text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting">
+    <%= button_to "編集", edit_board_board_comment_path(@board, comment), method: :get %>
+  </span>
+<% end %>

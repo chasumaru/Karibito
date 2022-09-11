@@ -43,10 +43,10 @@
           </div>
         </div>
         <div class='flex w-full lg:w-32 h-10 justify-end items-end py-0.5 mr-16 mt-2 lg:mr-0'>
-          <%= button_to posts_path, method: :get, class: "inline-flex rounded-full p-2 mr-4 lg:mr-3 hover:bg-gray-100" do %>
+          <%= button_to posts_path, method: :get, class: "inline-flex rounded-full p-2 mr-4 lg:mr-3 hover:bg-gray-100 no-tap-highlighting" do %>
             <img src="https://img.icons8.com/ios/100/000000/edit-chat-history.png" class='w-6 h-6' />
           <% end %>
-          <%= button_to boards_path, method: :get, class: "inline-flex rounded-full p-2 hover:bg-gray-100" do %>
+          <%= button_to boards_path, method: :get, class: "inline-flex rounded-full p-2 hover:bg-gray-100 no-tap-highlighting" do %>
             <img src="https://img.icons8.com/ios-filled/50/000000/noticeboard.png" class='w-6 h-6' />
           <% end %>
         </div>
@@ -56,7 +56,7 @@
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 mt-1 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <% if signed_in? %>
             <% if unchecked_notifications.any? %>
-              <%= button_to notifications_path, method: :get, class: "bg-white p-1 rounded-full text-gray-400 hover:text-black hover:bg-gray-100 relative" do %>
+              <%= button_to notifications_path, method: :get, class: "bg-white p-1 rounded-full text-gray-400 hover:text-black hover:bg-gray-100 relative no-tap-highlighting" do %>
                 <span class="sr-only">View notifications</span>
                 <span class="absolute bg-red-600 p-0.5 rounded-full top-1.5 right-1.5"></span>
                 <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
@@ -64,7 +64,7 @@
                 </svg>
               <% end %>
             <% else %>
-              <%= button_to notifications_path, method: :get, class: "bg-white p-1 rounded-full text-gray-400 hover:text-black hover:bg-gray-100" do %>
+              <%= button_to notifications_path, method: :get, class: "bg-white p-1 rounded-full text-gray-400 hover:text-black hover:bg-gray-100 no-tap-highlighting" do %>
                 <span class="sr-only">View notifications</span>
                 <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />

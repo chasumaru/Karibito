@@ -5,7 +5,7 @@
     <% end %>
   </span>
 <% end %>
-<div class="py-2 border-b-2 px-2">
+<div class="py-2 border-b-2 px-2 break-all">
   <h3 class="font-bold text-black py-0.5 ml-3"><%= post.title %></h3>
   <p class="text-xs text-slate-600 mx-2 ml-3"><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
 </div>
@@ -109,7 +109,7 @@
 </section>
 <section>
   <div class="bg-white ml-1 break-all">
-    <p class="tracking-wide leading-loose whitespace-pre-wrap font-medium text-sm md:text-base py-4 mx-2"><%= @post.content %></p>
+    <p class="tracking-wide leading-loose whitespace-pre-wrap font-medium text-sm md:text-base py-4 mx-4"><%= @post.content %></p>
   </div>
   <div class="grid grid-cols-1 gap-2 py-4 bg-white">
     <% ((@post.images.count) -1).times  do |i| %>

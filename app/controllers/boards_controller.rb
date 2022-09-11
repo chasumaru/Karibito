@@ -34,7 +34,7 @@ class BoardsController < ApplicationController
   def show
     @board          = Board.find(params[:id])
     @board_comment  = BoardComment.new
-    @comments = @board.board_comment.includes(:user)
+    @board_comments = @board.board_comment.includes(:user)
     @tags = @board.tags
   end
 

@@ -1,7 +1,7 @@
 class BoardCommentsController < ApplicationController
   before_action :sign_in_required, only: [:edit, :update, :destroy]
   before_action :set_board, only: [:create, :edit, :update]
-  before_action :set_boards, only: [:edit, :update]
+  before_action :set_board_comment, only: [:edit, :update, :destroy]
   before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
  
   def create
@@ -21,7 +21,7 @@ class BoardCommentsController < ApplicationController
   
   def update
     if @board_comment.update(board_comment_params)
-      redirect_to post_path(@board), notice: "コメントを編集しました。"
+      redirect_to board_path(@board), notice: "コメントを編集しました。"
     else
       flash.now.alert = "コメントの編集に失敗しました。"
       render :edit, status: :unprocessable_entity 
@@ -44,10 +44,9 @@ class BoardCommentsController < ApplicationController
     @board = Board.find(params[:board_id])
   end
 
-  def set_boards
-    @board = Board.find(params[:board_id])
+  def set_board_comment
+    @board_comment = BoardComment.find(params[:id])
   end
-
   
   def ensure_correct_user
     @board_comment = BoardComment.find_by(id: params[:id])

@@ -55,10 +55,10 @@
               <% if board.illustration.attached? %>
                 <%= link_to image_tag(board.thumbnail, alt: "サムネイル画像"), board_path(board), class: "w-full h-full object-center object-cover board-loading rounded-l-md" %>
               <% else %>
-                <%= link_to image_tag('800x600_dummy.jpg', alt: "サムネイル画像"), board_path(board), class: "w-full h-full object-center object-cover board-loading rounded-l-md" %>
+                <%= link_to image_tag('800x600_dummy.jpg', alt: "サムネイル画像", class: "w-full h-full object-center object-cover board-loading rounded-l-md"), board_path(board) %>
               <% end %>
               </div>
-            <div class="flex flex-col w-full ml-1 max-h-32">
+            <div class="flex flex-col w-full ml-1 max-h-32 break-all">
               <p class="leading-tight text-base font-bold text-black  pl-0.5 pt-0.5"><%= link_to truncate(board.title, length:26), board_path(board) %></p>
               <% if board.description %>
                 <p class="tracking-wider leading-snug text-slate-600 text-xs pl-0.5 pt-0.5 ml-0.5 h-18"><%= truncate(board.description, length:49) %></p>

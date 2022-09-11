@@ -1,0 +1,29 @@
+<div class="flex flex-col w-full break-all pt-1 pb-6 mb-1 border-b">
+  <div class="flex">
+    <div class="flex justify-center w-12 h-12 ">
+    <% if comment.user.present? && !comment.anonymous_flag %>
+      <%= avatar_link(comment) %>
+    <% else %>
+        <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border border-yellow-300" %>
+    <% end %>
+    </div>
+    <div class="flex flex-col w-full break-all pt-1 mb-1">
+      <div class="flex">
+        <% if comment.user.present? && !comment.anonymous_flag %>
+          <strong><%= link_to truncate(comment.user.name, length:17), profile_path(comment.user), class:"hover:underline" %></strong>
+        <% else %>
+        <strong>名無しさん</strong>
+        <% end %>
+        <p class="ml-3 text-slate-400"><%= how_long_ago(comment) %></p>
+      </div>
+       <div class="relative pb-2 w-5/6">
+        <%= render partial: "board_comments/board_comment_content", locals: {comment: comment} %>
+        <% if user_signed_in? && current_user == comment.user %>
+          <span class="absolute -bottom-4 right-1 inline-flex justify-center w-11 h-6 px-2 py-1 ml-1 border border-red-400 text-red-400 text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting">
+          <%= button_to "削除", board_board_comment_path(@board, comment), { method: :delete, form: { data: { turbo_confirm: "コメントを削除しますか？" } } } %>
+          </span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
