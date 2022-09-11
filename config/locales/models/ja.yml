@@ -1,0 +1,21 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      post: 日記
+      comment: コメント
+      board: 掲示板
+      board_comment: 掲示板コメント
+      like: いいね
+      ability: 肩書き
+      notification: 通知
+    attributes:
+      post:
+        title: タイトル
+        content: 本文
+        images: 画像
+      comment:
+        context: 内容
+      board:
+        title: タイトル
+        description: 説明
