@@ -53,9 +53,9 @@
           <div class="flex flex-row border-2 border-gray-200 rounded-md border-opacity-60 no-tap-highlighting">
             <div class="w-48 h-32">
               <% if board.illustration.attached? %>
-                <%= image_tag board.thumbnail, class: "w-full h-full object-center object-cover board-loading bg-red-200 rounded-l-md" %>
+                <%= link_to image_tag(board.thumbnail, alt: "サムネイル画像"), board_path(board), class: "w-full h-full object-center object-cover board-loading rounded-l-md" %>
               <% else %>
-                <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "w-full h-full object-center object-cover board-loading rounded-l-md" %>
+                <%= link_to image_tag('800x600_dummy.jpg', alt: "サムネイル画像"), board_path(board), class: "w-full h-full object-center object-cover board-loading rounded-l-md" %>
               <% end %>
               </div>
             <div class="flex flex-col w-full ml-1 max-h-32">
@@ -68,8 +68,8 @@
               <div class="flex w-full flex-row justify-start relative">
                 <span class="flex flex-row items-center">
                   <% if board.anonymous_flag? %>
-                    <%= image_tag "no_avatar.png", class: "w-6 h-6 rounded-full border border-yellow-300" %>
-                    <p class="text-xs font-medium mr-2 ml-2">名無しさん</p>
+                    <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border border-yellow-300 no-tap-highlighting" %>
+                    <p class="text-xs font-medium ml-1">名無しさん</p>
                   <% else %>
                     <% if board.user.present? %>
                       <%= avatar_link(board) %>
@@ -78,7 +78,7 @@
                   <% end %>
                 </span>
               </div>
-              <p class="text-xs text-slate-500 ml-5 -mt-0.5"><%= how_long_ago(board) %></p>
+              <p class="text-xs text-slate-500 ml-9 -mt-0.5"><%= how_long_ago(board) %></p>
             </div>
           </div>
         <% end %>
@@ -101,3 +101,4 @@
   <% end %>
 </section>
 
+<a target="_blank" href="https://icons8.com/icon/47096/上">上 icon by Icons8</a>
