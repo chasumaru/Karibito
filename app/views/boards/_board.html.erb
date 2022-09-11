@@ -54,19 +54,19 @@
     <div class="w-full bg-white py-2 px-4 my-3">
       <h3 class="font-bold">掲示板コメント一覧</h3>
       <section>
-        <div class="text-xs font-medium">
+        <div class="text-xs font-medium mt-5" id="board_comments">
           <% if @board_comments.present? %>
-            <% @board_comments.each do |comment| %>
-            <%= render partial: 'board_comments/board_comment_block', locals: {comment: comment} %>
+            <% @board_comments.each do |board_comment| %>
+            <%= render partial: 'board_comments/board_comment_block', locals: {comment: board_comment} %>
             <% end %>
           <% else %>
-            <p class="test-lg bg-red-600">まだコメントがありません</p>
+            <p class="text-base ml-1" id="no_board_comments">まだコメントがありません</p>
           <% end %>
         </div>
       </section>
       <section>
         <div class="grid grid-cols-1 justify-center mt-6">
-          <%= render partial: "board_comments/new_board_comment", locals: {board: @board, board_comment: @board_comment} %>
+          <%= render partial: "board_comments/new_board_comment" %>
         </div>
       </section>
     </div>

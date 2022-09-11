@@ -5,12 +5,12 @@ class BoardCommentsController < ApplicationController
   before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
  
   def create
-    @board_comment = BoardComment.new(board_comment_params)
+    @board_comment = BoardComment.create(board_comment_params)
     if current_user
       @board_comment.user_id = current_user.id
     end
     if @board_comment.save
-      redirect_to request.referer, notice: "コメントを投稿しました。"
+      flash.now.notice = "コメントを投稿しました。"
     else
       redirect_to request.referer, alert: "コメントの作成に失敗しました。", status: :see_other 
     end
@@ -21,7 +21,7 @@ class BoardCommentsController < ApplicationController
   
   def update
     if @board_comment.update(board_comment_params)
-      redirect_to board_path(@board), notice: "コメントを編集しました。"
+      flash.now.notice = "コメントを更新しました。"
     else
       flash.now.alert = "コメントの編集に失敗しました。"
       render :edit, status: :unprocessable_entity 
@@ -29,9 +29,8 @@ class BoardCommentsController < ApplicationController
   end
 
   def destroy
-    @board_comment = BoardComment.find(params[:id])
     @board_comment.destroy
-    redirect_to request.referer, notice: "コメントを削除しました。", status: :see_other 
+    flash.now.notice = "コメントを削除しました。"
   end
 
   private

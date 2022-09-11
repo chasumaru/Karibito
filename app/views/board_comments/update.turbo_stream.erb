@@ -1,0 +1,5 @@
+<%= turbo_stream.replace @board_comment do %>
+  <%= render partial: "board_comment_content",
+              locals: {board: @board, comment: @board_comment} %>
+<% end %>
+<%= turbo_stream_flash %>

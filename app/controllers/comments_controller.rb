@@ -28,7 +28,6 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    # redirect_to request.referer, notice: "コメントを削除しました。", status: :see_other 
     flash.now.notice = "コメントを削除しました。"
   end
 

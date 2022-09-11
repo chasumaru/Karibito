@@ -19,3 +19,5 @@ ja:
       board:
         title: タイトル
         description: 説明
+      board_comment:
+        description: 内容
