@@ -9,7 +9,7 @@
         <p class="ml-3 text-slate-400"><%= how_long_ago(comment) %></p>
       </div>
       <div class="relative pb-2">
-        <%= render partial: "posts/comment_content", locals: {comment: comment} %>
+        <%= render partial: "comments/comment_content", locals: {comment: comment} %>
         <% if user_signed_in? && current_user == comment.user %>
           <span class="absolute -bottom-6 right-6 inline-flex justify-center w-11 h-6 px-2 py-1 ml-1 border border-red-400 text-red-400 text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting">
             <%= button_to "削除", post_comment_path(@post, comment), { method: :delete, form: { data: { turbo_confirm: "コメントを削除しますか？" } } } %>
@@ -24,7 +24,7 @@
         <div data-controller="reply" class=" relative h-full">
           <% if user_signed_in? %>
             <button data-reply-target="trigger" data-action="reply#display" class="underline ml-1 -mb-1 no-tap-highlighting">返信する</button>
-            <%= render partial: "posts/new_reply", locals: {comment: comment} %>
+            <%= render partial: "comments/new_reply", locals: {comment: comment} %>
             <button data-reply-target="closed" data-action="reply#hide" class="absolute underline ml-1 my-1 no-tap-highlighting">キャンセル</button>
           <% else %>
             <%= link_to "返信する", new_user_session_path, class: "underline ml-1 -mb-1 no-tap-highlighting" %>
@@ -35,7 +35,7 @@
     <section>
       <% if comment.replies.present? %>
         <% comment.replies.each do |reply| %>
-          <%= render partial: "reply", locals: {reply: reply} %>
+          <%= render partial: "comments/reply", locals: {reply: reply} %>
         <% end %>
       <% end %>
     </section>

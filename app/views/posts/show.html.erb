@@ -96,7 +96,7 @@
                       <% next %>
                     <% end %>
                       <div class="grid grid-cols-1">
-                        <%= render partial: "posts/comment_block", locals: {comment: comment} %>
+                        <%= render partial: "comments/comment_block", locals: {comment: comment} %>
                       </div>
                   <% end %>
               <% else %>
@@ -107,7 +107,7 @@
           <section>
             <div class="grid grid-cols-1 justify-center mt-6">
               <% if user_signed_in? %>
-                <%= render partial: "posts/new_comment", locals: {post: @post} %>
+                <%= render partial: "comments/new_comment", locals: {post: @post} %>
               <% else %>
                 <div class="flex justify-center bg-white">
                   <%= button_to "コメントする", new_user_session_path, method: :get, class:"px-5 py-1 my-1 rounded-2xl tracking-widest font-semibold bg-white border-2 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>

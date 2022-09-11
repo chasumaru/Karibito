@@ -1,11 +1,11 @@
 <% if @comment.reply_comment_id.present? %>
   <%= turbo_stream.replace @comment do %>
-    <%= render partial: "posts/reply_content",
+    <%= render partial: "reply_content",
                 locals: {post: @post, reply: @comment} %>
   <% end %>
 <% else %>
   <%= turbo_stream.replace @comment do %>
-    <%= render partial: "posts/comment_content",
+    <%= render partial: "comment_content",
                 locals: {post: @post, comment: @comment} %>
   <% end %>
 <% end %>
