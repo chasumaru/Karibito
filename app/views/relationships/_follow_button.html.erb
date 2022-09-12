@@ -6,7 +6,7 @@
   <% else %>
     <%= form_with(model: current_user.active_relationships.build) do |f| %>
       <div><%= hidden_field_tag :followed_id, user.id %></div>
-      <p class="text-slate-800 bg-slate-300 font-extrabold rounded-3xl px-6 py-2 mr-2 mb-2 focus:outline-none"><%= f.submit "フォローする" %></p>
+      <p class="text-slate-800 bg-slate-300 font-extrabold rounded-3xl px-4.5 py-2.5 mr-2 mb-2 focus:outline-none"><%= f.submit "フォローする" %></p>
     <% end %>
   <% end %>
 </section>
