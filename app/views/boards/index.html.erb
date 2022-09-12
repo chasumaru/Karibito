@@ -48,7 +48,7 @@
 <section>
   <%= turbo_frame_tag "boards-list", loading: :lazy , target: "_top" do %>
     <% if @boards.present? %>
-      <div class="grid md:grid-cols-2 gap-x-2 gap-y-2 mx-4 my-2">
+      <div class="grid md:grid-cols-2 gap-x-2 gap-y-2 mx-4 mt-8">
         <% @boards.each do |board| %>
           <div class="flex flex-row border-2 border-gray-200 rounded-md border-opacity-60 no-tap-highlighting">
             <div class="w-48 h-32">
@@ -101,4 +101,4 @@
   <% end %>
 </section>
 
-<a target="_blank" href="https://icons8.com/icon/47096/上">上 icon by Icons8</a>
+<a class="text-sm text-slate-300" target="_blank" href="https://icons8.com/icon/47096/上">上 icon by Icons8</a>

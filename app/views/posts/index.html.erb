@@ -51,7 +51,7 @@
 <section>
   <%= turbo_frame_tag "posts-list", loading: :lazy, target: "_top" do %>
     <% if @posts.present? %>
-      <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-3 mx-8">
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-3 mx-8 mt-8">
         <% @posts.each do |post| %>
           <div class="border-2 border-gray-200 border-opacity-60 rounded-xl overflow-hidden no-tap-highlighting">
             <% if post.images.attached? %>
@@ -105,4 +105,4 @@
   <% end %>
 </section>
 
-<a target="_blank" href="https://icons8.com/icon/47096/上">上 icon by Icons8</a>
+<a class="text-sm text-slate-300" target="_blank" href="https://icons8.com/icon/47096/上">上 icon by Icons8</a>

@@ -7,7 +7,7 @@ class Users::AccountsController < ApplicationController
     @positions = @user.positions
     @pagy_post, @posts = pagy(@user.posts, page_param: :page_post, items: 18)
     @boards = @user.boards
-    # @pagy_board, @boards = pagy(@user.boards, page_param: :page_board, items: 12)
+    @followers = @user.followers
   end
   
   def index

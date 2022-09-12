@@ -1,0 +1,6 @@
+<%= turbo_stream.replace "follow_button" do %>
+  <%= render partial: "follow_button", locals: {user: @user} %>
+<% end %>
+<%= turbo_stream.update "follower_count" do %>
+  <%= render partial: "followers_count", locals: {followers: @followers} %>
+<% end %>

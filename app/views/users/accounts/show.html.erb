@@ -57,21 +57,21 @@
           </div>
           <div class="grid col-start-5 col-span-2 justify-items-center py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md" data-tabs-target="tab" data-action="click->tabs#change">
             <p class="text-xs font-black mb-2">掲示板</p>
-            <p class="text-md font-black underline underline-offset-4">0</p>
+            <p class="text-md font-black underline underline-offset-4"><%= @user.boards.count %></p>
           </div>
           <%= link_to following_path(@user), class: "grid col-start-8 col-span-2 justify-items-center no-tap-highlighting py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md" do %>
             <p class="text-xs font-black mb-2">フォロー</p>
-            <p class="text-md font-black underline underline-offset-4" id="following_number"><%= @user.following.count %></p>
+            <p class="text-md font-black underline underline-offset-4"><%= @user.following.count %></p>
           <% end %>
           <%= link_to followers_path(@user), class: "grid col-start-11 col-span-2 justify-items-center no-tap-highlighting py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md" do %>
             <p class="text-xs font-black mb-2">フォロワー</p>
-            <p class="text-md font-black underline underline-offset-4" id="follower_number"><%= @user.followers.count %></p>
+            <%= render partial: "relationships/followers_count", locals: {followers: @followers} %>
           <% end %>
         </div>
         <div class="grid justify-center">
           <div class="my-6">
             <% if current_user != @user %>
-              <%= render partial: "follow_button", locals: {user: @user} %>
+              <%= render partial: "relationships/follow_button", locals: {user: @user} %>
             <% end %>
           </div>
         </div>

@@ -7,4 +7,3 @@
 <%= turbo_stream.update "like_number" do %>
   <%= render partial: "like_number", locals: {liked_users: @liked_users} %>
 <% end %>
-<%= turbo_stream_flash %>
