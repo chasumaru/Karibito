@@ -50,7 +50,7 @@
           </svg>
         <% end %>
       <% end %>
-      <%= render partial: "likes/like_count", locals: {post: @post} %>
+      <%= render partial: "likes/like_count", locals: {post: @post, liked_users: @liked_users } %>
     </div>
     <div class="flex">
       <div class="flex items-center">

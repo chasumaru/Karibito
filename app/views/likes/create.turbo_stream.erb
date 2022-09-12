@@ -1,7 +1,7 @@
 <%= turbo_stream.replace "like_icon" do %>
-  <%= render partial: "like_icon", locals: {like: @like} %>
+  <%= render partial: "like_icon", locals: {post: @post} %>
 <% end %>
 <%= turbo_stream.replace "like_count" do %>
-  <%= render partial: "like_count", locals: {like: @like} %>
+  <%= render partial: "like_count", locals: {post: @post, liked_users: @liked_users} %>
 <% end %>
 <%= turbo_stream_flash %>
