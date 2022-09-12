@@ -5,16 +5,28 @@ class LikesController < ApplicationController
   def create
     @like = current_user.likes.create(post_id: params[:post_id])
     @post.create_notification_by(current_user)
-    flash.now.notice = "いいねができまsita。" if @post.save
-    unless @post.save
-      flash.now.notice = "いいねができませんでした。"
-    end
+    flash.now.notice = "いいねができまsita。" 
+    redirect_to request.referer, status: :see_other 
   end
+
+  # def destroy
+  #   @like = Like.find_by(post_id: params[:post_id], user_id: current_user.id)
+  #   @like.destroy
+  #   redirect_to request.referer, status: :see_other 
+  # end
+  
+  # def create
+  #   @like = current_user.likes.create(post_id: params[:post_id])
+  #   if @like.save
+  #     @post.create_notification_by(current_user)
+  #     flash.now.notice = "いいねしました。" 
+  #   end
+  # end
 
   def destroy
     @like = Like.find_by(post_id: params[:post_id], user_id: current_user.id)
     @like.destroy
-    flash.now.notice = "いいねができませんでした。"
+    flash.now.notice = "いいねを取り消しました。"
   end
   
   private
