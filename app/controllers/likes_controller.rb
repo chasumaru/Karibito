@@ -4,9 +4,10 @@ class LikesController < ApplicationController
 
   def create
     @like = current_user.likes.create(post_id: params[:post_id])
+    @liked_users = @post.liked_users
     @post.create_notification_by(current_user)
     flash.now.notice = "いいねができまsita。" 
-    redirect_to request.referer, status: :see_other 
+    # redirect_to request.referer, status: :see_other 
   end
 
   # def destroy
