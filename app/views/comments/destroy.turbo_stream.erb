@@ -4,5 +4,8 @@
 <% else %>
   <%= turbo_stream.update "parent_comment_#{@comment.id}", "" %>
 <% end %>
+<%= turbo_stream.update "comment_number" do %>
+  <%= render partial: "comment_number", locals: {post: @post} %>
+<% end %>
 <%= turbo_stream_flash %>
 

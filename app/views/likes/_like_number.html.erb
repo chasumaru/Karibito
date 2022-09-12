@@ -1,0 +1,10 @@
+<span class="text-gray-400 inline-flex h-6 items-center leading-none text-sm" id="like_number">
+  <svg class="w-4 h-4 mr-1"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  
+    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+  </svg>
+  <% if liked_users %>
+    <%= liked_users.count %>
+  <% else %>
+  0
+  <% end %>
+</span>

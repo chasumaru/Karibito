@@ -14,4 +14,7 @@
   <% end %>
   <%= turbo_stream.update "no_comments" , "" %>
 <% end %>
+<%= turbo_stream.update "comment_number" do %>
+  <%= render partial: "comment_number", locals: {post: @post} %>
+<% end %>
 <%= turbo_stream_flash %>
