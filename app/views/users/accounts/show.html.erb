@@ -57,7 +57,11 @@
           </div>
           <div class="grid col-start-5 col-span-2 justify-items-center py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md" data-tabs-target="tab" data-action="click->tabs#change">
             <p class="text-xs font-black mb-2">掲示板</p>
-            <p class="text-md font-black underline underline-offset-4"><%= @user.boards.count %></p>
+            <% if @real_boards %>
+              <p class="text-md font-black underline underline-offset-4"><%= @real_boards.count %></p>
+            <% else %>
+              <p class="text-md font-black underline underline-offset-4">0</p>
+            <% end %>
           </div>
           <%= link_to following_path(@user), class: "grid col-start-8 col-span-2 justify-items-center no-tap-highlighting py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md" do %>
             <p class="text-xs font-black mb-2">フォロー</p>
@@ -75,8 +79,6 @@
             <% end %>
           </div>
         </div>
-
-        
         <div data-tabs-target="panel" class="hidden">
           <% if @posts.present? %>
             <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-3 mx-8">
@@ -97,11 +99,10 @@
             </div>
           <% end %>
         </div>
-
         <div data-tabs-target="panel" class="hidden">
-          <% if @boards.present? %>
+          <% if @real_boards.present? %>
             <div class="grid grid-cols-1 gap-x-2 gap-y-3 mx-8">
-              <% (@boards).each do |board| %>
+              <% (@real_boards).each do |board| %>
                 <%= render partial: "board", locals: { board: board} %> 
               <% end %>
             </div>
@@ -118,8 +119,6 @@
             </div>
           <% end %>
         </div>
-
-
       </div>
     </div>
   </section>

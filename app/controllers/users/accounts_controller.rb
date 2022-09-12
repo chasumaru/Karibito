@@ -8,6 +8,8 @@ class Users::AccountsController < ApplicationController
     @pagy_post, @posts = pagy(@user.posts, page_param: :page_post, items: 18)
     @boards = @user.boards
     @followers = @user.followers
+    @real_boards = Board.where(user_id: @user.id, anonymous_flag: false)
+
   end
   
   def index
