@@ -15,11 +15,15 @@
         </div>
         <div class="grid grid-cols-1 relative border-t-2">
           <span class="flex justify-start items-center ml-3 py-2 bg-white">
-          <% if @board.anonymous_flag? %>
-            <p class="text-sm mr-2 ml-2">このスレは<span class="text-sm font-bold">名無しさん</span>によって立てられました。</p>
-          <% else %>
-            <p class="text-sm mr-2 ml-2">このスレは<span class="text-sm font-bold hover:underline hover:underline-offset-2"><%= link_to @board.user.name, profile_path(@board.user) %>さん</span>によって立てられました。</p>
-          <% end %>
+            <% if @board.user %>
+              <% if @board.anonymous_flag? %>
+                <p class="text-sm mr-2 ml-2">このスレは<span class="text-sm font-bold">名無しさん</span>によって立てられました。</p>
+              <% else %>
+                <p class="text-sm mr-2 ml-2">このスレは<span class="text-sm font-bold hover:underline hover:underline-offset-2"><%= link_to @board.user.name, profile_path(@board.user) %>さん</span>によって立てられました。</p>
+              <% end %> 
+            <% else %>
+              <p class="text-sm mr-2 ml-2">このスレは<span class="text-sm font-bold">名無しさん</span>によって立てられました。</p>
+            <% end %>
           </span>
         </div>
         <div class="flex justify-between items-center px-6 py-1 border-b-2">
