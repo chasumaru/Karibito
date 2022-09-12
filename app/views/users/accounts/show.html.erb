@@ -61,26 +61,17 @@
           </div>
           <%= link_to following_path(@user), class: "grid col-start-8 col-span-2 justify-items-center no-tap-highlighting py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md" do %>
             <p class="text-xs font-black mb-2">フォロー</p>
-            <p class="text-md font-black underline underline-offset-4"><%= @user.following.count %></p>
+            <p class="text-md font-black underline underline-offset-4" id="following_number"><%= @user.following.count %></p>
           <% end %>
           <%= link_to followers_path(@user), class: "grid col-start-11 col-span-2 justify-items-center no-tap-highlighting py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md" do %>
             <p class="text-xs font-black mb-2">フォロワー</p>
-            <p class="text-md font-black underline underline-offset-4"><%= @user.followers.count %></p>
+            <p class="text-md font-black underline underline-offset-4" id="follower_number"><%= @user.followers.count %></p>
           <% end %>
         </div>
         <div class="grid justify-center">
           <div class="my-6">
             <% if current_user != @user %>
-              <% if current_user.following?(@user) %>
-                <%= form_with(model: current_user.active_relationships.find_by(followed_id: @user.id), html: { method: :delete }) do |f| %>
-                  <p class="text-slate-800 bg-white border-2 border-slate-300 font-extrabold rounded-3xl px-6 py-2 mr-2 mb-2 focus:outline-none"><%= f.submit "フォロー中" %></p>
-                <% end %>
-              <% else %>
-                <%= form_with(model: current_user.active_relationships.build) do |f| %>
-                  <div><%= hidden_field_tag :followed_id, @user.id %></div>
-                  <p class="text-slate-800 bg-slate-300 font-extrabold rounded-3xl px-6 py-2 mr-2 mb-2 focus:outline-none"><%= f.submit "フォローする" %></p>
-                <% end %>
-              <% end %>
+              <%= render partial: "follow_button", locals: {user: @user} %>
             <% end %>
           </div>
         </div>
