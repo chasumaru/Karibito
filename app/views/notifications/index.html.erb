@@ -1,23 +1,10 @@
 <div class="grid grid-cols-1 justify-center bg-neutral-100 px-2 py-3 border-8 border-white">
   <div class="grid grid-cols-1 justify-center bg-white">
     <h2 class="inline-flex justify-self-center font-bold my-6">通知一覧</h2>
-    <% if @notifications.exists? %>
-      <div class="flex justify-end items-center mb-5 mr-3">
-        <%= button_to  destroy_all_notifications_path, { method: :delete} do %> 
-          <p class="text-sm bg-red-300 border px-2 py-1 rounded-xl hover:bg-red-500">全て削除</p>
-        <% end %>
-      </div>
-      <div class="border-t">
-        <%= render @notifications %>
-      </div>
-    <% else %>
-      <div class="flex w-full flex-col justify-center items-center mb-48 mt-24">
-        <span class ="relative">
-          <div class="h-36 w-36 bg-white rounded-full -ml-1.5 "></div>
-          <%= image_tag 'ojigi_animal_neko.jpg', class:' absolute top-6 left-4 z-10 w-24 h-28 p-4' %>
-        </span>
-        <p class="font-medium py-2">新着の通知はありません。</p>
-      </div>
-    <% end %>
+      <% if @notifications.exists? %>
+        <%= render partial: "notification_content", locals:{notifications: @notifications} %>
+      <% else %>
+        <%= render "no_notification" %>
+      <% end %>
   </div>
 </div>
