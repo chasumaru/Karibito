@@ -1,28 +1,50 @@
-<div class="pb-72">
 
-
-
-<h2>よくある質問</h2>
-
-<ul>
-  <li>Q. ユーザー登録すると何ができますか?</li>
-  <li>A. 無料でご登録いただくと、日記投稿やDM機能をご利用いただけます。</li>
-
-  <li>Q. 投稿の仕方が分かりません</li>
-  <li>A. こちらから投稿のマニュアルをご覧になれます。</li>
-  
-  <li>Q.画像のカバーのかけ方が分かりません。</li>
-  <li>A. こちらでカバーのかけ方の詳細をご確認いただけます。</li>
-
-  <li>Q.投稿された画像のカバーを外したい</li>
-    <li>A. 画像をクリックしていただくと、カバーを外すことができます。また、設定でカバーをつけたままにすることや、カバーを外したままにする切替えができます。詳しくはこちらをご覧ください。</li>
-  <li>
-</ul>
-
-</div>
 
 <%= link_to "Googleでログイン", user_google_oauth2_omniauth_authorize_path, method: :post, class: "hidden" %>
-
+<div>
+  <section>
+    <div class="grid grid-cols-1 px-5 mt-14 mx-auto">
+      <div class="text-center mb-10">
+        <h2 class="font-bold text-center mb-4">
+          よくある質問
+        </h2>
+      </div>
+      <div class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
+        <div class="w-full px-4 py-2">
+          <details class="mb-4">
+            <summary class="font-semibold bg-gray-200 rounded-md py-2 px-4 mb-1">
+              ユーザー登録すると何ができますか?
+            </summary>
+            <span>
+              無料でご登録いただくと、日記の投稿や日記へのコメント、フォロー機能などの各種機能をご利用いただけます。
+            </span>
+          </details>
+          <details class="mb-4">
+            <summary class="font-semibold bg-gray-200 rounded-md py-2 px-4 mb-1">
+              画像のカバーのかけ方が分かりません。
+            </summary>
+            <span>
+              投稿時にdangerチェックボックス(下図)をオンにしてから投稿してください。
+            </span>
+          </details>
+          <details class="mb-4">
+            <summary class="font-semibold bg-gray-200 rounded-md py-2 px-4 mb-1">
+              投稿された画像のカバーを外したい。
+            </summary>
+            <span>
+              画像をクリックしていただくと、カバーを外すことができます。また、設定でカバーをつけたままにすることや、カバーを外したままにする切替えができます。
+            </span>
+          </details>
+        </div>
+      </div>
+      <div class="text-center mb-20">
+        <p class="text-sm font-medium leading-relaxed w-3/4 xl:w-2/4 lg:w-3/4 mx-auto">
+          その他ご不明点などございましたら、お問い合わせフォームよりご意見をお聞かせください。
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
 
 <span>
 <%# 消すこと %>

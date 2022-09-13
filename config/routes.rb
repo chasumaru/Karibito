@@ -46,6 +46,5 @@ Rails.application.routes.draw do
       get '/privacy', action: 'privacy', as: 'privacy'
       get '/faq', action: 'faq', as: 'faq'
       get '/term', action: 'term', as: 'term'
-      get '/manual', action: 'manual', as: 'manual'
     end
 end
