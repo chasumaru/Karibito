@@ -21,18 +21,7 @@
               </div>
             </div>
             <div class="flex justify-items-end">
-              <% if current_user != user %>
-                <% if current_user.following?(user) %>
-                  <%= form_with(model: current_user.active_relationships.find_by(followed_id: user.id), html: { method: :delete }) do |f| %>
-                    <p class="text-xs md:text-sm text-slate-800 bg-white border border-slate-800 font-medium rounded-md px-5 py-2 focus:outline-none no-tap-highlighting cursor-pointer"><%= f.submit "フォロー中", class: "no-tap-highlighting cursor-pointer"%></p>
-                  <% end %>
-                <% else %>
-                  <%= form_with(model: current_user.active_relationships.build) do |f| %>
-                    <div><%= hidden_field_tag :followed_id, user.id %></div>
-                    <p class="text-xs md:text-sm text-slate-800 bg-slate-200 font-medium rounded-md px-3.75 py-2 focus:outline-none no-tap-highlighting cursor-pointer"><%= f.submit "フォローする", class: "no-tap-highlighting cursor-pointer" %></p>
-                  <% end %>
-                <% end %>
-              <% end %>
+              <%= render partial: "shared/follow_button", locals: {user: user} %>
             </div>
           </div>
         <% end %>
