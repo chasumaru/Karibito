@@ -1,6 +1,6 @@
 <div class="grid grid-cols-1 justify-center bg-neutral-100 px-2 py-3 border-8 border-white">
   <div class="grid grid-cols-1 justify-center bg-white">
-    <h3 class="inline-flex justify-self-center font-bold my-6">通知一覧</h3>
+    <h2 class="inline-flex justify-self-center font-bold my-6">通知一覧</h2>
     <% if @notifications.exists? %>
       <div class="flex justify-end items-center mb-5 mr-3">
         <%= button_to  destroy_all_notifications_path, { method: :delete} do %> 
