@@ -58,7 +58,9 @@
           </div>
         <div class="flex flex-col no-tap-highlighting py-4">
           <%= f.label :images, "画像を追加", class: "font-semibold text-black ml-4" %>
-          <%= f.file_field :images, multiple: true, direct_upload: true, data: {image_preview_target: "input", action: "image-preview#readURL" }, class: "ml-2" %>
+          <%= f.file_field :images, multiple: true, direct_upload: true, data: {image_preview_target:"input source", action: "image-preview#readURL image-preview#preview" }, class: "ml-2" %>
+          <span id = "Img"></span>
+        </div>
         </div>
       </section>
     </div>

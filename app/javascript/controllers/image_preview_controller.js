@@ -1,8 +1,25 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = [ "output", "input", "bgOutput", "bgInput" ]
+  static targets = ["source", "output", "input", "bgOutput", "bgInput" ]
 
+ preview() {
+  var input = this.sourceTarget
+  var files = input.files
+  var imgLoc = document.getElementById("Img")
+  for (var i = 0; i < files.length; i++) {
+      let reader = new FileReader()
+      reader.onload = function() {
+          let image = document.createElement("img")
+          imgLoc.appendChild(image)
+          image.style.height = '100px'
+          image.src = reader.result
+      }
+      if (i > 0){
+      reader.readAsDataURL(files[i])
+      }
+  }
+}
 
  readURL() {
   var input = this.inputTarget
@@ -15,6 +32,7 @@ export default class extends Controller {
    reader.readAsDataURL(input.files[0]);
  }
 }
+
 readBgURL() {
   var input = this.bgInputTarget
   var output = this.bgOutputTarget
