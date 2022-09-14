@@ -4,7 +4,7 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= render "users/shared/error_messages", resource: resource %>
       <div class="grid grid-cols-1 items-center">
-        <div data-controller="image-preview" class="profile__icon bg-white">
+        <div data-controller="image-preview" class="profile__icon bg-white -mt-1">
           <%if current_user.background.attached? %>
             <%= image_tag(current_user.background, data: { image_preview_target: "bgOutput" }, class: "w-full h-64 md:h-96 object-center object-cover") %>
           <% else %>
@@ -13,9 +13,9 @@
           <div class="flex w-full flex-col justify-center items-center">
             <span class ="relative -mt-10 md:-mt-16">
               <%if  current_user.avatar.attached? %>
-                <%= image_tag(current_user.avatar, data: { image_preview_target: "output" }, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-emerald-500") %>
+                <%= image_tag(current_user.avatar, data: { image_preview_target: "output" }, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-emerald-500 bg-white") %>
               <% else %>
-                <%= image_tag "no_avatar.png", alt: "アバター画像", data: { image_preview_target: "output" }, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-yellow-300" %>
+                <%= image_tag "no_avatar.png", alt: "アバター画像", data: { image_preview_target: "output" }, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-yellow-300 bg-white" %>
               <% end %>
             </span>
             <div class="my-2 mx-6">

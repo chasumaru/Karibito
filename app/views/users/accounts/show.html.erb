@@ -5,9 +5,9 @@
   <% i = "#{@user.name}さんのページ" %>
 <% end %>
 <% provide(:title, "#{i}") %>
-<div class="-mt-12 bg-white">
+<div class="bg-white">
   <section>
-    <div class="profile__icon">
+    <div class="profile__icon -mt-1">
       <%if @user.background.attached? %>
         <% if @user == current_user %>
           <%= image_tag(current_user.background, class: "w-full h-64 md:h-96 object-cover") %>
@@ -21,12 +21,12 @@
         <span class ="relative -mt-10 md:-mt-16">
           <%if @user.avatar.attached? %>
             <% if @user == current_user %>
-              <%= image_tag(current_user.avatar, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-emerald-500") %>
+              <%= image_tag(current_user.avatar, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-emerald-500 bg-white") %>
             <% else %>
-              <%= image_tag(@user.avatar, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-indigo-500") %>
+              <%= image_tag(@user.avatar, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-indigo-500 bg-white") %>
             <% end %>
           <% else %>
-            <%= image_tag "no_avatar.png", class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-yellow-300" %>
+            <%= image_tag "no_avatar.png", class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-yellow-300 bg-white" %>
           <% end %>
         </span>
         <p class="my-2 font-semibold"><%= @user.name %></p>
