@@ -1,0 +1,4 @@
+<%= turbo_stream.remove @board_comment %>
+<%= turbo_stream.update "parent_board_comment_#{@board_comment.id}", "" %>
+<%= turbo_stream_flash %>
+

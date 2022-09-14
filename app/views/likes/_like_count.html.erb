@@ -1,0 +1,28 @@
+<section id="like_count">
+  <% if @post.liked_users.present? %>
+    <%= button_to liked_post_path(@post), method: :get, class: "overflow-hidden h-10 w-24 focus:outline-none" do %>
+      <div class="flex -space-x-4 itmes-center mx-2">
+        <% if liked_users.first.avatar.present? %>
+          <%= image_tag(liked_users.first.avatar, class: "w-8 h-8 rounded-full border-2 border-white dark:border-gray-800") %>
+        <% else %>
+          <%= image_tag "no_avatar.png", class: "w-8 h-8 rounded-full border-2 border-white dark:border-gray-800" %>
+        <% end %>
+        <% if liked_users.second.present? %>
+          <% if liked_users.second.avatar.present? %>
+            <%= image_tag(liked_users.second.avatar, class: "w-8 h-8 rounded-full border-2 border-white dark:border-gray-800") %>
+          <% else %>
+            <%= image_tag "no_avatar.png", class: "w-8 h-8 rounded-full border-2 border-white dark:border-gray-800" %>
+          <% end %>
+        <% end %>
+        <% if liked_users.third.present? %>
+          <% if liked_users.third.avatar.present? %>
+            <%= image_tag(liked_users.third.avatar, class: "w-8 h-8 rounded-full border-2 border-white dark:border-gray-800") %>
+          <% else %>
+            <%= image_tag "no_avatar.png", class: "w-8 h-8 rounded-full border-2 border-white dark:border-gray-800" %>
+          <% end %>
+        <% end %>
+        <p class="flex justify-center items-center w-8 h-8 text-xs font-medium text-white bg-gray-700 rounded-full border-2 border-white hover:bg-gray-600 dark:border-gray-800"><%= liked_users.count %></p>
+      </div>
+    <% end %>
+  <% end %>
+</section>

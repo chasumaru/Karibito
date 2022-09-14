@@ -1,0 +1,45 @@
+<section id="parent_comment_<%="#{comment.id}"%>">
+  <div class="grid grid-cols-1 w-full break-all pt-1 mb-1">
+    <div class="flex">
+      <div class="flex justify-center w-12 h-12">
+        <%= avatar_link(comment) %>
+      </div>
+      <div class="flex flex-col w-full">
+        <div class="flex">
+          <strong><%= comment.user.name %></strong>
+          <p class="ml-3 text-slate-400"><%= how_long_ago(comment) %></p>
+        </div>
+        <div class="relative pb-2 w-4/5">
+          <%= render partial: "comments/comment_content", locals: {comment: comment} %>
+          <% if user_signed_in? && current_user == comment.user %>
+            <span class="absolute -bottom-6 right-0 inline-flex justify-center w-11 h-6 px-2 py-1 ml-1 border border-red-400 text-red-400 text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting">
+              <%= button_to "削除", post_comment_path(@post, comment), { method: :delete, form: { data: { turbo_confirm: "コメントを削除しますか？" } } } %>
+            </span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col w-full">
+      <section>
+        <div class="mb-2 ml-11 border-b pb-6">
+          <div data-controller="reply" class=" relative h-full">
+            <% if user_signed_in? %>
+              <button data-reply-target="trigger" data-action="reply#display" class="underline ml-1 -mb-1 no-tap-highlighting">返信する</button>
+              <%= render partial: "comments/new_reply", locals: {comment: comment} %>
+              <button data-reply-target="closed" data-action="reply#hide" class="absolute underline ml-1 my-1 no-tap-highlighting">キャンセル</button>
+            <% else %>
+              <%= link_to "返信する", new_user_session_path, class: "underline ml-1 -mb-1 no-tap-highlighting" %>
+            <% end %>
+          </div>
+        </div>
+      </section>
+      <section>
+        <% if comment.replies.present? %>
+          <% comment.replies.each do |reply| %>
+            <%= render partial: "comments/reply", locals: {reply: reply} %>
+          <% end %>
+        <% end %>
+      </section>
+    </div>
+  </div>
+</section>

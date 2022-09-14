@@ -1,0 +1,42 @@
+<section>
+  <div class="grid grid-cols-1 justify-center bg-neutral-100 px-3 py-3 mt-8">
+    <div class='bg-white'>
+      <% if users.present? %>
+        <% users.each do |user| %>
+          <div class="flex justify-end items-center border-b py-2 px-3 bg-white">
+            <div class="flex w-full justify-self-start items-cneter">
+              <div class="mr-4 no-tap-highlighting">
+                <%if user.avatar.attached? %>
+                  <% if user == current_user %>
+                    <%= link_to(image_tag(current_user.avatar, class: "w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-emerald-500"), profile_path(current_user)) %>
+                  <% else %>
+                    <%= link_to(image_tag(user.avatar, class: "w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-indigo-500"), profile_path(user)) %>
+                  <% end %>
+                <% else %>
+                  <%=link_to(image_tag("no_avatar.png", class: "w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-yellow-300"), profile_path(user)) %>
+                <% end %>
+              </div>
+              <div class="self-center">
+                <%= link_to user.name, profile_path(user), class:"font-bold text-sm md:text-base no-tap-highlighting hover:underline underline-offset-4" %>
+              </div>
+            </div>
+            <div class="flex justify-items-end">
+              <%= render partial: "shared/follow_button", locals: {user: user} %>
+            </div>
+          </div>
+        <% end %>
+        <div class="flex justify-center mt-10 mb-6">
+          <%= pagy_nav(@pagy).html_safe %>
+        </div>
+      <% else %>
+        <div class="flex w-full flex-col justify-center items-center mb-48">
+          <span class ="relative">
+            <div class="h-36 w-36 bg-white rounded-full -ml-1.5 "></div>
+            <%= image_tag 'ojigi_animal_inu.png', class:' absolute top-6 left-4 z-10 w-24 h-28 p-4' %>
+          </span>
+          <p class="font-medium py-2">ユーザーが見つかりませんでした。</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

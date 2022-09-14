@@ -1,0 +1,12 @@
+<% if @comment.reply_comment_id.present? %>
+  <%= turbo_stream.replace @comment do %>
+    <%= render partial: "reply_content",
+                locals: {post: @post, reply: @comment} %>
+  <% end %>
+<% else %>
+  <%= turbo_stream.replace @comment do %>
+    <%= render partial: "comment_content",
+                locals: {post: @post, comment: @comment} %>
+  <% end %>
+<% end %>
+<%= turbo_stream_flash %>

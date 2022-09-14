@@ -16,11 +16,32 @@
 },
 @layer components {
   .hamburger {
-    @apply z-40 block absolute top-4 right-3.75 w-6.25 h-5.5 cursor-pointer transition duration-600;
+    @apply z-40 block absolute top-4 right-5 w-6 h-5.5 cursor-pointer transition duration-200;
   }
   .inner_line {
-    @apply block absolute right-0 w-6.25 h-0.5 bg-black duration-600 rounded;
+    @apply block absolute right-0 w-6 h-0.5 bg-black duration-200 rounded;
   }
+}
+
+
+/* turbo-frame開発用css */
+
+
+
+.board-loading {
+   background-image: url("Spinner-1s-128px.gif");
+   background-repeat: no-repeat;
+   background-position: center center;
+   background-size: cover;
+}
+
+.post-loading {
+   background-image: url("Spinner-1s-580px.gif");
+   background-repeat: no-repeat;
+   background-position: center center;
+   background-size: cover;
+   width: 60vh;
+   height: 60vh;
 }
 
   /* サイドバーのモーション */
@@ -53,10 +74,86 @@
 	display: block;
 }
 
+.pictures{
+width: 100%;
+object-position: center;
+}
 
 
+@import "~tailwindcss/base";
 
-/* スクロール時にヘッダーの表示切り替え */
+.pagy-nav,
+.pagy-nav-js {
+   @apply flex w-full justify-center items-center space-x-2 md:space-x-4 lg:space-x-8 mx-2;
+}
+
+.pagy-nav .page a,
+.pagy-nav .page.active,
+.pagy-nav .page.prev.disabled,
+.pagy-nav .page.next.disabled,
+.pagy-nav-js .page a,
+.pagy-nav-js .page.active,
+.pagy-nav-js .page.prev.disabled,
+.pagy-nav-js .page.next.disabled {
+  @apply block rounded-lg px-3 lg:px-6 md:px-6 py-2 lg:py-4 text-sm lg:text-base md:text-base text-gray-500 font-semibold bg-gray-200 shadow-md;
+  &:hover{
+    @apply bg-gray-300;
+  }
+  &:active{
+    @apply bg-gray-400 text-white;
+  }
+}
+
+.pagy-nav .page.prev.disabled,
+.pagy-nav .page.next.disabled,
+.pagy-nav-js .page.prev.disabled,
+.pagy-nav-js .page.next.disabled {
+  @apply text-gray-400 cursor-default;
+  &:hover {
+    @apply text-gray-400 bg-gray-200;
+  }
+  &:active {
+    @apply text-gray-400 bg-gray-200;
+  }
+}
+
+.pagy-nav .page.active,
+.pagy-nav-js .page.active {
+  @apply text-white cursor-default bg-gray-400;
+  &:hover {
+    @apply text-white bg-gray-400;
+  }
+  &:active {
+    @apply bg-gray-400 text-white;
+  }
+}
+
+
+.pagy-combo-nav-js {
+  @apply flex max-w-max rounded-full px-3 py-1 text-sm text-gray-500 font-semibold bg-gray-200 shadow-md;
+}
+
+.pagy-combo-nav-js .pagy-combo-input {
+  @apply bg-white px-2 rounded-sm
+}
+
+.pagy-combo-nav-js .page.prev,
+.pagy-combo-nav-js .page.next {
+  &:hover {
+    @apply text-gray-800;
+  }
+  &:active {
+    @apply text-gray-800;
+  }
+}
+
+.pagy-combo-nav-js .page.prev.disabled,
+.pagy-combo-nav-js .page.next.disabled {
+  @apply text-gray-400 cursor-default;
+}
+
+
+/* スクロール時にヘッダーの表示切り替え
 
 .header {
   -webkit-transform: translateY(0);
@@ -74,3 +171,4 @@
   transition: transform .4s ease;
   transition: transform .4s ease, -webkit-transform .4s ease;
 }
+ */

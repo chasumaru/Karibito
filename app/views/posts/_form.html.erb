@@ -1,50 +1,73 @@
-<%= form_with(model: post) do |f| %>
-  <% if post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-      <ul>
-        <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-
-  <div class="field">
-    <%= f.label :title, "タイトル" %><br>
-    <%= f.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= f.label :content, "本文" %><br>
-    <%= f.text_area :content %>
-  </div>
-
-  <div class="field">
-    <%= f.label :images, "画像を添付する" %><br>
-    <%= f.file_field :images, multiple: true %><br>
-  </div>
-
-  <h3>画像</h3>
-
-  <% if post.images.attached? %>
-    <p>選択済みの画像（削除する画像にチェックをつけてください）</p>
-    <div style="display: flex; flex-wrap: wrap; width: 750px;">
-      <% @post.images.each do |image| %>
-        <div style="display: flex; margin:5px 5px 5px 0;">
-        <%= f.check_box :image_ids, {multiple: true }, image.id, false %>
-          <label for="post_image_ids_<%= image.id %>" >
-            <%= image_tag image, width: 300, height: 200 %>
-          </label>
+<%= form_with(model: post, local: true) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="grid grid-cols-1 mx-auto max-w-screen-lg bg-white">
+    <div data-controller="image-preview" class="grid grid-cols-1">
+      <article>
+        <div 
+          data-controller="character-counter" 
+          data-character-counter-countdown-value="true" 
+          class="py-2 border-b-2 px-2">
+          <%= f.text_field :title, placeholder: "タイトル(必須)", data: {character_counter_target: "input"}, maxlength: 50, class: "w-full bg-amber-100 text-xl font-bold text-black rounded-md pl-2 py-1 mb-1 focus:outline-none focus:ring-0" %>
+           <p class="flex justify-end items-center text-xs md:text-base font-semibold mr-2">
+            <strong data-character-counter-target="counter" class="font-bold text-sm md:text-lg px-0.5"></strong>文字
+          </p>
         </div>
-      <% end %>
+        <div class="py-2 border-b-2 px-2">
+          <p class='text-xs font-semibold ml-2 my-1'> 複数の場合は(,) で区切って下さい。(例: シカ,罠猟..)</p>
+          <%= f.text_field :tag_list, data: {character_counter_target: "input"}, value: @post.tag_list.join(','), placeholder: "タグを入力", maxlength: 40, class: "w-full bg-amber-100 text-base font-bold text-black rounded-md pl-2 py-1 mb-1 focus:outline-none focus:ring-0" %>
+        </div>
+        <div class="grid grid-cols-1 relative border-t-2">
+          <span class="flex justify-start items-center ml-3 py-1 bg-white border-t">
+            <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border border-yellow-300" %>
+            <p class="text-sm font-bold text-stone-500 mr-2 ml-2 hover:underline hover:underline-offset-2">ユーザー名</p>
+          </span>
+        </div>
+        <div class="flex">
+          <p class="font-semibold text-stone-500 ml-2">サムネイル画像</p>
+          <p class="text-xs self-start ml-0.5">※1</p>
+        </div>
+        <div class="h-full overflow-hidden">
+          <%= image_tag("gettyimages-825522644-612x612.jpg", 
+            data: { image_preview_target: "output" }, alt: "サムネイル画像", class: "w-full object-center") %>
+        </div>
+      </article>
+      <section>
+        <div 
+        data-controller="character-counter" 
+        data-character-counter-countdown-value="true" 
+        class="mx-2 mt-6 mb-2">
+          <span class="flex mb-1 tracking-wide  whitespace-pre-wrap font-medium text-base">
+            <%= f.text_area :content, data: {controller: "autogrow", character_counter_target: "input"}, maxlength: 300, placeholder: "本文を入力", class: "text-black w-full pt-3 pl-1 pb-5 rounded-md bg-amber-100 focus:outline-none focus:ring-0" %>
+          </span>
+           <p class="flex justify-end items-center text-xs md:text-base font-semibold mr-2">
+            <strong data-character-counter-target="counter" class="font-bold text-sm md:text-lg px-0.5"></strong>文字
+          </p>
+        </div>
+          <div class="grid grid-cols-1 gap-2 py-4">
+            <p class="text-sm font-medium text-stone-500  ml-3">※1・・・アップロードした画像の一枚目がサムネイルになります。</p>
+            <% if post.images.attached? %>
+              <% post.images.each do |image| %>
+                <%= f.check_box :image_ids, {multiple: true }, image.id, false %>
+                <label for="post_image_ids_<%= image.id %>" >
+                  <div class="h-full overflow-hidden">
+                    <%= image_tag image, alt: "他の画像", class: "w-full object-center" %>
+                  </div>
+                </label> 
+              <% end %>
+            <% else %>
+              <div class="grid grid-cols-1 no-tap-highlighting py-4">
+                <%= f.label :images, "画像を追加", class: "font-semibold text-black ml-4" %>
+                <%= f.file_field :images, multiple: true, direct_upload: true, data: {image_preview_target:"input source", action: "image-preview#readURL image-preview#preview" }, class: "ml-2" %>
+              </div>
+              <div class="h-full overflow-hidden">
+                <span class="grid grid-cols-1 gap-y-2" id = "Img"></span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </section>
     </div>
-  <% end %>
-
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="flex justify-center bg-white">
+      <%= f.submit "投稿", class:"h-10 md:h-12 w-20 md:w-32 md:text-lg px-5 py-1 my-2 rounded-2xl tracking-widest font-semibold bg-white border-2 text-stone-600 hover:text-black border-cyan-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+    </div>
 <% end %>

@@ -1,24 +1,8 @@
-<h3>タイトル</h3>
-<%= @post.title %><br>
-
-<h3>本文</h3>
-<%= @post.content %>
-
-<% if @post.images.attached? %>
-<div style="width: 700px;">
-  <p><strong>Image:</strong></p>
-  <% @post.images.each do |image| %>
-    <%= link_to image_tag(image, size: '200×150'), url_for(image) %>
-    <%# <%= image_tag image.variant(resize: "300×300") %>
-  <% end %>
-</div>
+<% provide(:title, "#{@post.title}") %>
+<article>
+  <%= render @post %>
+</article>
+<%= link_to posts_path, class: "inline-flex items-center h-6 w-22 px-1 py-4 ml-6 my-2 rounded-lg dark:text-white dark:bg-gray-600 border dark:hover:text-gray-900 focus:outline-none no-tap-highlighting" do %>
+  <p class="text-xs font-semibold">一覧に戻る</p>
+  <%= image_tag("Uターン矢印 1.png", class: "w-4 h-4 ml-0.5 -mt-0.5") %>
 <% end %>
-
-<%= link_to '編集する', edit_post_path(@post) %> |
-<%= link_to 'ユーザーページ', posts_path %>
-
-<ul>
-<li>ユーザー自身のみ投稿,編集,削除が可能</li>
-<li>他のユーザーは閲覧のみ</li>
-<li>ユーザーページにユーザの投稿一覧を加える。</li>
-</ul>

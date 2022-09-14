@@ -1,4 +1,3 @@
----
 ja:
   activerecord:
     errors:
@@ -205,3 +204,9 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
+
+ja:
+  views:
+    pagination:
+      prev: "前"
+      next: "次"

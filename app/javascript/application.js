@@ -1,8 +1,8 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 
-// Turbo.session.drive = false
 import "@hotwired/turbo-rails"
 import "controllers"
+// Turbo.session.drive = false
 
 // /* スクロール時にヘッダーの表示切り替え */
 

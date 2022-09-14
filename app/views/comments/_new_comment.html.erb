@@ -1,0 +1,7 @@
+<%= form_with model: [@post, Comment.new], id: "new_comment" do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= f.text_area :context, data: {controller: "autogrow" }, maxlength: 300, class: "block w-full rounded-xl bg-amber-100 focus:outline-none focus:ring-0 pl-2 pt-1 pb-6" , placeholder: "コメントする..." %>
+  <div class="flex justify-center bg-white">
+    <%= f.submit "投稿", class:"px-5 py-1 mt-2 rounded-2xl tracking-widest ft-semibold bg-white border-2 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+  </div>
+<% end %>
