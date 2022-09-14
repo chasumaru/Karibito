@@ -47,4 +47,6 @@ Rails.application.routes.draw do
       get '/faq', action: 'faq', as: 'faq'
       get '/term', action: 'term', as: 'term'
     end
+
+    get '*path', controller: 'application', action: 'render_404'
 end
