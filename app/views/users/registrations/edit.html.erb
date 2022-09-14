@@ -4,18 +4,18 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= render "users/shared/error_messages", resource: resource %>
       <div class="grid grid-cols-1 items-center">
-        <div class="profile__icon bg-white">
+        <div data-controller="image-preview" class="profile__icon bg-white">
           <%if current_user.background.attached? %>
-            <%= image_tag(current_user.background, class: "w-full h-64 md:h-96 object-center object-cover") %>
+            <%= image_tag(current_user.background, data: { image_preview_target: "bgOutput" }, class: "w-full h-64 md:h-96 object-center object-cover") %>
           <% else %>
-            <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "w-full h-64 md:h-96 object-center object-cover" %>
+            <%= image_tag'800x600_dummy.jpg', alt: "背景画像", data: { image_preview_target: "bgOutput" }, class: "w-full h-64 md:h-96 object-center object-cover" %>
           <% end %>
           <div class="flex w-full flex-col justify-center items-center">
             <span class ="relative -mt-10 md:-mt-16">
               <%if  current_user.avatar.attached? %>
-                <%= image_tag(current_user.avatar, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-emerald-500") %>
+                <%= image_tag(current_user.avatar, data: { image_preview_target: "output" }, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-emerald-500") %>
               <% else %>
-                <%= image_tag "no_avatar.png", class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-yellow-300" %>
+                <%= image_tag "no_avatar.png", alt: "アバター画像", data: { image_preview_target: "output" }, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-yellow-300" %>
               <% end %>
             </span>
             <div class="my-2 mx-6">
@@ -25,9 +25,9 @@
           </div>
           <div class="flex flex-col ml-4 mt-8 mb-6">
             <%= f.label :avatar, "(プロフィール画像の設定)",class:"font-semibold mb-1" %>
-            <%= f.file_field :avatar, direct_upload: true, class: "ml-1" %>
+            <%= f.file_field :avatar, direct_upload: true, data: {image_preview_target: "input", action: "image-preview#readURL" }, class: "ml-1" %>
             <%= f.label :background, "(背景画像の設定)", class: "font-semibold mb-1 mt-4" %>
-            <%= f.file_field :background, class: "ml-1" %>
+            <%= f.file_field :background, direct_upload: true, data: { image_preview_target: "bgInput", action: "image-preview#readBgURL" }, class: "ml-1" %>
           </div>
         </div>
         <div class="profile__details">
@@ -56,7 +56,7 @@
         </div>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>メール認証を完了してください : <%= resource.unconfirmed_email %></div>
+        <div class="ml-3 text-red-500">メール認証を完了してください : <%= resource.unconfirmed_email %></div>
       <% end %>
 
       <div class="flex justify-center bg-white  my-4">
