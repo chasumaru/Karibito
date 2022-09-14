@@ -1,45 +1,46 @@
 <% provide(:title, "無料会員登録") %>
-
-<h1 class="font-bold text-center">会員登録</h1>
-<div class="flex w-full items-center space-y-8">
-    <div class="flex-1 px-8 md:px-32 lg:px-24">
-        <div class="my-8 bg-white rounded-md shadow-md p-5">
-            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %> 
-            <%= render "users/shared/error_messages", resource: resource %>
-                <div class="field">
-                  <%= f.label :name, "名前", class: "block text-lg font-bold text-gray-600 dark:text-gray-200" %>
-                  <%= f.text_field :name, autofocus: true, autocomplete: "name" ,placeholder: "山本太郎", maxlength: 30, class: "block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 dark:focus:border-blue-400" %>
-                </div>
-
-                <div class="field mt-6">
-                    <%= f.label :email, "メールアドレス", class: "block text-lg font-bold text-gray-600 dark:text-gray-200" %>
-                    <%= f.email_field :email, autofocus: true, autocomplete: "email" ,placeholder: "example@gmail.com",class: "block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 dark:focus:border-blue-400" %>
-                </div><br>
-
-                <div class="field">
-                    <div class="flex justify-between">
-                        <%= f.label :password, "パスワード", class: "block text-lg font-bold text-gray-600 dark:text-gray-200" %>
-                        <% if @minimum_password_length %>
-                        <div class="text-sm text-gray-400 mt-2 ml-8">(<%= @minimum_password_length %>~32文字の半角英数字)</div>
-                        <% end %><br />
+<div class="mt-14 mb-10">
+    <h1 class="font-bold text-center">会員登録</h1>
+    <div class="flex w-full items-center space-y-8">
+        <div class="flex-1 px-8 md:px-32 lg:px-24">
+            <div class="my-8 bg-white rounded-md shadow-md p-5">
+                <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %> 
+                <%= render "users/shared/error_messages", resource: resource %>
+                    <div class="field">
+                    <%= f.label :name, "名前", class: "block text-lg font-bold text-gray-600 dark:text-gray-200" %>
+                    <%= f.text_field :name, autofocus: true, autocomplete: "name" ,placeholder: "山本太郎", maxlength: 30, class: "block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 dark:focus:border-blue-400" %>
                     </div>
-                    <%= f.password_field :password ,autocomplete: "new-password" ,placeholder: "New Password", maxlength: 32, class: "block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 dark:focus:border-blue-400" %>
-                </div><br>
 
-                <div class="field">
-                    <div class="flex justify-between">
-                        <%= f.label :password_confirmation, "パスワード(確認用)", class: "block text-lg font-bold text-gray-600 dark:text-gray-200" %>
-                    </div>
-                    <%= f.password_field :password_confirmation, autocomplete: "new-password", maxlength: 32, class: "block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 dark:focus:border-blue-400" %>
-                </div><br>
-                    <%= f.submit "無料登録する" ,class: "w-full px-4 py-2 tracking-wide transition-colors duration-200 transform bg-green-200 rounded-md hover:bg-green-100 focus:outline-none focus:bg-green-100 focus:ring focus:ring-green-100 focus:ring-opacity-50 mb-4" %>
-            <% end %>
-            <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-                <p class="my-2 text-sm text-center"><%= link_to "確認メールが届かない場合", new_confirmation_path(resource_name), class: "text-blue-500 focus:outline-none focus:underline hover:underline" %></p>
-            <% end %>
-            <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-            
-            <% end %>
+                    <div class="field mt-6">
+                        <%= f.label :email, "メールアドレス", class: "block text-lg font-bold text-gray-600 dark:text-gray-200" %>
+                        <%= f.email_field :email, autofocus: true, autocomplete: "email" ,placeholder: "example@gmail.com",class: "block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 dark:focus:border-blue-400" %>
+                    </div><br>
+
+                    <div class="field">
+                        <div class="flex justify-between">
+                            <%= f.label :password, "パスワード", class: "block text-lg font-bold text-gray-600 dark:text-gray-200" %>
+                            <% if @minimum_password_length %>
+                            <div class="text-sm text-gray-400 mt-2 ml-8">(<%= @minimum_password_length %>~32文字の半角英数字)</div>
+                            <% end %><br />
+                        </div>
+                        <%= f.password_field :password ,autocomplete: "new-password" ,placeholder: "New Password", maxlength: 32, class: "block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 dark:focus:border-blue-400" %>
+                    </div><br>
+
+                    <div class="field">
+                        <div class="flex justify-between">
+                            <%= f.label :password_confirmation, "パスワード(確認用)", class: "block text-lg font-bold text-gray-600 dark:text-gray-200" %>
+                        </div>
+                        <%= f.password_field :password_confirmation, autocomplete: "new-password", maxlength: 32, class: "block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 dark:focus:border-blue-400" %>
+                    </div><br>
+                        <%= f.submit "無料登録する" ,class: "w-full px-4 py-2 tracking-wide transition-colors duration-200 transform bg-green-200 rounded-md hover:bg-green-100 focus:outline-none focus:bg-green-100 focus:ring focus:ring-green-100 focus:ring-opacity-50 mb-4" %>
+                <% end %>
+                <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+                    <p class="my-2 text-sm text-center"><%= link_to "確認メールが届かない場合", new_confirmation_path(resource_name), class: "text-blue-500 focus:outline-none focus:underline hover:underline" %></p>
+                <% end %>
+                <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+                
+                <% end %>
+            </div>
         </div>
     </div>
 </div>
