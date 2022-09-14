@@ -1,7 +1,7 @@
-<%= form_with(model: post) do |f| %>
+<%= form_with(model: post, local: true) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="grid grid-cols-1 mx-auto max-w-screen-lg bg-white">
-    <div class="grid grid-cols-1">
+    <div data-controller="image-preview" class="grid grid-cols-1">
       <article>
         <div 
           data-controller="character-counter" 
@@ -27,7 +27,8 @@
           <p class="text-xs self-start ml-0.5">※1</p>
         </div>
         <div class="h-full overflow-hidden">
-          <%= image_tag'gettyimages-825522644-612x612.jpg', alt: "サムネイルのサンプル", class: "w-full object-center" %>
+          <%= image_tag("gettyimages-825522644-612x612.jpg", 
+            data: { image_preview_target: "output" }, alt: "サムネイル画像", class: "w-full object-center") %>
         </div>
       </article>
       <section>
@@ -43,8 +44,7 @@
           </p>
         </div>
           <div class="grid grid-cols-1 gap-2 py-4">
-            <p class="font-semibold text-stone-500 ml-2">その他の画像</p>
-            <p class="text-sm font-medium text-stone-500  ml-3">※1・・・追加した画像の一枚目がサムネイルになります。</p>
+            <p class="text-sm font-medium text-stone-500  ml-3">※1・・・アップロードした画像の一枚目がサムネイルになります。</p>
             <% if post.images.attached? %>
               <% post.images.each do |image| %>
                 <%= f.check_box :image_ids, {multiple: true }, image.id, false %>
@@ -58,7 +58,7 @@
           </div>
         <div class="flex flex-col no-tap-highlighting py-4">
           <%= f.label :images, "画像を追加", class: "font-semibold text-black ml-4" %>
-          <%= f.file_field :images, multiple: true, direct_upload: true, class: "ml-2" %>
+          <%= f.file_field :images, multiple: true, direct_upload: true, data: {image_preview_target: "input", action: "image-preview#readURL" }, class: "ml-2" %>
         </div>
       </section>
     </div>
