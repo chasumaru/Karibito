@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'pagy/extras/i18n'
 # Pagy initializer file (5.10.1)
 # Customize only what you really need and notice that the core Pagy works also without any of the following lines.
 # Should you just cherry pick part of this file, please maintain the require-order of the extras
@@ -15,12 +16,13 @@
 # See https://ddnexus.github.io/pagy/api/pagy#instance-variables
 # Pagy::DEFAULT[:page]   = 1                                  # default
 # Pagy::DEFAULT[:items]  = 20                                 # default
+Pagy::DEFAULT[:items]  = 24
 # Pagy::DEFAULT[:outset] = 0                                  # default
 
 
 # Other Variables
 # See https://ddnexus.github.io/pagy/api/pagy#other-variables
-# Pagy::DEFAULT[:size]       = [1,4,4,1]                       # default
+Pagy::DEFAULT[:size]       = [1,1,1,1]                       # default
 # Pagy::DEFAULT[:page_param] = :page                           # default
 # The :params can be also set as a lambda e.g ->(params){ params.exclude('useless').merge!('custom' => 'useful') }
 # Pagy::DEFAULT[:params]     = {}                              # default

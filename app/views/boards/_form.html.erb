@@ -1,0 +1,51 @@
+<%= form_with(model: board) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="grid grid-cols-1 mx-auto max-w-screen-lg bg-white">
+    <div data-controller="image-preview" class="grid grid-cols-1">
+        <div 
+          data-controller="character-counter" 
+          data-character-counter-countdown-value="true" 
+          class="py-2 border-b-2 px-2">
+          <%= f.text_field :title, placeholder: "タイトル(必須)", data: {character_counter_target: "input"}, maxlength: 100, class: "w-full bg-amber-100 text-xl font-bold text-black rounded-md pl-2 py-1 mb-1 focus:outline-none focus:ring-0" %>
+           <p class="flex justify-end items-center text-xs md:text-base font-semibold mr-2">
+            <strong data-character-counter-target="counter" class="font-bold text-sm md:text-lg px-0.5"></strong>文字
+          </p>
+        </div>
+        <div class="h-full overflow-hidden">
+          <%= image_tag("gettyimages-825522644-612x612.jpg", 
+            data: { image_preview_target: "output" }, alt: "サムネイル画像", class: "w-full object-center") %>
+        </div>
+        <div class="py-2 border-b-2 px-2">
+          <p class='text-xs font-semibold ml-2 my-1'> 複数の場合は(,) で区切って下さい。(例: シカ,罠猟..)</p>
+          <%= f.text_field :tag_list, data: {character_counter_target: "input"}, value: @board.tag_list.join(','), placeholder: "タグを入力", maxlength: 40, class: "w-full bg-amber-100 text-base font-bold text-black rounded-md pl-2 py-1 mb-1 focus:outline-none focus:ring-0" %>
+        </div>
+        <div class="flex flex-col no-tap-highlighting py-4">
+          <%= f.label :images, "サムネイル画像を設定", class: "font-semibold text-black ml-4" %>
+          <%= f.file_field :illustration, direct_upload: true, data: {image_preview_target: "input", action: "image-preview#readURL" }, class: "ml-2" %>
+        </div>
+      <section>
+        <div 
+          data-controller="character-counter" 
+          data-character-counter-countdown-value="true" 
+          class="mx-2 mt-6 mb-2">
+          <span class="flex mb-1 tracking-wide  whitespace-pre-wrap font-medium text-base">
+            <%= f.text_area :description, data: {controller: "autogrow", character_counter_target: "input"}, maxlength: 400, placeholder: "本文を入力", class: "text-black w-full pt-2 px-1 pb-5 rounded-md bg-amber-100 focus:outline-none focus:ring-0" %>
+          </span>
+           <p class="flex justify-end items-center text-xs md:text-base font-semibold mr-2">
+            <strong data-character-counter-target="counter" class="font-bold text-sm md:text-lg px-0.5"></strong>文字
+          </p>
+        </div>
+      </section>
+      <div class="grid grid-cols-1 justify-center">
+        <% if current_user %>
+          <div class="flex justify-center items-center py-3">
+            <p class="text-base font-medium mr-2">匿名で投稿</p>
+            <%= f.check_box(:anonymous_flag,{:checked=>true},"1","0") %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="flex justify-center bg-white">
+      <%= f.submit "投稿", class:"h-10 md:h-12 w-20 md:w-32 md:text-lg px-5 py-1 my-2 rounded-2xl tracking-widest font-semibold bg-white border-2 text-stone-600 hover:text-black border-cyan-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+    </div>
+<% end %>

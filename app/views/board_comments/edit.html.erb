@@ -1,0 +1,6 @@
+<% provide(:title, "コメントの編集") %>
+<%= render "form", board: @board %>
+<%= link_to :back, class: "inline-flex items-center h-6 w-22 px-1 py-4 ml-6 my-2 rounded-lg dark:text-white dark:bg-gray-600 border dark:hover:text-gray-900 focus:outline-none no-tap-highlighting" do %>
+  <p class="text-xs font-semibold">詳細に戻る</p>
+  <%= image_tag("Uターン矢印 1.png", class: "w-4 h-4 ml-0.5 -mt-0.5") %>
+<% end %>

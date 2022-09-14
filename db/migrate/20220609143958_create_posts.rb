@@ -7,5 +7,7 @@ class CreatePosts < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+    add_index :posts, :title
+    add_index :posts, :content, length: { content: 255 }
   end
 end

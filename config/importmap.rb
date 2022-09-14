@@ -4,18 +4,12 @@ pin "application", preload: true
 pin "vue", to: "https://unpkg.com/vue@2.6.11/dist/vue.esm.browser.min.js"
 pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
 pin "app"
-pin "@hotwired/stimulus", to: "stimulus.min.js", preload: true
+pin "@hotwired/stimulus", to: "https://ga.jspm.io/npm:@hotwired/stimulus@3.1.0/dist/stimulus.js"
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
 pin_all_from "app/javascript/controllers", under: "controllers"
-
-# pin "postcss", to: "https://ga.jspm.io/npm:postcss@8.4.13/lib/postcss.mjs"
-# pin "buffer", to: "https://ga.jspm.io/npm:@jspm/core@2.0.0-beta.24/nodelibs/browser/buffer.js"
-# pin "fs", to: "https://ga.jspm.io/npm:@jspm/core@2.0.0-beta.24/nodelibs/browser/fs.js"
-# pin "nanoid/non-secure", to: "https://ga.jspm.io/npm:nanoid@3.3.4/non-secure/index.cjs"
-# pin "path", to: "https://ga.jspm.io/npm:@jspm/core@2.0.0-beta.24/nodelibs/browser/path.js"
-# pin "picocolors", to: "https://ga.jspm.io/npm:picocolors@1.0.0/picocolors.browser.js"
-# pin "process", to: "https://ga.jspm.io/npm:@jspm/core@2.0.0-beta.24/nodelibs/browser/process-production.js"
-# pin "source-map-js", to: "https://ga.jspm.io/npm:source-map-js@1.0.2/source-map.js"
-# pin "url", to: "https://ga.jspm.io/npm:@jspm/core@2.0.0-beta.24/nodelibs/browser/url.js"
-# pin "tailwind-forms", to: "https://ga.jspm.io/npm:tailwind-forms@1.0.6/index.js"
-# pin "tailwindcss/defaultTheme", to: "https://ga.jspm.io/npm:tailwindcss@3.0.24/defaultTheme.js"
+pin "tailwindcss-stimulus-components", to: "https://ga.jspm.io/npm:tailwindcss-stimulus-components@3.0.4/dist/tailwindcss-stimulus-components.modern.js"
+pin "flowbite", to: "https://ga.jspm.io/npm:flowbite@1.5.1/dist/flowbite.js"
+pin "stimulus-notification", to: "https://ga.jspm.io/npm:stimulus-notification@2.1.0/dist/stimulus-notification.es.js"
+pin "hotkeys-js", to: "https://ga.jspm.io/npm:hotkeys-js@3.9.5/dist/hotkeys.esm.js"
+pin "stimulus-use", to: "https://ga.jspm.io/npm:stimulus-use@0.50.0/dist/index.js"
+pin "stimulus-character-counter", to: "https://ga.jspm.io/npm:stimulus-character-counter@4.1.0/dist/stimulus-character-counter.es.js"

@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+  before_action :sign_in_required, only: [:edit, :update, :destroy]
 
   # GET /resource/sign_up
   def new
@@ -12,12 +11,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    @user = User.new(user_params)
+    @user = User.new(sign_up_params)
     if @user.save
       flash[:notice] = 'ユーザー認証メールを送信いたしました。認証が完了しましたらログインしてください。'
-      redirect_to new_user_session_path
+      redirect_to root_path
     else
-      flash[:alert] = 'ユーザー登録に失敗しました。'
+      flash.now.alert = 'ユーザー登録に失敗しました。'
       render :new, status: :unprocessable_entity
     end
   end
@@ -27,10 +26,31 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # PUT /resource
   def update
-    super
-    resource.avatar.attach(account_update_params[:avatar]) if account_update_params[:avatar].present?
+    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+    prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
+
+    resource_updated = update_resource(resource, account_update_params)
+    if account_update_params[:background].present?
+      resource.background.attach(account_update_params[:background]) 
+    end
+    if account_update_params[:avatar].present?
+      resource.avatar.attach(account_update_params[:avatar]) 
+    end
+    yield resource if block_given?
+    if resource_updated
+      # resource.resized_avatar
+      set_flash_message_for_update(resource, prev_unconfirmed_email)
+      bypass_sign_in resource, scope: resource_name if sign_in_after_change_password?
+
+      respond_with resource, location: after_update_path_for(resource)
+    else
+      clean_up_passwords resource
+      set_minimum_password_length
+      flash.now.alert = 'プロフィール編集に失敗しました。'
+      render :edit, status: :unprocessable_entity
+
+    end
   end
 
   # DELETE /resource
@@ -63,23 +83,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_sign_up_path_for(resource)
   #   super(resource)
   # end
-  def after_update_path_for(_resource)
-    # 自分で設定した「マイページ」へのパス
-    mypage_path(current_user)
+  def after_update_path_for(resource)
+    profile_path(current_user)
   end
 
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)
-    mypage_url(resource)
+    profile_url(resource)
   end
 
   def update_resource(resource, params)
     resource.update_without_password(params)
   end
 
-  private
-
-  def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar)
-  end
 end

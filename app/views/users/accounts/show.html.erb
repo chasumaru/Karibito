@@ -1,26 +1,125 @@
-<h1>ユーザーページ</h1>
-
-<% if @user.avatar.present? %>
-  <%= image_tag @user.avatar, size: "200×200", class: "avatar" %>
+<% case @user %>
+<% when current_user %>
+  <% i = 'マイページ' %>
 <% else %>
-  <%= image_tag "noavatar.png", size: "200×200" ,class: "avatar"%>
+  <% i = "#{@user.name}さんのページ" %>
 <% end %>
-
-<h3>名前</h3>
-<%= @user.name %>
-<h3>メールアドレス</h3>
-<%= @user.email %>
-<h3>プロフィール</h3>
-<%= @user.profile%>
-<%= link_to "投稿する", new_post_path %>
-<br>
-<br>
-
-
-<p>実装予定</p>
-<ul>
-  <li>画像投稿機能</li>
-  <li>プロフィール画像設定機能</li>
-  <li>マイページををログイン不要のユーザに表示</li>
-  <li>フィード</li>
-</ul>
+<% provide(:title, "#{i}") %>
+<div class="bg-white">
+  <section>
+    <div class="profile__icon -mt-1">
+      <%if @user.background.attached? %>
+        <% if @user == current_user %>
+          <%= image_tag(current_user.background, class: "w-full h-64 md:h-96 object-cover") %>
+        <% else %>
+          <%= image_tag(@user.background, class: "w-full h-64 md:h-96 object-cover") %>
+        <% end %>
+      <% else %>
+        <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "w-full h-64 md:h-96 object-cover" %>
+      <% end %>
+      <div class="flex w-full flex-col justify-center items-center">
+        <span class ="relative -mt-10 md:-mt-16">
+          <%if @user.avatar.attached? %>
+            <% if @user == current_user %>
+              <%= image_tag(current_user.avatar, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-emerald-500 bg-white") %>
+            <% else %>
+              <%= image_tag(@user.avatar, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-indigo-500 bg-white") %>
+            <% end %>
+          <% else %>
+            <%= image_tag "no_avatar.png", class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-yellow-300 bg-white" %>
+          <% end %>
+        </span>
+        <p class="my-2 font-semibold"><%= @user.name %></p>
+      </div>
+      <span class='flex flex-wrap justify-center'>
+        <% if @positions.present? %>
+          <% @positions.each do |p| %>
+            <%= link_to p, users_path(tag_name: p.name), class:'bg-pink-100 text-pink-800 text-xs font-semibold px-2 py-1 mb-1 mr-1.5 rounded dark:bg-pink-200 dark:text-pink-900 hover:bg-pink-300 no-tap-highlighting' %>
+          <% end %>
+        <% end %>
+      </span>
+    </div>
+    <div class="profile__details">
+      <div data-controller="tabs" class="grid mx-3 md:mx-12 mb-4">
+        <div class="mx-4">
+          <div class="border-y leading-loose tracking-wide font-light text-sm pb-6 ml-2 my-2">
+            <% if @user.profile.present? %>
+                <p class="whitespace-pre-wrap my-2"><%= @user.profile %></p>
+              <% else %>
+                <p class="whitespace-pre-wrap my-2">プロフィールが未入力です。</p>
+            <% end %>
+          </div>
+        </div>
+        <div class="grid grid-cols-12 py-2 mb-1 mr-12">
+          <div class="grid col-start-2 col-span-2 justify-items-center py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md" data-tabs-target="tab" data-action="click->tabs#change">
+            <p class="text-xs font-black mb-2">日記</p>
+            <p class="text-md font-black underline underline-offset-4"><%= @user.posts.count %></p>
+          </div>
+          <div class="grid col-start-5 col-span-2 justify-items-center py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md" data-tabs-target="tab" data-action="click->tabs#change">
+            <p class="text-xs font-black mb-2">掲示板</p>
+            <% if @real_boards %>
+              <p class="text-md font-black underline underline-offset-4"><%= @real_boards.count %></p>
+            <% else %>
+              <p class="text-md font-black underline underline-offset-4">0</p>
+            <% end %>
+          </div>
+          <%= link_to following_path(@user), class: "grid col-start-8 col-span-2 justify-items-center no-tap-highlighting py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md" do %>
+            <p class="text-xs font-black mb-2">フォロー</p>
+            <p class="text-md font-black underline underline-offset-4"><%= @user.following.count %></p>
+          <% end %>
+          <%= link_to followers_path(@user), class: "grid col-start-11 col-span-2 justify-items-center no-tap-highlighting py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md" do %>
+            <p class="text-xs font-black mb-2">フォロワー</p>
+            <%= render partial: "relationships/followers_count", locals: {followers: @followers} %>
+          <% end %>
+        </div>
+        <div class="grid justify-center">
+          <div class="my-6">
+            <% if current_user != @user %>
+              <%= render partial: "relationships/follow_button", locals: {user: @user} %>
+            <% end %>
+          </div>
+        </div>
+        <div data-tabs-target="panel" class="hidden">
+          <% if @posts.present? %>
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-3 mx-8">
+              <% (@posts).each do |post| %>
+                <%= render partial: "post", locals: { post: post} %> 
+              <% end %>
+            </div>
+            <div class="flex justify-center mt-10 mb-6">
+              <%= pagy_nav(@pagy_post).html_safe %>
+            </div>
+          <% else %>
+            <div class="flex w-full flex-col justify-center items-center mb-48">
+              <span class ="relative">
+                <div class="h-36 w-36 bg-white rounded-full -ml-1.5 "></div>
+                <%= image_tag 'ojigi_animal_usagi.png', class:' absolute top-6 left-4 z-10 w-24 h-28 p-4' %>
+              </span>
+              <p class="font-medium py-2">まだ日記がありません。</p>
+            </div>
+          <% end %>
+        </div>
+        <div data-tabs-target="panel" class="hidden">
+          <% if @real_boards.present? %>
+            <div class="grid grid-cols-1 gap-x-2 gap-y-3 mx-8">
+              <% (@real_boards).each do |board| %>
+                <%= render partial: "board", locals: { board: board} %> 
+              <% end %>
+            </div>
+            <%# <div class="flex justify-center mt-10 mb-6">
+              <%= pagy_nav(@pagy_board).html_safe %>
+            <%# </div> %>
+          <% else %>
+            <div class="flex w-full flex-col justify-center items-center mb-48">
+              <span class ="relative">
+                <div class="h-36 w-36 bg-white rounded-full -ml-1.5 "></div>
+                <%= image_tag 'ojigi_animal_kuma.png', class:' absolute top-6 left-4 z-10 w-24 h-28 p-4' %>
+              </span>
+              <p class="font-medium py-2">まだ日記がありません。</p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

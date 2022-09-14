@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Karibito</title>
-        <%= favicon_link_tag('favicon.ico') %>
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <%= csrf_meta_tags %>
-        <%= csp_meta_tag %>
-        <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-        <%= javascript_importmap_tags %>
-        <%= yield(:head) %>
-    </head>
-<%# ブレイクポイント対応はしていない %>
-    <body class="font-body text-stone-700 bg-white relative z-0" data-controller="sidebar">
-        <header id="header">
-            <%= render "shared/navbar" %>
+  <head>
+  <title><%= full_title(yield(:title)) %></title>
+    <%= favicon_link_tag('favicon.ico') %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body data-controller="sidebar" class="font-body text-stone-700 bg-neutral-100">
+    <div class="grid grid-cols-1 mx-auto max-w-screen-lg">
+      <div class="grid grid-cols-1 bg-white">
+        <header>
+          <%= render "shared/navbar" %>
+          <%= render "shared/sidebar" %>
         </header>
         <main>
-            <div class="bg-neutral-100 mx-auto relative z-0 pt-24 ">
-                <%= render "shared/flash" %>
-                <%= yield %>
+          <div class="relative z-0 pt-15">
+           <div id="flash">
+             <%= render "shared/flash" %>
+           </div>
+            <%= yield %>
             <div data-sidebar-target="covering"></div>
-            </div>
+          </div>
         </main>
         <footer>
-            <%= render "shared/footer" %>
+          <%= render "shared/footer" %>
         </footer>
-    </body>
+      </div>
+    </div>
+  </body>
 </html>

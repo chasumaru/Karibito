@@ -38,3 +38,4 @@
 # environments
 /environment/*
 .env
+.env
