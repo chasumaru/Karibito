@@ -7,14 +7,14 @@
           data-controller="character-counter" 
           data-character-counter-countdown-value="true" 
           class="py-2 border-b-2 px-2">
-          <%= f.text_field :title, placeholder: "タイトル(必須)", data: {character_counter_target: "input"}, maxlength: 50, class: "w-full bg-amber-100 text-xl font-bold text-black rounded-md pl-2 py-1 mb-1" %>
+          <%= f.text_field :title, placeholder: "タイトル(必須)", data: {character_counter_target: "input"}, maxlength: 50, class: "w-full bg-amber-100 text-xl font-bold text-black rounded-md pl-2 py-1 mb-1 focus:outline-none focus:ring-0" %>
            <p class="flex justify-end items-center text-xs md:text-base font-semibold mr-2">
             <strong data-character-counter-target="counter" class="font-bold text-sm md:text-lg px-0.5"></strong>文字
           </p>
         </div>
         <div class="py-2 border-b-2 px-2">
           <p class='text-xs font-semibold ml-2 my-1'> 複数の場合は(,) で区切って下さい。(例: シカ,罠猟..)</p>
-          <%= f.text_field :tag_list, data: {character_counter_target: "input"}, value: @post.tag_list.join(','), placeholder: "タグを入力", maxlength: 40, class: "w-full bg-amber-100 text-base font-bold text-black rounded-md pl-2 py-1 mb-1" %>
+          <%= f.text_field :tag_list, data: {character_counter_target: "input"}, value: @post.tag_list.join(','), placeholder: "タグを入力", maxlength: 40, class: "w-full bg-amber-100 text-base font-bold text-black rounded-md pl-2 py-1 mb-1 focus:outline-none focus:ring-0" %>
         </div>
         <div class="grid grid-cols-1 relative border-t-2">
           <span class="flex justify-start items-center ml-3 py-1 bg-white border-t">
@@ -37,7 +37,7 @@
         data-character-counter-countdown-value="true" 
         class="mx-2 mt-6 mb-2">
           <span class="flex mb-1 tracking-wide  whitespace-pre-wrap font-medium text-base">
-            <%= f.text_area :content, data: {controller: "autogrow", character_counter_target: "input"}, maxlength: 300, placeholder: "本文を入力", class: "text-black w-full pt-3 pl-1 pb-5 rounded-md bg-amber-100" %>
+            <%= f.text_area :content, data: {controller: "autogrow", character_counter_target: "input"}, maxlength: 300, placeholder: "本文を入力", class: "text-black w-full pt-3 pl-1 pb-5 rounded-md bg-amber-100 focus:outline-none focus:ring-0" %>
           </span>
            <p class="flex justify-end items-center text-xs md:text-base font-semibold mr-2">
             <strong data-character-counter-target="counter" class="font-bold text-sm md:text-lg px-0.5"></strong>文字
