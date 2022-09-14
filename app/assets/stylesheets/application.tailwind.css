@@ -74,9 +74,13 @@
 	display: block;
 }
 
+.pictures{
+width: 100%;
+object-position: center;
+}
+
 
 @import "~tailwindcss/base";
-
 
 .pagy-nav,
 .pagy-nav-js {
