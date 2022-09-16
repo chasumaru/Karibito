@@ -79,9 +79,6 @@ width: 100%;
 object-position: center;
 }
 
-
-@import "~tailwindcss/base";
-
 .pagy-nav,
 .pagy-nav-js {
    @apply flex w-full justify-center items-center space-x-2 md:space-x-4 lg:space-x-8 mx-2;
