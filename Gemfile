@@ -81,6 +81,8 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'gimei'
+  gem 'capybara'
+  # gem 'shoulda-matchers'
 end
 
 group :development do

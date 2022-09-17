@@ -3,6 +3,5 @@ FactoryBot.define do
     description { "MyText" }
     user { nil }
     board { nil }
-    reply_comment_id { 1 }
   end
 end

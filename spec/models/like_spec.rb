@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Like, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'モデルのテスト' do
+    it "有効なuserの場合は保存されるか" do
+      expect(build(:like)).to be_valid
+    end
+  end
 end
