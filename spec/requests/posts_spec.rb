@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Posts", type: :request do
+  let!(:user) { create(:user) }
+  let!(:post) { create(:post, user_id: user.id) }
+  
   describe "GET /index" do
     it "正常にレスポンスを返すこと" do
       get boards_path
@@ -17,16 +20,9 @@ RSpec.describe "Posts", type: :request do
 
   # describe "GET /show" do
   #   it "正常にレスポンスを返すこと" do
-  #     get "/boards/show"
-  #     expect(response).to have_http_status(:success)
+  #     sign_in user
+  #     get post_path(post)
+  #     expect(response).to have_http_status :ok
   #   end
   # end
-
-  # describe "GET /edit" do
-  #   it "正常にレスポンスを返すこと" do
-  #     get "/boards/edit"
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
-
 end

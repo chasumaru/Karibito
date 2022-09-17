@@ -95,3 +95,6 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
+
+# admin-railsとの依存関係があり、テスト時はコメントアウトする。
+# gem "sassc-rails"
