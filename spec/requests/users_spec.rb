@@ -79,6 +79,11 @@ RSpec.describe "Users", type: :request do
         expect(response).to redirect_to root_path
       end
 
+      # it 'ログイン状態であること' do
+      #   post user_session_path, params: user_params
+      #   expect(signed_in?).to be_truthy
+      # end
+
       it 'flashが表示されること' do
         post user_registration_path, params: user_params
         expect(flash).to be_any
