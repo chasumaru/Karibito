@@ -27,7 +27,7 @@ RSpec.describe "Sessions", type: :system do
         fill_in 'メールアドレス', with: user.email
         fill_in 'パスワード', with: user.password
         find('#login_btn').click
-        visit root_path
+        # expect(response).to redirect_to root_path
         # expect(flash[:notice]).to match('ログインしました。')
         # expect(page).to_not have_selector "a[href=\"#{new_user_session_path}\"]"
         # expect(page).to have_selector "a[href=\"#{profile_path(:user)}\"]"
