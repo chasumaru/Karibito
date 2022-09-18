@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) { build(:user) }
+
     describe 'ユーザー登録' do
      it "name、email、passwordとpassword_confirmationが存在すれば登録できること" do
        expect(user).to be_valid
@@ -53,6 +54,5 @@ RSpec.describe User, type: :model do
       user.password = user.password_confirmation = 'a' * 5
       expect(user).not_to be_valid
     end
-
   end
 end

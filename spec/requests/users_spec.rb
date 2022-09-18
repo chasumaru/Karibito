@@ -3,9 +3,15 @@ require 'rails_helper'
 RSpec.describe "Users", type: :request do
 
   let!(:user) { create(:user) }
+  # let!(:another_user) { create(:user, :other_user) }
+
+  # describe 'another_user' do
+  #   it 'userと異なること'
+  #     expect(another_user.id).not_to eq user.id
+  #   end
+  # end
 
   describe "GET /:id/profile" do
-    subject { get profile_path(user) }
     context 'ログインしている場合' do
       before do
         user.confirm  
@@ -25,7 +31,6 @@ RSpec.describe "Users", type: :request do
   end
 
   describe "GET /users" do
-    subject { get users_path }
     context 'ログインしている場合' do
       before do
         user.confirm
@@ -45,7 +50,6 @@ RSpec.describe "Users", type: :request do
   end
 
   describe "GET  /:id/unsubscribe" do
-    subject { get unsubscribe_path(user) }
     context 'ログインしている場合' do
       before do
         user.confirm
@@ -65,7 +69,6 @@ RSpec.describe "Users", type: :request do
   end
 
   describe "GET  /:id/following" do
-    subject { get following_path(user) }
     context 'ログインしている場合' do
       before do
         user.confirm
@@ -85,7 +88,6 @@ RSpec.describe "Users", type: :request do
   end
 
   describe "GET  /:id/followers" do
-    subject { get followers_path(user) }
     context 'ログインしている場合' do
       before do
         user.confirm
@@ -175,7 +177,6 @@ RSpec.describe "Users", type: :request do
 
 
   describe "DELETE /logout" do
-    subject { delete destroy_user_session_path }
     context 'ログインしている場合' do
       before do
         user.confirm
@@ -194,7 +195,6 @@ RSpec.describe "Users", type: :request do
       get new_user_password_path
       expect(response).to have_http_status(:ok)
     end
-    subject { get new_user_password_path(user) }
     context 'ログインしている場合' do
       before do
         user.confirm
