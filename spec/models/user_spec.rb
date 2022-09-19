@@ -2,28 +2,18 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) { build(:user) }
+  subject(:user) { create(:user) }
 
-    describe 'ユーザー登録' do
-     it "name、email、passwordとpassword_confirmationが存在すれば登録できること" do
-       expect(user).to be_valid
-     end
-     
-     it'nameがnilの場合' do
-      user.name = ''
-      expect(user).not_to be_valid
-     end
+  describe 'ユーザー登録' do
+    it { should be_valid }
+    it { should validate_presence_of :name}
+    it { should validate_length_of(:name).is_at_most(30)}
+    it { should validate_presence_of :email}
+    it { should validate_length_of :email}
+    it { should validate_presence_of :password}
+    it { should validate_length_of(:password).is_at_least(6).is_at_most(32)}
 
-     it 'nameは30文字以内であること' do
-      user.name = 'b' * 31
-      expect(user).not_to be_valid
-    end
-
-     it'emailがnilの場合' do
-      user.email = ''
-      expect(user).not_to be_valid
-     end
-
-     it 'emailが有効な形式であること' do
+    it 'emailが有効な形式であること' do
       valid_addresses = %w[user@exmple.com USER@foo.COM A_US-ER@foo.bar.org first.last@foo.jp alice+bob@baz.cn]
       valid_addresses.each do |valid_address|
         user.email = valid_address
@@ -39,20 +29,32 @@ RSpec.describe User, type: :model do
     end
 
     it 'emailは小文字でDB登録されていること' do
-      mixed_case_email = 'Foo@ExAMPle.CoM'
-      user.email = mixed_case_email
+      upcase_email = user.email.upcase
+      user.email = upcase_email
       user.save
-      expect(user.reload.email).to eq mixed_case_email.downcase
+      expect(user.reload.email).to eq upcase_email.downcase
     end
+  end
 
-    it 'passwordが必須であること' do
-      user.password = user.password_confirmation = ' '
-      expect(user).not_to be_valid
-    end
-   
-    it 'passwordは6文字以上であること' do
-      user.password = user.password_confirmation = 'a' * 5
-      expect(user).not_to be_valid
-    end
+  describe 'ユーザー編集' do
+    it { should validate_length_of(:profile).is_at_most(200)}
+  end
+
+  describe "アソシエーションテスト" do
+    it { should have_many(:active_relationships) }
+    it { should have_many(:passive_relationships) }
+    it { should have_many(:following) }
+    it { should have_many(:followers) }
+    it { should have_many(:posts) }
+    it { should have_many(:likes) }
+    it { should have_many(:liked_posts) }
+    it { should have_many(:comments) }
+    it { should have_many(:boards) }
+    it { should have_many(:board_comments) }
+    it { should have_many(:positions) }
+    it { should have_many(:active_notifications) }
+    it { should have_many(:passive_notifications) }
+    it { should have_one_attached(:avatar) }
+    it { should have_one_attached(:background) }
   end
 end

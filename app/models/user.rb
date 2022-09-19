@@ -1,6 +1,5 @@
 class User < ApplicationRecord
 
-
   # Valdation
   validates :name, presence: true, length: { maximum: 30 }
   validates :profile, length: { maximum: 200 }

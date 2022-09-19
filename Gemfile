@@ -82,7 +82,7 @@ group :development, :test do
   gem 'faker'
   gem 'gimei'
   gem 'capybara'
-  # gem 'shoulda-matchers'
+  gem 'shoulda-matchers'
 end
 
 group :development do

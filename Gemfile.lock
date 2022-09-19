@@ -314,6 +314,8 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
+    shoulda-matchers (5.2.0)
+      activesupport (>= 5.2.0)
     snaky_hash (2.0.0)
       hashie
       version_gem (~> 1.1)
@@ -377,6 +379,7 @@ DEPENDENCIES
   rspec-rails
   rubocop
   rubocop-rails
+  shoulda-matchers
   stimulus-rails
   turbo-rails
   tzinfo-data

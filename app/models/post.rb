@@ -1,12 +1,12 @@
 class Post < ApplicationRecord
   belongs_to :user
-  has_many_attached :images
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
   has_many :notifications, dependent: :destroy
+  has_many_attached :images
   acts_as_taggable
-  
+
   validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: 50 }
   validates :content, length: { maximum: 300 }
