@@ -1,9 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Like, type: :model do
-  describe 'モデルのテスト' do
-    it "有効なuserの場合は保存されるか" do
-      expect(build(:like)).to be_valid
-    end
+  let(:like) { build(:like) }
+  subject(:like) { create(:like) }
+
+  describe 'バリデーション' do
+    it { should be_valid }
+  end
+
+
+  describe "アソシエーションテスト" do
+    it { should belong_to(:user) }
+    it { should belong_to(:post) }
   end
 end
