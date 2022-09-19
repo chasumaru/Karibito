@@ -3,13 +3,6 @@ require 'rails_helper'
 RSpec.describe "Users", type: :request do
 
   let!(:user) { create(:user) }
-  # let!(:another_user) { create(:user, :other_user) }
-
-  # describe 'another_user' do
-  #   it 'userと異なること'
-  #     expect(another_user.id).not_to eq user.id
-  #   end
-  # end
 
   describe "GET /:id/profile" do
     context 'ログインしている場合' do

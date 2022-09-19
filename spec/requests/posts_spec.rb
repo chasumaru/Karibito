@@ -63,9 +63,14 @@ RSpec.describe "Posts", type: :request do
         user.confirm
         sign_in user
       end
-      it "更新する" do
+      it "リダイレクトされること" do
         patch post_path(post), params: post_params
         expect(response).to redirect_to post_path(post)
+      end
+
+      it 'flashが表示されていること' do
+        patch post_path(post), params: post_params
+        expect(flash).to be_any
       end
     end
     context 'ログインしていない場合' do
@@ -76,7 +81,6 @@ RSpec.describe "Posts", type: :request do
     end
   end
 
-  
   describe "DELETE /destroy" do
     let(:post_params) {{ post: {title: 'sample', content: 'sample_content' }}}
     context'ログイン済みの正しいユーザーの場合' do
@@ -88,6 +92,11 @@ RSpec.describe "Posts", type: :request do
         expect{
           delete post_path(post), params: post_params
         }.to change(Post, :count).by -1
+      end
+
+      it 'flashが表示されていること' do
+        delete post_path(post), params: post_params
+        expect(flash).to be_any
       end
 
       it "リダイレクトされること" do
