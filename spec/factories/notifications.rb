@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :notification do
-    visitor_id { 1 }
-    visited_id { 1 }
-    post_id { 1 }
-    comment_id { 1 }
-    action { "MyString" }
+    visitor_id { Faker::Number.number(digits: 3) }
+    visited_id { Faker::Number.number(digits: 3) }
+    post_id { Faker::Number.number(digits: 3) }
+    comment_id { Faker::Number.number(digits: 3) }
+    action { "" }
     checked { false }
   end
 end

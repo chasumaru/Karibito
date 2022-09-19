@@ -12,7 +12,6 @@ RSpec.describe Post, type: :model do
     it { should validate_length_of(:content).is_at_most(300)}
   end
 
-
   describe "アソシエーションテスト" do
     it { should belong_to(:user) }
     it { should have_many(:comments) }
