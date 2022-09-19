@@ -2,6 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :sign_in_required, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:edit]
 
   # GET /resource/sign_up
   def new

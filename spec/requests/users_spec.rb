@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "Users", type: :request do
 
   let!(:user) { create(:user) }
+  let!(:other) { create(:user) }
 
   describe "GET /:id/profile" do
     context 'ログインしている場合' do
@@ -61,44 +62,6 @@ RSpec.describe "Users", type: :request do
     end
   end
 
-  describe "GET  /:id/following" do
-    context 'ログインしている場合' do
-      before do
-        user.confirm
-        sign_in user
-      end
-      it "正しいレスポンスを返すこと" do
-        get following_path(user)
-        expect(response).to have_http_status(:ok)
-      end
-    end
-    context 'ログインしていない場合' do
-      it 'リダイレクトされること' do
-        get following_path(user)
-        expect(response).to redirect_to new_user_session_path
-      end
-    end
-  end
-
-  describe "GET  /:id/followers" do
-    context 'ログインしている場合' do
-      before do
-        user.confirm
-        sign_in user
-      end
-      it "正しいレスポンスを返すこと" do
-        get followers_path(user)
-        expect(response).to have_http_status(:ok)
-      end
-    end
-    context 'ログインしていない場合' do
-      it 'リダイレクトされること' do
-        get followers_path(user)
-        expect(response).to redirect_to new_user_session_path
-      end
-    end
-  end
-
   describe "GET /users/positions" do
     it "正しいレスポンスを返すこと" do
       get positions_path
@@ -150,17 +113,24 @@ RSpec.describe "Users", type: :request do
   end
 
   describe "GET /register/edit/profile" do
+
     context 'ログインしている場合' do
       before do
         user.confirm
         sign_in user
       end
-      it "正しいレスポンスを返すこと" do
-        get edit_user_registration_path(user)
+      it "正しいユーザーとして編集できる" do
+        get edit_user_registration_path
         expect(response).to have_http_status(:ok)
       end
     end
+
     context 'ログインしていない場合' do
+      it 'flashが表示されること' do
+        get edit_user_registration_path
+        expect(flash).to be_any
+      end
+
       it 'リダイレクトされること' do
         get edit_user_registration_path
         expect(response).to redirect_to new_user_session_path
@@ -184,10 +154,6 @@ RSpec.describe "Users", type: :request do
 
 
   describe "GET /secret/new" do
-    it "正しいレスポンスを返すこと" do
-      get new_user_password_path
-      expect(response).to have_http_status(:ok)
-    end
     context 'ログインしている場合' do
       before do
         user.confirm
