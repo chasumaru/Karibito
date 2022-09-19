@@ -15,7 +15,7 @@
       <div class="relative flex-1 flex items-center sm:items-stretch sm:justify-start">
         <div class="flex-shrink-0 flex items-center -mb-1">
           <%= link_to "Karibito", root_path, class:"text-xl md:text-2xl block absolute items-center left-14 md:left-16 font-semibold no-tap-highlighting" %>
-          <%= link_to image_tag('Karibito_logo.png', class:'w-10 md:w-12 no-tap-highlighting'), root_path %>
+          <%= link_to image_tag('Karibito_logo.png', class:'w-10 md:w-12 no-tap-highlighting'), root_path, id:'Logo' %>
         </div>
         <div class="w-full hidden lg:block">
           <div class="flex w-full flax-auto justify-center items-center space-x-3 py-2 ml-24">
@@ -29,7 +29,7 @@
               <%= button_to 'お問い合せ', "https://forms.gle/Z8WNE7HpJw3NnH8F6", method: :get %> 
             </div>
             <% if user_signed_in? %>
-              <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-pink-100 hover:text-black">
+              <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-pink-100 hover:text-black" id="nav_logout">
                 <%= button_to "ログアウト", destroy_user_session_path, { method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } } %> 
               </div>
             <% else %> 
@@ -90,11 +90,11 @@
             <div data-dropdown-target="menu" class="absolute right-0 mt-2 hidden">
               <div class="bg-white shadow rounded border overflow-hidden">
                 <% if user_signed_in? %>
-                  <%= link_to 'マイページ', profile_path(current_user), data: {action: "click->dropdown#toggle"}, class: 'no-underline block pl-6 py-2 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
-                  <%= link_to 'ユーザー編集', edit_user_registration_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block pl-6 py-2 pr-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
+                  <%= link_to 'マイページ', profile_path(current_user), data: {action: "click->dropdown#toggle"}, class: 'no-underline block pl-6 py-2 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap', id: 'nav_mypage' %>
+                  <%= link_to 'ユーザー編集', edit_user_registration_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block pl-6 py-2 pr-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap', id: 'nav_edit_profile' %>
                 <% else %>
-                  <%= link_to '会員登録', new_user_registration_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-6 py-2 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
-                  <%= link_to 'ログイン', new_user_session_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-6 py-2 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
+                  <%= link_to '会員登録', new_user_registration_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-6 py-2 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap', id: 'nav_signup' %>
+                  <%= link_to 'ログイン', new_user_session_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-6 py-2 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap', id: 'nav_login' %>
                 <% end %>
               </div>
             </div>
