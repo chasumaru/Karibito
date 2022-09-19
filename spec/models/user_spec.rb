@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) { build(:user) }
+  let(:other) { build(:user) }
   subject(:user) { create(:user) }
 
   describe 'ユーザー登録' do
@@ -56,5 +57,37 @@ RSpec.describe User, type: :model do
     it { should have_many(:passive_notifications) }
     it { should have_one_attached(:avatar) }
     it { should have_one_attached(:background) }
+  end
+
+  describe '関連付けされたモデルのdependentオプション' do
+    describe 'Post' do
+      let(:post) { create(:post) }
+      it 'ユーザが削除された場合、そのユーザの投稿も削除されること' do
+        user = post.user
+        expect {
+          user.destroy
+        }.to change(Post, :count).by (-1)
+      end
+    end
+
+    describe 'Comment' do
+      let(:comment) { create(:comment) }
+      it 'ユーザが削除された場合、そのユーザのコメントも削除されること' do
+        user = comment.user
+        expect {
+          user.destroy
+        }.to change(Comment, :count).by (-1)
+      end
+    end
+
+    describe 'Like' do
+      let(:like) { create(:like) }
+      it 'ユーザが削除された場合、そのユーザのいいねも削除されること' do
+        user = like.user
+        expect {
+          user.destroy
+        }.to change(Like, :count).by (-1)
+      end
+    end
   end
 end

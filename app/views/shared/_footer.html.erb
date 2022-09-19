@@ -7,8 +7,8 @@
       <% end %>
     </div>
     <div class="block mb-4">
-      <li><%= link_to '狩猟掲示板',new_board_path, class: "block no-tap-highlighting hover:underline hover:underline-offset-4 block w-20" %></li>
-      <li class="my-1"><%= link_to 'スレを立てる',new_post_path, class: "block no-tap-highlighting hover:underline hover:underline-offset-4 block w-24" %></li>  
+      <li><%= link_to '狩猟掲示板',boards_path, class: "block no-tap-highlighting hover:underline hover:underline-offset-4 block w-20" %></li>
+      <li class="my-1"><%= link_to 'スレを立てる',new_board_path, class: "block no-tap-highlighting hover:underline hover:underline-offset-4 block w-24" %></li>  
     </div>
     <div class="block">
       <li><%= link_to 'ユーザー一覧',users_path, class: "block no-tap-highlighting hover:underline hover:underline-offset-4 block w-24" %></li>
@@ -20,10 +20,10 @@
     <% end %>
   </ul>
   <ul class="flex-auto w-48">
-    <li class="mb-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-30"><%= link_to 'Karibitoとは?',about_path, class: "block" %></li> 
-    <li class="mb-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-20"><%= link_to '利用規約',term_path, class: "block" %></li> 
-    <li class="my-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-40"><%= link_to 'プライバシーポリシー',privacy_path, class: "block" %></li> 
-    <li class="my-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-24"><%= link_to 'よくある質問',about_path, class: "block" %></li> 
+    <li class="mb-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-30"><%= link_to 'Karibitoとは?',about_path, class: "block", id: 'footer_about' %></li> 
+    <li class="mb-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-20"><%= link_to '利用規約',term_path, class: "block", id: 'footer_term' %></li> 
+    <li class="my-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-40"><%= link_to 'プライバシーポリシー',privacy_path, class: "block", id: 'footer_privacy' %></li> 
+    <li class="my-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-24"><%= link_to 'よくある質問',faq_path, class: "block", id: 'footer_faq' %></li>
     <li class="my-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-24"><%= link_to 'お問い合わせ',"https://forms.gle/Z8WNE7HpJw3NnH8F6", class: "block" %></li> 
     <% if user_signed_in? %>
       <li class="my-2 no-tap-highlighting hover:underline hover:underline-offset-4 block w-28"><%= link_to "アカウント設定", unsubscribe_path(current_user) %></li>
