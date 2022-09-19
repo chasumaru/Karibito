@@ -10,6 +10,7 @@ class Post < ApplicationRecord
   validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: 50 }
   validates :content, length: { maximum: 300 }
+  validates :tag_list, length: { maximum: 40 }
   validate :image_size, :image_count
   
   def thumbnail

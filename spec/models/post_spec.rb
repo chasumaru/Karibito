@@ -4,7 +4,7 @@ RSpec.describe Post, type: :model do
   let(:post) { build(:post) }
   subject(:post) { create(:post) }
 
-  describe 'ユーザー登録' do
+  describe 'バリデーション' do
     it { should be_valid }
     it { should validate_presence_of :user_id}
     it { should validate_presence_of :title}
