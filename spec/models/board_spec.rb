@@ -16,4 +16,16 @@ RSpec.describe Board, type: :model do
     it { should have_one_attached(:illustration) }
     it { should have_many(:tags) }
   end
+
+  describe '関連付けされたモデルのdependentオプション' do
+    describe 'BoardComment' do
+      let(:board_comment) { create(:board_comment) }
+      it '掲示板が削除された場合、その掲示板の掲示板コメントも削除されること' do
+        board = board_comment.board
+        expect {
+          board.destroy
+        }.to change(BoardComment, :count).by (-1)
+      end
+    end
+  end
 end

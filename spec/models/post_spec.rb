@@ -21,4 +21,27 @@ RSpec.describe Post, type: :model do
     it { should have_many_attached(:images) }
     it { should have_many(:tags) }
   end
+
+  describe '関連付けされたモデルのdependentオプション' do
+
+    describe 'Comment' do
+      let(:comment) { create(:comment) }
+      it '投稿が削除された場合、その投稿のコメントも削除されること' do
+        user = comment.user
+        expect {
+          user.destroy
+        }.to change(Comment, :count).by (-1)
+      end
+    end
+
+    describe 'Like' do
+      let(:like) { create(:like) }
+      it '投稿が削除された場合、その投稿のいいねも削除されること' do
+        user = like.user
+        expect {
+          user.destroy
+        }.to change(Like, :count).by (-1)
+      end
+    end
+  end
 end

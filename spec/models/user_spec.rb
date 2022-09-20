@@ -72,7 +72,7 @@ RSpec.describe User, type: :model do
 
     describe 'Comment' do
       let(:comment) { create(:comment) }
-      it 'ユーザが削除された場合、そのユーザのコメントも削除されること' do
+      it '投稿が削除された場合、その投稿のコメントも削除されること' do
         user = comment.user
         expect {
           user.destroy
@@ -87,6 +87,26 @@ RSpec.describe User, type: :model do
         expect {
           user.destroy
         }.to change(Like, :count).by (-1)
+      end
+    end
+
+    describe 'Board' do
+      let(:board) { create(:board) }
+      it 'ユーザーが削除された場合、そのユーザーの掲示板は削除されないこと' do
+        user = board.user
+        expect {
+          user.destroy
+        }.not_to change(Board, :count)
+      end
+    end
+
+    describe 'BoardComment' do
+      let(:board_comment) { create(:board_comment) }
+      it 'ユーザーが削除された場合、そのユーザーの掲示板コメントは削除されないこと' do
+        user = board_comment.user
+        expect {
+          user.destroy
+        }.not_to change(BoardComment, :count)
       end
     end
   end
