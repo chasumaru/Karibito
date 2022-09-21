@@ -1,8 +1,9 @@
 class StaticPagesController < ApplicationController
 
   def index
-    @posts = Post.all
-    @users = User.all
+    @posts = Post.order(updated_at: :desc).limit(30)
+    @users = User.order(updated_at: :desc).limit(30)
+    @boards = Board.order(updated_at: :desc).limit(30)
   end
 
   def about; end

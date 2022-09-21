@@ -74,6 +74,9 @@
                     <% if board.user.present? %>
                       <%= avatar_link(board) %>
                       <p class="text-xs font-medium ml-1 hover:underline hover:underline-offset-2"><%= link_to truncate(board.user.name, length:17), profile_path(board.user) %></p>
+                    <% else %>
+                      <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border border-yellow-300 no-tap-highlighting" %>
+                      <p class="text-xs font-medium ml-1">名無しさん</p>
                     <% end %>
                   <% end %>
                 </span>

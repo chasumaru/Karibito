@@ -38,6 +38,15 @@
                   </div>
                   <p class="text-xs text-slate-500 ml-10"><%= how_long_ago(post) %></p>
                 </div>
+                <span class='flex flex-wrap justify-center'>
+                  <% if post.tags.present? %>
+                    <span class='flex flex-wrap ml-5 mt-2'>
+                      <% post.tags.each do |tag| %>
+                        <%= link_to tag, posts_path(tag_name: tag.name), class:'bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 mb-1 mr-1.5 rounded dark:bg-green-200 dark:text-green-900 hover:bg-green-300 no-tap-highlighting' %>
+                      <% end %>
+                    </span>
+                  <% end %>
+                </span>
               </div>
             </div>
           <% end %>
@@ -47,7 +56,7 @@
     <%= link_to "日記をもっと見る", posts_path, class: "justify-self-center font-medium text-sm bg-white border shadow-md rounded-full focus:outline-none focus:ring-0 w-48 px-5 py-2.5 text-center my-6" %>
 
     <section>
-      <h3 class="font-bold text-center bg-white pt-8 pb-3 mb-6 border-t-2">人気のユーザー</h3>
+      <h3 class="font-bold text-center bg-white pt-8 pb-3 my-6 border-t-2">人気のユーザー</h3>
       <div class="grid py-2 bg-neutral-100">
         <div class="flex h-full overflow-x-auto overflow-y-hidden">
           <% @users.each do |user| %>
@@ -63,15 +72,15 @@
                   <span class ="relative -mt-6 md:-mt-10">
                     <%if user.avatar.attached? %>
                       <% if user == current_user %>
-                        <%= image_tag(current_user.avatar, class: "w-12 h-12 md:w-20 md:h-20 rounded-full border-2 border-emerald-500 bg-white") %>
+                        <%= link_to image_tag(current_user.avatar, class: "w-12 h-12 md:w-20 md:h-20 rounded-full border-2 border-emerald-500 bg-white"), profile_path(current_user) %>
                       <% else %>
-                        <%= image_tag(user.avatar, class: "w-12 h-12 md:w-20 md:h-20 rounded-full border-2 border-indigo-500 bg-white") %>
+                        <%= link_to image_tag(user.avatar, class: "w-12 h-12 md:w-20 md:h-20 rounded-full border-2 border-indigo-500 bg-white"), profile_path(user) %>
                       <% end %>
                     <% else %>
-                      <%= image_tag "no_avatar.png", class: "w-12 h-12 md:w-20 md:h-20 rounded-full border-2 border-yellow-300 bg-white" %>
+                      <%= link_to image_tag("no_avatar.png", class: "w-12 h-12 md:w-20 md:h-20 rounded-full border-2 border-yellow-300 bg-white"), profile_path(user) %>
                     <% end %>
                   </span>
-                  <p class="my-2 font-semibold"><%= user.name %></p>
+                  <p class="text-sm font-semibold my-2 hover:underline hover:underline-offset-2 no-tap-highlighting"><%= link_to user.name, profile_path(user) %></p>
                 </div>
                 <span class='flex flex-wrap justify-center'>
                   <% if user.positions.present? %>
@@ -91,5 +100,41 @@
     <% else %>
       <%= link_to "ユーザーをもっと見る", new_user_session_path, class: "justify-self-center font-medium text-sm bg-white border shadow-md rounded-full focus:outline-none focus:ring-0 w-48 px-5 py-2.5 text-center my-6" %>
     <% end %>
+
+    <section>
+      <h3 class="font-bold text-center bg-white pt-8 pb-3 my-6 border-t-2">狩猟掲示板</h3>
+      <div class="h-96 px-3 bg-white">
+        <div class="grid h-full bg-neutral-100 px-2 py-3">
+          <div class="flex flex-col w-full overflow-y-auto overflow-x-hidden bg-white">
+            <% @boards.each  do |board| %>
+              <div class="relative flex-none h-24 bg-white border-b px-1">
+                <div class="grid grid-cols-3">
+                  <div class="grid h-full col-span-2 px-2 pt-2">
+                    <%= link_to truncate(board.title, length:26), board_path(board), class: "leading-tight font-semibold hover:underline" %>
+                    <p class="absolute bottom-1 left-4 text-sm font-medium">コメント数：
+                      <% if board.board_comment %>
+                        <%= board.board_comment.count %>
+                      <% else %>
+                        0
+                      <% end %>
+                    </p>
+                  </div>
+                  <div class="flex h-full col-start-3 col-span-1 pt-1">
+                    <% if board.tags.present? %>
+                      <span class='flex flex-wrap mt-1'>
+                        <% board.tags.each do |tag| %>
+                          <%= link_to tag, posts_path(tag_name: tag.name), class:'bg-green-100 text-green-800 text-xs font-semibold px-1 py-0.5 mb-0.5 mr-1 rounded dark:bg-green-200 dark:text-green-900 hover:bg-green-300 no-tap-highlighting' %>
+                        <% end %>
+                      </span>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </section>
+    <%= link_to "掲示板をもっと見る", boards_path, class: "justify-self-center font-medium text-sm bg-white border shadow-md rounded-full focus:outline-none focus:ring-0 w-48 px-5 py-2.5 text-center my-6" %>
   </div>
 </div>
