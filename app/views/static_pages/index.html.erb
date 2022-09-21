@@ -5,7 +5,7 @@
       <h3 class="font-bold text-center bg-white py-3 mb-6">狩猟日記</h3>
       <div class="grid py-2 bg-neutral-100">
         <div class="flex h-full overflow-x-auto overflow-y-hidden">
-          <% @posts.each do |post| %>
+          <% @popular_posts.each do |post| %>
             <div class="flex-none w-2/3 sm:w-1/3 border-2 border-gray-200 border-opacity-60 rounded-xl no-tap-highlighting mx-1.5 bg-white shadow-sm">
               <div class="flex flex-col w-full">
                 <% if post.images.attached? %>
@@ -59,7 +59,7 @@
       <h3 class="font-bold text-center bg-white pt-8 pb-3 my-6 border-t-2">人気のユーザー</h3>
       <div class="grid py-2 bg-neutral-100">
         <div class="flex h-full overflow-x-auto overflow-y-hidden">
-          <% @users.each do |user| %>
+          <% @popular_users.each do |user| %>
             <div class="flex-none w-1/2 sm:w-1/3 border-2 border-gray-200 border-opacity-60 no-tap-highlighting mx-1.5 bg-white shadow-sm">
               <div class="flex flex-col w-full">
                 <% if user.background.attached? %>
@@ -106,7 +106,7 @@
       <div class="h-96 px-3 bg-white">
         <div class="grid h-full bg-neutral-100 px-2 py-3">
           <div class="flex flex-col w-full overflow-y-auto overflow-x-hidden bg-white">
-            <% @boards.each  do |board| %>
+            <% @popular_boards.each  do |board| %>
               <div class="relative flex-none h-24 bg-white border-b px-1">
                 <div class="grid grid-cols-3">
                   <div class="grid h-full col-span-2 px-2 pt-2">

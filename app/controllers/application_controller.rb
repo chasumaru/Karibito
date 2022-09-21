@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   unless Rails.env.development?
-    rescue_from Exception,                      with: :_render_500
+    # rescue_from Exception,                      with: :_render_500
     rescue_from ActiveRecord::RecordNotFound,   with: :_render_404
     rescue_from ActionController::RoutingError, with: :_render_404
   end
@@ -21,9 +21,9 @@ class ApplicationController < ActionController::Base
     render partial: 'errors/error_404', status: 404, content_type: 'text/html'
   end
   
-  def render_500
-  render partial: 'errors/error_500', status: 500, content_type: 'text/html'
-end
+  # def render_500
+  #   render partial: 'errors/error_500', status: 500, content_type: 'text/html'
+  # end
 
   
   private
