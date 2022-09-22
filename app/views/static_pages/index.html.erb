@@ -96,7 +96,7 @@
       </div>
     </section>
     <% if current_user %>
-      <%= link_to "ユーザーをもっと見る", posts_path, class: "justify-self-center font-medium text-sm bg-white border shadow-md rounded-full focus:outline-none focus:ring-0 w-48 px-5 py-2.5 text-center my-6" %>
+      <%= link_to "ユーザーをもっと見る", users_path, class: "justify-self-center font-medium text-sm bg-white border shadow-md rounded-full focus:outline-none focus:ring-0 w-48 px-5 py-2.5 text-center my-6" %>
     <% else %>
       <%= link_to "ユーザーをもっと見る", new_user_session_path, class: "justify-self-center font-medium text-sm bg-white border shadow-md rounded-full focus:outline-none focus:ring-0 w-48 px-5 py-2.5 text-center my-6" %>
     <% end %>

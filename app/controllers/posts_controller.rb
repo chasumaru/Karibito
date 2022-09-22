@@ -40,9 +40,8 @@ class PostsController < ApplicationController
     @comments = @post.comments.includes(:user)
     @like     = Like.new
     if @post.liked_users.present?
-      @liked_users = @post.liked_users
+      @liked_users = @post.liked_users.includes(:likes)
     end
-    @tags = @post.tags
   end
 
   def edit
@@ -74,9 +73,7 @@ class PostsController < ApplicationController
   def liked
     @post = Post.find(params[:id])
     if @post.liked_users.present?
-      @liked_users = @post.liked_users
-      # liked = Like.where(post_id: @post.id).pluck(:user_id)
-      # @liked_users = User.find(liked)
+      @liked_users = @post.liked_users.includes(:likes)
     end
   end
 
