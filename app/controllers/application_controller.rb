@@ -10,21 +10,6 @@ class ApplicationController < ActionController::Base
       format.html { redirect_to root_path, alert: "管理者権限がないのでアクセスできません" }
     end
   end
-
-  unless Rails.env.development?
-    # rescue_from Exception,                      with: :_render_500
-    rescue_from ActiveRecord::RecordNotFound,   with: :_render_404
-    rescue_from ActionController::RoutingError, with: :_render_404
-  end
-
-  def render_404
-    render partial: 'errors/error_404', status: 404, content_type: 'text/html'
-  end
-  
-  # def render_500
-  #   render partial: 'errors/error_500', status: 500, content_type: 'text/html'
-  # end
-
   
   private
   
