@@ -34,7 +34,6 @@ class BoardsController < ApplicationController
   def show
     @board_comment  = BoardComment.new
     @board_comments = @board.board_comment.includes(:user)
-    @tags = @board.tags
   end
 
   def edit
