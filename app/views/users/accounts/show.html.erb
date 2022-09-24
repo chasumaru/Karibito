@@ -5,7 +5,7 @@
   <% i = "#{@user.name}さんのページ" %>
 <% end %>
 <% provide(:title, "#{i}") %>
-<div class='bg-white'>
+<div class='bg-white animate-fade-in'>
   <section>
     <div class='profile__icon -mt-1'>
       <%if @user.background.attached? %>

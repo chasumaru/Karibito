@@ -6,7 +6,6 @@
 <% end %>
 <% provide(:title, "#{i}") %>
   
-
 <section>
   <div class='grid itmes-cneter mt-2'>
     <%= search_form_for(
@@ -32,7 +31,9 @@
     <% end %>
   </div>
 </section>
-<%= turbo_frame_tag 'users-list', target: '_top' do %>
-  <%= render 'shared/users', users: @users %>
-<% end %>
+<section class='animate-fade-in'>
+  <%= turbo_frame_tag 'users-list', target: '_top' do %>
+    <%= render 'shared/users', users: @users %>
+  <% end %>
+</section>
 
