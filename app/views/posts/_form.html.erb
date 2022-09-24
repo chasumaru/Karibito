@@ -44,10 +44,11 @@
           </p>
         </div>
           <div class='grid grid-cols-1 gap-2 py-4'>
-            <p class='text-sm font-medium text-stone-500  ml-3'>※1・・・アップロードした画像の一枚目がサムネイルになります。</p>
+            <p class='text-sm font-semibold text-stone-500  ml-3'>※１・・・アップロードした画像の一枚目がサムネイルになります。</p>
             <% if post.images.attached? %>
+            <p class='text-sm font-semibold text-stone-500 ml-3'>※２・・・以下のチェックボックスで選択した画像は削除されます。</p>
               <% post.images.each do |image| %>
-                <%= f.check_box :image_ids, {multiple: true }, image.id, false %>
+                <%= f.check_box :image_ids, {multiple: true, class: 'justify-self-start w-6 h-6 ml-4' }, image.id, false %>
                 <label for='post_image_ids_<%= image.id %>' >
                   <div class='h-full overflow-hidden'>
                     <%= image_tag image, alt: '他の画像', class: 'w-full object-center' %>
