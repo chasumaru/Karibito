@@ -24,7 +24,7 @@ class BoardsController < ApplicationController
     @board = Board.new(board_params)
     @board.user = current_user
     if @board.save
-      redirect_to boards_path, notice: "新しいスレッドを作成しました。"
+      redirect_to boards_path, notice: '新しいスレッドを作成しました。'
     else
       flash.now.alert = 'スレッドの作成に失敗しました。'
       render :new, status: :unprocessable_entity
@@ -41,7 +41,7 @@ class BoardsController < ApplicationController
 
   def update
     if @board.update(board_params)
-      redirect_to @board, notice: "スレッドの内容が更新されました。"
+      redirect_to @board, notice: 'スレッドの内容が更新されました。'
     else
       flash.now.alert = 'スレッドの作成に失敗しました。'
       render :edit, status: :unprocessable_entity 
@@ -50,11 +50,11 @@ class BoardsController < ApplicationController
 
   def destroy
     @board.destroy
-    redirect_to boards_path, notice: "スレッドを削除しました。", status: :see_other 
+    redirect_to boards_path, notice: 'スレッドを削除しました。', status: :see_other 
   end
 
   def tags
-    @tags = Board.tag_counts_on(:tags).order("name")
+    @tags = Board.tag_counts_on(:tags).order('name')
   end
   
   private
@@ -70,10 +70,10 @@ class BoardsController < ApplicationController
   def ensure_correct_user
     @board = Board.find_by(id: params[:id])
     if @board.user_id.nil?
-      redirect_to boards_path, notice: "権限がありません"
+      redirect_to boards_path, notice: '権限がありません'
     elsif
       @board.user_id != current_user.id
-      redirect_to boards_path, notice: "権限がありません"
+      redirect_to boards_path, notice: '権限がありません'
     end
   end
 end

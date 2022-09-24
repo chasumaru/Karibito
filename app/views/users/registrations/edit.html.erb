@@ -1,65 +1,64 @@
-<% provide(:title, "プロフィール編集") %>
-
+<% provide(:title, 'プロフィール編集') %>
 <section>
-  <div class="mt-14 mb-10">
+  <div class='mt-14 mb-10'>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <%= render "users/shared/error_messages", resource: resource %>
-        <div class="grid grid-cols-1 items-center">
-          <div data-controller="image-preview" class="profile__icon bg-white -mt-1">
+      <%= render 'users/shared/error_messages', resource: resource %>
+        <div class='grid grid-cols-1 items-center'>
+          <div data-controller='image-preview' class='profile__icon bg-white -mt-1'>
             <%if current_user.background.attached? %>
-              <%= image_tag(current_user.background, data: { image_preview_target: "bgOutput" }, class: "w-full h-64 md:h-96 object-center object-cover") %>
+              <%= image_tag(current_user.background, data: { image_preview_target: 'bgOutput' }, class: 'w-full h-64 md:h-96 object-center object-cover') %>
             <% else %>
-              <%= image_tag'800x600_dummy.jpg', alt: "背景画像", data: { image_preview_target: "bgOutput" }, class: "w-full h-64 md:h-96 object-center object-cover" %>
+              <%= image_tag'800x600_dummy.jpg', alt: '背景画像', data: { image_preview_target: 'bgOutput' }, class: 'w-full h-64 md:h-96 object-center object-cover' %>
             <% end %>
-            <div class="flex w-full flex-col justify-center items-center">
-              <span class ="relative -mt-10 md:-mt-16">
+            <div class='flex w-full flex-col justify-center items-center'>
+              <span class ='relative -mt-10 md:-mt-16'>
                 <%if  current_user.avatar.attached? %>
-                  <%= image_tag(current_user.avatar, data: { image_preview_target: "output" }, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-emerald-500 bg-white") %>
+                  <%= image_tag(current_user.avatar, data: { image_preview_target: 'output' }, class: 'w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-emerald-500 bg-white') %>
                 <% else %>
-                  <%= image_tag "no_avatar.png", alt: "アバター画像", data: { image_preview_target: "output" }, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-yellow-300 bg-white" %>
+                  <%= image_tag 'no_avatar.png', alt: 'アバター画像', data: { image_preview_target: 'output' }, class: 'w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-yellow-300 bg-white' %>
                 <% end %>
               </span>
-              <div class="my-2 mx-6">
-                <%= f.label :name, "(名前)", class: "font-semibold block" %>
-                <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "(必須)", maxlength: 30, class: " w-full bg-amber-100 font-bold text-black text-lg rounded-md font-semibold py-1 pl-2" %>
+              <div class='my-2 mx-6'>
+                <%= f.label :name, '(名前)', class: 'font-semibold block' %>
+                <%= f.text_field :name, autofocus: true, autocomplete: 'name', placeholder: '(必須)', maxlength: 30, class: ' w-full bg-amber-100 font-bold text-black text-lg rounded-md font-semibold py-1 pl-2' %>
               </div>
             </div>
-            <div class="flex flex-col ml-4 mt-8 mb-6">
-              <%= f.label :avatar, "(プロフィール画像の設定)",class:"font-semibold mb-1" %>
-              <%= f.file_field :avatar, direct_upload: true, data: {image_preview_target: "input", action: "image-preview#readURL" }, class: "ml-1" %>
-              <%= f.label :background, "(背景画像の設定)", class: "font-semibold mb-1 mt-4" %>
-              <%= f.file_field :background, direct_upload: true, data: { image_preview_target: "bgInput", action: "image-preview#readBgURL" }, class: "ml-1" %>
+            <div class='flex flex-col ml-4 mt-8 mb-6'>
+              <%= f.label :avatar, '(プロフィール画像の設定)',class:'font-semibold mb-1' %>
+              <%= f.file_field :avatar, direct_upload: true, data: {image_preview_target: 'input', action: 'image-preview#readURL' }, class: 'ml-1' %>
+              <%= f.label :background, '(背景画像の設定)', class: 'font-semibold mb-1 mt-4' %>
+              <%= f.file_field :background, direct_upload: true, data: { image_preview_target: 'bgInput', action: 'image-preview#readBgURL' }, class: 'ml-1' %>
             </div>
           </div>
-          <div class="profile__details">
-            <div class="grid py-3 bg-gray-100">
-              <div class="mx-2 bg-white">
-                <div class="ml-3 mt-2 mb-3">
-                  <%= f.label :email, "(メールアドレス)", class: "font-semibold block mb-1" %>
-                  <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "(必須)", class: "bg-amber-100 font-bold text-black rounded-md font-semibold py-1 pl-2" %>
+          <div class='profile__details'>
+            <div class='grid py-3 bg-gray-100'>
+              <div class='mx-2 bg-white'>
+                <div class='ml-3 mt-2 mb-3'>
+                  <%= f.label :email, '(メールアドレス)', class: 'font-semibold block mb-1' %>
+                  <%= f.email_field :email, autofocus: true, autocomplete: 'email', placeholder: '(必須)', class: 'bg-amber-100 font-bold text-black rounded-md font-semibold py-1 pl-2' %>
                 </div>
-                <div class="ml-3 mt-2 mb-3">
+                <div class='ml-3 mt-2 mb-3'>
                   <p class='text-xs font-semibold ml-2 my-1'> 複数の場合は(,) で区切って下さい。(例: 罠猟師, 猟師見習い..)</p>
-                  <%= f.text_field :position_list, data: {character_counter_target: "input"}, value: resource.position_list.join(','), placeholder: "タグ(肩書き)を入力", maxlength: 40, class: "w-full bg-amber-100 text-base font-bold text-black rounded-md pl-2 py-1 mb-1" %>
+                  <%= f.text_field :position_list, data: {character_counter_target: 'input'}, value: resource.position_list.join(','), placeholder: 'タグ(肩書き)を入力', maxlength: 40, class: 'w-full bg-amber-100 text-base font-bold text-black rounded-md pl-2 py-1 mb-1' %>
                 </div>
                 <div 
-                data-controller="character-counter" 
-                data-character-counter-countdown-value="true" 
-                class="border-y tracking-wide leading-relaxed font-medium  text-base pb-6 mx-2">
-                  <%= f.label :profile, "(プロフィール文)", class: "font-semibold block mb-1" %>
-                  <%= f.text_area :profile, data: {controller: "autogrow", character_counter_target: "input"}, autofocus: true, maxlength: 200, placeholder: "プロフィール文を入力", class: "w-full whitespace-pre-wrap pt-1 pl-2 pb-2 font-medium text-lg rounded-md bg-amber-100" %>
-                  <p class="flex justify-end items-center text-xs md:text-base font-semibold mr-2">
-                    <strong data-character-counter-target="counter" class="font-bold text-sm md:text-lg px-0.5"></strong>文字
+                data-controller='character-counter' 
+                data-character-counter-countdown-value='true' 
+                class='border-y tracking-wide leading-relaxed font-medium  text-base pb-6 mx-2'>
+                  <%= f.label :profile, '(プロフィール文)', class: 'font-semibold block mb-1' %>
+                  <%= f.text_area :profile, data: {controller: 'autogrow', character_counter_target: 'input'}, autofocus: true, maxlength: 200, placeholder: 'プロフィール文を入力', class: 'w-full whitespace-pre-wrap pt-1 pl-2 pb-2 font-medium text-lg rounded-md bg-amber-100' %>
+                  <p class='flex justify-end items-center text-xs md:text-base font-semibold mr-2'>
+                    <strong data-character-counter-target='counter' class='font-bold text-sm md:text-lg px-0.5'></strong>文字
                   </p>
                 </div>
               </div>
             </div>
           </div>
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <div class="ml-3 text-red-500">メール認証を完了してください : <%= resource.unconfirmed_email %></div>
+          <div class='ml-3 text-red-500'>メール認証を完了してください : <%= resource.unconfirmed_email %></div>
         <% end %>
-        <div class="flex justify-center bg-white  my-4">
-          <%= f.submit "更新する", class:"px-3 py-1 rounded-2xl tracking-widest font-semibold bg-white border-2 text-stone-600 hover:text-black border-cyan-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+        <div class='flex justify-center bg-white  my-4'>
+          <%= f.submit '更新する', class:'px-3 py-1 rounded-2xl tracking-widest font-semibold bg-white border-2 text-stone-600 hover:text-black border-cyan-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting' %>
         </div>
       </div>
     <% end %>

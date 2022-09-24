@@ -28,11 +28,11 @@ class User < ApplicationRecord
   has_many :liked_posts, through: :likes, source: :post
   has_one_attached :avatar
   has_one_attached :background
-  has_many :active_relationships, class_name:  "Relationship",
-                                  foreign_key: "follower_id",
+  has_many :active_relationships, class_name:  'Relationship',
+                                  foreign_key: 'follower_id',
                                   dependent:   :destroy
-  has_many :passive_relationships, class_name:  "Relationship",
-                                  foreign_key: "followed_id",
+  has_many :passive_relationships, class_name:  'Relationship',
+                                  foreign_key: 'followed_id',
                                   dependent:   :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
@@ -65,7 +65,7 @@ class User < ApplicationRecord
   end
 
   def create_notification_follow!(current_user)
-    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
+    temp = Notification.where(['visitor_id = ? and visited_id = ? and action = ? ',current_user.id, id, 'follow'])
     if temp.blank?
       notification = current_user.active_notifications.new(
         visited_id: id,
@@ -100,7 +100,7 @@ class User < ApplicationRecord
   # # 現状、不要
   # def resized_avatar
   #   return self.avatar.variant(
-  #     resize_to_fill: [800, 800], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed
+  #     resize_to_fill: [800, 800], sampling_factor: '4:2:0', strip: true, interlace: 'JPEG', colorspace: 'sRGB', quality: 85).processed
   # end
 
   private

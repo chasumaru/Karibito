@@ -1,31 +1,31 @@
 <% unless board.anonymous_flag? %>
-  <div class="flex flex-row border-2 border-gray-200 rounded-md border-opacity-60 no-tap-highlighting">
-    <div class="w-48 h-32">
+  <div class='flex flex-row border-2 border-gray-200 rounded-md border-opacity-60 no-tap-highlighting'>
+    <div class='w-48 h-32'>
       <% if board.illustration.attached? %>
-        <%= image_tag board.thumbnail, class: "w-full h-full object-center object-cover board-loading bg-red-200 rounded-l-md" %>
+        <%= image_tag board.thumbnail, class: 'w-full h-full object-center object-cover board-loading bg-red-200 rounded-l-md' %>
       <% else %>
-        <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "w-full h-full object-center object-cover board-loading rounded-l-md" %>
+        <%= image_tag'800x600_dummy.jpg', alt: 'ダミー画像', class: 'w-full h-full object-center object-cover board-loading rounded-l-md' %>
       <% end %>
       </div>
-    <div class="flex flex-col w-full ml-1 max-h-32">
-      <p class="leading-tight text-base font-bold text-black  pl-0.5 pt-0.5"><%= link_to truncate(board.title, length:26), board_path(board) %></p>
+    <div class='flex flex-col w-full ml-1 max-h-32'>
+      <p class='leading-tight text-base font-bold text-black  pl-0.5 pt-0.5'><%= link_to truncate(board.title, length:26), board_path(board) %></p>
       <% if board.description %>
-        <p class="tracking-wider leading-snug text-slate-600 text-xs pl-0.5 pt-0.5 ml-0.5 h-18"><%= truncate(board.description, length:49) %></p>
+        <p class='tracking-wider leading-snug text-slate-600 text-xs pl-0.5 pt-0.5 ml-0.5 h-18'><%= truncate(board.description, length:49) %></p>
       <% else %>
-        <p class="tracking-wider leading-snug text-slate-600 text-xs pl-0.5 pt-0.5 ml-0.5 h-18">説明がありません</p>
+        <p class='tracking-wider leading-snug text-slate-600 text-xs pl-0.5 pt-0.5 ml-0.5 h-18'>説明がありません</p>
       <% end %>
-      <div class="flex w-full flex-row justify-start relative">
-        <span class="flex flex-row items-center">
+      <div class='flex w-full flex-row justify-start relative'>
+        <span class='flex flex-row items-center'>
           <% if board.user.present? %>
             <%= avatar_link(board) %>
-            <p class="text-xs font-medium ml-1 hover:underline hover:underline-offset-2"><%= link_to truncate(board.user.name, length:17), profile_path(board.user) %></p>
+            <p class='text-xs font-medium ml-1 hover:underline hover:underline-offset-2'><%= link_to truncate(board.user.name, length:17), profile_path(board.user) %></p>
           <% else %>
-            <%= image_tag "no_avatar.png", class: "w-8 h-8 object-cover rounded-full border border-yellow-300 no-tap-highlighting" %>
-            <p class="text-xs font-medium ml-1">名無しさん</p>
+            <%= image_tag 'no_avatar.png', class: 'w-8 h-8 object-cover rounded-full border border-yellow-300 no-tap-highlighting' %>
+            <p class='text-xs font-medium ml-1'>名無しさん</p>
           <% end %>
         </span>
       </div>
-      <p class="text-xs text-slate-500 ml-10 -mt-0.5 mb-1"><%= how_long_ago(board) %></p>
+      <p class='text-xs text-slate-500 ml-10 -mt-0.5 mb-1'><%= how_long_ago(board) %></p>
     </div>
   </div>
 <% end %>

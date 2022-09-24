@@ -14,14 +14,14 @@ class Post < ApplicationRecord
   validate :image_size, :image_count
   
   def thumbnail
-    return self.images.first.variant(resize_to_fill: [1200, 900], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed
+    return self.images.first.variant(resize_to_fill: [1200, 900], sampling_factor: '4:2:0', strip: true, interlace: 'JPEG', colorspace: 'sRGB', quality: 85).processed
   end
 
   def create_notification_by(current_user)
     notification = current_user.active_notifications.new(
       post_id: id,
       visited_id: user_id,
-      action: "like"
+      action: 'like'
     )
     notification.save if notification.valid?
   end

@@ -1,16 +1,16 @@
 <h1>アカウントの凍結を解除</h1>
 
 <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+  <%= render 'users/shared/error_messages', resource: resource %>
 
-  <div class="field">
+  <div class='field'>
     <%= f.label :メールアドレス %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: 'email' %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "ロック解除メール送信" %>
+  <div class='actions'>
+    <%= f.submit 'ロック解除メール送信' %>
   </div>
 <% end %>
 
-<%= render "users/shared/links" %>
+<%= render 'users/shared/links' %>

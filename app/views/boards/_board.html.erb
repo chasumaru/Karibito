@@ -1,83 +1,83 @@
 <section>
   <% if board.tags.present? %>
-    <span class='flex flex-wrap ml-5 mt-2 mb-4'>
+    <span class='flex flex-wrap ml-5 mt-2 mb-4 animate-fade-in'>
       <% board.tags.each do |tag| %>
         <%= link_to tag, boards_path(tag_name: tag.name), class:'bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 mb-1 mr-1.5 rounded dark:bg-blue-200 dark:text-blue-800 hover:bg-blue-300' %>
       <% end %>
     </span>
   <% end %>
-  <div class="grid grid-cols-1 justify-center bg-neutral-100 border-x-8 border-white px-3">
-    <div class="w-full bg-white py-2 px-4 my-3">
+  <div class='grid grid-cols-1 justify-center bg-neutral-100 border-x-8 border-white px-3'>
+    <div class='w-full bg-white py-2 px-4 my-3'>
       <article>
-        <div class="py-2 border-b-2 px-2 break-all">
-          <p class="text-xl font-bold text-black py-0.5 ml-3"><%= @board.title %></p>
-          <p class="text-xs text-slate-600 mx-2 -mb-2 ml-3"><%= @board.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+        <div class='py-2 border-b-2 px-2 break-all'>
+          <p class='text-xl font-bold text-black py-0.5 ml-3'><%= @board.title %></p>
+          <p class='text-xs text-slate-600 mx-2 -mb-2 ml-3'><%= @board.created_at.strftime('%Y/%m/%d %H:%M') %></p>
         </div>
-        <div class="h-full overflow-hidden">
+        <div class='h-full overflow-hidden'>
           <% if board.illustration.present?  %>
-            <%= image_tag board.illustration, class: "w-full object-center" %>
+            <%= image_tag board.illustration, class: 'w-full object-center' %>
           <% else %>
-            <%= image_tag'gettyimages-825522644-612x612.jpg', alt: "サムネイル画像", class: "w-full object-center" %>
+            <%= image_tag'gettyimages-825522644-612x612.jpg', alt: 'サムネイル画像', class: 'w-full object-center' %>
           <% end %>
         </div>
-        <div class="grid grid-cols-1 relative border-t-2">
-          <span class="flex justify-start items-center ml-3 py-2 bg-white">
+        <div class='grid grid-cols-1 relative border-t-2'>
+          <span class='flex justify-start items-center ml-3 py-2 bg-white'>
             <% if @board.user %>
               <% if @board.anonymous_flag? %>
-                <p class="text-sm mr-2 ml-2">このスレは<span class="text-sm font-bold">名無しさん</span>によって立てられました。</p>
+                <p class='text-sm mr-2 ml-2'>このスレは<span class='text-sm font-bold'>名無しさん</span>によって立てられました。</p>
               <% else %>
-                <p class="text-sm mr-2 ml-2">このスレは<span class="text-sm font-bold hover:underline hover:underline-offset-2"><%= link_to @board.user.name, profile_path(@board.user) %>さん</span>によって立てられました。</p>
+                <p class='text-sm mr-2 ml-2'>このスレは<span class='text-sm font-bold hover:underline hover:underline-offset-2'><%= link_to @board.user.name, profile_path(@board.user) %>さん</span>によって立てられました。</p>
               <% end %> 
             <% else %>
-              <p class="text-sm mr-2 ml-2">このスレは<span class="text-sm font-bold">名無しさん</span>によって立てられました。</p>
+              <p class='text-sm mr-2 ml-2'>このスレは<span class='text-sm font-bold'>名無しさん</span>によって立てられました。</p>
             <% end %>
           </span>
         </div>
-        <div class="flex justify-between items-center px-6 py-1 border-b-2">
-          <div class="flex items-center">
+        <div class='flex justify-between items-center px-6 py-1 border-b-2'>
+          <div class='flex items-center'>
           </div>
-          <div class="flex">
-            <div class="flex items-center">
+          <div class='flex'>
+            <div class='flex items-center'>
               <% if signed_in? %>
                 <% if current_user == @board.user %>
                   <span>
-                  <%= button_to "編集", edit_board_path(@board), method: :get, class: "inline-block px-6 py-2 border-2 border-blue-400 text-blue-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+                  <%= button_to '編集', edit_board_path(@board), method: :get, class: 'inline-block px-6 py-2 border-2 border-blue-400 text-blue-400 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting' %>
                   </span>
-                  <span class="inline-block px-6 py-2 ml-2 border-2 border-red-600 text-red-600 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting">
-                    <%= button_to "削除", @board, { method: :delete, form: { data: { turbo_confirm: "この投稿を削除しますか？" } } } %>
+                  <span class='inline-block px-6 py-2 ml-2 border-2 border-red-600 text-red-600 font-bold text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting'>
+                    <%= button_to '削除', @board, { method: :delete, form: { data: { turbo_confirm: 'この投稿を削除しますか？' } } } %>
                   </span>
                 <% end %>
               <% end %>
             </div>
           </div>
         </div>
-        <p class="text-xs font-medium text-slate-500 my-2 ml-5">このスレッドの説明</p>
-        <div class="flex flex-row border border-gray-300 border-opacity-60 rounded-md overflow-hidden no-tap-highlighting bg-lime-50">
-          <div class="flex flex-col w-full break-all">
-            <p class="tracking-wider leading-relaxed whitespace-pre-wrap  text-slate-600 text-sm px-1 pt-0.5 h-18 "><%= truncate(@board.description, length:400) %></p>
+        <p class='text-xs font-medium text-slate-500 my-2 ml-5'>このスレッドの説明</p>
+        <div class='flex flex-row border border-gray-300 border-opacity-60 rounded-md overflow-hidden no-tap-highlighting bg-lime-50'>
+          <div class='flex flex-col w-full break-all'>
+            <p class='tracking-wider leading-relaxed whitespace-pre-wrap  text-slate-600 text-sm px-1 pt-0.5 h-18 '><%= truncate(@board.description, length:400) %></p>
           </div>
         </div>
       </div>
     </article>
 </section>
 <section>
-  <div class="grid grid-cols-1 justify-center bg-neutral-100 border-x-8 border-white px-3">
-    <div class="w-full bg-white py-2 px-4 my-3">
-      <h3 class="font-bold">掲示板コメント一覧</h3>
+  <div class='grid grid-cols-1 justify-center bg-neutral-100 border-x-8 border-white px-3'>
+    <div class='w-full bg-white py-2 px-4 my-3'>
+      <h3 class='font-bold'>掲示板コメント一覧</h3>
       <section>
-        <div class="text-xs font-medium mt-5" id="board_comments">
+        <div class='text-xs font-medium mt-5' id='board_comments'>
           <% if @board_comments.present? %>
             <% @board_comments.each do |board_comment| %>
             <%= render partial: 'board_comments/board_comment_block', locals: {comment: board_comment} %>
             <% end %>
           <% else %>
-            <p class="text-base ml-1" id="no_board_comments">まだコメントがありません</p>
+            <p class='text-base ml-1' id='no_board_comments'>まだコメントがありません</p>
           <% end %>
         </div>
       </section>
       <section>
-        <div class="grid grid-cols-1 justify-center mt-6">
-          <%= render partial: "board_comments/new_board_comment" %>
+        <div class='grid grid-cols-1 justify-center mt-6'>
+          <%= render partial: 'board_comments/new_board_comment' %>
         </div>
       </section>
     </div>

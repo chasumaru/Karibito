@@ -1,14 +1,14 @@
-<%= form_with model: [@board, BoardComment.new], id: "new_board_comment" do |f| %>
-  <%= f.text_area :description, data: {controller: "autogrow" }, maxlength: 300, class: "block w-full rounded-xl bg-amber-100 pl-2 pt-1 pb-6 focus:outline-none focus:ring-0" , placeholder: "コメントする..." %>
-  <div class="grid grid-cols-1 justify-center">
+<%= form_with model: [@board, BoardComment.new], id: 'new_board_comment' do |f| %>
+  <%= f.text_area :description, data: {controller: 'autogrow' }, maxlength: 300, class: 'block w-full rounded-xl bg-amber-100 pl-2 pt-1 pb-6 focus:outline-none focus:ring-0' , placeholder: 'コメントする...' %>
+  <div class='grid grid-cols-1 justify-center'>
     <% if current_user %>
-      <div class="flex justify-center items-center py-3">
-        <p class="text-base font-medium mr-2">匿名で投稿</p>
-        <%= f.check_box(:anonymous_flag,{:checked=>true},"1","0") %>
+      <div class='flex justify-center items-center py-3'>
+        <p class='text-base font-medium mr-2'>匿名で投稿</p>
+        <%= f.check_box(:anonymous_flag,{:checked=>true},'1','0') %>
       </div>
     <% end %>
   </div>
-  <div class="flex justify-center">
-    <%= f.submit "投稿", class:"px-5 py-1 mt-2 rounded-2xl tracking-widest font-semibold bg-white border-2 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting" %>
+  <div class='flex justify-center'>
+    <%= f.submit '投稿', class:'px-5 py-1 mt-2 rounded-2xl tracking-widest font-semibold bg-white border-2 text-stone-600 hover:text-black border-lime-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting' %>
   </div>
 <% end %>

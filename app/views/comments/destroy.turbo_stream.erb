@@ -1,11 +1,11 @@
 <%= turbo_stream.remove @comment %>
 <% if @comment.reply_comment_id.present? %>
-  <%= turbo_stream.update "reply_#{@comment.id}", "" %>
+  <%= turbo_stream.update "reply_#{@comment.id}", '' %>
 <% else %>
-  <%= turbo_stream.update "parent_comment_#{@comment.id}", "" %>
+  <%= turbo_stream.update "parent_comment_#{@comment.id}", '' %>
 <% end %>
-<%= turbo_stream.update "comment_number" do %>
-  <%= render partial: "comment_number", locals: {post: @post} %>
+<%= turbo_stream.update 'comment_number' do %>
+  <%= render partial: 'comment_number', locals: {post: @post} %>
 <% end %>
 <%= turbo_stream_flash %>
 

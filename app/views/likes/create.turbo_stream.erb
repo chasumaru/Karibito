@@ -1,9 +1,9 @@
-<%= turbo_stream.update "like_icon" do %>
-  <%= render partial: "like_icon", locals: {post: @post} %>
+<%= turbo_stream.update 'like_icon' do %>
+  <%= render partial: 'like_icon', locals: {post: @post} %>
 <% end %>
-<%= turbo_stream.replace "like_count" do %>
-  <%= render partial: "like_count", locals: {post: @post, liked_users: @liked_users} %>
+<%= turbo_stream.replace 'like_count' do %>
+  <%= render partial: 'like_count', locals: {post: @post, liked_users: @liked_users} %>
 <% end %>
-<%= turbo_stream.update "like_number" do %>
-  <%= render partial: "like_number", locals: {liked_users: @liked_users} %>
+<%= turbo_stream.update 'like_number' do %>
+  <%= render partial: 'like_number', locals: {liked_users: @liked_users} %>
 <% end %>

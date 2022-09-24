@@ -1,9 +1,9 @@
-<%= turbo_stream.update "follow_button" do %>
-  <%= render partial: "follow_button", locals: {user: @user} %>
+<%= turbo_stream.update 'follow_button' do %>
+  <%= render partial: 'follow_button', locals: {user: @user} %>
 <% end %>
-<%= turbo_stream.update "follower_count" do %>
-  <%= render partial: "followers_count", locals: {followers: @followers} %>
+<%= turbo_stream.update 'follower_count' do %>
+  <%= render partial: 'followers_count', locals: {followers: @followers} %>
 <% end %>
 <%= turbo_stream.update "follow_button_#{@user.id}" do %>
-  <%= render partial: "shared/follow_button", locals: {user: @user} %>
+  <%= render partial: 'shared/follow_button', locals: {user: @user} %>
 <% end %>

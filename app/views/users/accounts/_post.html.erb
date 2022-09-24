@@ -1,34 +1,32 @@
-
-      
-        <div class="border-2 border-gray-200 border-opacity-60 rounded-xl overflow-hidden no-tap-highlighting">
+        <div class='border-2 border-gray-200 border-opacity-60 rounded-xl overflow-hidden no-tap-highlighting'>
           <% if post.images.attached? %>
-            <%= link_to image_tag(post.thumbnail, alt: "サムネイル画像"), post_path(post), class: "rounded-t-xl w-full object-center" %>
+            <%= link_to image_tag(post.thumbnail, alt: 'サムネイル画像'), post_path(post), class: 'rounded-t-xl w-full object-center' %>
           <% else %>
-            <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "rounded-t-xl w-full object-center" %>
+            <%= image_tag'800x600_dummy.jpg', alt: 'ダミー画像', class: 'rounded-t-xl w-full object-center' %>
           <% end %>
-          <div class="flex flex-col p-4 -mt-2 h-full">
-            <p class="text-base font-bold text-black"><%= link_to truncate(post.title, length:18), post_path(post) %></p>
-            <p class="tracking-tight leading-tight text-slate-600 md:text-sm"><%= truncate(post.content, length:36) %></p>
-            <div class="flex w-full flex-row mt-5 justify-start relative">
-              <span class="flex flex-row items-center">
+          <div class='flex flex-col p-4 -mt-2 h-full'>
+            <p class='text-base font-bold text-black'><%= link_to truncate(post.title, length:18), post_path(post) %></p>
+            <p class='tracking-tight leading-tight text-slate-600 md:text-sm'><%= truncate(post.content, length:36) %></p>
+            <div class='flex w-full flex-row mt-5 justify-start relative'>
+              <span class='flex flex-row items-center'>
                 <%= avatar_link(post) %>
-                <p class="text-sm font-medium mr-2 ml-2 hover:underline hover:underline-offset-2"><%= link_to truncate(post.user.name, length:17), profile_path(post.user) %></p>
+                <p class='text-sm font-medium mr-2 ml-2 hover:underline hover:underline-offset-2'><%= link_to truncate(post.user.name, length:17), profile_path(post.user) %></p>
               </span>
-              <div class="flex items-center justify-items-end w-20 absolute top-6 right-1">
-                <span class="text-gray-400 inline-flex h-6 items-center leading-none text-sm pr-3">
-                  <svg class="w-4 h-4 mr-1"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              <div class='flex items-center justify-items-end w-20 absolute top-6 right-1'>
+                <span class='text-gray-400 inline-flex h-6 items-center leading-none text-sm pr-3'>
+                  <svg class='w-4 h-4 mr-1'  viewBox='0 0 24 24'  fill='none'  stroke='currentColor'  stroke-width='2'  stroke-linecap='round'  stroke-linejoin='round'>  
+                    <path d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z' />
                   </svg>
                   <%= post.liked_users.count %>
                 </span>
-                <span class="text-gray-400 inline-flex items-center leading-none text-sm ml-1">
-                  <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                <span class='text-gray-400 inline-flex items-center leading-none text-sm ml-1'>
+                  <svg class='w-4 h-4 mr-1' stroke='currentColor' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'>
+                    <path d='M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z'></path>
                   </svg>
                   <%= post.comments.count %>
                 </span>
               </div>
             </div>
-            <p class="text-xs text-slate-500 ml-10"><%= how_long_ago(post) %></p>
+            <p class='text-xs text-slate-500 ml-10'><%= how_long_ago(post) %></p>
           </div>
         </div>

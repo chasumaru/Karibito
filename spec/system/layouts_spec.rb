@@ -1,6 +1,6 @@
 require 'rails_helper'
  
-RSpec.describe "Layouts", type: :system do
+RSpec.describe 'Layouts', type: :system do
   before do
     driven_by(:rack_test)
   end
@@ -36,7 +36,7 @@ RSpec.describe "Layouts", type: :system do
       end
 
       it 'お問い合わせ' do
-        expect(page).to have_link 'お問い合わせ', href: "https://forms.gle/Z8WNE7HpJw3NnH8F6"
+        expect(page).to have_link 'お問い合わせ', href: 'https://forms.gle/Z8WNE7HpJw3NnH8F6'
       end
 
       it '会員登録' do
@@ -71,7 +71,7 @@ RSpec.describe "Layouts", type: :system do
         # click_button 'ログアウト'
         # # 確認ダイアログの処理
         # expect(page.current_path).to eq root_path
-        expect(page).to have_content "ログアウト"
+        expect(page).to have_content 'ログアウト'
       end
 
       it '通知一覧' do
@@ -119,7 +119,7 @@ RSpec.describe "Layouts", type: :system do
       end
 
       it 'お問い合わせ' do
-        expect(page).to have_link 'お問い合わせ', href: "https://forms.gle/Z8WNE7HpJw3NnH8F6"
+        expect(page).to have_link 'お問い合わせ', href: 'https://forms.gle/Z8WNE7HpJw3NnH8F6'
       end
 
       it '会員登録' do
@@ -159,7 +159,7 @@ RSpec.describe "Layouts", type: :system do
         # click_button 'ログアウト'
         # # 確認ダイアログの処理
         # expect(page.current_path).to eq root_path
-        expect(page).to have_content "ログアウト"
+        expect(page).to have_content 'ログアウト'
       end
     end
   end
@@ -206,7 +206,7 @@ RSpec.describe "Layouts", type: :system do
       end
 
       it 'お問い合わせ' do
-        expect(page).to have_link 'お問い合わせ', href: "https://forms.gle/Z8WNE7HpJw3NnH8F6"
+        expect(page).to have_link 'お問い合わせ', href: 'https://forms.gle/Z8WNE7HpJw3NnH8F6'
       end
     end
 

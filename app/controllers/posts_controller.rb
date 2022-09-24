@@ -4,8 +4,8 @@ class PostsController < ApplicationController
   before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
 
 
-  require "mini_magick"
-  require "image_processing/mini_magick"
+  require 'mini_magick'
+  require 'image_processing/mini_magick'
 
 
   def index
@@ -28,7 +28,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
     if @post.save
-      redirect_to @post, notice: "新しい日記を作成しました。"
+      redirect_to @post, notice: '新しい日記を作成しました。'
     else
       flash.now.alert = '日記の作成に失敗しました。'
       render :new, status: :unprocessable_entity
@@ -57,7 +57,7 @@ class PostsController < ApplicationController
     end
 
     if @post.update(post_params)
-      redirect_to @post, notice: "日記の内容が更新されました。"
+      redirect_to @post, notice: '日記の内容が更新されました。'
     else
       flash.now.alert = '日記の作成に失敗しました。'
       render :edit, status: :unprocessable_entity 
@@ -66,7 +66,7 @@ class PostsController < ApplicationController
   
   def destroy
     @post.destroy
-    redirect_to posts_path, notice: "日記を削除しました。", status: :see_other 
+    redirect_to posts_path, notice: '日記を削除しました。', status: :see_other 
   end
 
 
@@ -78,7 +78,7 @@ class PostsController < ApplicationController
   end
 
   def tags
-    @tags = Post.tag_counts_on(:tags).order("name")
+    @tags = Post.tag_counts_on(:tags).order('name')
   end
 
 
@@ -96,7 +96,7 @@ class PostsController < ApplicationController
   def ensure_correct_user
     @post = Post.find_by(id: params[:id])
     if @post.user_id != current_user.id
-    redirect_to posts_path, notice: "権限がありません"
+    redirect_to posts_path, notice: '権限がありません'
     end
   end
 end
