@@ -61,15 +61,14 @@ module.exports = {
       },
       transitionDuration: {
         '600': '600ms',
-      }
-      // backgroundImage: {
-      //   'main-img-1': "url('/images/#.jpg')",
-      //   'main-img-2': "url('/images/main_background_2.jpg')",
-      // },
+      },
+      backgroundImage: {
+        'spiner-1': "url('/images/Spinner-1s-128px.gif')",
+        'spiner-2': "url('/images/Spinner-1s-580px.gif')",
+      }, 
       // spacing: {
       //   'sidebar': '500px'
       // },
-      
     },
   },
   plugins: [

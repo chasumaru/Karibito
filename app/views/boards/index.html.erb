@@ -51,11 +51,15 @@
       <div class='grid md:grid-cols-2 gap-x-2 gap-y-2 mx-4 mt-8 animate-fade-in'>
         <% @boards.each do |board| %>
           <div class='flex flex-row border-2 border-gray-200 rounded-md border-opacity-60 no-tap-highlighting'>
-            <div class='w-48 h-32'>
+            <div class='w-48 h-32 relative bg-spiner-1 bg-no-repeat'>
               <% if board.illustration.attached? %>
-                <%= link_to image_tag(board.thumbnail, alt: 'サムネイル画像'), board_path(board), class: 'w-full h-full object-center object-cover board-loading rounded-l-md' %>
+                <%= link_to  board_path(board) do %>
+                  <%= image_tag board.thumbnail, alt: 'サムネイル画像', class: 'w-full h-full rounded-l-md  bg-spiner-1 bg-no-repeat bg-center bg-cover' %>
+                <% end %>
               <% else %>
-                <%= link_to image_tag('800x600_dummy.jpg', alt: 'サムネイル画像', class: 'w-full h-full object-center object-cover board-loading rounded-l-md'), board_path(board) %>
+                <%= link_to  board_path(board) do %>
+                  <%= image_tag '800x600_dummy.jpg', alt: 'サムネイル画像', class: 'w-full h-full rounded-l-md  bg-spiner-1 bg-no-repeat bg-center bg-cover' %>
+                <% end %>
               <% end %>
               </div>
             <div class='flex flex-col w-full ml-1 max-h-32 break-all'>
