@@ -51,13 +51,13 @@
 <section>
   <%= turbo_frame_tag 'posts-list', loading: :lazy, target: '_top' do %>
     <% if @posts.present? %>
-      <div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-3 mx-8 mt-8 bg-red-300'>
+      <div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-3 mx-8 mt-8'>
         <% @posts.each do |post| %>
-          <div class='flex flex-col border-2 border-gray-200 border-opacity-60 rounded-xl overflow-hidden no-tap-highlighting bg-lime-100'>
-            <div class='h-full bg-lime-300'>
+          <div class='grid border-2 border-gray-200 border-opacity-60 rounded-xl overflow-hidden no-tap-highlighting'>
+            <div class='grid h-full'>
               <% if post.images.attached? %>
                 <%= link_to  post_path(post) do %>
-                  <%= image_tag post.thumbnail, alt: 'サムネイル画像', class: 'rounded-t-xl w-full object-center bg-lime-500' %>
+                  <%= image_tag post.thumbnail, alt: 'サムネイル画像', class: 'rounded-t-xl w-full object-center' %>
                 <% end %>
               <% else %>
                 <%= link_to  post_path(post) do %>
