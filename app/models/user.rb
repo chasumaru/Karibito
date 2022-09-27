@@ -76,34 +76,44 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name   # Userモデルにnameカラムがあるとする
-      user.image = auth.info.image # Userモデルにimageカラムがあるとする
-      # Deviseのconfirmableを使い、かつプロバイダがメールのバリデーションを行っている場合は、
-      # 以下の行のコメントを解除して確認メールをスキップする
-      # user.skip_confirmation!
+    find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.name = auth.info.name
     end
   end
   
-  def self.find_or_create_for_oauth(auth)
-    find_or_create_by!(email: auth.info.email) do |user|
-      user.provider = auth.provider,
-      user.uid = auth.uid,
-      user.name = auth.info.name,
-      user.email = auth.info.email,
-      user.password = Devise.friendly_token[0, 20]
+  def self.new_with_session(params, session)
+    if session["devise.user_attributes"]
+      new(session["devise.user_attributes"]) do |user|
+        user.attributes = params
+      end
+    else
+      super
     end
   end
 
-  # # 現状、不要
-  # def resized_avatar
-  #   return self.avatar.variant(
-  #     resize_to_fill: [800, 800], sampling_factor: '4:2:0', strip: true, interlace: 'JPEG', colorspace: 'sRGB', quality: 85).processed
-  # end
+  def self.find_for_oauth(auth)
+    user = User.where(uid: auth.uid, provider: auth.provider).first
+
+    unless user
+      user = User.create(
+        uid:      auth.uid,
+        provider: auth.provider,
+        email:    User.dummy_email(auth),
+        password: Devise.friendly_token[0, 20]
+      )
+    end
+    user.skip_confirmation! #仮登録メールを介さずに即時登録
+    user
+  end
+
 
   private
+
+  def self.dummy_email(auth)
+    "#{auth.uid}-#{auth.provider}@example.com"
+  end
 
   def avatar_not_attached?
    !( self.avatar.attached?)
