@@ -59,6 +59,7 @@ gem 'devise'
 gem 'devise-i18n'
 
 gem 'omniauth'
+gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 
