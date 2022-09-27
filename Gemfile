@@ -62,6 +62,7 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
+gem "omniauth-rails_csrf_protection"
 
 gem "acts-as-taggable-on", "~> 9.0"
 
