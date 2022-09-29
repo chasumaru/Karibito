@@ -33,10 +33,7 @@ module.exports = {
         }
       }),
       colors: {
-        'base-white': '#f9fafb',
-        'base-gray' : '#f4f4f5',
-        // 緑を調製する
-        'base-brown' : '#ecd94b',
+        'shadow-gray': 'rgba(3,3,3,.7)'
       },
       spacing: {
         '3.75':'0.9375rem' ,
