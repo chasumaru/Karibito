@@ -54,18 +54,18 @@
       <div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-3 mx-8 mt-8'>
         <% @posts.each do |post| %>
           <div class='grid border-2 border-gray-200 border-opacity-60 rounded-xl overflow-hidden no-tap-highlighting'>
-            <div class='grid h-full'>
+            <div class='gridh-60 md:h-44 border'>
               <% if post.images.attached? %>
                 <%= link_to  post_path(post) do %>
-                  <%= image_tag post.thumbnail, alt: 'サムネイル画像', class: 'rounded-t-xl w-full object-center' %>
+                  <%= image_tag post.thumbnail, alt: 'サムネイル画像', class: 'rounded-t-xl w-full h-60 md:h-44 object-center' %>
                 <% end %>
               <% else %>
                 <%= link_to  post_path(post) do %>
-                  <%= image_tag '800x600_dummy.jpg', alt: 'サムネイル画像', class: 'rounded-t-xl w-full object-center' %>
+                  <%= image_tag '800x600_dummy.jpg', alt: 'サムネイル画像', class: 'rounded-t-xl w-full h-60 md:h-44 object-center' %>
                 <% end %>
               <% end %>
             </div>
-            <div class='p-2'>
+            <div class='grid p-2 h-40'>
               <p class='text-base font-bold text-black'><%= link_to truncate(post.title, length:18), post_path(post) %></p>
               <p class='tracking-tight leading-tight text-slate-600 md:text-sm'><%= truncate(post.content, length:36) %></p>
               <div class='flex w-full flex-row mt-5 justify-start relative'>
