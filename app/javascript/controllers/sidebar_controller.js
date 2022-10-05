@@ -56,10 +56,10 @@ export default class extends Controller {
   }
   
   cover() {
-    this.coveringTarget.classList.add('sidebar__cover')
+    this.coveringTarget.classList.add('sidebar-cover')
   }
 
   uncover() {
-    this.coveringTarget.classList.remove('sidebar__cover')
+    this.coveringTarget.classList.remove('sidebar-cover')
   }
 }

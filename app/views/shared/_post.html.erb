@@ -1,12 +1,13 @@
         <div class='grid border-2 border-gray-200 border-opacity-60 rounded-xl overflow-hidden no-tap-highlighting'>
-          <div class='grid h-60 md:h-44 border'>
+          <div class='grid h-60 md:h-44 border relative'>
             <% if post.images.attached? %>
               <%= link_to  post_path(post) do %>
-                <%= image_tag post.thumbnail, alt: 'サムネイル画像', class: 'rounded-t-xl w-full h-60 md:h-44 bg-no-repeat bg-center bg-cover' %>
+                <%= image_tag post.thumbnail, alt: 'サムネイル画像', class: 'rounded-t-lg w-full h-60 md:h-44' %>
+                <div class='flex justify-center items-center rounded-t-lg w-full h-60 md:h-44 picture-cover hover:text-white duration-100'><p class='text-sm font-medium'>Click</p></div>
               <% end %>
             <% else %>
               <%= link_to  post_path(post) do %>
-                <%= image_tag '800x600_dummy.jpg', alt: 'サムネイル画像', class: 'rounded-t-xl w-full h-60 md:h-44 bg-no-repeat bg-center bg-cover' %>
+                <%= image_tag '800x600_dummy.jpg', alt: 'サムネイル画像', class: 'rounded-t-lg w-full h-60 md:h-44' %>
               <% end %>
             <% end %>
           </div>
