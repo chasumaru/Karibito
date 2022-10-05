@@ -1,10 +1,16 @@
-        <div class='border-2 border-gray-200 border-opacity-60 rounded-xl overflow-hidden no-tap-highlighting'>
-          <% if post.images.attached? %>
-            <%= link_to image_tag(post.thumbnail, alt: 'サムネイル画像'), post_path(post), class: 'rounded-t-xl w-full object-center' %>
-          <% else %>
-            <%= image_tag'800x600_dummy.jpg', alt: 'ダミー画像', class: 'rounded-t-xl w-full object-center' %>
-          <% end %>
-          <div class='flex flex-col p-4 -mt-2 h-full'>
+        <div class='grid border-2 border-gray-200 border-opacity-60 rounded-xl overflow-hidden no-tap-highlighting'>
+          <div class='grid h-60 md:h-44 border'>
+            <% if post.images.attached? %>
+              <%= link_to  post_path(post) do %>
+                <%= image_tag post.thumbnail, alt: 'サムネイル画像', class: 'rounded-t-xl w-full h-60 md:h-44 bg-no-repeat bg-center bg-cover' %>
+              <% end %>
+            <% else %>
+              <%= link_to  post_path(post) do %>
+                <%= image_tag '800x600_dummy.jpg', alt: 'サムネイル画像', class: 'rounded-t-xl w-full h-60 md:h-44 bg-no-repeat bg-center bg-cover' %>
+              <% end %>
+            <% end %>
+          </div>
+          <div class='grid p-2 h-40 break-all'>
             <p class='text-base font-bold text-black'><%= link_to truncate(post.title, length:18), post_path(post) %></p>
             <p class='tracking-tight leading-tight text-slate-600 md:text-sm'><%= truncate(post.content, length:36) %></p>
             <div class='flex w-full flex-row mt-5 justify-start relative'>

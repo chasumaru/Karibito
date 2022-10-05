@@ -50,44 +50,7 @@
     <% if @boards.present? %>
       <div class='grid md:grid-cols-2 gap-x-2 gap-y-2 mx-4 mt-8 animate-fade-in'>
         <% @boards.each do |board| %>
-          <div class='flex flex-row border-2 border-gray-200 rounded-md border-opacity-60 no-tap-highlighting'>
-            <div class='w-48 h-32 border board-loading'>
-              <% if board.illustration.attached? %>
-                <%= link_to  board_path(board) do %>
-                  <%= image_tag board.thumbnail, alt: 'サムネイル画像', class: 'w-full h-full rounded-l-md  bg-spiner-1 bg-no-repeat bg-center bg-cover' %>
-                <% end %>
-              <% else %>
-                <%= link_to  board_path(board) do %>
-                  <%= image_tag '800x600_dummy.jpg', alt: 'サムネイル画像', class: 'w-full h-full rounded-l-md  bg-spiner-1 bg-no-repeat bg-center bg-cover' %>
-                <% end %>
-              <% end %>
-              </div>
-            <div class='flex flex-col w-full ml-1 max-h-32 break-all'>
-              <p class='leading-tight text-base font-bold text-black  pl-0.5 pt-0.5'><%= link_to truncate(board.title, length:26), board_path(board) %></p>
-              <% if board.description %>
-                <p class='tracking-wider leading-snug text-slate-600 text-xs pl-0.5 pt-0.5 ml-0.5 h-18'><%= truncate(board.description, length:49) %></p>
-              <% else %>
-                <p class='tracking-wider leading-snug text-slate-600 text-xs pl-0.5 pt-0.5 ml-0.5 h-18'>説明がありません</p>
-              <% end %>
-              <div class='flex w-full flex-row justify-start relative'>
-                <span class='flex flex-row items-center'>
-                  <% if board.anonymous_flag? %>
-                    <%= image_tag 'no_avatar.png', class: 'w-8 h-8 object-cover rounded-full border border-yellow-300 no-tap-highlighting' %>
-                    <p class='text-xs font-medium ml-1'>名無しさん</p>
-                  <% else %>
-                    <% if board.user.present? %>
-                      <%= avatar_link(board) %>
-                      <p class='text-xs font-medium ml-1 hover:underline hover:underline-offset-2'><%= link_to truncate(board.user.name, length:17), profile_path(board.user) %></p>
-                    <% else %>
-                      <%= image_tag 'no_avatar.png', class: 'w-8 h-8 object-cover rounded-full border border-yellow-300 no-tap-highlighting' %>
-                      <p class='text-xs font-medium ml-1'>名無しさん</p>
-                    <% end %>
-                  <% end %>
-                </span>
-              </div>
-              <p class='text-xs text-slate-500 ml-10 -mt-0.5 mb-1'><%= how_long_ago(board) %></p>
-            </div>
-          </div>
+          <%= render partial: 'shared/board', locals: {board: board} %>
         <% end %>
       </div>
       <div class='flex justify-center mt-10'>

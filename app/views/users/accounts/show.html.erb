@@ -7,7 +7,7 @@
 <% provide(:title, "#{i}") %>
 <div class='bg-white animate-fade-in'>
   <section>
-    <div class='profile__icon -mt-1'>
+    <div class='-mt-1'>
       <%if @user.background.attached? %>
         <% if @user == current_user %>
           <%= image_tag(current_user.background, class: 'w-full h-64 md:h-96 object-cover') %>
@@ -83,7 +83,7 @@
           <% if @posts.present? %>
             <div class='grid sm:grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-3 mx-8'>
               <% (@posts).each do |post| %>
-                <%= render partial: 'post', locals: { post: post} %> 
+                <%= render partial: 'shared/post', locals: {post: post} %>
               <% end %>
             </div>
             <div class='flex justify-center mt-10 mb-6'>
@@ -103,12 +103,11 @@
           <% if @real_boards.present? %>
             <div class='grid grid-cols-1 gap-x-2 gap-y-3 mx-8'>
               <% (@real_boards).each do |board| %>
-                <%= render partial: 'board', locals: { board: board} %> 
+                <% unless board.anonymous_flag? %>
+                  <%= render partial: 'shared/board', locals: {board: board} %>
+                <% end %>
               <% end %>
             </div>
-            <%# <div class='flex justify-center mt-10 mb-6'>
-              <%= pagy_nav(@pagy_board).html_safe %>
-            <%# </div> %>
           <% else %>
             <div class='flex w-full flex-col justify-center items-center mb-48'>
               <span class ='relative'>
