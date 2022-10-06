@@ -3,7 +3,7 @@
   <div class='grid grid-cols-1 justify-center'>
     <% if current_user %>
       <div class='flex justify-center items-center py-3'>
-        <p class='text-base font-medium mr-2'>匿名で投稿</p>
+        <p class='text-base font-medium mr-2'>匿名でコメント</p>
         <%= f.check_box(:anonymous_flag,{:checked=>true},'1','0') %>
       </div>
     <% end %>

@@ -65,27 +65,33 @@
       <div class='grid py-2 bg-neutral-100'>
         <div class='flex h-full overflow-x-auto overflow-y-hidden'>
           <% @popular_users.each do |user| %>
-            <div class='flex-none w-1/2 sm:w-1/3 border-2 border-gray-200 border-opacity-60 no-tap-highlighting mx-1.5 bg-white shadow-sm'>
+            <div class='flex-none w-48 border-2 border-gray-200 border-opacity-60 no-tap-highlighting mx-1.5 bg-white shadow-sm'>
               <div class='flex flex-col w-full'>
                 <% if user.background.attached? %>
                   <%= link_to  profile_path(user) do %>
-                    <%= image_tag user.background, alt: '背景画像', class: 'w-full object-center' %>
+                    <%= image_tag user.background, alt: '背景画像', class: 'w-full h-36 object-center object-cover' %>
                   <% end %>
                 <% else %>
                   <%= link_to  profile_path(user) do %>
-                    <%= image_tag '800x600_dummy.jpg', alt: '背景画像', class: 'w-full object-center' %>
+                    <%= image_tag '800x600_dummy.jpg', alt: '背景画像', class: 'w-full h-36 object-center object-cover' %>
                   <% end %>
                 <% end %>
                 <div class='flex w-full flex-col justify-center items-center'>
-                  <span class ='relative -mt-6 md:-mt-10'>
+                  <span class ='relative -mt-6'>
                     <%if user.avatar.attached? %>
                       <% if user == current_user %>
-                        <%= link_to image_tag(current_user.avatar, class: 'w-12 h-12 md:w-20 md:h-20 rounded-full border-2 border-emerald-500 bg-white'), profile_path(current_user) %>
+                        <%= link_to profile_path(current_user) do %>
+                          <%= image_tag current_user.avatar, alt: 'アバター画像', class: 'w-12 h-12 rounded-full border-2 border-emerald-500 bg-white' %>
+                        <% end %>
                       <% else %>
-                        <%= link_to image_tag(user.avatar, class: 'w-12 h-12 md:w-20 md:h-20 rounded-full border-2 border-indigo-500 bg-white'), profile_path(user) %>
+                        <%= link_to profile_path(user) do %>
+                          <%= image_tag user.avatar, alt: 'アバター画像', class: 'w-12 h-12 rounded-full border-2 border-indigo-500 bg-white' %>
+                        <% end %>
                       <% end %>
                     <% else %>
-                      <%= link_to image_tag('no_avatar.png', class: 'w-12 h-12 md:w-20 md:h-20 rounded-full border-2 border-yellow-300 bg-white'), profile_path(user) %>
+                      <%= link_to profile_path(user) do %>
+                        <%= image_tag 'no_avatar.png', alt: 'アバター画像', class: 'w-12 h-12 rounded-full border-2 border-yellow-300 bg-white' %>
+                      <% end %>
                     <% end %>
                   </span>
                   <p class='text-sm font-semibold my-2 hover:underline hover:underline-offset-2 no-tap-highlighting'><%= link_to user.name, profile_path(user) %></p>

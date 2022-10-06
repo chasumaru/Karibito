@@ -1,14 +1,14 @@
 <% provide(:title, 'プロフィール編集') %>
 <section>
-  <div class='mt-14 mb-10 animate-fade-in'>
+  <div class='mb-10 animate-fade-in'>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= render 'users/shared/error_messages', resource: resource %>
         <div class='grid grid-cols-1 items-center'>
           <div data-controller='image-preview' class='profile__icon bg-white -mt-1'>
             <%if current_user.background.attached? %>
-              <%= image_tag(current_user.background, data: { image_preview_target: 'bgOutput' }, class: 'w-full h-64 md:h-96 object-center object-cover') %>
+              <%= image_tag(current_user.background, data: { image_preview_target: 'bgOutput' }, class: 'w-full h-64 sm:h-96 md:h-120 lg:h-160 object-cover') %>
             <% else %>
-              <%= image_tag'800x600_dummy.jpg', alt: '背景画像', data: { image_preview_target: 'bgOutput' }, class: 'w-full h-64 md:h-96 object-center object-cover' %>
+              <%= image_tag'800x600_dummy.jpg', alt: '背景画像', data: { image_preview_target: 'bgOutput' }, class: 'w-full h-64 sm:h-96 md:h-120 lg:h-160 object-cover' %>
             <% end %>
             <div class='flex w-full flex-col justify-center items-center'>
               <span class ='relative -mt-10 md:-mt-16'>

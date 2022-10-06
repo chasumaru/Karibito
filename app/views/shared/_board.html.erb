@@ -1,17 +1,17 @@
 <div class='flex flex-row border-2 border-gray-200 rounded-lg border-opacity-60 no-tap-highlighting'>
   <div class='w-48 h-32 border rounded-l-md'>
     <% if board.illustration.attached? %>
-      <%= link_to  board_path(board) do %>
-        <%= image_tag board.thumbnail, alt: 'サムネイル画像', class: 'w-full h-full rounded-l-md' %>
-      <% end %>
+      <%= image_tag board.thumbnail, alt: 'サムネイル画像', class: 'w-full h-full rounded-l-md' %>
     <% else %>
-      <%= link_to  board_path(board) do %>
+      <%= link_to board_path(board) do %>
         <%= image_tag '800x600_dummy.jpg', alt: 'サムネイル画像', class: 'w-full h-full rounded-l-md' %>
       <% end %>
     <% end %>
     </div>
   <div class='flex flex-col w-full ml-1 max-h-32 break-all'>
-    <p class='leading-tight text-base font-bold text-black  pl-0.5 pt-0.5'><%= link_to truncate(board.title, length:26), board_path(board) %></p>
+    <%= link_to board_path(board) do %>
+      <p class='w-full leading-tight text-base font-bold text-black  pl-0.5 pt-0.5'><%= truncate(board.title, length:26) %></p>
+    <% end %>
     <% if board.description %>
       <p class='tracking-wider leading-snug text-slate-600 text-xs pl-0.5 pt-0.5 ml-0.5 h-18'><%= truncate(board.description, length:49) %></p>
     <% else %>

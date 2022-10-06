@@ -59,7 +59,6 @@ class User < ApplicationRecord
     active_relationships.find_by(followed_id: other_user.id).destroy
   end
 
-
   def following?(other_user)
     following.include?(other_user)
   end
@@ -111,9 +110,9 @@ class User < ApplicationRecord
 
   private
 
-  def self.dummy_email(auth)
-    "#{auth.uid}-#{auth.provider}@example.com"
-  end
+  # def self.dummy_email(auth)
+  #   "#{auth.uid}-#{auth.provider}@example.com"
+  # end
 
   def avatar_not_attached?
    !( self.avatar.attached?)

@@ -14,9 +14,13 @@ module ApplicationHelper
   def avatar_link(item)
     if item.user.avatar.attached? 
       if item.user == current_user 
-        link_to image_tag(current_user.avatar, class: 'w-8 h-8 rounded-full border-2 border-emerald-500 no-tap-highlighting'), profile_path(current_user) 
-      else 
-        link_to image_tag(item.user.avatar, class: 'w-8 h-8 rounded-full border-2 border-indigo-500 no-tap-highlighting'), profile_path(item.user) 
+        link_to profile_path(current_user) do
+          image_tag current_user.avatar, alt: 'アバター画像', class: 'w-8 h-8 rounded-full border-2 border-emerald-500 no-tap-highlighting'
+        end
+      else
+        link_to profile_path(item.user) do
+          image_tag item.user.avatar, alt: 'アバター画像', class: 'w-8 h-8 rounded-full border-2 border-indigo-500 no-tap-highlighting'
+        end
       end 
     else 
       image_tag 'no_avatar.png', class: 'w-8 h-8 object-cover rounded-full border border-yellow-300 no-tap-highlighting' 
@@ -44,15 +48,16 @@ module ApplicationHelper
     turbo_stream.update 'flash', partial: 'shared/flash'
   end
 
-  def devise_mapping
-    Devise.mappings[:user]
-  end
+# # Omniaauth関連の設定
+#   def devise_mapping
+#     Devise.mappings[:user]
+#   end
   
-  def resource_name
-    devise_mapping.name
-  end
+#   def resource_name
+#     devise_mapping.name
+#   end
   
-  def resource_class
-    devise_mapping.to
-  end
+#   def resource_class
+#     devise_mapping.to
+#   end
 end

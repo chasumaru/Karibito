@@ -51,6 +51,7 @@ module.exports = {
         '48': '12rem',
         '88': '22rem',
         '108': '27rem',
+        '120': '30rem',
         '160': '40rem',
       },
       boxShadow: {
