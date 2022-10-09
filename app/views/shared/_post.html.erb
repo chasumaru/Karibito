@@ -2,7 +2,7 @@
           <div class='grid h-60 md:h-44 border relative'>
             <% if post.images.attached? %>   
               <%= image_tag post.thumbnail, alt: 'サムネイル画像', class: 'rounded-t-lg w-full h-60 md:h-44' %>
-              <% if post.danger_id? %>
+              <% if post.danger_flag? %>
                 <div class='flex justify-center items-center rounded-t-lg w-full h-60 md:h-44 picture-cover hover:text-white duration-100'><p class='text-sm font-medium'>Click</p></div>
               <% end %>
             <% else %>
@@ -13,7 +13,7 @@
           </div>
           <div class='grid p-2 h-40 break-all'>
             <%= link_to post_path(post) do %>
-              <p class='w-full block text-base font-bold text-black bg-lime-300'><%= truncate(post.title, length:18) %></p>
+              <p class='w-full block text-base font-bold text-black'><%= truncate(post.title, length:18) %></p>
             <% end %>
             <p class='tracking-tight leading-tight text-slate-600 md:text-sm'><%= truncate(post.content, length:36) %></p>
             <div class='flex w-full flex-row mt-5 justify-start relative'>

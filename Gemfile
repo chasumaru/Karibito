@@ -101,4 +101,4 @@ group :development do
 end
 
 # admin-railsとの依存関係があり、テスト時はコメントアウトする。
-# gem "sassc-rails"
+gem "sassc-rails"

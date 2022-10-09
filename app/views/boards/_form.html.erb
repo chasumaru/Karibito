@@ -44,6 +44,12 @@
           </div>
         <% end %>
       </div>
+      <div class='grid grid-cols-1 justify-center'>
+        <div class='flex justify-center items-center py-3'>
+          <p class='text-base font-medium mr-2'>画像にカバーをかける(センシティブな画像を含む場合など)</p>
+          <%= f.check_box(:danger_flag,{:checked=>false},'1','0') %>
+        </div>
+      </div>
     </div>
     <div class='flex justify-center bg-white'>
       <%= f.submit '投稿', class:'h-10 md:h-12 w-20 md:w-32 md:text-lg px-5 py-1 my-2 rounded-2xl tracking-widest font-semibold bg-white border-2 text-stone-600 hover:text-black border-cyan-400 hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out no-tap-highlighting' %>

@@ -15,17 +15,20 @@
     <p class='text-sm font-bold mr-2 ml-2 hover:underline hover:underline-offset-2 no-tap-highlighting'><%= link_to post.user.name, profile_path(post.user) %></p>
   </span>
 </div>
-<div class='h-full overflow-hidden'>
+<div class='h-full overflow-hidden relative'>
   <% if post.images.present?  %>
     <%= image_tag post.thumbnail, class: 'w-full object-center' %>
+    <% if post.danger_flag? %>
+      <div class='flex justify-center items-center w-full h-full picture-cover hover:text-white duration-100'><p class='text-sm font-medium tracking-wider'>Click</p></div>
+    <% end %>
   <% else %>
     <%= image_tag'800x600_dummy.jpg', alt: 'ダミー画像', class: 'w-full object-center' %>
   <% end %>
-  <div class='flex justify-end bg-white py-0.5 border-b-2'>
-    <div class='inline-flex justify-between w-26 pr-3 mr-2'>
-      <%= render partial: 'likes/like_number', locals: {liked_users: @liked_users} %>
-      <%= render partial: 'comments/comment_number', locals: {post: @post} %>
-    </div>
+</div>
+<div class='flex justify-end bg-white py-0.5 border-b-2'>
+  <div class='inline-flex justify-between w-26 pr-3 mr-2'>
+    <%= render partial: 'likes/like_number', locals: {liked_users: @liked_users} %>
+    <%= render partial: 'comments/comment_number', locals: {post: @post} %>
   </div>
 </div>
 <section>
@@ -62,10 +65,15 @@
   <div class='bg-white ml-1 break-all'>
     <p class='tracking-wide leading-loose whitespace-pre-wrap font-medium text-sm md:text-base py-4 mx-4'><%= @post.content %></p>
   </div>
-  <div class='grid grid-cols-1 gap-2 py-4 bg-white'>
-    <% ((@post.images.count) -1).times  do |i| %>
-      <%= image_tag((@post.images[i+1].variant(resize_to_fill: [1200, 900], sampling_factor: '4:2:0', strip: true, interlace: 'JPEG', colorspace: 'sRGB', quality: 85).processed), class: 'w-full object-center') %>
-    <% end %>
+  <div class='grid grid-cols-1 gap-2 my-4 bg-white'>
+      <% ((@post.images.count) -1).times  do |i| %>
+        <div class="relative">
+          <%= image_tag((@post.images[i+1].variant(resize_to_fill: [1200, 900], sampling_factor: '4:2:0', strip: true, interlace: 'JPEG', colorspace: 'sRGB', quality: 85).processed), class: 'w-full object-center') %>
+          <% if post.danger_flag? %>
+            <div class='flex justify-center items-center w-full h-full picture-cover hover:text-white duration-100'><p class='text-sm font-medium tracking-wider'>Click</p></div>
+          <% end %>
+        </div>
+      <% end %>
   </div>
 </section>
 <section>

@@ -1,7 +1,10 @@
 <div class='flex flex-row border-2 border-gray-200 rounded-lg border-opacity-60 no-tap-highlighting'>
-  <div class='w-48 h-32 border rounded-l-md'>
+  <div class='w-48 h-32 border rounded-l-md relative'>
     <% if board.illustration.attached? %>
       <%= image_tag board.thumbnail, alt: 'サムネイル画像', class: 'w-full h-full rounded-l-md' %>
+      <% if board.danger_flag? %>
+        <div class='rounded-l-md w-48 h-32 picture-cover hover:text-white duration-100'><p class='absolute top-14 left-13 text-sm font-medium'>Click</p></div>
+      <% end %>
     <% else %>
       <%= link_to board_path(board) do %>
         <%= image_tag '800x600_dummy.jpg', alt: 'サムネイル画像', class: 'w-full h-full rounded-l-md' %>
