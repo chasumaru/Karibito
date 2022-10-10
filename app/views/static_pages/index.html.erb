@@ -7,10 +7,18 @@
           <% @popular_posts.each do |post| %>
             <div class='flex-none w-88 border-2 border-gray-200 border-opacity-60 rounded-xl no-tap-highlighting mx-1.5 bg-white shadow-sm'>
               <div class='flex flex-col w-full'>
-                <div class='grid h-60 border rounded-t-xl'>
+                <div data-controller='picture-cover' class='relative grid h-60 border rounded-t-lg'>
                   <% if post.images.attached? %>
-                    <%= link_to  post_path(post) do %>
-                      <%= image_tag post.thumbnail, alt: 'サムネイル画像', class: 'rounded-t-xl w-full h-60 object-center' %>
+                    <% if post.danger_flag? %>
+                      <%= image_tag post.thumbnail, alt: 'サムネイル画像', class: 'rounded-t-lg w-full h-60',data: {action: 'click->picture-cover#dangerToggle'} %>
+                      <span data-picture-cover-target='dangerCase' data-action='click->picture-cover#dangerToggle'>
+                        <div class='flex justify-center items-center rounded-t-lg w-full h-60 picture-cover hover:text-white duration-100'><p class='text-sm font-medium'>Click</p></div>
+                      </span>
+                    <% else %>
+                      <%= image_tag post.thumbnail, alt: 'サムネイル画像', class: 'rounded-t-lg w-full h-60',data: {action: 'click->picture-cover#normalToggle'} %>
+                      <span class='hidden' data-picture-cover-target='normalCase' data-action='click->picture-cover#normalToggle'>
+                        <div class='flex justify-center items-center rounded-t-lg w-full h-60 picture-cover hover:text-white duration-100'><p class='text-sm font-medium'>Click</p></div>
+                      </span>
                     <% end %>
                   <% else %>
                     <%= link_to  post_path(post) do %>

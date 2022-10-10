@@ -15,11 +15,18 @@
     <p class='text-sm font-bold mr-2 ml-2 hover:underline hover:underline-offset-2 no-tap-highlighting'><%= link_to post.user.name, profile_path(post.user) %></p>
   </span>
 </div>
-<div class='h-full overflow-hidden relative'>
-  <% if post.images.present?  %>
-    <%= image_tag post.thumbnail, class: 'w-full object-center' %>
+<div class='relative h-full' data-controller='picture-cover'>
+  <% if post.images.attached? %>
     <% if post.danger_flag? %>
-      <div class='flex justify-center items-center w-full h-full picture-cover hover:text-white duration-100'><p class='text-sm font-medium tracking-wider'>Click</p></div>
+      <%= image_tag post.thumbnail, class: 'w-full object-center', data: {action: 'click->picture-cover#dangerToggle'} %>
+      <span data-picture-cover-target='dangerCase' data-action='click->picture-cover#dangerToggle'>
+        <div class='flex justify-center items-center w-full h-full picture-cover hover:text-white duration-100'></div>
+      </span>
+    <% else %>
+      <%= image_tag post.thumbnail, class: 'w-full object-center', data: {action: 'click->picture-cover#normalToggle'} %>
+      <span class='hidden' data-picture-cover-target='normalCase' data-action='click->picture-cover#normalToggle'>
+        <div class='flex justify-center items-center w-full h-full picture-cover hover:text-white duration-100'></div>
+      </span>
     <% end %>
   <% else %>
     <%= image_tag'800x600_dummy.jpg', alt: 'ダミー画像', class: 'w-full object-center' %>
@@ -63,14 +70,21 @@
 </section>
 <section>
   <div class='bg-white ml-1 break-all'>
-    <p class='tracking-wide leading-loose whitespace-pre-wrap font-medium text-sm md:text-base py-4 mx-4'><%= @post.content %></p>
+    <p class='tracking-wide leading-loose whitespace-pre-wrap font-medium text-sm md:text-base py-4 mx-4'><%= post.content %></p>
   </div>
   <div class='grid grid-cols-1 gap-2 my-4 bg-white'>
-      <% ((@post.images.count) -1).times  do |i| %>
-        <div class="relative">
-          <%= image_tag((@post.images[i+1].variant(resize_to_fill: [1200, 900], sampling_factor: '4:2:0', strip: true, interlace: 'JPEG', colorspace: 'sRGB', quality: 85).processed), class: 'w-full object-center') %>
+      <% ((post.images.count) -1).times  do |i| %>
+        <div data-controller='picture-cover'data-controller='picture-cover' class="relative">
           <% if post.danger_flag? %>
-            <div class='flex justify-center items-center w-full h-full picture-cover hover:text-white duration-100'><p class='text-sm font-medium tracking-wider'>Click</p></div>
+            <%= image_tag (post.images[i+1].variant(resize_to_fill: [1200, 900], sampling_factor: '4:2:0', strip: true, interlace: 'JPEG', colorspace: 'sRGB', quality: 85).processed), class: 'w-full object-center', data: {action: 'click->picture-cover#dangerToggle'} %>
+            <span data-picture-cover-target='dangerCase' data-action='click->picture-cover#dangerToggle'>
+              <div class='flex justify-center items-center w-full h-full picture-cover hover:text-white duration-100'></div>
+            </span>
+          <% else %>
+            <%= image_tag (post.images[i+1].variant(resize_to_fill: [1200, 900], sampling_factor: '4:2:0', strip: true, interlace: 'JPEG', colorspace: 'sRGB', quality: 85).processed), class: 'w-full object-center', data: {action: 'click->picture-cover#normalToggle'} %>
+            <span class='hidden' data-picture-cover-target='normalCase' data-action='click->picture-cover#normalToggle'>
+              <div class='flex justify-center items-center w-full h-full picture-cover hover:text-white duration-100'></div>
+            </span>
           <% end %>
         </div>
       <% end %>

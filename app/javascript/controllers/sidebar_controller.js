@@ -32,7 +32,6 @@ export default class extends Controller {
     } 
   }
   
-
   hamburgerOn() {
     this.line1Target.classList.add('line_1')
     this.line2Target.classList.add('line_2')

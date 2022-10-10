@@ -48,12 +48,14 @@
             <% if post.images.attached? %>
             <p class='text-sm font-semibold text-stone-500 ml-3'>※２・・・以下のチェックボックスで選択した画像は削除されます。</p>
               <% post.images.each do |image| %>
-                <%= f.check_box :image_ids, {multiple: true, class: 'justify-self-start w-6 h-6 ml-4' }, image.id, false %>
-                <label for='post_image_ids_<%= image.id %>' >
-                  <div class='h-full overflow-hidden'>
-                    <%= image_tag image, alt: '他の画像', class: 'w-full object-center' %>
-                  </div>
-                </label> 
+                <div class='border-t-2 pt-2 mb-4'>
+                  <%= f.check_box :image_ids, {multiple: true, class: 'justify-self-start w-6 h-6 ml-4' }, image.id, false %>
+                  <label for='post_image_ids_<%= image.id %>' >
+                    <div class='h-full overflow-hidden'>
+                      <%= image_tag image, alt: '他の画像', class: 'w-full object-center' %>
+                    </div>
+                  </label> 
+                </div>
               <% end %>
             <% else %>
               <div class='grid grid-cols-1 no-tap-highlighting py-4'>
@@ -68,10 +70,10 @@
         </div>
       </section>
     </div>
-    <div class='grid grid-cols-1 justify-center'>
+    <div class='grid grid-cols-1 justify-center mb-4'>
       <div class='flex justify-center items-center py-3'>
-        <p class='text-base font-medium mr-2'>画像にカバーをかける(センシティブな画像を含む場合など)</p>
-        <%= f.check_box(:danger_flag,{:checked=>false},'1','0') %>
+        <p class='text-sm font-semibold mr-2'>画像カバー(センシティブな画像を含む)</p>
+        <%= f.check_box(:danger_flag,{:checked => false, class: 'justify-self-end w-6 h-6 mr-4'},'1','0') %>
       </div>
     </div>
     <div class='flex justify-center bg-white'>
