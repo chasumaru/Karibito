@@ -13,23 +13,23 @@ export default class extends Controller {
     }
 
     openValueChanged() {
-    if (this.openValue) {
-      this.hamburgerOn()
-      this.expand()
-      this.cover()
-    } else {
+      if (this.openValue == "1") {
+        this.hamburgerOn()
+        this.expand()
+        this.cover()
+      } else {
+        this.hamburgerOff()
+        this.collapse()
+        this.uncover()
+      }
+    }
+
+  close() {
+    if (this.openValue == "1") {
       this.hamburgerOff()
       this.collapse()
       this.uncover()
     }
-  }
-
-  close() {
-    if (!this.openValue) {
-      this.hamburgerOff()
-      this.collapse()
-      this.uncover()
-    } 
   }
   
   hamburgerOn() {
