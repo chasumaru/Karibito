@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :relationship do
-    follower_id { 1 }
-    followed_id { 1 }
+    follower_id { Faker::Number.number(digits: 3) }
+    followed_id { Faker::Number.number(digits: 3) }
   end
 end

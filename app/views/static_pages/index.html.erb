@@ -1,20 +1,162 @@
-<div class="pb-72 mt-14">
+<div class='bg-neutral-100 animate-fade-in'>
+  <div class='grid justify-center py-6 bg-white'>
+    <section>
+      <h3 class='font-bold text-center bg-white py-3 mb-6'>狩猟日記</h3>
+      <div class='grid py-2 bg-neutral-100'>
+        <div class='flex h-full overflow-x-auto overflow-y-hidden'>
+          <% @popular_posts.each do |post| %>
+            <div class='flex-none w-88 border-2 border-gray-200 border-opacity-60 rounded-xl no-tap-highlighting mx-1.5 bg-white shadow-sm'>
+              <div class='flex flex-col w-full'>
+                <div data-controller='picture-cover' class='relative grid h-60 border rounded-t-lg'>
+                  <% if post.images.attached? %>
+                    <% if post.danger_flag? %>
+                      <%= image_tag post.thumbnail, alt: 'サムネイル画像', class: 'rounded-t-lg w-full h-60',data: {action: 'click->picture-cover#dangerToggle'} %>
+                      <span data-picture-cover-target='dangerCase' data-action='click->picture-cover#dangerToggle'>
+                        <div class='flex justify-center items-center rounded-t-lg w-full h-60 picture-cover hover:text-white duration-100'><p class='text-sm font-medium'>Click</p></div>
+                      </span>
+                    <% else %>
+                      <%= image_tag post.thumbnail, alt: 'サムネイル画像', class: 'rounded-t-lg w-full h-60',data: {action: 'click->picture-cover#normalToggle'} %>
+                      <span class='hidden' data-picture-cover-target='normalCase' data-action='click->picture-cover#normalToggle'>
+                        <div class='flex justify-center items-center rounded-t-lg w-full h-60 picture-cover hover:text-white duration-100'><p class='text-sm font-medium'>Click</p></div>
+                      </span>
+                    <% end %>
+                  <% else %>
+                    <%= link_to  post_path(post) do %>
+                      <%= image_tag '800x600_dummy.jpg', alt: 'サムネイル画像', class: 'rounded-t-xl w-full h-60 object-center' %>
+                    <% end %>
+                  <% end %>
+                </div>
+                <div class='grid p-2 h-40'>
+                  <p class='text-base font-bold text-black'><%= link_to truncate(post.title, length:18), post_path(post) %></p>
+                  <p class='tracking-tight leading-tight text-slate-600 md:text-sm'><%= truncate(post.content, length:36) %></p>
+                  <div class='flex w-full flex-row mt-5 justify-start relative'>
+                    <span class='flex flex-row items-center'>
+                      <%= avatar_link(post) %>
+                      <p class='text-sm font-medium mr-2 ml-2 hover:underline hover:underline-offset-2'><%= link_to truncate(post.user.name, length:17), profile_path(post.user) %></p>
+                    </span>
+                    <div class='flex items-center justify-items-end w-20 absolute top-6 right-1'>
+                      <span class='text-gray-400 inline-flex h-6 items-center leading-none text-sm pr-3'>
+                        <svg class='w-4 h-4 mr-1'  viewBox='0 0 24 24'  fill='none'  stroke='currentColor'  stroke-width='2'  stroke-linecap='round'  stroke-linejoin='round'>  
+                          <path d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z' />
+                        </svg>
+                        <%= post.liked_users.count %>
+                      </span>
+                      <span class='text-gray-400 inline-flex items-center leading-none text-sm ml-1'>
+                        <svg class='w-4 h-4 mr-1' stroke='currentColor' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'>
+                          <path d='M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z'></path>
+                        </svg>
+                        <%= post.comments.count %>
+                      </span>
+                    </div>
+                  </div>
+                  <p class='text-xs text-slate-500 ml-10'><%= how_long_ago(post) %></p>
+                </div>
+                <span class='flex flex-wrap justify-center'>
+                  <% if post.tags.present? %>
+                    <span class='flex flex-wrap ml-5 mt-2'>
+                      <% post.tags.each do |tag| %>
+                        <%= link_to tag, posts_path(tag_name: tag.name), class:'bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 mb-1 mr-1.5 rounded dark:bg-green-200 dark:text-green-900 hover:bg-green-300 no-tap-highlighting' %>
+                      <% end %>
+                    </span>
+                  <% end %>
+                </span>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </section>
+    <%= link_to '日記をもっと見る', posts_path, class: 'justify-self-center font-medium text-sm bg-white border shadow-md rounded-full focus:outline-none focus:ring-0 w-48 px-5 py-2.5 text-center my-6' %>
 
-<h1>狩猟日記</h1>
+    <section>
+      <h3 class='font-bold text-center bg-white pt-8 pb-3 my-6 border-t-2'>人気のユーザー</h3>
+      <div class='grid py-2 bg-neutral-100'>
+        <div class='flex h-full overflow-x-auto overflow-y-hidden'>
+          <% @popular_users.each do |user| %>
+            <div class='flex-none w-48 border-2 border-gray-200 border-opacity-60 no-tap-highlighting mx-1.5 bg-white shadow-sm'>
+              <div class='flex flex-col w-full'>
+                <% if user.background.attached? %>
+                  <%= link_to  profile_path(user) do %>
+                    <%= image_tag user.background, alt: '背景画像', class: 'w-full h-36 object-center object-cover' %>
+                  <% end %>
+                <% else %>
+                  <%= link_to  profile_path(user) do %>
+                    <%= image_tag '800x600_dummy.jpg', alt: '背景画像', class: 'w-full h-36 object-center object-cover' %>
+                  <% end %>
+                <% end %>
+                <div class='flex w-full flex-col justify-center items-center'>
+                  <span class ='relative -mt-6'>
+                    <%if user.avatar.attached? %>
+                      <% if user == current_user %>
+                        <%= link_to profile_path(current_user) do %>
+                          <%= image_tag current_user.avatar, alt: 'アバター画像', class: 'w-12 h-12 rounded-full border-2 border-emerald-500 bg-white' %>
+                        <% end %>
+                      <% else %>
+                        <%= link_to profile_path(user) do %>
+                          <%= image_tag user.avatar, alt: 'アバター画像', class: 'w-12 h-12 rounded-full border-2 border-indigo-500 bg-white' %>
+                        <% end %>
+                      <% end %>
+                    <% else %>
+                      <%= link_to profile_path(user) do %>
+                        <%= image_tag 'no_avatar.png', alt: 'アバター画像', class: 'w-12 h-12 rounded-full border-2 border-yellow-300 bg-white' %>
+                      <% end %>
+                    <% end %>
+                  </span>
+                  <p class='text-sm font-semibold my-2 hover:underline hover:underline-offset-2 no-tap-highlighting'><%= link_to user.name, profile_path(user) %></p>
+                </div>
+                <span class='flex flex-wrap justify-center'>
+                  <% if user.positions.present? %>
+                    <% user.positions.each do |p| %>
+                      <%= link_to p, users_path(tag_name: p.name), class:'bg-pink-100 text-pink-800 text-xs font-semibold px-2 py-1 mb-1 mr-1.5 rounded dark:bg-pink-200 dark:text-pink-900 hover:bg-pink-300 no-tap-highlighting' %>
+                    <% end %>
+                  <% end %>
+                </span>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </section>
+    <% if current_user %>
+      <%= link_to 'ユーザーをもっと見る', users_path, class: 'justify-self-center font-medium text-sm bg-white border shadow-md rounded-full focus:outline-none focus:ring-0 w-48 px-5 py-2.5 text-center my-6' %>
+    <% else %>
+      <%= link_to 'ユーザーをもっと見る', new_user_session_path, class: 'justify-self-center font-medium text-sm bg-white border shadow-md rounded-full focus:outline-none focus:ring-0 w-48 px-5 py-2.5 text-center my-6' %>
+    <% end %>
 
-<h2>投稿した日記の一覧表示(横スクロール)</h2>
-<%= button_to 'もっと見る', posts_path, method: :get %>
-<br>
-<br>
-
-<h2>いいね数の多いユーザーの一覧表示(横スクロール)</h2>
-<br>
-
-<h1>質問掲示板</h1>
-
-<h2>投稿した質問の一覧表示(横スクロール)</h2>
-
-<button>もっと見る</button>
-
-
+    <section>
+      <h3 class='font-bold text-center bg-white pt-8 pb-3 my-6 border-t-2'>狩猟掲示板</h3>
+      <div class='h-96 px-3 bg-white'>
+        <div class='grid h-full bg-neutral-100 px-2 py-3'>
+          <div class='flex flex-col w-full overflow-y-auto overflow-x-hidden bg-white'>
+            <% @popular_boards.each  do |board| %>
+              <div class='relative flex-none h-24 bg-white border-b px-1'>
+                <div class='grid grid-cols-3'>
+                  <div class='grid h-full col-span-2 px-2 pt-2'>
+                    <%= link_to truncate(board.title, length:26), board_path(board), class: 'leading-tight font-semibold hover:underline' %>
+                    <p class='absolute bottom-1 left-4 text-sm font-medium'>コメント数：
+                      <% if board.board_comment %>
+                        <%= board.board_comment.count %>
+                      <% else %>
+                        0
+                      <% end %>
+                    </p>
+                  </div>
+                  <div class='flex h-full col-start-3 col-span-1 pt-1'>
+                    <% if board.tags.present? %>
+                      <span class='flex flex-wrap mt-1'>
+                        <% board.tags.each do |tag| %>
+                          <%= link_to tag, posts_path(tag_name: tag.name), class:'bg-green-100 text-green-800 text-xs font-semibold px-1 py-0.5 mb-0.5 mr-1 rounded dark:bg-green-200 dark:text-green-900 hover:bg-green-300 no-tap-highlighting' %>
+                        <% end %>
+                      </span>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </section>
+    <%= link_to '掲示板をもっと見る', boards_path, class: 'justify-self-center font-medium text-sm bg-white border shadow-md rounded-full focus:outline-none focus:ring-0 w-48 px-5 py-2.5 text-center my-6' %>
+  </div>
 </div>

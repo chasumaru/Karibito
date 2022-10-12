@@ -1,8 +1,8 @@
-<%= turbo_stream.append "board_comments" do %>
-  <%= render partial: "board_comment_block", locals: {comment: @board_comment} %>
+<%= turbo_stream.append 'board_comments' do %>
+  <%= render partial: 'board_comment_block', locals: {comment: @board_comment} %>
 <% end %>
-<%= turbo_stream.replace "new_board_comment" do %>
-  <%= render partial: "new_board_comment" %>
+<%= turbo_stream.replace 'new_board_comment' do %>
+  <%= render partial: 'new_board_comment' %>
 <% end %>
-<%= turbo_stream.update "no_board_comments" , "" %>
+<%= turbo_stream.update 'no_board_comments' , '' %>
 <%= turbo_stream_flash %>

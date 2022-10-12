@@ -4,14 +4,14 @@ class LikesController < ApplicationController
 
   def create
     @like = current_user.likes.create(post_id: params[:post_id])
-    @liked_users = @post.liked_users
+    @liked_users = @post.liked_users.includes(:likes)
     @post.create_notification_by(current_user)
   end
 
   def destroy
     @like = Like.find_by(post_id: params[:post_id], user_id: current_user.id)
     @like.destroy
-    @liked_users = @post.liked_users
+    @liked_users = @post.liked_users.includes(:likes)
   end
   
   private
@@ -21,9 +21,5 @@ class LikesController < ApplicationController
 
     def set_post
       @post = Post.find(params[:post_id])
-    end
-    
-    def set_liked_users
-      @liked_users = @post.liked_users
     end
 end

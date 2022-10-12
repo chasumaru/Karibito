@@ -1,6 +1,5 @@
 class User < ApplicationRecord
 
-
   # Valdation
   validates :name, presence: true, length: { maximum: 30 }
   validates :profile, length: { maximum: 200 }
@@ -29,11 +28,11 @@ class User < ApplicationRecord
   has_many :liked_posts, through: :likes, source: :post
   has_one_attached :avatar
   has_one_attached :background
-  has_many :active_relationships, class_name:  "Relationship",
-                                  foreign_key: "follower_id",
+  has_many :active_relationships, class_name:  'Relationship',
+                                  foreign_key: 'follower_id',
                                   dependent:   :destroy
-  has_many :passive_relationships, class_name:  "Relationship",
-                                  foreign_key: "followed_id",
+  has_many :passive_relationships, class_name:  'Relationship',
+                                  foreign_key: 'followed_id',
                                   dependent:   :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
@@ -60,13 +59,12 @@ class User < ApplicationRecord
     active_relationships.find_by(followed_id: other_user.id).destroy
   end
 
-
   def following?(other_user)
     following.include?(other_user)
   end
 
   def create_notification_follow!(current_user)
-    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
+    temp = Notification.where(['visitor_id = ? and visited_id = ? and action = ? ',current_user.id, id, 'follow'])
     if temp.blank?
       notification = current_user.active_notifications.new(
         visited_id: id,
@@ -76,35 +74,45 @@ class User < ApplicationRecord
     end
   end
 
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name   # Userモデルにnameカラムがあるとする
-      user.image = auth.info.image # Userモデルにimageカラムがあるとする
-      # Deviseのconfirmableを使い、かつプロバイダがメールのバリデーションを行っている場合は、
-      # 以下の行のコメントを解除して確認メールをスキップする
-      # user.skip_confirmation!
-    end
-  end
+  # def self.from_omniauth(auth)
+  #   find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
+  #     user.provider = auth.provider
+  #     user.uid = auth.uid
+  #     user.name = auth.info.name
+  #   end
+  # end
   
-  def self.find_or_create_for_oauth(auth)
-    find_or_create_by!(email: auth.info.email) do |user|
-      user.provider = auth.provider,
-      user.uid = auth.uid,
-      user.name = auth.info.name,
-      user.email = auth.info.email,
-      user.password = Devise.friendly_token[0, 20]
-    end
-  end
-
-  # # 現状、不要
-  # def resized_avatar
-  #   return self.avatar.variant(
-  #     resize_to_fill: [800, 800], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed
+  # def self.new_with_session(params, session)
+  #   if session["devise.user_attributes"]
+  #     new(session["devise.user_attributes"]) do |user|
+  #       user.attributes = params
+  #     end
+  #   else
+  #     super
+  #   end
   # end
 
+  # def self.find_for_oauth(auth)
+  #   user = User.where(uid: auth.uid, provider: auth.provider).first
+
+  #   unless user
+  #     user = User.create(
+  #       uid:      auth.uid,
+  #       provider: auth.provider,
+  #       email:    User.dummy_email(auth),
+  #       password: Devise.friendly_token[0, 20]
+  #     )
+  #   end
+  #   user.skip_confirmation! #仮登録メールを介さずに即時登録
+  #   user
+  # end
+
+
   private
+
+  # def self.dummy_email(auth)
+  #   "#{auth.uid}-#{auth.provider}@example.com"
+  # end
 
   def avatar_not_attached?
    !( self.avatar.attached?)

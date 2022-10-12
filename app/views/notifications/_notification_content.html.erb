@@ -1,19 +1,19 @@
-<section id="notification">
-  <div class="flex justify-end items-center mb-5 mr-3 no-tap-highlighting">
+<section id='notification'>
+  <div class='flex justify-end items-center mb-5 mr-3 no-tap-highlighting'>
     <%= button_to  destroy_all_notifications_path, { method: :delete} do %> 
-      <p class="text-sm bg-red-300 border px-2 py-1 rounded-xl hover:bg-red-500">全て削除</p>
+      <p class='text-sm bg-red-300 border px-2 py-1 rounded-xl hover:bg-red-500'>全て削除</p>
     <% end %>
   </div>
-  <div class="border-t">
+  <div class='border-t'>
     <% notifications.each do |notification| %>
-      <div class="flex items-center relative border-b pt-2 pb-4 px-3 mt-1">
-        <div class="flex justify-start items-cneter">
-          <div class="no-tap-highlighting mr-2">
+      <div class='flex items-center relative border-b pt-2 pb-4 px-3 mt-1'>
+        <div class='flex justify-start items-cneter'>
+          <div class='no-tap-highlighting mr-2'>
             <%= notification_avatar_link(notification) %>
           </div>
         </div>
         <%= notification_form(notification) %>
-        <p class="absolute right-1 bottom-1 w-20 text-xs text-slate-400"><%= how_long_ago(notification) %></p>
+        <p class='absolute right-1 bottom-1 w-20 text-xs text-slate-400'><%= how_long_ago(notification) %></p>
       </div>
     <% end %>
   </div>

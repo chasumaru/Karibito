@@ -1,26 +1,27 @@
 class Post < ApplicationRecord
   belongs_to :user
-  has_many_attached :images
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
   has_many :notifications, dependent: :destroy
+  has_many_attached :images
   acts_as_taggable
-  
+
   validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: 50 }
   validates :content, length: { maximum: 300 }
+  validates :tag_list, length: { maximum: 40 }
   validate :image_size, :image_count
   
   def thumbnail
-    return self.images.first.variant(resize_to_fill: [1200, 900], sampling_factor: "4:2:0", strip: true, interlace: "JPEG", colorspace: "sRGB", quality: 85).processed
+    return self.images.first.variant(resize_to_fill: [1200, 900], sampling_factor: '4:2:0', strip: true, interlace: 'JPEG', colorspace: 'sRGB', quality: 85).processed
   end
 
   def create_notification_by(current_user)
     notification = current_user.active_notifications.new(
       post_id: id,
       visited_id: user_id,
-      action: "like"
+      action: 'like'
     )
     notification.save if notification.valid?
   end
@@ -36,7 +37,7 @@ class Post < ApplicationRecord
   end
 
   def save_notification_comment!(current_user, comment_id, visited_id)
-      # コメントは複数回することが考えられるため、１つの投稿に複数回通知する
+      # １つの投稿に複数回通知する
       notification = current_user.active_notifications.new(
         post_id: id,
         comment_id: comment_id,

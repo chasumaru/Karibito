@@ -1,100 +1,102 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
-<nav class="w-full max-w-screen-lg fixed z-50 top-0 bg-white border-b-2">
-  <div class="px-2 sm:px-6 lg:px-8">
-    <div class="relative flex items-center justify-between h-14">
-      <div class="absolute inset-y-0 flex items-center lg:hidden">
+<nav class='w-full max-w-screen-lg fixed z-50 top-0 bg-white border-b-2'>
+  <div class='px-2 sm:px-6 lg:px-8'>
+    <div class='relative flex items-center justify-between h-14'>
+      <div class='absolute inset-y-0 flex items-center lg:hidden'>
         <!-- Mobile menu button-->
-        <div data-sidebar-target="hamburger" data-action="click->sidebar#toggle click@window->sidebar#close">
-            <nav class="hamburger fixed z-50 no-tap-highlighting mt-1">
-                <span data-sidebar-target="line1" class="inner_line top-0"></span>
-                <span data-sidebar-target="line2"  class="inner_line top-2.5"></span>
-                <span data-sidebar-target="line3"  class="inner_line bottom-0"></span>
+        <div data-sidebar-target='hamburger' data-action='click->sidebar#toggle'>
+            <nav class='hamburger fixed z-50 no-tap-highlighting mt-1'>
+                <span data-sidebar-target='line1' class='inner_line top-0'></span>
+                <span data-sidebar-target='line2'  class='inner_line top-2.5'></span>
+                <span data-sidebar-target='line3'  class='inner_line bottom-0'></span>
             </nav>
         </div>
       </div>
-      <div class="relative flex-1 flex items-center sm:items-stretch sm:justify-start">
-        <div class="flex-shrink-0 flex items-center -mb-1">
-          <%= link_to "Karibito", root_path, class:"text-xl md:text-2xl block absolute items-center left-14 md:left-16 font-semibold no-tap-highlighting" %>
-          <%= link_to image_tag('Karibito_logo.png', class:'w-10 md:w-12 no-tap-highlighting'), root_path %>
+      <div class='relative flex-1 flex items-center sm:items-stretch sm:justify-start'>
+        <div class='flex-shrink-0 flex items-center -mb-1'>
+          <%= link_to 'Karibito', root_path, class:'text-xl md:text-2xl block absolute items-center left-14 md:left-16 font-semibold no-tap-highlighting' %>
+          <%= link_to image_tag('Karibito_logo.png', class:'w-10 md:w-12 no-tap-highlighting'), root_path, id:'Logo' %>
         </div>
-        <div class="w-full hidden lg:block">
-          <div class="flex w-full flax-auto justify-center items-center space-x-3 py-2 ml-24">
-            <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black">
+        <div class='w-full hidden lg:block'>
+          <div class='flex w-full flax-auto justify-center items-center space-x-3 py-2 ml-24'>
+            <div class='px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black'>
               <%= button_to 'サービス概要', about_path, method: :get %> 
             </div>
-            <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black">
+            <div class='px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black'>
               <%= button_to 'ヘルプ', faq_path, method: :get %> 
             </div>
-            <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black">
-              <%= button_to 'お問い合せ', "https://forms.gle/Z8WNE7HpJw3NnH8F6", method: :get %> 
+            <div class='px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black'>
+              <%= button_to 'お問い合わせ', 'https://forms.gle/Z8WNE7HpJw3NnH8F6', method: :get %> 
             </div>
             <% if user_signed_in? %>
-              <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-pink-100 hover:text-black">
-                <%= button_to "ログアウト", destroy_user_session_path, { method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } } %> 
+              <div class='px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-pink-100 hover:text-black' id='nav_logout'>
+                <%= button_to 'ログアウト', destroy_user_session_path, { method: :delete, form: { data: { turbo_confirm: 'ログアウトしますか？' } } } %> 
               </div>
             <% else %> 
-              <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black">
+              <div class='px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black'>
                 <%= button_to '会員登録', new_user_registration_path, method: :get %> 
               </div>
-              <div class="px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black">
+              <div class='px-3 py-2 rounded-md text-sm font-medium no-tap-highlighting hover:bg-emerald-100 hover:text-black'>
                 <%= button_to 'ログイン', new_user_session_path, method: :get %> 
               </div>
             <% end %>
           </div>
         </div>
         <div class='flex w-full lg:w-32 h-10 justify-end items-end py-0.5 mr-16 mt-2 lg:mr-0'>
-          <%= button_to posts_path, method: :get, class: "inline-flex rounded-full p-2 mr-4 lg:mr-3 hover:bg-gray-100 no-tap-highlighting" do %>
-            <img src="https://img.icons8.com/ios/100/000000/edit-chat-history.png" class='w-6 h-6' />
+          <%= button_to posts_path, method: :get, class: 'inline-flex rounded-full p-2 mr-4 lg:mr-3 hover:bg-gray-100 no-tap-highlighting' do %>
+            <span class='sr-only'>posts_index</span>
+            <img src='https://img.icons8.com/ios/100/000000/edit-chat-history.png' class='w-6 h-6' />
           <% end %>
-          <%= button_to boards_path, method: :get, class: "inline-flex rounded-full p-2 hover:bg-gray-100 no-tap-highlighting" do %>
-            <img src="https://img.icons8.com/ios-filled/50/000000/noticeboard.png" class='w-6 h-6' />
+          <%= button_to boards_path, method: :get, class: 'inline-flex rounded-full p-2 hover:bg-gray-100 no-tap-highlighting' do %>
+            <span class='sr-only'>boards_index</span>
+            <img src='https://img.icons8.com/ios-filled/50/000000/noticeboard.png' class='w-6 h-6' />
           <% end %>
         </div>
       </div>
 
-      <div class="user-info hidden lg:block">
-        <div class="absolute inset-y-0 right-0 flex items-center pr-2 mt-1 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+      <div class='user-info hidden lg:block'>
+        <div class='absolute inset-y-0 right-0 flex items-center pr-2 mt-1 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
           <% if signed_in? %>
             <% if unchecked_notifications.any? %>
-              <%= button_to notifications_path, method: :get, class: "bg-white p-1 rounded-full text-gray-400 hover:text-black hover:bg-gray-100 relative no-tap-highlighting" do %>
-                <span class="sr-only">View notifications</span>
-                <span class="absolute bg-red-600 p-0.5 rounded-full top-1.5 right-1.5"></span>
-                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+              <%= button_to notifications_path, method: :get, class: 'bg-white p-1 rounded-full text-gray-400 hover:text-black hover:bg-gray-100 relative no-tap-highlighting' do %>
+                <span class='sr-only'>View notifications</span>
+                <span class='absolute bg-red-600 p-0.5 rounded-full top-1.5 right-1.5'></span>
+                <svg class='h-6 w-6' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' aria-hidden='true'>
+                  <path stroke-linecap='round' stroke-linejoin='round' d='M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9'/>
                 </svg>
               <% end %>
             <% else %>
-              <%= button_to notifications_path, method: :get, class: "bg-white p-1 rounded-full text-gray-400 hover:text-black hover:bg-gray-100 no-tap-highlighting" do %>
-                <span class="sr-only">View notifications</span>
-                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+              <%= button_to notifications_path, method: :get, class: 'bg-white p-1 rounded-full text-gray-400 hover:text-black hover:bg-gray-100 no-tap-highlighting' do %>
+                <span class='sr-only'>View notifications</span>
+                <svg class='h-6 w-6' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' aria-hidden='true'>
+                  <path stroke-linecap='round' stroke-linejoin='round' d='M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9' />
                 </svg>
               <% end %>
             <% end %>
           <% end %>
 
           <!-- Profile dropdown -->
-          <div data-controller="dropdown" class="ml-3 mr-10 lg:mr-0 mt-1 relative">
-            <div data-action="click->dropdown#toggle click@window->dropdown#hide" role="button" data-dropdown-target="button" tabindex="0" class="inline-block select-none">
-              <span class="appearance-none flex items-center text-gray-700">
-                <span class="sr-only">Open user menu</span>
+          <div data-controller='dropdown' class='ml-3 mr-10 lg:mr-0 mt-1 relative'>
+            <div data-action='click->dropdown#toggle click@window->dropdown#hide' role='button' data-dropdown-target='button' tabindex='0' class='inline-block select-none'>
+              <span class='appearance-none flex items-center text-gray-700'>
+                <span class='sr-only'>Open user menu</span>
                   <% if signed_in? && current_user.avatar.attached? %>
-                    <%= image_tag current_user.avatar, class: "w-10 h-10 rounded-full border-2 border-emerald-500" %>
+                    <%= image_tag current_user.avatar, class: 'w-10 h-10 rounded-full border-2 border-emerald-500' %>
                   <% else %>
-                    <%= image_tag "no_avatar.png", class: "w-10 h-10 rounded-full border-2 border-yellow-300" %>
+                    <%= image_tag 'no_avatar.png', class: 'w-10 h-10 rounded-full border-2 border-yellow-300' %>
                   <% end %>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="h-4 w-4"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+                  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' class='h-4 w-4'><path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z'></path></svg>
                 </span>
               </span>
             </div>
-            <div data-dropdown-target="menu" class="absolute right-0 mt-2 hidden">
-              <div class="bg-white shadow rounded border overflow-hidden">
+            <div data-dropdown-target='menu' class='absolute right-0 mt-2 hidden'>
+              <div class='bg-white shadow rounded border overflow-hidden'>
                 <% if user_signed_in? %>
-                  <%= link_to 'マイページ', profile_path(current_user), data: {action: "click->dropdown#toggle"}, class: 'no-underline block pl-6 py-2 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
-                  <%= link_to 'ユーザー編集', edit_user_registration_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block pl-6 py-2 pr-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
+                  <%= link_to 'マイページ', profile_path(current_user), data: {action: 'click->dropdown#toggle'}, class: 'no-underline block pl-6 py-2 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap', id: 'nav_mypage' %>
+                  <%= link_to 'ユーザー編集', edit_user_registration_path, data: {action: 'click->dropdown#toggle'}, class: 'no-underline block pl-6 py-2 pr-3 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap', id: 'nav_edit_profile' %>
                 <% else %>
-                  <%= link_to '会員登録', new_user_registration_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-6 py-2 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
-                  <%= link_to 'ログイン', new_user_session_path, data: {action: "click->dropdown#toggle"}, class: 'no-underline block px-6 py-2 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap' %>
+                  <%= link_to '会員登録', new_user_registration_path, data: {action: 'click->dropdown#toggle'}, class: 'no-underline block px-6 py-2 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap', id: 'nav_signup' %>
+                  <%= link_to 'ログイン', new_user_session_path, data: {action: 'click->dropdown#toggle'}, class: 'no-underline block px-6 py-2 text-gray-900 bg-white hover:bg-gray-300 whitespace-nowrap', id: 'nav_login' %>
                 <% end %>
               </div>
             </div>

@@ -5,31 +5,31 @@
   <% i = "#{@user.name}さんのページ" %>
 <% end %>
 <% provide(:title, "#{i}") %>
-<div class="bg-white">
+<div class='bg-white animate-fade-in'>
   <section>
-    <div class="profile__icon -mt-1">
+    <div class='-mt-1'>
       <%if @user.background.attached? %>
         <% if @user == current_user %>
-          <%= image_tag(current_user.background, class: "w-full h-64 md:h-96 object-cover") %>
+          <%= image_tag(current_user.background, class: 'w-full h-64 sm:h-96 md:h-120 lg:h-160 object-cover') %>
         <% else %>
-          <%= image_tag(@user.background, class: "w-full h-64 md:h-96 object-cover") %>
+          <%= image_tag(@user.background, class: 'w-full h-64 sm:h-96 md:h-120 lg:h-160 object-cover') %>
         <% end %>
       <% else %>
-        <%= image_tag'800x600_dummy.jpg', alt: "ダミー画像", class: "w-full h-64 md:h-96 object-cover" %>
+        <%= image_tag'800x600_dummy.jpg', alt: 'ダミー画像', class: 'w-full h-64 md:h-120 lg:h-160 object-cover' %>
       <% end %>
-      <div class="flex w-full flex-col justify-center items-center">
-        <span class ="relative -mt-10 md:-mt-16">
+      <div class='flex w-full flex-col justify-center items-center'>
+        <span class ='relative -mt-10 md:-mt-16'>
           <%if @user.avatar.attached? %>
             <% if @user == current_user %>
-              <%= image_tag(current_user.avatar, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-emerald-500 bg-white") %>
+              <%= image_tag(current_user.avatar, class: 'w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-emerald-500 bg-white') %>
             <% else %>
-              <%= image_tag(@user.avatar, class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-indigo-500 bg-white") %>
+              <%= image_tag(@user.avatar, class: 'w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-indigo-500 bg-white') %>
             <% end %>
           <% else %>
-            <%= image_tag "no_avatar.png", class: "w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-yellow-300 bg-white" %>
+            <%= image_tag 'no_avatar.png', class: 'w-20 h-20 md:w-32 md:h-32 rounded-full border-2 border-yellow-300 bg-white' %>
           <% end %>
         </span>
-        <p class="my-2 font-semibold"><%= @user.name %></p>
+        <p class='my-2 font-semibold'><%= @user.name %></p>
       </div>
       <span class='flex flex-wrap justify-center'>
         <% if @positions.present? %>
@@ -39,83 +39,82 @@
         <% end %>
       </span>
     </div>
-    <div class="profile__details">
-      <div data-controller="tabs" class="grid mx-3 md:mx-12 mb-4">
-        <div class="mx-4">
-          <div class="border-y leading-loose tracking-wide font-light text-sm pb-6 ml-2 my-2">
+    <div class='profile__details'>
+      <div data-controller='tabs' class='grid mx-3 md:mx-12 mb-4'>
+        <div class='mx-4'>
+          <div class='border-y leading-loose tracking-wide font-light text-sm pb-6 ml-2 my-2'>
             <% if @user.profile.present? %>
-                <p class="whitespace-pre-wrap my-2"><%= @user.profile %></p>
+                <p class='whitespace-pre-wrap my-2'><%= @user.profile %></p>
               <% else %>
-                <p class="whitespace-pre-wrap my-2">プロフィールが未入力です。</p>
+                <p class='whitespace-pre-wrap my-2'>プロフィールが未入力です。</p>
             <% end %>
           </div>
         </div>
-        <div class="grid grid-cols-12 py-2 mb-1 mr-12">
-          <div class="grid col-start-2 col-span-2 justify-items-center py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md" data-tabs-target="tab" data-action="click->tabs#change">
-            <p class="text-xs font-black mb-2">日記</p>
-            <p class="text-md font-black underline underline-offset-4"><%= @user.posts.count %></p>
+        <div class='grid grid-cols-12 py-2 mb-1 mr-12'>
+          <div class='grid col-start-2 col-span-2 justify-items-center py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md' data-tabs-target='tab' data-action='click->tabs#change'>
+            <p class='text-xs font-black mb-2'>日記</p>
+            <p class='text-md font-black underline underline-offset-4'><%= @user.posts.count %></p>
           </div>
-          <div class="grid col-start-5 col-span-2 justify-items-center py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md" data-tabs-target="tab" data-action="click->tabs#change">
-            <p class="text-xs font-black mb-2">掲示板</p>
+          <div class='grid col-start-5 col-span-2 justify-items-center py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md' data-tabs-target='tab' data-action='click->tabs#change'>
+            <p class='text-xs font-black mb-2'>掲示板</p>
             <% if @real_boards %>
-              <p class="text-md font-black underline underline-offset-4"><%= @real_boards.count %></p>
+              <p class='text-md font-black underline underline-offset-4'><%= @real_boards.count %></p>
             <% else %>
-              <p class="text-md font-black underline underline-offset-4">0</p>
+              <p class='text-md font-black underline underline-offset-4'>0</p>
             <% end %>
           </div>
-          <%= link_to following_path(@user), class: "grid col-start-8 col-span-2 justify-items-center no-tap-highlighting py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md" do %>
-            <p class="text-xs font-black mb-2">フォロー</p>
-            <p class="text-md font-black underline underline-offset-4"><%= @user.following.count %></p>
+          <%= link_to following_path(@user), class: 'grid col-start-8 col-span-2 justify-items-center no-tap-highlighting py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md' do %>
+            <p class='text-xs font-black mb-2'>フォロー</p>
+            <p class='text-md font-black underline underline-offset-4'><%= @user.following.count %></p>
           <% end %>
-          <%= link_to followers_path(@user), class: "grid col-start-11 col-span-2 justify-items-center no-tap-highlighting py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md" do %>
-            <p class="text-xs font-black mb-2">フォロワー</p>
-            <%= render partial: "relationships/followers_count", locals: {followers: @followers} %>
+          <%= link_to followers_path(@user), class: 'grid col-start-11 col-span-2 justify-items-center no-tap-highlighting py-1 border border-lime-300 hover:bg-lime-500 w-16 md:w-20 rounded-md' do %>
+            <p class='text-xs font-black mb-2'>フォロワー</p>
+            <%= render partial: 'relationships/followers_count', locals: {followers: @followers} %>
           <% end %>
         </div>
-        <div class="grid justify-center">
-          <div class="my-6">
+        <div class='grid justify-center'>
+          <div class='my-6'>
             <% if current_user != @user %>
-              <%= render partial: "relationships/follow_button", locals: {user: @user} %>
+              <%= render partial: 'relationships/follow_button', locals: {user: @user} %>
             <% end %>
           </div>
         </div>
-        <div data-tabs-target="panel" class="hidden">
+        <div data-tabs-target='panel' class='hidden'>
           <% if @posts.present? %>
-            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-3 mx-8">
+            <div class='grid sm:grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-3 mx-8'>
               <% (@posts).each do |post| %>
-                <%= render partial: "post", locals: { post: post} %> 
+                <%= render partial: 'shared/post', locals: {post: post} %>
               <% end %>
             </div>
-            <div class="flex justify-center mt-10 mb-6">
+            <div class='flex justify-center mt-10 mb-6'>
               <%= pagy_nav(@pagy_post).html_safe %>
             </div>
           <% else %>
-            <div class="flex w-full flex-col justify-center items-center mb-48">
-              <span class ="relative">
-                <div class="h-36 w-36 bg-white rounded-full -ml-1.5 "></div>
+            <div class='flex w-full flex-col justify-center items-center mb-48'>
+              <span class ='relative'>
+                <div class='h-36 w-36 bg-white rounded-full -ml-1.5 '></div>
                 <%= image_tag 'ojigi_animal_usagi.png', class:' absolute top-6 left-4 z-10 w-24 h-28 p-4' %>
               </span>
-              <p class="font-medium py-2">まだ日記がありません。</p>
+              <p class='font-medium py-2'>まだ日記がありません。</p>
             </div>
           <% end %>
         </div>
-        <div data-tabs-target="panel" class="hidden">
+        <div data-tabs-target='panel' class='hidden'>
           <% if @real_boards.present? %>
-            <div class="grid grid-cols-1 gap-x-2 gap-y-3 mx-8">
+            <div class='grid grid-cols-1 gap-x-2 gap-y-3 mx-8'>
               <% (@real_boards).each do |board| %>
-                <%= render partial: "board", locals: { board: board} %> 
+                <% unless board.anonymous_flag? %>
+                  <%= render partial: 'shared/board', locals: {board: board} %>
+                <% end %>
               <% end %>
             </div>
-            <%# <div class="flex justify-center mt-10 mb-6">
-              <%= pagy_nav(@pagy_board).html_safe %>
-            <%# </div> %>
           <% else %>
-            <div class="flex w-full flex-col justify-center items-center mb-48">
-              <span class ="relative">
-                <div class="h-36 w-36 bg-white rounded-full -ml-1.5 "></div>
+            <div class='flex w-full flex-col justify-center items-center mb-48'>
+              <span class ='relative'>
+                <div class='h-36 w-36 bg-white rounded-full -ml-1.5 '></div>
                 <%= image_tag 'ojigi_animal_kuma.png', class:' absolute top-6 left-4 z-10 w-24 h-28 p-4' %>
               </span>
-              <p class="font-medium py-2">まだ日記がありません。</p>
+              <p class='font-medium py-2'>まだ日記がありません。</p>
             </div>
           <% end %>
         </div>

@@ -53,10 +53,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_170949) do
   create_table "boards", charset: "utf8mb3", force: :cascade do |t|
     t.string "title"
     t.text "description"
+    t.boolean "danger_flag", default: false, null: false
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "anonymous_flag", default: false, null: false
+    t.index ["danger_flag"], name: "index_boards_on_danger_flag"
     t.index ["user_id"], name: "index_boards_on_user_id"
   end
 
@@ -74,7 +76,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_170949) do
   create_table "likes", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "post_id", null: false
     t.bigint "user_id", null: false
-    t.integer "board_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_likes_on_post_id"
@@ -99,10 +100,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_170949) do
   create_table "posts", charset: "utf8mb3", force: :cascade do |t|
     t.string "title"
     t.text "content"
+    t.boolean "danger_flag", default: false, null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["content"], name: "index_posts_on_content", length: 255
+    t.index ["danger_flag"], name: "index_posts_on_danger_flag"
     t.index ["title"], name: "index_posts_on_title"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
@@ -170,8 +173,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_170949) do
     t.datetime "locked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "provider"
-    t.string "uid"
     t.boolean "admin", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

@@ -1,5 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Like, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:like) { build(:like) }
+  subject(:like) { create(:like) }
+
+  describe 'バリデーション' do
+    it { should be_valid }
+  end
+
+
+  describe "アソシエーションテスト" do
+    it { should belong_to(:user) }
+    it { should belong_to(:post) }
+  end
 end

@@ -38,7 +38,7 @@ class Users::AccountsController < ApplicationController
   end
 
   def positions
-    @positions = User.tag_counts_on(:positions).order("name")
+    @positions = User.tag_counts_on(:positions).order('name')
   end
 end
 

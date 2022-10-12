@@ -31,22 +31,20 @@ Rails.application.routes.draw do
       password: 'secret', confirmation: 'verification',
       registration: 'register', edit: 'edit/profile',
     }
-    
-    scope module: :users do
-      get '/:id/profile', to: 'accounts#show', as: 'profile'
-      get '/users', to: 'accounts#index', as: 'users'
-      get '/users/status', to: 'accounts#positions', as: 'positions'
-      get '/:id/unsubscribe', to: 'accounts#unsubscribe', as: 'unsubscribe'
-      get '/:id/following', to: 'accounts#following', as: 'following'
-      get '/:id/followers', to: 'accounts#followers', as: 'followers'
-    end
-    
-    scope controller: 'static_pages' do
-      get '/about', action: 'about', as: 'about'
-      get '/privacy', action: 'privacy', as: 'privacy'
-      get '/faq', action: 'faq', as: 'faq'
-      get '/term', action: 'term', as: 'term'
-    end
 
-    get '*path', controller: 'application', action: 'render_404'
+  scope module: :users do
+    get '/:id/profile', to: 'accounts#show', as: 'profile'
+    get '/users', to: 'accounts#index', as: 'users'
+    get '/users/positions', to: 'accounts#positions', as: 'positions'
+    get '/:id/unsubscribe', to: 'accounts#unsubscribe', as: 'unsubscribe'
+    get '/:id/following', to: 'accounts#following', as: 'following'
+    get '/:id/followers', to: 'accounts#followers', as: 'followers'
+  end
+  
+  scope controller: 'static_pages' do
+    get '/about', action: 'about', as: 'about'
+    get '/privacy', action: 'privacy', as: 'privacy'
+    get '/faq', action: 'faq', as: 'faq'
+    get '/term', action: 'term', as: 'term'
+  end
 end

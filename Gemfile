@@ -59,8 +59,10 @@ gem 'devise'
 gem 'devise-i18n'
 
 gem 'omniauth'
+gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
+gem "omniauth-rails_csrf_protection"
 
 gem "acts-as-taggable-on", "~> 9.0"
 
@@ -81,6 +83,8 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'gimei'
+  gem 'capybara'
+  gem 'shoulda-matchers'
 end
 
 group :development do
@@ -95,4 +99,6 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
+
+# admin-railsとの依存関係があり、テスト時はコメントアウトする。
 gem "sassc-rails"

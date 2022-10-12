@@ -1,28 +1,27 @@
-<% provide(:title, "アカウント設定") %>
-
+<% provide(:title, 'アカウント設定') %>
 
 <section>
-  <div class="grid  mx-8 my-12">
+  <div class='grid  mx-8 my-12 animate-fade-in'>
     <h1 class='font-bold text-center mb-4'>アカウント設定</h2>
-    <div class="border border-gray-500 border-opacity-60 rounded-sm overflow-hidden no-tap-highlighting pt-2 pb-4 my-4">
+    <div class='border border-gray-500 border-opacity-60 rounded-sm overflow-hidden no-tap-highlighting pt-2 pb-4 my-4'>
       <div class='grid justify-center'>
         <%= button_to new_user_password_path(current_user), { method: :get } do %>
-          <span class="overflow-hidden h-10 w-36 text-base font-semibold text-gray-900 relative inline-flex  justify-center items-center border border-gray-500 px-1 py-3 my-6 bg-gray-100 hover:bg-gray-200 hover:border-2 hover:border-gray-600 rounded-md">
-            <span class="font-semibold">パスワード変更</span>
+          <span class='overflow-hidden h-10 w-36 text-base font-semibold text-gray-900 relative inline-flex  justify-center items-center border border-gray-500 px-1 py-3 my-6 bg-gray-100 hover:bg-gray-200 hover:border-2 hover:border-gray-600 rounded-md'>
+            <span class='font-semibold'>パスワード変更</span>
           </span>
         <% end %>
-        <%= button_to user_registration_path, { method: :delete, form: { data: { turbo_confirm: "本当に退会しますか？" } } } do %>
-          <span class="overflow-hidden h-10 w-28 text-base font-semibold text-gray-900 relative inline-flex justify-center items-center border border-gray-500 px-1 py-3 mb-3 ml-1 bg-gray-100 hover:bg-gray-200 hover:border-2 hover:border-black rounded-md">
-            <span class="font-semibold">退会する</span>
-            <img src="https://img.icons8.com/windows/64/000000/exit.png" class='h-6 w-6'/>
+        <%= button_to user_registration_path, { method: :delete, form: { data: { turbo_confirm: '本当に退会しますか？' } } } do %>
+          <span class='overflow-hidden h-10 w-28 text-base font-semibold text-gray-900 relative inline-flex justify-center items-center border border-gray-500 px-1 py-3 mb-3 ml-1 bg-gray-100 hover:bg-gray-200 hover:border-2 hover:border-black rounded-md'>
+            <span class='font-semibold'>退会する</span>
+            <img src='https://img.icons8.com/windows/64/000000/exit.png' class='h-6 w-6'/>
           </span>
         <% end %>
       </div>
       <p class='flex justify-center py-2 mx-8'>※退会された場合、再度ご利用いただくには、新規登録のお手続きが必要となります。</p>
       <div class='flex justify-center'>
-        <%= link_to :back, class: "inline-flex items-center h-6 w-14 px-1 py-3 my-3 rounded-lg dark:text-white dark:bg-gray-600 border dark:hover:text-gray-900 focus:outline-none no-tap-highlighting" do %>
-          <p class="text-xs font-semibold">戻る</p>
-          <%= image_tag("Uターン矢印 1.png", class: "w-4 h-4 ml-0.5 -mt-0.5") %>
+        <%= link_to :back, class: 'inline-flex items-center h-6 w-14 px-1 py-3 my-3 rounded-lg dark:text-white dark:bg-gray-600 border dark:hover:text-gray-900 focus:outline-none no-tap-highlighting' do %>
+          <p class='text-xs font-semibold'>戻る</p>
+          <%= image_tag('Uターン矢印 1.png', class: 'w-4 h-4 ml-0.5 -mt-0.5') %>
         <% end %>
       </div>
     </div>

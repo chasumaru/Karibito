@@ -33,10 +33,7 @@ module.exports = {
         }
       }),
       colors: {
-        'base-white': '#f9fafb',
-        'base-gray' : '#f4f4f5',
-        // 緑を調製する
-        'base-brown' : '#ecd94b',
+        'shadow-gray': 'rgba(3,3,3,.7)'
       },
       spacing: {
         '3.75':'0.9375rem' ,
@@ -46,6 +43,7 @@ module.exports = {
         '7': '1.75rem',
         '9': '2.25rem',
         '9.5': '2.375rem',
+        '13': '3.25rem',
         '15': '3.75rem',
         '18': '4.5rem',
         '22': '5.5rem',
@@ -54,6 +52,7 @@ module.exports = {
         '48': '12rem',
         '88': '22rem',
         '108': '27rem',
+        '120': '30rem',
         '160': '40rem',
       },
       boxShadow: {
@@ -61,15 +60,14 @@ module.exports = {
       },
       transitionDuration: {
         '600': '600ms',
-      }
-      // backgroundImage: {
-      //   'main-img-1': "url('/images/#.jpg')",
-      //   'main-img-2': "url('/images/main_background_2.jpg')",
-      // },
+      },
+      backgroundImage: {
+        'spiner-1': "url('/images/Spinner-1s-128px.gif')",
+        'spiner-2': "url('/images/Spinner-1s-580px.gif')",
+      }, 
       // spacing: {
       //   'sidebar': '500px'
       // },
-      
     },
   },
   plugins: [
