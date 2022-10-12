@@ -18,12 +18,12 @@
             <% if board.danger_flag? %>
               <%= image_tag board.illustration, class: 'w-full object-center', data: {action: 'click->picture-cover#dangerToggle'} %>
               <span data-picture-cover-target='dangerCase' data-action='click->picture-cover#dangerToggle'>
-                <div class='flex justify-center items-center w-full h-full picture-cover hover:text-white duration-100'></div>
+                <div class='w-full h-full picture-cover hover:text-white duration-100'></div>
               </span>
             <% else %>
               <%= image_tag board.illustration, class: 'w-full object-center', data: {action: 'click->picture-cover#normalToggle'} %>
               <span data-picture-cover-target='normalCase' data-action='click->picture-cover#normalToggle'>
-                <div class='flex justify-center items-center w-full h-full picture-cover hover:text-white duration-100'></div>
+                <div class='w-full h-full picture-cover hover:text-white duration-100'></div>
               </span>
             <% end %>
           <% else %>
