@@ -45,10 +45,8 @@ Rails.application.configure do
     :port => 587,
 
     # 本番環境にデプロイ前に隠す
-    # user_name: Rails.application.credentials.gmail[:user_name],
-    # password: Rails.application.credentials.gmail[:password],
-    :user_name => 'yumami345@gmail.com',
-    :password => 'kstzsgskrqyxlhau',
+    user_name: Rails.application.credentials.gmail[:user_name],
+    password: Rails.application.credentials.gmail[:password],
     :authentication => :plain,
     :enable_starttls_auto => true
   }
