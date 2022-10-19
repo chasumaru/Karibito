@@ -51,7 +51,7 @@
 <section>
   <%= turbo_frame_tag 'posts-list', loading: :lazy, target: '_top' do %>
     <% if @posts.present? %>
-      <div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-3 mx-8 mt-8'>
+      <div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-3 mx-8 mt-8 animate-fade-in'>
         <% @posts.each do |post| %>
           <%= render partial: 'shared/post', locals: {post: post} %>
         <% end %>
