@@ -2,24 +2,28 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="picture-cover"
 export default class extends Controller {
-  static targets = ["dangerCase", "normalCase" ]
+  static targets = ["dangerClick", "normalClick", "dangerPicture", "normalPicture" ]
 
   // カバーがない(hiddenがある)場合はカバーをかける(hiddenを外す)こと。カバーがある(hiddenがない)場合はカバーを外す(hiddenをつける)こと
   dangerToggle() {
-    if (this.dangerCaseTarget.classList.contains('hidden')){
-      this.dangerCaseTarget.classList.remove('hidden')
+    if (this.dangerClickTarget.classList.contains('hidden')){
+      this.dangerClickTarget.classList.remove('hidden')
+      this.dangerPictureTarget.classList.add('blur-sm')
     }
     else {
-      this.dangerCaseTarget.classList.add('hidden')
+      this.dangerClickTarget.classList.add('hidden')
+      this.dangerPictureTarget.classList.remove('blur-sm')
     }
   }
 
   normalToggle() {
-    if (this.normalCaseTarget.classList.contains('hidden')){
-      this.normalCaseTarget.classList.remove('hidden')
+    if (this.normalClickTarget.classList.contains('hidden')){
+      this.normalClickTarget.classList.remove('hidden')
+      this.normalPictureTarget.classList.add('blur-sm')
     }
     else {
-      this.normalCaseTarget.classList.add('hidden')
+      this.normalClickTarget.classList.add('hidden')
+      this.normalPictureTarget.classList.remove('blur-sm')
     }
   }
 }

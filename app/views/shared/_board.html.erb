@@ -1,14 +1,15 @@
 <div class='flex flex-row border-2 border-gray-200 rounded-lg border-opacity-60 no-tap-highlighting'>
   <div class='relative w-48 h-32 border rounded-l-md' data-controller='picture-cover'>
     <% if board.illustration.attached? %>
-      <%= image_tag board.thumbnail, alt: 'サムネイル画像', class: 'w-full h-full rounded-l-md', data: {action: 'click->picture-cover#dangerToggle'} %>
       <% if board.danger_flag? %>
-        <span data-picture-cover-target='dangerCase' data-action='click->picture-cover#dangerToggle'>
-          <div class='rounded-l-md w-48 h-32 picture-cover hover:text-white duration-100'><p class='flex h-full justify-center items-center text-sm font-medium'>Click</p></div>
+        <%= image_tag board.thumbnail, alt: 'サムネイル画像', class: 'w-full h-full rounded-l-md blur-sm',data: {action: 'click->picture-cover#dangerToggle', picture_cover_target: 'dangerPicture'} %>
+        <span data-picture-cover-target='dangerClick' data-action='click->picture-cover#dangerToggle'>
+          <div class='rounded-l-md w-48 h-32 picture-cover'><p class='flex h-full justify-center items-center text-sm font-medium'>Click</p></div>
         </span>
       <% else %>
-        <span class='hidden' data-picture-cover-target='normalCase' data-action='click->picture-cover#normalToggle'>
-          <div class='rounded-l-md w-48 h-32 picture-cover hover:text-white duration-100'><p class='flex h-full justify-center items-center text-sm font-medium'>Click</p></div>
+        <%= image_tag board.thumbnail, alt: 'サムネイル画像', class: 'w-full h-full rounded-l-md',data: {action: 'click->picture-cover#normalToggle', picture_cover_target: 'normalPicture'} %>
+        <span class='hidden' data-picture-cover-target='normalClick' data-action='click->picture-cover#normalToggle'>
+          <div class='rounded-l-md w-48 h-32 picture-cover'><p class='flex h-full justify-center items-center text-sm font-medium'>Click</p></div>
         </span>
       <% end %>
     <% else %>

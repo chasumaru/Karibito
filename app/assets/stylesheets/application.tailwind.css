@@ -89,7 +89,6 @@ turbo-frame::before {
 	z-index: 10;
 	width: 100%;
   object-position: center;
-  background: rgba(3,3,3,.7);
 }
 
 
