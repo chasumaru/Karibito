@@ -4,12 +4,12 @@
       <% if board.danger_flag? %>
         <%= image_tag board.thumbnail, alt: 'サムネイル画像', class: 'w-full h-full rounded-l-md blur-sm',data: {action: 'click->picture-cover#dangerToggle', picture_cover_target: 'dangerPicture'} %>
         <span data-picture-cover-target='dangerClick' data-action='click->picture-cover#dangerToggle'>
-          <div class='rounded-l-md w-48 h-32 picture-cover'><p class='flex h-full justify-center items-center text-sm font-medium'>Click</p></div>
+          <div class='rounded-l-md w-48 h-32 picture-cover'><p class='flex h-full justify-center items-center text-sm font-medium text-white'>Click</p></div>
         </span>
       <% else %>
         <%= image_tag board.thumbnail, alt: 'サムネイル画像', class: 'w-full h-full rounded-l-md',data: {action: 'click->picture-cover#normalToggle', picture_cover_target: 'normalPicture'} %>
         <span class='hidden' data-picture-cover-target='normalClick' data-action='click->picture-cover#normalToggle'>
-          <div class='rounded-l-md w-48 h-32 picture-cover'><p class='flex h-full justify-center items-center text-sm font-medium'>Click</p></div>
+          <div class='rounded-l-md w-48 h-32 picture-cover'><p class='flex h-full justify-center items-center text-sm font-medium text-white'>Click</p></div>
         </span>
       <% end %>
     <% else %>

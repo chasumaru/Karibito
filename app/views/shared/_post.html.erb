@@ -4,12 +4,12 @@
       <% if post.danger_flag? %>
         <%= image_tag post.thumbnail, alt: 'サムネイル画像', class: 'rounded-t-lg w-full h-full sm:h-60 md:h-48 lg:h-44 blur-sm', data: {action: 'click->picture-cover#dangerToggle', picture_cover_target: 'dangerPicture'} %>
         <span data-picture-cover-target='dangerClick' data-action='click->picture-cover#dangerToggle'>
-          <div class='flex justify-center items-center rounded-t-lg w-full h-full sm:h-60 md:h-48 lg:h-44 picture-cover'><p class='text-sm font-medium'>Click</p></div>
+          <div class='flex justify-center items-center rounded-t-lg w-full h-full sm:h-60 md:h-48 lg:h-44 picture-cover'><p class='text-sm font-medium text-white'>Click</p></div>
         </span>
       <% else %>
         <%= image_tag post.thumbnail, alt: 'サムネイル画像', class: 'rounded-t-lg w-full h-full sm:h-60 md:h-48 lg:h-44',data: {action: 'click->picture-cover#normalToggle', picture_cover_target: 'normalPicture'} %>
         <span class='hidden' data-picture-cover-target='normalClick' data-action='click->picture-cover#normalToggle'>
-          <div class='flex justify-center items-center rounded-t-lg w-full h-full sm:h-60 md:h-48 lg:h-44 picture-cover'><p class='text-sm font-medium'>Click</p></div>
+          <div class='flex justify-center items-center rounded-t-lg w-full h-full sm:h-60 md:h-48 lg:h-44 picture-cover'><p class='text-sm font-medium text-white'>Click</p></div>
         </span>
       <% end %>
     <% else %>

@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :sign_in_required
-  before_action :set_post, only: [:create, :edit, :update]
+  before_action :set_post, only: [:create, :edit, :update, :destroy]
   before_action :set_comment, only: [:edit, :update, :destroy]
   before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
 

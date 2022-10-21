@@ -16,14 +16,14 @@
         <div class='relative h-full' data-controller='picture-cover'>
           <% if board.illustration.attached?  %>
             <% if board.danger_flag? %>
-              <%= image_tag board.illustration, class: 'w-full object-center', data: {action: 'click->picture-cover#dangerToggle'} %>
-              <span data-picture-cover-target='dangerCase' data-action='click->picture-cover#dangerToggle'>
-                <div class='w-full h-full picture-cover hover:text-white duration-100'></div>
+              <%= image_tag board.illustration, class: 'w-full object-center blur-sm', data: {action: 'click->picture-cover#dangerToggle', picture_cover_target: 'dangerPicture'} %>
+              <span data-picture-cover-target='dangerClick' data-action='click->picture-cover#dangerToggle'>
+                <div class='flex justify-center items-center w-full h-full picture-cover'></div>
               </span>
             <% else %>
-              <%= image_tag board.illustration, class: 'w-full object-center', data: {action: 'click->picture-cover#normalToggle'} %>
-              <span data-picture-cover-target='normalCase' data-action='click->picture-cover#normalToggle'>
-                <div class='w-full h-full picture-cover hover:text-white duration-100'></div>
+              <%= image_tag board.illustration, class: 'w-full object-center', data: {action: 'click->picture-cover#normalToggle', picture_cover_target: 'normalPicture'} %>
+              <span class='hidden' data-picture-cover-target='normalClick' data-action='click->picture-cover#normalToggle'>
+                <div class='flex justify-center items-center w-full h-full picture-cover'></div>
               </span>
             <% end %>
           <% else %>
