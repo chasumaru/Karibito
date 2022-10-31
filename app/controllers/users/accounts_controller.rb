@@ -5,10 +5,9 @@ class Users::AccountsController < ApplicationController
   def show
     @user = User.find(params[:id])
     @positions = @user.positions
-    @pagy_post, @posts = pagy(@user.posts, page_param: :page_post, items: 18)
-    @boards = @user.boards
+    @pagy_post, @posts = pagy(@user.posts.includes(:user, :images_attachments), page_param: :page_post, items: 18)
     @followers = @user.followers
-    @real_boards = Board.where(user_id: @user.id, anonymous_flag: false)
+    @real_boards = Board.where(user_id: @user.id, anonymous_flag: false).includes(:user, :illustration_attachment)
 
   end
   
@@ -21,7 +20,7 @@ class Users::AccountsController < ApplicationController
       @search = User.ransack(@q)
     end 
     @search.sorts = 'name' if @search.sorts.empty?
-    @pagy, @users = pagy @search.result
+    @pagy, @users = pagy @search.result.includes(:avatar_attachment)
   end
 
   def unsubscribe; end

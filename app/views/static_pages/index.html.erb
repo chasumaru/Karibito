@@ -10,19 +10,19 @@
                 <div data-controller='picture-cover' class='relative grid h-60 border rounded-t-lg'>
                   <% if post.images.attached? %>
                     <% if post.danger_flag? %>
-                      <%= image_tag post.thumbnail, alt: 'サムネイル画像', class: 'rounded-t-lg w-full h-60',data: {action: 'click->picture-cover#dangerToggle'} %>
-                      <span data-picture-cover-target='dangerCase' data-action='click->picture-cover#dangerToggle'>
-                        <div class='flex justify-center items-center rounded-t-lg w-full h-60 picture-cover hover:text-white duration-100'><p class='text-sm font-medium'>Click</p></div>
+                      <%= image_tag post.thumbnail, alt: 'サムネイル画像', class: 'rounded-t-lg w-full h-60 blur-sm',data: {action: 'click->picture-cover#dangerToggle', picture_cover_target: 'dangerPicture'} %>
+                      <span data-picture-cover-target='dangerClick' data-action='click->picture-cover#dangerToggle'>
+                        <div class='flex justify-center items-center rounded-t-lg w-full h-60 picture-cover'><p class='text-sm font-medium text-white'>Click</p></div>
                       </span>
                     <% else %>
-                      <%= image_tag post.thumbnail, alt: 'サムネイル画像', class: 'rounded-t-lg w-full h-60',data: {action: 'click->picture-cover#normalToggle'} %>
-                      <span class='hidden' data-picture-cover-target='normalCase' data-action='click->picture-cover#normalToggle'>
-                        <div class='flex justify-center items-center rounded-t-lg w-full h-60 picture-cover hover:text-white duration-100'><p class='text-sm font-medium'>Click</p></div>
+                      <%= image_tag post.thumbnail, alt: 'サムネイル画像', class: 'rounded-t-lg w-full h-60',data: {action: 'click->picture-cover#normalToggle', picture_cover_target: 'normalPicture'} %>
+                      <span class='hidden' data-picture-cover-target='normalClick' data-action='click->picture-cover#normalToggle'>
+                        <div class='flex justify-center items-center rounded-t-lg w-full h-60 picture-cover'><p class='text-sm font-medium text-white'>Click</p></div>
                       </span>
                     <% end %>
                   <% else %>
                     <%= link_to  post_path(post) do %>
-                      <%= image_tag '800x600_dummy.jpg', alt: 'サムネイル画像', class: 'rounded-t-xl w-full h-60 object-center' %>
+                      <%= image_tag 'gettyimages-825522644-612x612.jpg', alt: 'サムネイル画像', class: 'rounded-t-xl w-full h-60 object-center' %>
                     <% end %>
                   <% end %>
                 </div>
@@ -81,7 +81,7 @@
                   <% end %>
                 <% else %>
                   <%= link_to  profile_path(user) do %>
-                    <%= image_tag '800x600_dummy.jpg', alt: '背景画像', class: 'w-full h-36 object-center object-cover' %>
+                    <%= image_tag 'gettyimages-825522644-612x612.jpg', alt: '背景画像', class: 'w-full h-36 object-center object-cover' %>
                   <% end %>
                 <% end %>
                 <div class='flex w-full flex-col justify-center items-center'>

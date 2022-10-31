@@ -38,5 +38,4 @@
 # environments
 /environment/*
 .env
-.env
 /config/master.key

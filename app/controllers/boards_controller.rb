@@ -6,14 +6,14 @@ class BoardsController < ApplicationController
 
   def index
     @q = params[:q]
-    @q = @q.to_unsafe_hash.transform_values { |v| v.split(/[ |　]/) } if params[:q]
+    @q = @q.to_unsafe_hash.transform_values { |v| v.split(/[ |　]/) } if @q
     if params[:tag_name]
       @search = Board.tagged_with("#{params[:tag_name]}").ransack(@q)
     else
       @search = Board.ransack(@q)
     end 
     @search.sorts = 'id desc' if @search.sorts.empty?
-    @pagy, @boards = pagy @search.result
+    @pagy, @boards = pagy @search.result.includes([{user: [:avatar_attachment]}], :illustration_attachment).with_attached_illustration
   end
 
   def new

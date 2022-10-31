@@ -1,2 +1,2 @@
 <%= provide("#{@post.title}のいいねユーザー") %>
-<%= render 'shared/users', users: @liked_users %>
+<%= render partial: 'shared/users', locals: {users: @liked_users} %>

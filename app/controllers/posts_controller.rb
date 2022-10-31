@@ -10,14 +10,14 @@ class PostsController < ApplicationController
 
   def index
     @q = params[:q]
-    @q = @q.to_unsafe_hash.transform_values { |v| v.split(/[ |　]/) } if params[:q]
-    if params[:tag_name]
-      @search = Post.tagged_with("#{params[:tag_name]}").ransack(@q)
-    else
-      @search = Post.ransack(@q)
-    end 
+    @q = @q.to_unsafe_hash.transform_values { |v| v.split(/[ |　]/) } if @q
+      if params[:tag_name]
+        @search = Post.tagged_with("#{params[:tag_name]}").ransack(@q)
+      else
+        @search = Post.ransack(@q)
+      end
     @search.sorts = 'id desc' if @search.sorts.empty?
-    @pagy, @posts = pagy @search.result
+    @pagy, @posts = pagy @search.result.includes([{user: [:avatar_attachment]}], :images_attachments).with_attached_images
   end
 
   def new
@@ -73,7 +73,7 @@ class PostsController < ApplicationController
   def liked
     @post = Post.find(params[:id])
     if @post.liked_users.present?
-      @liked_users = @post.liked_users.includes(:likes)
+      @pagy, @liked_users = pagy(@post.liked_users.includes(:likes))
     end
   end
 
