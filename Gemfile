@@ -75,6 +75,7 @@ gem 'ransack'
 gem 'cancancan'
 gem 'rails_admin'
 
+gem 'aws-sdk-s3'
 
 
 group :development, :test do
