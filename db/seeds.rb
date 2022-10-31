@@ -1,13 +1,12 @@
 if Rails.env == "development"
 
   User.create!(
-    name: "chasu",
+    name: "admin",
     email: "admin@example.com",
     password: "password",
     password_confirmation: "password",
     confirmed_at: DateTime.now,
     admin: true)
-
 
   10.times do |s|
       User.create!(
@@ -32,4 +31,11 @@ if Rails.env == "development"
         user_id: "#{t}")
     end
   end 
+  Board.create!(
+    title: "掲示板のご紹介",
+    description: 
+    "　常日頃、Karibitoをご利用いただきまして、誠にありがとうございます。さて、掲示板を通じて訪問者は誰でもスレッドを立てられます。そして、スレッド内で自由に掲示板コメントを投稿できます。狩猟が身近な方、身近ではなくても狩猟に興味がある方など、様々な人が自由に交流していただけることを期待します。
+    ※ログインがまだお済みでないユーザーは、スレッド及びコメントの編集と削除を行うことが出来ませんのでご了承ください。
+    　一方、管理者がモラルに反するスレッドやコメントと判断した場合は、事前の通知無く削除する場合がございます。ご理解いただけますよう宜しくお願い致します。",
+    created_at: DateTime.now)
 end

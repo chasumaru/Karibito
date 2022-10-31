@@ -38,3 +38,4 @@
 # environments
 /environment/*
 .env
+/config/master.key

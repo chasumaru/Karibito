@@ -73,7 +73,7 @@ class PostsController < ApplicationController
   def liked
     @post = Post.find(params[:id])
     if @post.liked_users.present?
-      @liked_users = @post.liked_users.includes(:likes)
+      @pagy, @liked_users = pagy(@post.liked_users.includes(:likes))
     end
   end
 

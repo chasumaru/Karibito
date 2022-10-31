@@ -8,7 +8,7 @@
             <%if current_user.background.attached? %>
               <%= image_tag(current_user.background, data: { image_preview_target: 'bgOutput' }, class: 'w-full h-64 sm:h-96 md:h-120 lg:h-160 object-cover') %>
             <% else %>
-              <%= image_tag'800x600_dummy.jpg', alt: '背景画像', data: { image_preview_target: 'bgOutput' }, class: 'w-full h-64 sm:h-96 md:h-120 lg:h-160 object-cover' %>
+              <%= image_tag'gettyimages-825522644-612x612.jpg', alt: '背景画像', data: { image_preview_target: 'bgOutput' }, class: 'w-full h-64 sm:h-96 md:h-120 lg:h-160 object-cover' %>
             <% end %>
             <div class='flex w-full flex-col justify-center items-center'>
               <span class ='relative -mt-10 md:-mt-16'>
