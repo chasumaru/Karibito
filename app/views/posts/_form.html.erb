@@ -43,30 +43,36 @@
             <strong data-character-counter-target='counter' class='font-bold text-sm md:text-lg px-0.5'></strong>文字
           </p>
         </div>
-          <div class='grid grid-cols-1 gap-2 py-4'>
-            <p class='text-sm font-semibold text-stone-500  ml-3'>※１・・・アップロードした画像の一枚目がサムネイルになります。</p>
-            <% if post.images.attached? %>
-            <p class='text-sm font-semibold text-stone-500 ml-3'>※２・・・以下のチェックボックスで選択した画像は削除されます。</p>
-              <% post.images.each do |image| %>
-                <div class='border-t-2 pt-2 mb-4'>
-                  <%= f.check_box :image_ids, {multiple: true, class: 'justify-self-start w-6 h-6 ml-4' }, image.id, false %>
-                  <label for='post_image_ids_<%= image.id %>' >
-                    <div class='h-full overflow-hidden'>
-                      <%= image_tag image, alt: '他の画像', class: 'w-full object-center' %>
-                    </div>
-                  </label> 
-                </div>
-              <% end %>
-            <% else %>
-              <div class='grid grid-cols-1 no-tap-highlighting py-4'>
-                <%= f.label :images, '画像を追加', class: 'font-semibold text-black ml-4' %>
-                <%= f.file_field :images, multiple: true, direct_upload: true, data: {image_preview_target:'input source', action: 'image-preview#readURL image-preview#preview' }, class: 'ml-2' %>
-              </div>
-              <div class='h-full overflow-hidden'>
-                <span class='grid grid-cols-1 gap-y-2' id = 'Img'></span>
+        <div class='grid grid-cols-1 gap-2 my-4 bg-white'>
+          <p class='text-sm font-semibold text-stone-500  ml-3'>※１・・・アップロードした画像の一枚目がサムネイルになります。</p>
+          <% if post.images.attached? %>
+          <p class='text-sm font-semibold text-stone-500 ml-3'>※２・・・以下のチェックボックスで選択した画像は削除されます。</p>
+            <% post.images.each do |image| %>
+              <div class='border-t-2 pt-2 mb-4'>
+                <%= f.check_box :image_ids, {multiple: true, class: 'justify-self-start w-6 h-6 ml-4' }, image.id, false %>
+                <label for='post_image_ids_<%= image.id %>' >
+                  <div class='h-full overflow-hidden'>
+                    <%= image_tag image, alt: '他の画像', class: 'w-full object-center' %>
+                  </div>
+                </label> 
               </div>
             <% end %>
-          </div>
+            <div class='grid grid-cols-1 no-tap-highlighting py-4'>
+              <%= f.label :images, '画像を追加', class: 'font-semibold text-black ml-4' %>
+              <%= f.file_field :images, multiple: true, direct_upload: true, data: {image_preview_target:'input source', action: 'image-preview#readURL image-preview#preview' }, class: 'ml-2' %>
+            </div>
+            <div class='grid grid-cols-1 gap-2'>
+              <span class='grid grid-cols-1 gap-2' id = 'Img'></span>
+            </div>
+          <% else %>
+            <div class='grid grid-cols-1 no-tap-highlighting py-4'>
+              <%= f.label :images, '画像を追加', class: 'font-semibold text-black ml-4' %>
+              <%= f.file_field :images, multiple: true, direct_upload: true, data: {image_preview_target:'input source', action: 'image-preview#readURL image-preview#preview' }, class: 'ml-2' %>
+            </div>
+            <div class='grid grid-cols-1 gap-2'>
+              <span class='grid grid-cols-1 gap-2' id = 'Img'></span>
+            </div>
+          <% end %>
         </div>
       </section>
     </div>

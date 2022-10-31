@@ -87,10 +87,14 @@ turbo-frame::before {
   top: 0;
 	left: 0;
 	z-index: 10;
-	width: 100%;
+    width: 100%;
   object-position: center;
 }
 
+.pictures{
+  width: 100%;
+  overflow: hidden;
+}
 
 .pagy-nav,
 .pagy-nav-js {

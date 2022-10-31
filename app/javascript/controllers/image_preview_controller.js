@@ -12,7 +12,7 @@ export default class extends Controller {
         reader.onload = function() {
             let image = document.createElement("img")
             imgLoc.appendChild(image)
-            // image.classList.add("pictures");
+            image.classList.add("pictures");
             image.src = reader.result
         }
         if (i > 0){

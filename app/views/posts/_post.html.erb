@@ -73,21 +73,21 @@
     <p class='tracking-wide leading-loose whitespace-pre-wrap font-medium text-sm md:text-base py-4 mx-4'><%= post.content %></p>
   </div>
   <div class='grid grid-cols-1 gap-2 my-4 bg-white'>
-      <% ((post.images.count) -1).times  do |i| %>
-        <div data-controller='picture-cover' class="relative">
-          <% if post.danger_flag? %>
-            <%= image_tag (post.images[i+1].variant(resize_to_fill: [1200, 900], sampling_factor: '4:2:0', strip: true, interlace: 'JPEG', colorspace: 'sRGB', quality: 85).processed), class: 'w-full object-center', data: {action: 'click->picture-cover#dangerToggle', picture_cover_target: 'dangerPicture'} %>
-            <span data-picture-cover-target='dangerClick' data-action='click->picture-cover#dangerToggle'>
-              <div class='flex justify-center items-center w-full h-full picture-cover'></div>
-            </span>
-          <% else %>
-            <%= image_tag (post.images[i+1].variant(resize_to_fill: [1200, 900], sampling_factor: '4:2:0', strip: true, interlace: 'JPEG', colorspace: 'sRGB', quality: 85).processed), class: 'w-full object-center', data: {action: 'click->picture-cover#normalToggle', picture_cover_target: 'normalPicture'} %>
-            <span class='hidden' data-picture-cover-target='normalClick' data-action='click->picture-cover#normalToggle'>
-              <div class='flex justify-center items-center w-full h-full picture-cover'></div>
-            </span>
-          <% end %>
-        </div>
-      <% end %>
+    <% ((post.images.count) -1).times  do |i| %>
+      <div data-controller='picture-cover' class="relative">
+        <% if post.danger_flag? %>
+          <%= image_tag (post.images[i+1].variant(resize_to_fill: [1200, 900], sampling_factor: '4:2:0', strip: true, interlace: 'JPEG', colorspace: 'sRGB', quality: 85).processed), class: 'w-full object-center', data: {action: 'click->picture-cover#dangerToggle', picture_cover_target: 'dangerPicture'} %>
+          <span data-picture-cover-target='dangerClick' data-action='click->picture-cover#dangerToggle'>
+            <div class='flex justify-center items-center w-full h-full picture-cover'></div>
+          </span>
+        <% else %>
+          <%= image_tag (post.images[i+1].variant(resize_to_fill: [1200, 900], sampling_factor: '4:2:0', strip: true, interlace: 'JPEG', colorspace: 'sRGB', quality: 85).processed), class: 'w-full object-center', data: {action: 'click->picture-cover#normalToggle', picture_cover_target: 'normalPicture'} %>
+          <span class='hidden' data-picture-cover-target='normalClick' data-action='click->picture-cover#normalToggle'>
+            <div class='flex justify-center items-center w-full h-full picture-cover'></div>
+          </span>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </section>
 <section>
@@ -102,7 +102,7 @@
                   <% next %>
                 <% end %>
                   <div class='grid grid-cols-1' id='parent_comment_<%="#{comment.id}"%>'>
-                    <%= render partial: 'comments/comment_block', locals: {post: @post, comment: comment} %>
+                    <%= rende partial: 'comments/comment_block', locals: {post: @post, comment: comment} %>
                   </div>
               <% end %>
           <% else %>
