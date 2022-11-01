@@ -50,5 +50,7 @@ module Myapp
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    # 本番環境でprecompileに生じたエラーを解消する
+    config.assets.css_compressor = nil
   end
 end
