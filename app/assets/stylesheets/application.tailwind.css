@@ -45,13 +45,6 @@ turbo-frame::before {
 } */
 
 
-/* .board-loading {
-   background-image: url("Spinner-1s-128px.gif");
-   background-repeat: no-repeat;
-   background-position: center center;
-   background-size: cover;
-} */
-
   /* サイドバーのモーション */
 
 .sidebar{
@@ -165,24 +158,3 @@ turbo-frame::before {
 .pagy-combo-nav-js .page.next.disabled {
   @apply text-gray-400 cursor-default;
 }
-
-
-/* スクロール時にヘッダーの表示切り替え
-
-.header {
-  -webkit-transform: translateY(0);
-  transform: translateY(0);
-}
-
-.header--unpinned {
-  -webkit-transform: translateY(-150%);
-  transform: translateY(-150%);
-}
-
-.header {
-  -webkit-transition: -webkit-transform .4s ease;
-  transition: -webkit-transform .4s ease;
-  transition: transform .4s ease;
-  transition: transform .4s ease, -webkit-transform .4s ease;
-}
- */

@@ -7,7 +7,8 @@ ruby '3.1.2'
 gem 'rails', '~> 7.0.2', '>= 7.0.2.4'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem 'propshaft'
+# gem 'propshaft'
+gem 'sprockets-rails'
 
 # Use mysql as the database for Active Record
 gem 'mysql2', '~> 0.5'
@@ -53,10 +54,18 @@ gem 'bootsnap', require: false
 
 gem 'cssbundling-rails'
 
+
 gem 'dotenv-rails'
 gem 'rails-i18n'
+gem 'aws-sdk-s3'
+
 gem 'devise'
 gem 'devise-i18n'
+gem "acts-as-taggable-on", "~> 9.0"
+gem 'image_processing'
+gem 'mini_magick'
+gem 'pagy'
+gem 'ransack'
 
 gem 'omniauth'
 gem 'omniauth-twitter'
@@ -64,18 +73,10 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 gem "omniauth-rails_csrf_protection"
 
-gem "acts-as-taggable-on", "~> 9.0"
-
-gem 'image_processing'
-gem 'mini_magick'
-
-gem 'pagy'
-gem 'ransack'
-
 gem 'cancancan'
 gem 'rails_admin'
-
-gem 'aws-sdk-s3'
+# admin-railsとの依存関係があり、propshaftは本番環境では機能しなくなる。。
+gem "sassc-rails"
 
 
 group :development, :test do
@@ -102,6 +103,3 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
-
-# admin-railsとの依存関係があり、テスト時はコメントアウトする。
-gem "sassc-rails"

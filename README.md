@@ -7,7 +7,7 @@
 - Rails:        7.0.2
 - Nginx:        1.21.1
 - MySQL:        8.0
-- Tailwindcss
+- Tailwindcss   3.0.2
 
 
 実装gems
@@ -21,16 +21,26 @@
 - importmap-rails
 - cssbundling-rails
 
+*各種機能
+- devise
+- minimagick
+- acts-as-taggable-on
+- pagy
+- ransack
+- dotenv-rails
+
 *Test
 - Rspec-rails
 - factorybot-rails
+- gimei
+- bullet
+- faker
+- capybara
+- shoulda-matchers
 
 
-開発の大まかな流れ
-- [ ] 環境構築
-- [ ] 機能の実装
-- [ ] 本番環境(AWS)へのデプロイ
-- [ ] CI/CDの実装
-- [ ] Teraformによるインフラのコード化
-
+*管理者権限
+- rubocop
+- cancancan
+- rails_admin ...sprocket-railsに依存している。propshaftは開発環境では動いた。しかし、本番環境へのデプロイ時にエラーが発生したため、sprocket-railsに切り替えた。
 

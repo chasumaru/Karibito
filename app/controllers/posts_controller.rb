@@ -4,10 +4,6 @@ class PostsController < ApplicationController
   before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
 
 
-  require 'mini_magick'
-  require 'image_processing/mini_magick'
-
-
   def index
     @q = params[:q]
     @q = @q.to_unsafe_hash.transform_values { |v| v.split(/[ |　]/) } if @q
