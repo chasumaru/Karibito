@@ -11,6 +11,7 @@ module ApplicationHelper
     end
   end
 
+  # アバターアイコン
   def avatar_link(item)
     if item.user.avatar.attached? 
       if item.user == current_user 

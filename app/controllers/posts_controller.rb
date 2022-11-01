@@ -2,11 +2,7 @@ class PostsController < ApplicationController
   before_action :sign_in_required, except: [:index, :show, :tags]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
-
-
-  require 'mini_magick'
-  require 'image_processing/mini_magick'
-
+  
 
   def index
     @q = params[:q]

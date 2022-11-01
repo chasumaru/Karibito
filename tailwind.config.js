@@ -73,8 +73,6 @@ module.exports = {
   plugins: [
     // 指定行数で文章を切り捨てて省略記法
     // require('@tailwindcss/line-clamp'),
-    // // 画像の縦横比を指定
-    // require('@tailwindcss/aspect-ratio'),
     // モバイル端末でのタップ時の影を非表示にする
     plugin(function ({ addUtilities }) {
       addUtilities({
