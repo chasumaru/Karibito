@@ -17,13 +17,16 @@ services:
     #   - db
     environment:
       - EDITOR=vim
-
+    networks:
+      - Karibito-network
   # db:
   #   image: mysql:8.0
   #   env_file:
   #     - ./environment/db.env
   #   volumes:
   #     - db-data:/var/lib/mysql
+  #   networks:
+  #     - Karibito-network
   web:
     build:
       context: containers/nginx
@@ -31,11 +34,17 @@ services:
       - public-data:/myapp/public
       - tmp-data:/myapp/tmp
     ports:
-      - 3000:80
+      - 80:80
     depends_on:
       - app
+    networks:
+      - Karibito-network
 volumes:
   public-data:
   tmp-data:
   log-data:
   db-data:
+
+networks:
+  Karibito-network:
+    external: true
