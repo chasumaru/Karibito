@@ -65,16 +65,11 @@ module.exports = {
         'spiner-1': "url('/images/Spinner-1s-128px.gif')",
         'spiner-2': "url('/images/Spinner-1s-580px.gif')",
       }, 
-      // spacing: {
-      //   'sidebar': '500px'
-      // },
     },
   },
   plugins: [
     // 指定行数で文章を切り捨てて省略記法
     // require('@tailwindcss/line-clamp'),
-    // // 画像の縦横比を指定
-    // require('@tailwindcss/aspect-ratio'),
     // モバイル端末でのタップ時の影を非表示にする
     plugin(function ({ addUtilities }) {
       addUtilities({
