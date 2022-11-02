@@ -104,7 +104,7 @@
                   </span>
                   <p class='text-sm font-semibold my-2 hover:underline hover:underline-offset-2 no-tap-highlighting'><%= link_to user.name, profile_path(user) %></p>
                 </div>
-                <span class='flex flex-wrap justify-center'>
+                <span class='flex flex-wrap justify-center mb-2'>
                   <% if user.positions.present? %>
                     <% user.positions.each do |p| %>
                       <%= link_to p, users_path(tag_name: p.name), class:'bg-pink-100 text-pink-800 text-xs font-semibold px-2 py-1 mb-1 mr-1.5 rounded dark:bg-pink-200 dark:text-pink-900 hover:bg-pink-300 no-tap-highlighting' %>

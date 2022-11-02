@@ -76,7 +76,7 @@
     <% ((post.images.count) -1).times  do |i| %>
       <div data-controller='picture-cover' class="relative">
         <% if post.danger_flag? %>
-          <%= image_tag (post.images[i+1].variant(resize_to_fill: [1200, 900], sampling_factor: '4:2:0', strip: true, interlace: 'JPEG', colorspace: 'sRGB', quality: 85).processed), class: 'w-full object-center', data: {action: 'click->picture-cover#dangerToggle', picture_cover_target: 'dangerPicture'} %>
+          <%= image_tag (post.images[i+1].variant(resize_to_fill: [1200, 900], sampling_factor: '4:2:0', strip: true, interlace: 'JPEG', colorspace: 'sRGB', quality: 85).processed), class: 'w-full object-center blur-sm', data: {action: 'click->picture-cover#dangerToggle', picture_cover_target: 'dangerPicture'} %>
           <span data-picture-cover-target='dangerClick' data-action='click->picture-cover#dangerToggle'>
             <div class='flex justify-center items-center w-full h-full picture-cover'></div>
           </span>
