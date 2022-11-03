@@ -102,7 +102,7 @@
                   <% next %>
                 <% end %>
                   <div class='grid grid-cols-1' id='parent_comment_<%="#{comment.id}"%>'>
-                    <%= rende partial: 'comments/comment_block', locals: {post: @post, comment: comment} %>
+                    <%= render partial: 'comments/comment_block', locals: {post: @post, comment: comment} %>
                   </div>
               <% end %>
           <% else %>
