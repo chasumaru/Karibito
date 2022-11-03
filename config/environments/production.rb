@@ -64,7 +64,7 @@ Rails.application.configure do
 
   
   # config.action_mailer.default_url_options = { host: 'アプリケーションのドメイン名'}
-  config.action_mailer.default_url_options = { host: 'https://karibito.org'}
+  config.action_mailer.default_url_options = { host: 'karibito.org'}
 
   config.action_mailer.perform_deliveries = true
   
