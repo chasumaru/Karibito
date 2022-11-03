@@ -8,6 +8,6 @@ class CreateBoards < ActiveRecord::Migration[7.0]
       t.timestamps
     end
     add_index :boards, :title
-    add_index :boards, :description
+    add_index :boards, :description, length: { description: 500 }
   end
 end
