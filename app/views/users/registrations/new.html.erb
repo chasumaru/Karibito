@@ -7,7 +7,7 @@
                 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %> 
                 <%= render 'users/shared/error_messages', resource: resource %>
                     <div class='field'>
-                    <%= f.label :name, '名前', class: 'block text-lg font-bold text-gray-600 dark:text-gray-200' %>
+                    <%= f.label :name, 'ユーザー名', class: 'block text-lg font-bold text-gray-600 dark:text-gray-200' %>
                     <%= f.text_field :name, autofocus: true, autocomplete: 'name' ,placeholder: '山本太郎', maxlength: 30, class: 'block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  focus:border-blue-400  focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 dark:focus:border-blue-400' %>
                     </div>
 

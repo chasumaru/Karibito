@@ -9,7 +9,7 @@ RSpec.describe "Registration", type: :system do
     context '無効な値の場合' do
       it 'flashメッセージが表示される' do
         visit new_user_registration_path
-        fill_in '名前', with: 'invlid'
+        fill_in 'ユーザー名', with: 'invlid'
         fill_in 'メールアドレス', with: '@invlid'
         fill_in 'パスワード', with: 'foo'
         click_button '無料登録する'
