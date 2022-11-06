@@ -61,10 +61,10 @@ module.exports = {
       transitionDuration: {
         '600': '600ms',
       },
-      backgroundImage: {
-        'spiner-1': "url('/images/Spinner-1s-128px.gif')",
-        'spiner-2': "url('/images/Spinner-1s-580px.gif')",
-      }, 
+      // backgroundImage: {
+      //   'spiner-1': "url('/images/Spinner-1s-128px.gif')",
+      //   'spiner-2': "url('/images/Spinner-1s-580px.gif')",
+      // }, 
     },
   },
   plugins: [

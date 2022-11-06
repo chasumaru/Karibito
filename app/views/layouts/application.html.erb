@@ -1,5 +1,14 @@
 <!DOCTYPE html>
   <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-248539068-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-248539068-1');
+  </script>
   <title><%= full_title(yield(:title)) %></title>
     <%= favicon_link_tag('favicon.ico') %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
