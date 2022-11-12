@@ -13,6 +13,7 @@ class PostsController < ApplicationController
         @search = Post.ransack(@q)
       end
     @search.sorts = 'id desc' if @search.sorts.empty?
+    binding.break
     @pagy, @posts = pagy @search.result.includes([{user: [:avatar_attachment]}], :images_attachments).with_attached_images
   end
 

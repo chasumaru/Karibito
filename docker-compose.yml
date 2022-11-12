@@ -19,6 +19,8 @@ services:
       - EDITOR=vim
     networks:
       - Karibito-network
+    tty: true
+    stdin_open: true
   db:
     image: mysql:8.0
     env_file:
