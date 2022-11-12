@@ -6,27 +6,27 @@ services:
     env_file:
       - ./environment/db.env
     # 本番環境の設定
-    command: bundle exec puma -C config/puma.rb -e production
-    # command: bundle exec puma -C config/puma.rb
+    # command: bundle exec puma -C config/puma.rb -e production
+    command: bundle exec puma -C config/puma.rb
     volumes:
       - .:/myapp
       - public-data:/myapp/public
       - tmp-data:/myapp/tmp
       - log-data:/myapp/log
-    # depends_on:
-    #   - db
+    depends_on:
+      - db
     environment:
       - EDITOR=vim
     networks:
       - Karibito-network
-  # db:
-  #   image: mysql:8.0
-  #   env_file:
-  #     - ./environment/db.env
-  #   volumes:
-  #     - db-data:/var/lib/mysql
-  #   networks:
-  #     - Karibito-network
+  db:
+    image: mysql:8.0
+    env_file:
+      - ./environment/db.env
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - Karibito-network
   web:
     build:
       context: containers/nginx
@@ -34,7 +34,9 @@ services:
       - public-data:/myapp/public
       - tmp-data:/myapp/tmp
     ports:
-      - 80:80
+      - 3000:80
+    # ports:
+    #   - 80:80
     depends_on:
       - app
     networks:

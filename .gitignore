@@ -39,5 +39,3 @@
 /environment/*
 .env
 /environment/db.env
-
-/config/master.key
