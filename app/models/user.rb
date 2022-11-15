@@ -123,13 +123,13 @@ class User < ApplicationRecord
   end
 
   # 10MB以上のファイルを許可しない
-  def avatar_size
+  def validate_avatar_size_limit
     if avatar.blob.byte_size > 10485760
       errors.add :avatar, 'ファイルサイズが大きすぎます。'
     end
   end
 
-  def background_size
+  def validate_background_size_limit
     if background.blob.byte_size > 10485760
       errors.add :background, 'ファイルサイズが大きすぎます。'
     end

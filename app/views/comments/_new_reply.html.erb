@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "new_reply_#{comment.id}" do %>
-  <%= form_with model: [@post, Comment.new], data: {controller: 'reset-form', reply_target: 'content', action: 'reply#hide turbo:submit-end->reset-form#reset'}, class: 'h-full pt-4' do |f| %>
+  <%= form_with model: [@post, Comment.new], data: {controller: 'reset-form', reply_target: 'content', action: 'reply#hide turbo:submit-end->reset-form#reset'}, class: 'hidden h-full pt-4' do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
     <div data-reply-target='content' class='flex h-full mt-1'>
       <%= f.text_area :context, data: {controller: 'autogrow'}, maxlength: 300, class: 'text-sm bg-amber-100 rounded-md w-3/4 h-full pl-1 pt-1 pb-5 mt-6 focus:outline-none focus:ring-0', placeholder: 'コメントに返信する...' %>

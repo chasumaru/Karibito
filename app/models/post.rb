@@ -26,17 +26,17 @@ class Post < ApplicationRecord
     notification.save if notification.valid?
   end
 
-  def create_notification_comment!(current_user, comment_id)
+  def create_comment_notification!(current_user, comment_id)
     # 自分以外にコメントしている人をすべて取得し、全員に通知を送る
     temp_ids = Comment.select(:user_id).where(post_id: id).where.not(user_id: current_user.id).distinct
     temp_ids.each do |temp_id|
-        save_notification_comment!(current_user, comment_id, temp_id['user_id'])
+        save_comment_notification!(current_user, comment_id, temp_id['user_id'])
       end
     # まだ誰もコメントしていない場合は、投稿者に通知を送る
-    save_notification_comment!(current_user, comment_id, user_id) if temp_ids.blank?
+    save_comment_notification!(current_user, comment_id, user_id) if temp_ids.blank?
   end
 
-  def save_notification_comment!(current_user, comment_id, visited_id)
+  def save_comment_notification!(current_user, comment_id, visited_id)
       # １つの投稿に複数回通知する
       notification = current_user.active_notifications.new(
         post_id: id,
@@ -53,7 +53,7 @@ class Post < ApplicationRecord
 
   private
   # 10MB以上の画像ファイルを許可しない
-  def image_size
+  def validate_image_size_limit
     images.blobs.each do |image|
       if image.byte_size > 10485760
         errors.add :images, 'ファイルサイズが大きすぎます。'
@@ -61,7 +61,7 @@ class Post < ApplicationRecord
     end
   end
 
-  def image_count
+  def validate_image_count_limit
     if images.blobs.count > 20
       images.purge
       errors.add :images, '画像枚数の上限を超えています。'
@@ -69,6 +69,6 @@ class Post < ApplicationRecord
   end
 
   def favorited_by?(user)
-    Like.where(user_id: user.id).exists?
+    likes.where(user_id: user.id).exists?
   end
 end

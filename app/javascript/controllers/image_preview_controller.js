@@ -8,16 +8,16 @@ export default class extends Controller {
     var files = input.files
     var imgLoc = document.getElementById("Img")
     for (var i = 0; i < files.length; i++) {
-        let reader = new FileReader()
-        reader.onload = function() {
-            let image = document.createElement("img")
-            imgLoc.appendChild(image)
-            image.classList.add("pictures");
-            image.src = reader.result
-        }
-        if (i > 0){
-        reader.readAsDataURL(files[i])
-        }
+      let reader = new FileReader()
+      reader.onload = function() {
+        let image = document.createElement("img")
+        imgLoc.appendChild(image)
+        image.classList.add("pictures");
+        image.src = reader.result
+      }
+      if (i > 0){
+      reader.readAsDataURL(files[i])
+      }
     }
   }
 

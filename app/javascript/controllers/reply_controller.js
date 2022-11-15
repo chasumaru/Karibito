@@ -4,19 +4,19 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["trigger", "closed", "content"]
 
-  connect() {
-    this.hide()
-  }
-
   display() {
-    this.triggerTarget.hidden = true
-    this.contentTarget.hidden = false
-    this.closedTarget.hidden = false
+    if (this.closedTarget.classList.contains('hidden')){
+      this.closedTarget.classList.remove('hidden')
+      this.contentTarget.classList.remove('hidden')
+      this.triggerTarget.classList.add('hidden')
+    }
   }
 
   hide() {
-    this.triggerTarget.hidden = false
-    this.contentTarget.hidden = true
-    this.closedTarget.hidden = true
+    if (this.triggerTarget.classList.contains('hidden')){
+      this.closedTarget.classList.add('hidden')
+      this.contentTarget.classList.add('hidden')
+      this.triggerTarget.classList.remove('hidden')
+    }
   }
 }
