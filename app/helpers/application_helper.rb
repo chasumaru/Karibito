@@ -41,7 +41,7 @@ module ApplicationHelper
       (Date.today - object.created_at.to_date).to_i.to_s + '日前'
     else
       #それ以降
-      object.created_at
+      object.created_at.to_datestrftime("%Y-%m-%d")
     end
   end
 
