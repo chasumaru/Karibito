@@ -11,7 +11,7 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: { maximum: 50 }
   validates :content, length: { maximum: 400 }
   validates :tag_list, length: { maximum: 40 }
-  validate :image_size, :image_count
+  validate :validate_image_size_limit, :validate_image_count_limit
   
   def thumbnail
     return self.images.first.variant(resize_to_fill: [1200, 900], sampling_factor: '4:2:0', strip: true, interlace: 'JPEG', colorspace: 'sRGB', quality: 85).processed

@@ -59,6 +59,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_170949) do
     t.datetime "updated_at", null: false
     t.boolean "anonymous_flag", default: false, null: false
     t.index ["danger_flag"], name: "index_boards_on_danger_flag"
+    t.index ["description"], name: "index_boards_on_description", length: 500
+    t.index ["title"], name: "index_boards_on_title"
     t.index ["user_id"], name: "index_boards_on_user_id"
   end
 
@@ -104,7 +106,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_170949) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["content"], name: "index_posts_on_content", length: 255
+    t.index ["content"], name: "index_posts_on_content", length: 400
     t.index ["danger_flag"], name: "index_posts_on_danger_flag"
     t.index ["title"], name: "index_posts_on_title"
     t.index ["user_id"], name: "index_posts_on_user_id"

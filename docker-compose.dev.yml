@@ -1,9 +1,26 @@
-version: '3'
+version: '3.8'
+
 services:
   app:
+    build:
+      context: .
+    env_file:
+      - ./environment/db.env
     command: bundle exec puma -C config/puma.rb
+    volumes:
+      - .:/myapp
+      - public-data:/myapp/public
+      - tmp-data:/myapp/tmp
+      - log-data:/myapp/log
+    environment:
+      - EDITOR=nano
+    networks:
+      - Karibito-network
+    tty: true
+    stdin_open: true
     depends_on:
       - db
+
   db:
     image: mysql:8.0
     env_file:
@@ -12,6 +29,26 @@ services:
       - db-data:/var/lib/mysql
     networks:
       - Karibito-network
+
   web:
+    build:
+      context: containers/nginx
+    volumes:
+      - public-data:/myapp/public
+      - tmp-data:/myapp/tmp
     ports:
-      - 3000:80
+      - 3000:80  # 3000ポートを公開
+    depends_on:
+      - app
+    networks:
+      - Karibito-network
+
+volumes:
+  public-data:
+  tmp-data:
+  log-data:
+  db-data:
+
+networks:
+  Karibito-network:
+    driver: bridge

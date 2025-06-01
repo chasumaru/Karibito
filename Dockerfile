@@ -1,4 +1,4 @@
-FROM ruby:3.1
+FROM ruby:3.1.2
 ENV BUNDLER_VERSION=2.3.10
 
 # yarnパッケージ管理ツールインストール
